@@ -1,0 +1,25 @@
+Updated: 26Apr14
+
+Structure:
+
+T = Thread 
+MBT = Managed By Thread
+
+Main T -> StarNub
+		T1 -> SB_ServerMonitor (Process Check/Process Dead Restarter, Network Response Check/Lock Up Restarter, Configurable AutoRestart)
+			(MBT1) -> SB_ProcessManagment (Start / Stop / Restart / Status) 
+			
+		// Work in Progress
+			(MBT1) T2 -> SB_ProcessStreamInput
+				(Ukn) -> Unknown Classes (Console Formating and Filtering)
+				(Ukn) -> Temporary array builder for Player Name and IP
+	
+		T3 -> SN_Unkown Class for key listening
+			(Ukn) -> Interrupt console printing and clear the screen, 
+						but still filter
+			(Ukn) -> Menu Class for server functions
+			
+		T4 -> SN_Network
+            -> Netty Boss Threads
+            -> Netty Worker Threads
+	
