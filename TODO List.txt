@@ -1,0 +1,34 @@
+Updated: 26Apr14
+
+Also Stat's, Process Crashes, Unresponsive, Wrapper Uptime, Uptime since last restart, Last restart
+Looping Key Listener
+Menu . redirect output during this period.
+in game menu for admin
+configurable console output from sb
+
+Network Check for Restarter
+Network Netty
+Pass Through
+
+HashMap Builder Player Name and IP
+Banned HashMap Builder
+Banned HashMapper Saver
+
+Configuration Checker
+Configuration Loader
+
+Client ID and Client Class
+
+///////////////////////////////////////////
+Configurable:
+StarNub Port
+Starbound Port
+Restart Timer
+
+Will Not Be Configurable:
+15 Second Process Check
+StarNub Console Output and Logging
+Starbound Output - Input Java - Output Java
+///////////////////////////////////////////
+Need to Fix:
+Unknown Small memory leak.

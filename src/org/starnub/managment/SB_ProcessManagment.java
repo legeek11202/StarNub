@@ -16,9 +16,8 @@ import org.starnub.managment.SB_ProcessStreamInput;
 * These methods will return a boolean or nothing.
 **/
 
-public final class SB_ProcessManagment {
+public class SB_ProcessManagment {
 	
-    private static String filePath = OS_GetFilePath.getFilePath();
 	private static Process sbProcess;
 	
 	public static Process getSbProcess() 
@@ -30,7 +29,7 @@ public final class SB_ProcessManagment {
 	{
 		try 
 		{
-			sbProcess = Runtime.getRuntime().exec(filePath);
+			sbProcess = Runtime.getRuntime().exec(OS_GetFilePath.getFilePath());
 			Runnable sb_StreamInput = new SB_ProcessStreamInput();
 			new Thread(sb_StreamInput).start();
 		} 

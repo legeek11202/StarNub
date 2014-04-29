@@ -19,34 +19,31 @@ public class SB_Query {
 	{
 		try
 		{
-		DatagramPacket queryPacket = packetAssembly();
-		DatagramPacket responsePacket = packetReceive();
 		DatagramSocket ds = new DatagramSocket(65000);
 		boolean continueSending = true;
 		int counter = 0;
 	
 		//Set packet send/receive timeout (Milliseconds)
-		ds.setSoTimeout(2000);
+		ds.setSoTimeout(3000);
 		
-			// Sends packet up to 5 times if no response in 2 seconds between packets
-			while (continueSending && counter < 5) 
+			// Sends packet up to 10 times if no response in 2 seconds between packets
+			while (continueSending && counter < 10) 
 			{
-				ds.send(queryPacket);
+				ds.send(packetAssembly());
 				counter++;
 				try 
 				{
-					ds.receive(responsePacket);
+					ds.receive(packetReceive());
 					continueSending = false; // A packet has been received : stop sending
 					ds.close();
 					return true;
 				}
 				catch (SocketTimeoutException e) 
 				{
-					// No response received after 1 second. Continue sending.
+					// No response received after 3 second. Continue sending.
 					SN_MessageFormater.msgPrint("Starbound Query: No response from your Starbound Server", 1);
 				}
 			}
-			SN_MessageFormater.msgPrint("Starbound Query: Error: While Loop", 1);
 			ds.close();
 		}
 		catch (Exception e)
@@ -60,7 +57,6 @@ public class SB_Query {
 	private static DatagramPacket packetAssembly() throws UnknownHostException 
 	{
 		/* Building the packet */
-		byte[] data;
 		// TSource Engine Query (https://developer.valvesoftware.com/wiki/Server_queries)
 		char peer0_0[] = 
 			{ 
@@ -71,16 +67,15 @@ public class SB_Query {
 				0x6e, 0x65, 0x20, 0x51, 
 				0x75, 0x65, 0x72, 0x79, 0x00 
 			};
-		data = new String(peer0_0).getBytes();
+		byte[] data = new String(peer0_0).getBytes();
 		// TODO import port variable
-		return new DatagramPacket(data, 0, data.length, InetAddress.getByName("127.0.0.1"), 21025);
+		return new DatagramPacket(data, 0, data.length, InetAddress.getByName("127.0.0.1"), 21024);
 	}
 
 	private static DatagramPacket packetReceive()
 	{
 		/* Receive portion of the UDP Query */
-		byte[] rec = new byte[1024];
-		return new DatagramPacket(rec, 1024);
+		return new DatagramPacket(new byte[1024], 1024);
 	}
 	
 	public SB_Query() 

@@ -29,7 +29,7 @@ Temporary Feature
 Planned Features
 ================
 Milestone 1:
-Network pass through for internal testing (Netty IO)
+- Network pass through for internal testing (Netty IO)
 
 Milestone 2
 - Configuration Options (Auto Restart, Starbound and StarNub Ports)
@@ -37,11 +37,11 @@ Milestone 2
 - Create Player Name|IP hashmap for console banning	
 	
 Milestone 3:
-Packet Classes
+- Packet Classes
 	
 Milestone 4:
-Plug Frame Work
-StarNub API
+- Plug Frame Work
+- StarNub API
 	
 Milestone 5:
 - Wrapper Console Menu

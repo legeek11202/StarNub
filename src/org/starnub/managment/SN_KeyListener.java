@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class SN_KeyListener implements Runnable {
 
-	public void run() 
+	public synchronized void run() 
 	{
 		System.out.println("Press 1 and then enter to shutdown the Wrapper and Server.");
 		Scanner sc = new Scanner(System.in);

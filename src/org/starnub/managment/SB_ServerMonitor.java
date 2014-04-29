@@ -15,61 +15,54 @@ import org.starnub.util.SN_Timer;
 
 public class SB_ServerMonitor implements Runnable {
 	
-	// TODO push variables to menu, add all time counters
-	/* serverUptime is in minutes */
-	static int serverUptime = 0;
-	static int serverRestarts = 0;
-	static int serverWrapperCrashes = 0;
-	static int serverWrapperUnresponsive = 0;
-	
-	public void run () 
+	public synchronized void run () 
 	{
-		int sbRestartTimer = 0;
-		int serverCrashes = 0;
-		int serverUnresponsive = 0;
-		
 		// TODO: Configurable variable in hours
-		final int restartTimer = 24;
+		//3600 is 60 Minutes x 60 Seconds.
+		final int autoRestartTimer = (24*3600);
+		int sbRestartTimer = 0;
+		
+		/* Temporary */
+		/* Since Server Last Restart */
+		int serverCrashesTemp = 0;
+		int serverUnresponsiveTemp = 0;
+		@SuppressWarnings("unused")
+		int serverUptimeTemp = 0;	
 		
 		SN_MessageFormater.msgPrint("Starting the Starbound Server.", 0);
 		SB_ProcessManagment.sb_ProcessStart();
-		// Sleep for 2 minutes while the server boots up.
+		/* Sleep for 2 minutes while the server boots up.*/
 		SN_Timer.startTimer(120000);
 		
 		do 
 		{
-			boolean sbStatus = SB_ProcessManagment.sb_ProcessStatus();
-			boolean sbNetResponse = SB_Query.getServerResponse();
-			
-			if (!sbStatus)
+			if (!SB_ProcessManagment.sb_ProcessStatus())
 			{
 				SN_MessageFormater.msgPrint("It appears the Starbound server crashed, Starting the Starbound server...", 1);
-				SB_ProcessManagment.sb_ProcessStart();
 				/* Add a crash to the crash trackers */
-				serverCrashes += 1; serverWrapperCrashes += 1;
-				SN_MessageFormater.msgPrint("Your server has crashed "+serverCrashes+" time(s) since the last autorestart.", 1);
-				// Sleep for 2 minutes while the server boots up.
-				
+				serverCrashesTemp += 1;
+				SN_MessageFormater.msgPrint("Your server has crashed "+serverCrashesTemp+" time(s) since the last autorestart.", 1);
+				run ();
 			}
-			else if (!sbNetResponse)
+			else if (!SB_Query.getServerResponse())
 			{
 				SN_MessageFormater.msgPrint("It appears the Starbound server is unresponsive, Starting the Starbound server...", 1);
 				SB_ProcessManagment.sb_ProcessRestart();
 				/* Add a unresponsive to the unresponsive trackers */
-				serverUnresponsive += 1; serverWrapperUnresponsive += 1;
+				serverUnresponsiveTemp += 1;
+				SN_MessageFormater.msgPrint("Your server been unresponsive "+serverUnresponsiveTemp+" time(s) since the last autorestart.", 1);
 				// Sleep for 2 minutes while the server boots up.
 				SN_Timer.startTimer(120000);
-				SN_MessageFormater.msgPrint("Your server been unresponsive "+serverUnresponsive+" time(s) since the last autorestart.", 1);
 			}
 			SN_Timer.startTimer(15000);
-			sbRestartTimer += 15; serverUptime += (15);
+			sbRestartTimer += 15; serverUptimeTemp += 15;
 			//TODO Correct serverUptime format
 		} 
-		while (sbRestartTimer <= (restartTimer*(60*60)));
+		while (sbRestartTimer <= autoRestartTimer);
 		
 		/* Add a restart to the restart tracker */
-		serverRestarts += 1; 
-		SN_MessageFormater.msgPrint("It has been "+(restartTimer/60)+" hours since the last restart. Auto restarting server as per configuration.", 0);
+		// TODO
+		SN_MessageFormater.msgPrint("It has been "+autoRestartTimer+" hours since the last restart. Auto restarting server as per configuration.", 0);
 		// TODO Add a server broadcast for restart when network and packets added
 		SB_ProcessManagment.sb_ProcessKill();
 		run();	 

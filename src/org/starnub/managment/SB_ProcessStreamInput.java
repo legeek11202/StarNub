@@ -14,21 +14,19 @@ import java.io.InputStreamReader;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
-// Multi conditional statments one to take user name and ip out and store in array
+// TODO Multi conditional statments one to take user name and ip out and store in array
 // this array will be used for ip/username banning
-// TODO Future filter on or off option
 
 public class SB_ProcessStreamInput implements Runnable {
-	
-	
-	
-	public void run()
+
+	public synchronized void run()
 		{  
-		Process sbProcess = SB_ProcessManagment.getSbProcess();
 			String line;
-	      
-			BufferedReader input = new BufferedReader(new InputStreamReader(sbProcess.getInputStream()));
 			
+			BufferedReader input = new BufferedReader(new InputStreamReader(SB_ProcessManagment.getSbProcess().getInputStream()));
+			
+			//TODO Configuration options
+			//Menu Default, All console, filtered
 			try 
 			{
 				while ((line = input.readLine()) != null) 
@@ -56,7 +54,7 @@ public class SB_ProcessStreamInput implements Runnable {
 					} 
 					else
 					{
-				      // Do Nothing. We do not want Console Spam. Starbound Server Log will contain warning or errors.
+				      // Do Nothing. We do not want Console spam. Starbound Server Log will contain warning or errors.
 					}
 			} 
 			catch (IOException e) 
