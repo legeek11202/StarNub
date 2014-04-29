@@ -23,7 +23,7 @@ public final class OS_GetFilePath {
     	
     	if (osWindows == true)
     	{
-    			SN_MessageFormater.msgPrint("Using Win32 Starbound_Server.exe.", 0);
+    			SN_MessageFormater.msgPrint("Using Win32 Starbound_Server.exe.", 0, 0);
     			return win32Path;
     	} 
     	else 
@@ -34,12 +34,12 @@ public final class OS_GetFilePath {
     		{
     		case 1: 
     		{
-				SN_MessageFormater.msgPrint("Using Linux64 Starbound_Server.", 0);
+				SN_MessageFormater.msgPrint("Using Linux64 Starbound_Server.", 0, 0);
     			return linux64Path;
     		}
     		case 2: 
     		{
-    			SN_MessageFormater.msgPrint("Using Linux32 Starbound_Server.", 0);
+    			SN_MessageFormater.msgPrint("Using Linux32 Starbound_Server.", 0, 0);
     			return linux32Path;
     		}
     		default:

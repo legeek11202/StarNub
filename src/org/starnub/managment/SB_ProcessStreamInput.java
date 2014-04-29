@@ -32,25 +32,20 @@ public class SB_ProcessStreamInput implements Runnable {
 				while ((line = input.readLine()) != null) 
 					if (line.contains("Info:  <"))
 					{
-						String currentTime = new DateTime().toString(DateTimeFormat.forPattern("[HH:mm:ss]"));
-						System.out.println(currentTime+"[Starbound Chat]: "+line);
+						SN_MessageFormater.msgPrint(line, 1, 2);
 					}
 					else if (line.contains("Client '") && line.contains("> ("))
 					{
-						// TODO Needs additional Formating and better filter
-						String currentTime = new DateTime().toString(DateTimeFormat.forPattern("[HH:mm:ss]"));
-						System.out.println(currentTime+"[Starbound Info]: "+line);
+						SN_MessageFormater.msgPrint(line, 1, 0);
 					} 
 					else if (line.contains("Server version"))
 					{
-						String currentTime = new DateTime().toString(DateTimeFormat.forPattern("[HH:mm:ss]"));
-						System.out.println(currentTime+"[Starbound Info]: "+line);
+						SN_MessageFormater.msgPrint(line, 1, 0);
 					} 
 					else if (line.contains("TcpServer"))
 					{
 						// TODO Insert port variable
-						String currentTime = new DateTime().toString(DateTimeFormat.forPattern("[HH:mm:ss]"));
-						System.out.println(currentTime+"[Starbound Info]: Starbound server online and excepting connections.");
+						SN_MessageFormater.msgPrint("Starbound server online and excepting connections.", 1, 0);
 					} 
 					else
 					{
@@ -59,7 +54,7 @@ public class SB_ProcessStreamInput implements Runnable {
 			} 
 			catch (IOException e) 
 			{
-				SN_MessageFormater.msgPrint("Starbound process stream issues: Java Message: "+e.getMessage(), 1);
+				SN_MessageFormater.msgPrint("Starbound process stream issues: Java Message: "+e.getMessage(), 0, 1);
 				e.printStackTrace();
 			}
 	      }

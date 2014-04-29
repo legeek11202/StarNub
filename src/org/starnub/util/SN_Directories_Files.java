@@ -34,14 +34,14 @@ public class SN_Directories_Files {
 					boolean result = directory.mkdir();  
 					if(result) 
 					{    
-						SN_MessageFormater.msgPrint(directory+" directory created.", 0);
+						SN_MessageFormater.msgPrint(directory+" directory created.", 0, 0);
 					}
 				}
 			}
 		}
 		catch (Exception e)
 		{
-			SN_MessageFormater.msgPrint("Directory creation: Java Error Message: "+e.getMessage(), 1);
+			SN_MessageFormater.msgPrint("Directory creation: Java Error Message: "+e.getMessage(), 0, 1);
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class SN_Directories_Files {
 		}
 		catch (Exception e)
 		{
-			SN_MessageFormater.msgPrint("Directory creation: Java Error Message: "+e.getMessage(), 1);
+			SN_MessageFormater.msgPrint("Directory creation: Java Error Message: "+e.getMessage(), 0, 1);
 		}
 		return exsist;
 	}

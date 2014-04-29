@@ -41,14 +41,14 @@ public class SB_Query {
 				catch (SocketTimeoutException e) 
 				{
 					// No response received after 3 second. Continue sending.
-					SN_MessageFormater.msgPrint("Starbound Query: No response from your Starbound Server", 1);
+					SN_MessageFormater.msgPrint("Starbound Query: No response from your Starbound Server", 0, 1);
 				}
 			}
 			ds.close();
 		}
 		catch (Exception e)
 		{
-			SN_MessageFormater.msgPrint("Starbound Query: Error: Creating Socket or Socket Functions", 1);
+			SN_MessageFormater.msgPrint("Starbound Query: Error: Creating Socket or Socket Functions", 0, 1);
 			
 		}
 		return false;

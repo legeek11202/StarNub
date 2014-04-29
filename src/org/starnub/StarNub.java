@@ -1,6 +1,5 @@
 package org.starnub;
 
-
 import org.starnub.configuration.SN_Configuration;
 import org.starnub.managment.SB_ServerMonitor;
 import org.starnub.managment.SN_KeyListener;
@@ -29,25 +28,29 @@ public final class StarNub {
     			+ "=============================================\n");
     	
     	/* Runs the StarNub configuration checker */
-    	SN_MessageFormater.msgPrint("Staring StarNub...", 0);
+    	SN_MessageFormater.msgPrint("Staring StarNub...", 0, 0);
     	SN_Configuration.sn_CongiruationCheck();
     	   
     	/* Initiates Logger (SN_MultiOutputStream) */
-    	SN_MessageFormater.msgPrint("Starting StarNub Logger...", 0);
+    	SN_MessageFormater.msgPrint("Starting StarNub Logger...", 0, 0);
     	SN_Logger.snLogger ();
-    	SN_MessageFormater.msgPrint("Logger running.", 0);
+    	SN_MessageFormater.msgPrint("Logger running.", 0, 0);
 
     	/* Starts the KeyListener */
-    	SN_MessageFormater.msgPrint("Starting StarNub KeyListner...", 0);
+    	SN_MessageFormater.msgPrint("Starting StarNub KeyListner...", 0, 0);
     	Runnable sn_KeyListener = new SN_KeyListener();
     	new Thread(sn_KeyListener).start();
-    	SN_MessageFormater.msgPrint("KeyListner running.", 0);
+    	SN_MessageFormater.msgPrint("KeyListner running.", 0, 0);
 
     	/* Starts the Server WatchDog */
-    	SN_MessageFormater.msgPrint("Starting StarNub Server Watchdog...", 0);
+    	SN_MessageFormater.msgPrint("Starting StarNub Server Watchdog...", 0, 0);
     	Runnable sb_Watchdog = new SB_ServerMonitor();
     	new Thread(sb_Watchdog).start();
-    	SN_MessageFormater.msgPrint("Server watchdog running.", 0);
+    	SN_MessageFormater.msgPrint("Server watchdog running.", 0, 0);
+    	
+
+
+    	
     	
 	}
 }

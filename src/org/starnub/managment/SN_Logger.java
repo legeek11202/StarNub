@@ -37,7 +37,7 @@ public class SN_Logger {
     	}
     	catch (FileNotFoundException e)
     	{
-    		SN_MessageFormater.msgPrint("Logger files: Java Error Message: "+e.getMessage(), 1);
+    		SN_MessageFormater.msgPrint("Logger files: Java Error Message: "+e.getMessage(), 0, 1);
     	}
 	}
 		

@@ -35,7 +35,7 @@ public class SB_ProcessManagment {
 		} 
 		catch (Exception e) 
 		{
-			SN_MessageFormater.msgPrint("Runtime exception when creating the Starbound server process: Java Message: "+e.getMessage(), 1);
+			SN_MessageFormater.msgPrint("Runtime exception when creating the Starbound server process: Java Message: "+e.getMessage(), 0, 1);
 	    }	
 	}  
 	
@@ -47,7 +47,7 @@ public class SB_ProcessManagment {
 		} 
 		catch (Exception e)
 		{
-			SN_MessageFormater.msgPrint("Runtime exception when destroying the Starbound server process: Java Message: "+e.getMessage(), 1);
+			SN_MessageFormater.msgPrint("Runtime exception when destroying the Starbound server process: Java Message: "+e.getMessage(), 0, 1);
 		}
 	}
 	

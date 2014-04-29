@@ -12,7 +12,7 @@ public class SN_Timer {
 		} 
 		catch (InterruptedException e) 
 		{
-			SN_MessageFormater.msgPrint("Timer Error: Thread Sleep Error: Java Message: "+e.getMessage(), 1);
+			SN_MessageFormater.msgPrint("Timer Error: Thread Sleep Error: Java Message: "+e.getMessage(), 0, 1);
 		}
 	}
 	

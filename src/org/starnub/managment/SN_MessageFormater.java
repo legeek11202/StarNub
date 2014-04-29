@@ -10,18 +10,23 @@ import org.joda.time.format.DateTimeFormat;
 **/
 
 public class SN_MessageFormater {
-
-	private static String SN = "[StarNub ";
+	
+	private static String[] serverArray= new String[]
+			{
+				"[StarNub ",
+				"[Starbound ",
+			};
 	private static String[] typeArray = new String[]
 			{
 				"Info]: ",
 				"Error]: ",
+				"Chat]: ",
 			};
 
-	public static void msgPrint(String message,int type)
+	public static void msgPrint(String message,int server,int type)
 	{
 		new DateTime();
-		System.out.println(DateTime.now().toString(DateTimeFormat.forPattern("[HH:mm:ss]"))+SN+typeArray[type]+message);
+		System.out.println(DateTime.now().toString(DateTimeFormat.forPattern("[HH:mm:ss]"))+serverArray[server]+typeArray[type]+message);
 	}
 	
 	public SN_MessageFormater() 

@@ -29,7 +29,7 @@ public class SB_ServerMonitor implements Runnable {
 		@SuppressWarnings("unused")
 		int serverUptimeTemp = 0;	
 		
-		SN_MessageFormater.msgPrint("Starting the Starbound Server.", 0);
+		SN_MessageFormater.msgPrint("Starting the Starbound Server.", 0, 0);
 		SB_ProcessManagment.sb_ProcessStart();
 		/* Sleep for 2 minutes while the server boots up.*/
 		SN_Timer.startTimer(120000);
@@ -38,19 +38,19 @@ public class SB_ServerMonitor implements Runnable {
 		{
 			if (!SB_ProcessManagment.sb_ProcessStatus())
 			{
-				SN_MessageFormater.msgPrint("It appears the Starbound server crashed, Starting the Starbound server...", 1);
+				SN_MessageFormater.msgPrint("It appears the Starbound server crashed, Starting the Starbound server...", 0, 1);
 				/* Add a crash to the crash trackers */
 				serverCrashesTemp += 1;
-				SN_MessageFormater.msgPrint("Your server has crashed "+serverCrashesTemp+" time(s) since the last autorestart.", 1);
+				SN_MessageFormater.msgPrint("Your server has crashed "+serverCrashesTemp+" time(s) since the last autorestart.", 0, 1);
 				run ();
 			}
 			else if (!SB_Query.getServerResponse())
 			{
-				SN_MessageFormater.msgPrint("It appears the Starbound server is unresponsive, Starting the Starbound server...", 1);
+				SN_MessageFormater.msgPrint("It appears the Starbound server is unresponsive, Starting the Starbound server...", 0, 1);
 				SB_ProcessManagment.sb_ProcessRestart();
 				/* Add a unresponsive to the unresponsive trackers */
 				serverUnresponsiveTemp += 1;
-				SN_MessageFormater.msgPrint("Your server been unresponsive "+serverUnresponsiveTemp+" time(s) since the last autorestart.", 1);
+				SN_MessageFormater.msgPrint("Your server been unresponsive "+serverUnresponsiveTemp+" time(s) since the last autorestart.", 0, 1);
 				// Sleep for 2 minutes while the server boots up.
 				SN_Timer.startTimer(120000);
 			}
@@ -62,7 +62,7 @@ public class SB_ServerMonitor implements Runnable {
 		
 		/* Add a restart to the restart tracker */
 		// TODO
-		SN_MessageFormater.msgPrint("It has been "+autoRestartTimer+" hours since the last restart. Auto restarting server as per configuration.", 0);
+		SN_MessageFormater.msgPrint("It has been "+autoRestartTimer+" hours since the last restart. Auto restarting server as per configuration.", 0, 0);
 		// TODO Add a server broadcast for restart when network and packets added
 		SB_ProcessManagment.sb_ProcessKill();
 		run();	 

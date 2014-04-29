@@ -34,7 +34,7 @@ public class OS_GetLinuxKernel {
 			catch (Exception e) 
 			{
 				linuxKernel = 0;
-				SN_MessageFormater.msgPrint("Linux uname -m Java Message: "+e.getMessage(), 1);
+				SN_MessageFormater.msgPrint("Linux uname -m Java Message: "+e.getMessage(), 0, 1);
 			} 
 			if (output.contains("x86_64"))
 			{

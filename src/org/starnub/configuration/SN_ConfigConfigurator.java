@@ -39,7 +39,7 @@ public class SN_ConfigConfigurator {
 		{
 			SN_MessageFormater.msgPrint(lines
 					+ "\nThis prompt will only come up if your configuration is missing."
-					+ "\nYou will have 60 seconds to make each choice or the defaults will be selected for you.", 0);
+					+ "\nYou will have 60 seconds to make each choice or the defaults will be selected for you.", 0, 0);
 			StarNub = new FileOutputStream("StarNub/StarNub.config");
 	        BufferedReader questions = new BufferedReader(new InputStreamReader(System.in));
 	       
@@ -103,14 +103,14 @@ public class SN_ConfigConfigurator {
 	        		System.out.print("Restarting configuration prompt.");
 	        		SN_ConfigCreator ();
 	        	}
-	        	SN_MessageFormater.msgPrint("StarNub is now configured.", 0);
+	        	SN_MessageFormater.msgPrint("StarNub is now configured.", 0, 0);
 	        	}
 	 
 		} 
 		catch (IOException io) 
 		{
 			io.printStackTrace();
-			SN_MessageFormater.msgPrint("Configuration creation error: Java Message: "+io.getMessage(), 1);
+			SN_MessageFormater.msgPrint("Configuration creation error: Java Message: "+io.getMessage(), 0, 1);
 		} 
 		finally 
 		{
@@ -123,7 +123,7 @@ public class SN_ConfigConfigurator {
 				catch (IOException e) 
 				{
 					e.printStackTrace();
-					SN_MessageFormater.msgPrint("Configuration creation error: Java Message: "+e.getMessage(), 1);
+					SN_MessageFormater.msgPrint("Configuration creation error: Java Message: "+e.getMessage(), 0, 1);
 				}
 			}
 	 
