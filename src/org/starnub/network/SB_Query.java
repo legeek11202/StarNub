@@ -69,7 +69,7 @@ public class SB_Query {
 			};
 		byte[] data = new String(peer0_0).getBytes();
 		// TODO import port variable
-		return new DatagramPacket(data, 0, data.length, InetAddress.getByName("127.0.0.1"), 21024);
+		return new DatagramPacket(data, 0, data.length, InetAddress.getByName("127.0.0.1"), 21025);
 	}
 
 	private static DatagramPacket packetReceive()

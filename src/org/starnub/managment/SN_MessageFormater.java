@@ -20,8 +20,8 @@ public class SN_MessageFormater {
 
 	public static void msgPrint(String message,int type)
 	{
-		String currentTime = new DateTime().toString(DateTimeFormat.forPattern("[HH:mm:ss]"));
-		System.out.println(currentTime+SN+typeArray[type]+message);
+		new DateTime();
+		System.out.println(DateTime.now().toString(DateTimeFormat.forPattern("[HH:mm:ss]"))+SN+typeArray[type]+message);
 	}
 	
 	public SN_MessageFormater() 
