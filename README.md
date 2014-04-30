@@ -28,22 +28,22 @@ Temporary Feature
 	
 Planned Features
 ================
-Milestone 1:
+Milestone:
 - Network pass through for internal testing (Netty IO)
 
-Milestone 2
+Milestone
 - Configuration Options (Auto Restart, Starbound and StarNub Ports)
 - Formated console output, reducing clutter and pointless messages from the Starbound Process
 - Create Player Name|IP hashmap for console banning	
 	
-Milestone 3:
+Milestone:
 - Packet Classes
 	
-Milestone 4:
+Milestone:
 - Plug Frame Work
 - StarNub API
 	
-Milestone 5:
+Milestone:
 - Wrapper Console Menu
 	- Ungraceful Shutdown
 	- Restart Server
@@ -68,6 +68,9 @@ Installation
 	
 Java 8 Installation on Linux
 ============================
+The below tutorial was taken from: 
+http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html
+
 Method 1:
 
 1. sudo add-apt-repository ppa:webupd8team/java

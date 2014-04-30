@@ -21,7 +21,7 @@ public class SN_ConfigConfigurator {
         {
 		"StarNub_Port",
 		"Starbound_Port",
-        "Auto_Restart_Timer",
+		"Auto_Restart_Timer",
         };
 	
 	private static String[]  snConfigValues = new String[]
@@ -30,7 +30,8 @@ public class SN_ConfigConfigurator {
 	        "21024",
 	        "4",
 	        };  
-	static Properties p = new Properties();
+	
+	private static Properties p = new Properties();
 
 	public static void createConfig()
 	{
@@ -61,8 +62,8 @@ public class SN_ConfigConfigurator {
 			}
 			SN_MessageFormater.msgPrint(
 			  "\nPlayers will connect to the following port: "+p.getProperty(snConfigOptions[0])
-    		+ "\nStarNub will communicate to Starbound on the following: "+p.getProperty(snConfigOptions[1])
-    		+ "\nYour Server will auto restart every "+p.getProperty(snConfigOptions[2])+" hour(s).", 0, 0);
+			  + "\nStarNub will communicate to Starbound on the following: "+p.getProperty(snConfigOptions[1])
+			  + "\nYour Server will auto restart every "+p.getProperty(snConfigOptions[2])+" hour(s).", 0, 0);
 			String answerString = SN_TaskTimer.inputCall("\nAre these correct? (Y/N)(Default Y)",60);
 			if (answerString.equalsIgnoreCase("Y") || answerString.isEmpty())
 			{
