@@ -1,7 +1,7 @@
 package org.starnub.managment;
 
 import org.starnub.network.SB_Query;
-import org.starnub.util.SN_Timer;
+import org.starnub.util.SN_ThreadTimer;
 
 /*
 * This class's method manages Starbound Server Monitoring
@@ -32,16 +32,16 @@ public class SB_ServerMonitor implements Runnable {
 		SN_MessageFormater.msgPrint("Starting the Starbound Server.", 0, 0);
 		SB_ProcessManagment.sb_ProcessStart();
 		/* Sleep for 2 minutes while the server boots up.*/
-		SN_Timer.startTimer(120000);
+		SN_ThreadTimer.startTimer(120);
 		
 		do 
 		{
 			if (!SB_ProcessManagment.sb_ProcessStatus())
 			{
-				SN_MessageFormater.msgPrint("It appears the Starbound server crashed, Starting the Starbound server...", 0, 1);
+				SN_MessageFormater.msgPrint("It appears the Starbound server crashed.", 0, 1);
 				/* Add a crash to the crash trackers */
 				serverCrashesTemp += 1;
-				SN_MessageFormater.msgPrint("Your server has crashed "+serverCrashesTemp+" time(s) since the last autorestart.", 0, 1);
+				SN_MessageFormater.msgPrint("Your server has crashed "+serverCrashesTemp+" time(s) since the last auto restart.", 0, 1);
 				run ();
 			}
 			else if (!SB_Query.getServerResponse())
@@ -50,11 +50,11 @@ public class SB_ServerMonitor implements Runnable {
 				SB_ProcessManagment.sb_ProcessRestart();
 				/* Add a unresponsive to the unresponsive trackers */
 				serverUnresponsiveTemp += 1;
-				SN_MessageFormater.msgPrint("Your server been unresponsive "+serverUnresponsiveTemp+" time(s) since the last autorestart.", 0, 1);
+				SN_MessageFormater.msgPrint("Your server been unresponsive "+serverUnresponsiveTemp+" time(s) since the last auto restart.", 0, 1);
 				// Sleep for 2 minutes while the server boots up.
-				SN_Timer.startTimer(120000);
+				SN_ThreadTimer.startTimer(120);
 			}
-			SN_Timer.startTimer(15000);
+			SN_ThreadTimer.startTimer(15);
 			sbRestartTimer += 15; serverUptimeTemp += 15;
 			//TODO Correct serverUptime format
 		} 

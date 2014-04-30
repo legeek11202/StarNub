@@ -2,13 +2,13 @@ package org.starnub.util;
 
 import org.starnub.managment.SN_MessageFormater;
 
-public class SN_Timer {
+public class SN_ThreadTimer {
 	
 	public static void startTimer(int timer)
 	{
 		try 
 		{
-			Thread.sleep(timer);
+			Thread.sleep(timer*1000);
 		} 
 		catch (InterruptedException e) 
 		{
@@ -16,8 +16,7 @@ public class SN_Timer {
 		}
 	}
 	
-	public SN_Timer() {
+	public SN_ThreadTimer() {
 		// TODO Auto-generated constructor stub
 	}
-
 }

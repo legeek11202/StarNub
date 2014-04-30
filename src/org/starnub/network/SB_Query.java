@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
@@ -22,26 +23,31 @@ public class SB_Query {
 		boolean continueSending = true;
 		int counter = 0;
 		DatagramSocket ds = openSocket();
+		try {
+			/* Set packet receive timeout in milliseconds */
+			ds.setSoTimeout(6000);
+		} catch (SocketException e1) {
+			e1.printStackTrace();
+		}
 		
-		//Set packet send/receive timeout (Milliseconds)
 		try
-		{
-			// Sends packet up to 10 times if no response in 2 seconds between packets
+		{	
+			/* Attempts to send a packet, if no response, retry 10 times */
 			while (continueSending && counter < 10) 
 			{
-				ds.setSoTimeout(3000);
 				ds.send(packetAssembly());
 				counter++;
 				try 
 				{
 					ds.receive(packetReceive());
-					continueSending = false; // A packet has been received : stop sending
+					/* A packet has been received : stop sending */
+					continueSending = false; 
 					ds.close();
 					return true;
 				}
 				catch (SocketTimeoutException e) 
 				{
-					// No response received after 3 second. Continue sending.
+					/* No response received after 3 second - Retry sending */
 					SN_MessageFormater.msgPrint("Starbound Query: No response from the Starbound server.", 0, 1);
 				}
 			}
@@ -53,14 +59,14 @@ public class SB_Query {
 			return true;
 		}
 		SN_MessageFormater.msgPrint("Starbound Query: The Starbound server could not be reached.", 0, 1);
-		// Dump UDP query port, server port wrapper port
+		// TODO Dump UDP query port, server port wrapper port
 		return false;
 	}
 	
+	/* Packet assembly */
 	private static DatagramPacket packetAssembly() throws UnknownHostException 
 	{
-		/* Building the packet */
-		// TSource Engine Query (https://developer.valvesoftware.com/wiki/Server_queries)
+		/* TSource Engine Query = https://developer.valvesoftware.com/wiki/Server_queries */
 		char peer0_0[] = 
 			{ 
 				0xff, 0xff, 0xff, 0xff, 
@@ -74,13 +80,15 @@ public class SB_Query {
 		// TODO import port variable
 		return new DatagramPacket(data, 0, data.length, InetAddress.getLoopbackAddress(), 21025);
 	}
-
+	
+	/* Receive portion of the UDP Query */
 	private static DatagramPacket packetReceive()
 	{
-		/* Receive portion of the UDP Query */
+
 		return new DatagramPacket(new byte[1024], 1024);
 	}
 	
+	/* Socket creation and address bind */
 	private static DatagramSocket openSocket()
 	{
 		for (int port = 9000 ; port <= 65000 ; port++)
@@ -91,8 +99,7 @@ public class SB_Query {
 			} 
 			catch (IOException e) 
 			{
-				// Try the next port
-				System.out.println("Port "+port+" unable to bind");
+				/* Tries the next port */
 			}
 		}
 		SN_MessageFormater.msgPrint("Starbound Query: Error: Creating Socket.", 0, 1);
@@ -101,7 +108,7 @@ public class SB_Query {
 	
 	private static InetAddress setInetAddress()
 	{
-		//TODO check various address method
+		//TODO check various address method.
 		InetAddress.getLoopbackAddress();
 		return null;
 	}

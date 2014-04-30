@@ -12,8 +12,8 @@ import org.starnub.managment.SN_MessageFormater;
 public final class OS_GetFilePath {
 	
 	private static String win32Path = "win32/starbound_server.exe";
-	private static String linux32Path = "linux32/starbound_server";
-	private static String linux64Path = "linux64/starbound_server";
+	private static String linux32Path = "./linux32/starbound_server";
+	private static String linux64Path = "./linux64/starbound_server";
 	
 	public static String getFilePath ()
 	{	

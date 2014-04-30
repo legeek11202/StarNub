@@ -22,7 +22,7 @@ public class SN_Configuration {
     	else 
     	{
     		SN_MessageFormater.msgPrint("Creating StarNub Configuration...", 0, 0);
-    		SN_ConfigConfigurator.SN_ConfigCreator();
+    		SN_ConfigConfigurator.createConfig();
     		//TODO Config Load Call
     	}
 		

@@ -5,6 +5,7 @@ import org.starnub.managment.SB_ServerMonitor;
 import org.starnub.managment.SN_KeyListener;
 import org.starnub.managment.SN_Logger;
 import org.starnub.managment.SN_MessageFormater;
+import org.starnub.util.SN_ThreadTimer;
 
 
 /*
@@ -36,18 +37,19 @@ public final class StarNub {
     	SN_Logger.snLogger ();
     	SN_MessageFormater.msgPrint("Logger running.", 0, 0);
 
-    	/* Starts the KeyListener */
-    	SN_MessageFormater.msgPrint("Starting StarNub KeyListner...", 0, 0);
-    	Runnable sn_KeyListener = new SN_KeyListener();
-    	new Thread(sn_KeyListener).start();
-    	SN_MessageFormater.msgPrint("KeyListner running.", 0, 0);
-
     	/* Starts the Server WatchDog */
     	SN_MessageFormater.msgPrint("Starting StarNub Server Watchdog...", 0, 0);
     	Runnable sb_Watchdog = new SB_ServerMonitor();
     	new Thread(sb_Watchdog).start();
     	SN_MessageFormater.msgPrint("Server watchdog running.", 0, 0);
     	
+    	SN_ThreadTimer.startTimer(2);
+
+    	/* Starts the KeyListener */
+    	SN_MessageFormater.msgPrint("Starting StarNub KeyListner...", 0, 0);
+    	Runnable sn_KeyListener = new SN_KeyListener();
+    	new Thread(sn_KeyListener).start();
+    	SN_MessageFormater.msgPrint("KeyListner running.", 0, 0);
 
 
     	
