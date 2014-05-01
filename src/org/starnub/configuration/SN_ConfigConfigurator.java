@@ -42,12 +42,15 @@ public class SN_ConfigConfigurator {
 	{
 			OutputStream StarNub = null;
 			int a = 0;
+			String answerString;
+			
 			SN_MessageFormater.msgPrint("\n\nThis prompt will only come up if your configuration is missing. Type in the value or hit 'Enter' to accept the default value", 0, 0);
 			/* Loop through array of configuration questions */
 			for(String Qs : snConfigQuestions) 
 			{
 				/* Calls the TaskTimer and waits 30 second reply */
-				String answerString = SN_TaskTimer.inputCall(Qs,5);
+				//System.out.println(Qs)
+				answerString = SN_TaskTimer.inputCall(Qs,30);
 				if (answerString.isEmpty())
 				{
 					p.setProperty(snConfigOptions[a], snConfigValues[a]);
@@ -62,7 +65,7 @@ public class SN_ConfigConfigurator {
 			  "\nPlayers will connect to the following port: "+p.getProperty(snConfigOptions[0])
 			  + "\nStarNub will communicate to Starbound on the following: "+p.getProperty(snConfigOptions[1])
 			  + "\nYour Server will auto restart every "+p.getProperty(snConfigOptions[2])+" hour(s).", 0, 0);
-			String answerString = SN_TaskTimer.inputCall("\nAre these correct? (Y/N)(Default Y)",30);
+			answerString = SN_TaskTimer.inputCall("\nAre these correct? (Y/N)(Default Y)",30);
 			if (answerString.equalsIgnoreCase("Y") || answerString.isEmpty())
 			{
 				try 
