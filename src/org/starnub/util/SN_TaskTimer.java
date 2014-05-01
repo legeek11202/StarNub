@@ -1,14 +1,19 @@
 package org.starnub.util;
-import java.util.Timer;  
-import java.util.TimerTask;  
-import java.io.*;  
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.starnub.managment.SN_MessageFormater;
+
+/*
+ * This class is not function correctly. May not be possible to time user input.
+ */
 
 public class SN_TaskTimer {
 	
 	private static String questionAnswer = "";
-	private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in)); 
+	private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	
 	public static String inputCall(String questionString,int length)  
 	{  
@@ -29,12 +34,9 @@ public class SN_TaskTimer {
     	{  
     		if(questionAnswer.equals(""))
     		{   
-    			try {
-					in.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+    			System.out.println("test");
+
+    			return;
     		} 
     	}  
     };  

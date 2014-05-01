@@ -46,7 +46,7 @@ public class SN_ConfigConfigurator {
 			/* Loop through array of configuration questions */
 			for(String Qs : snConfigQuestions) 
 			{
-				/* Calls the TaskTimer and waits a 60 second reply */
+				/* Calls the TaskTimer and waits 30 second reply */
 				String answerString = SN_TaskTimer.inputCall(Qs,5);
 				if (answerString.isEmpty())
 				{
@@ -56,15 +56,13 @@ public class SN_ConfigConfigurator {
 				{
 					p.setProperty(snConfigOptions[a], answerString);
 				}
-				System.out.println(a);
 				a += 1;
-				System.out.println(a);
 			}
 			SN_MessageFormater.msgPrint(
 			  "\nPlayers will connect to the following port: "+p.getProperty(snConfigOptions[0])
 			  + "\nStarNub will communicate to Starbound on the following: "+p.getProperty(snConfigOptions[1])
 			  + "\nYour Server will auto restart every "+p.getProperty(snConfigOptions[2])+" hour(s).", 0, 0);
-			String answerString = SN_TaskTimer.inputCall("\nAre these correct? (Y/N)(Default Y)",60);
+			String answerString = SN_TaskTimer.inputCall("\nAre these correct? (Y/N)(Default Y)",30);
 			if (answerString.equalsIgnoreCase("Y") || answerString.isEmpty())
 			{
 				try 

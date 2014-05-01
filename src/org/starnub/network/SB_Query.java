@@ -106,13 +106,6 @@ public class SB_Query {
 		return null;
 	}
 	
-	private static InetAddress setInetAddress()
-	{
-		//TODO check various address method.
-		InetAddress.getLoopbackAddress();
-		return null;
-	}
-	
 	public SB_Query() 
 	{
 	}
