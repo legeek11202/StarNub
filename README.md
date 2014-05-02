@@ -55,6 +55,9 @@ Milestone:
 	- Editable Ban List
 	- Server Stat's
 
+Milestone:
+- Internationalization
+
 Starbound
 	- No need to change your configuration port number (We will do that for you)
 	
