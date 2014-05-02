@@ -25,7 +25,8 @@ public class SN_TaskTimer {
 		}  
 		catch( Exception e )
 		{  
-			SN_MessageFormater.msgPrint("TaskTimer: Creation Error."+e.getMessage(), 0, 1);
+			SN_MessageFormater.msgPrint("TaskTimer: Creation Error.", 0, 1);
+			e.printStackTrace();
 		}
 		return questionAnswer;
 	}  
@@ -58,7 +59,7 @@ public class SN_TaskTimer {
     				} 
     				catch (IOException e) 
     				{
-    					// TODO Auto-generated catch block
+    					SN_MessageFormater.msgPrint("TaskTimer in.readLine() Error: Java Message: "+e.getMessage(), 0, 1);
     					e.printStackTrace();
     				}
     			}
@@ -66,7 +67,7 @@ public class SN_TaskTimer {
     		} 
     		catch (IOException e) 
     		{
-    			// TODO Auto-generated catch block
+    			SN_MessageFormater.msgPrint("TaskTimer in.ready while loop Error: Java Message: "+e.getMessage(), 0, 1);
     			e.printStackTrace();
     		}
     	}

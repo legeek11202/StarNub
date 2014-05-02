@@ -1,5 +1,19 @@
 Updated: 26Apr14
 
+/* Exceptions where logs are needed shall consist of these items */
+SN_MessageFormater.msgPrint("TaskTimer: Creation Error.", 0, 1);
+e.printStackTrace();
+
+/* Break Down */
+SN_MessageFormater.msgPrint = Message formatter class
+Class Name = TaskTimer
+Method or Section = Creation Error
+0 for StarNub, 1 for Starbound
+0 for Info, 1 for Error, 2 for Chat
+
+
+
+
 Structure:
 
 T = Thread 

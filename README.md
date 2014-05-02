@@ -13,15 +13,18 @@ Requirements
 - Java 8 (32 or 64 bit version)
 - Any Windows or Linux OS
 
-Features
+Current Features
 ========
 - Easy Install
 - No GUI - Console Only
 - No need to start the Starbound Server
+- No need to write a configuration file (First run, we will ask you questions)
+	- Configuration Options (Auto Restart Timer, Starbound and StarNub Ports)
 - Server Watchdog
 	- Checks the Starbound Server process every 15 seconds. (Restarts on missing process(Crashes))
 	- Checks the Starbound Server for a response via (UDP) every 15 seconds. (Restarts on Server lockups)
-	- Auto Re-starter (Default 3 Hours)
+	- Auto Re-starter (Configurable)
+- Clean console output. Only see player connects, disconnects and joins.
 
 Temporary Feature
 	- Press "1" in console and press enter to shut the server down. (Will be replaced with a future menu)
@@ -32,9 +35,7 @@ Milestone:
 - Network pass through for internal testing (Netty IO)
 
 Milestone
-- Configuration Options (Auto Restart, Starbound and StarNub Ports)
-- Formated console output, reducing clutter and pointless messages from the Starbound Process
-- Create Player Name|IP hashmap for console banning	
+- Create Player Name|IP HashMap(Completed Feature)
 	
 Milestone:
 - Packet Classes
@@ -47,10 +48,14 @@ Milestone:
 - Wrapper Console Menu
 	- Ungraceful Shutdown
 	- Restart Server
-	- Player/IP List (Created via Starbound process output stream)(No annoying color tags)
+	- Player/IP List 
 	- IP Banning
 	- Editable Ban List
+	- Server Stat's
 
+Starbound
+	- No need to change your configuration port number (We will do that for you)
+	
 Installation
 ============
 1. Place the StarNub.jar in your starbound directory.

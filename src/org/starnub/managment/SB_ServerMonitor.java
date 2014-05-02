@@ -1,5 +1,6 @@
 package org.starnub.managment;
 
+import org.starnub.StarNub;
 import org.starnub.network.SB_Query;
 import org.starnub.util.SN_ThreadTimer;
 
@@ -20,7 +21,7 @@ public class SB_ServerMonitor implements Runnable {
 		// TODO: Configurable variable in hours
 		//3600 is 60 Minutes x 60 Seconds.
 		final int autoRestartTimer = (24*3600);
-		int sbRestartTimer = 0;
+		int sbRestartTimer = StarNub.configVariables.get("Auto_Restart_Timer");
 		
 		/* Temporary */
 		/* Since Server Last Restart */

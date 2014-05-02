@@ -11,7 +11,7 @@ import org.starnub.managment.SN_MessageFormater;
 * This method will return nothing.
 **/
 
-public class SN_Directories_Files {
+public class SN_Directories {
 
 	// Directory Checker
 
@@ -45,29 +45,7 @@ public class SN_Directories_Files {
 		}
 	}
 	
-	public static boolean snConfigCheck()
-	{
-		Boolean exsist = null;
-		try
-		{
-			File f = new File("StarNub/StarNub.config");
-			if(f.exists() && !f.isDirectory())
-			{
-				exsist = true;
-			}
-			else 
-			{
-				exsist = false;
-			}
-		}
-		catch (Exception e)
-		{
-			SN_MessageFormater.msgPrint("Directory creation: Java Error Message: "+e.getMessage(), 0, 1);
-		}
-		return exsist;
-	}
-	
-	public SN_Directories_Files() 
+	public SN_Directories() 
 	{
 	}
 }

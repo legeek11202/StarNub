@@ -1,5 +1,8 @@
 package org.starnub;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.starnub.configuration.SN_Configuration;
 import org.starnub.managment.SB_ServerMonitor;
 import org.starnub.managment.SN_KeyListener;
@@ -14,7 +17,11 @@ import org.starnub.util.SN_ThreadTimer;
 
 public final class StarNub {
 
-	private StarNub() 
+	public static Map<String, Integer> configVariables = new HashMap<String, Integer>();
+	public static Map<String, String> playersOnline = new HashMap<String, String>();
+	public static Map<String, String> bannedPlayers = new HashMap<String, String>();
+	
+	public StarNub() 
 	{
     }
 	

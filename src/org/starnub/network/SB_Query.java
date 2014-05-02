@@ -8,9 +8,12 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import org.starnub.StarNub;
 import org.starnub.managment.SN_MessageFormater;
 
 public class SB_Query {
+	
+	static int sbPort = StarNub.configVariables.get("Starbound_Port");
 	
 	public static boolean getServerResponse ()
 	{
@@ -21,22 +24,26 @@ public class SB_Query {
 	{
 		
 		boolean continueSending = true;
-		int counter = 0;
+		int packetAttempt = 0;
+		int packetsTry = 12;
 		DatagramSocket ds = openSocket();
+		
 		try {
 			/* Set packet receive timeout in milliseconds */
-			ds.setSoTimeout(6000);
-		} catch (SocketException e1) {
+			ds.setSoTimeout(10000);
+		} catch (SocketException e1) 
+		{
+			SN_MessageFormater.msgPrint("Starbound Query: Unable to set the packet receive timeout period.", 0, 1);
 			e1.printStackTrace();
 		}
 		
 		try
 		{	
-			/* Attempts to send a packet, if no response, retry 10 times */
-			while (continueSending && counter < 10) 
+			/* Attempts to send a packet, if no response, retry X times */
+			while (continueSending && packetAttempt < packetsTry) 
 			{
 				ds.send(packetAssembly());
-				counter++;
+				packetAttempt++;
 				try 
 				{
 					ds.receive(packetReceive());
@@ -48,18 +55,19 @@ public class SB_Query {
 				catch (SocketTimeoutException e) 
 				{
 					/* No response received after 3 second - Retry sending */
-					SN_MessageFormater.msgPrint("Starbound Query: No response from the Starbound server.", 0, 1);
+					SN_MessageFormater.msgPrint("UDP Query: No response from the Starbound server. Packet "+packetAttempt+" of "+packetsTry+" tried." , 0, 1);
 				}
 			}
 			ds.close();
 		}
 		catch (Exception e)
 		{
-			SN_MessageFormater.msgPrint("Starbound Query: Error sending packets.", 0, 1);
+			SN_MessageFormater.msgPrint("UDP Query: Error sending packets.", 0, 1);
 			return true;
 		}
-		SN_MessageFormater.msgPrint("Starbound Query: The Starbound server could not be reached.", 0, 1);
-		// TODO Dump UDP query port, server port wrapper port
+		SN_MessageFormater.msgPrint("UDP Query: The Starbound server could not be reached."
+				+ "\n"
+				+ "Starbound Port: "+sbPort+ "StarNub Port: "+StarNub.configVariables.get("StarNub_Port"), 0, 1);
 		return false;
 	}
 	
@@ -77,8 +85,7 @@ public class SB_Query {
 				0x75, 0x65, 0x72, 0x79, 0x00 
 			};
 		byte[] data = new String(peer0_0).getBytes();
-		// TODO import port variable
-		return new DatagramPacket(data, 0, data.length, InetAddress.getLoopbackAddress(), 21025);
+		return new DatagramPacket(data, 0, data.length, InetAddress.getLoopbackAddress(), sbPort);
 	}
 	
 	/* Receive portion of the UDP Query */
