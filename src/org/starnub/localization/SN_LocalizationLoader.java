@@ -29,7 +29,7 @@ public class SN_LocalizationLoader {
 		localConfig();
 		Locale locale = new Locale(language);
 		SN_MessageFormater.msgPrint("Language: "+language, 0, 0);
-		return ResourceBundle.getBundle("org.starnub.localization.Language", locale);
+		return ResourceBundle.getBundle("org.starnub.localization.language", locale);
 	}
 	
 	private static void localConfig()
