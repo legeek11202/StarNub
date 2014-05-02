@@ -54,7 +54,7 @@ public class SB_Query {
 				}
 				catch (SocketTimeoutException e) 
 				{
-					/* No response received after 3 second - Retry sending */
+					/* No response received after X second - Retry sending */
 					SN_MessageFormater.msgPrint("UDP Query: No response from the Starbound server. Packet "+packetAttempt+" of "+packetsTry+" tried." , 0, 1);
 				}
 			}

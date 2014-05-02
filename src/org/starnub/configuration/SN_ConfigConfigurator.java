@@ -106,7 +106,6 @@ public class SN_ConfigConfigurator {
 				StarNub.configVariables.clear();
 				configurationQuestions();
 			}	
-		
 	}
 	
 	public static void configurationValidation()

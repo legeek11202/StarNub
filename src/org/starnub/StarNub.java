@@ -2,6 +2,7 @@ package org.starnub;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import org.starnub.configuration.SN_Configuration;
 import org.starnub.managment.SB_ServerMonitor;
@@ -16,7 +17,8 @@ import org.starnub.util.SN_ThreadTimer;
  */
 
 public final class StarNub {
-
+	
+	// TODO public static ResourceBundle lang = 
 	public static Map<String, Integer> configVariables = new HashMap<String, Integer>();
 	public static Map<String, String> playersOnline = new HashMap<String, String>();
 	public static Map<String, String> bannedPlayers = new HashMap<String, String>();

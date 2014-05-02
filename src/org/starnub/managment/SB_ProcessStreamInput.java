@@ -26,7 +26,7 @@ public class SB_ProcessStreamInput implements Runnable {
 				while ((line = input.readLine()) != null) 
 					if (line.contains("Info:  <"))
 					{
-						SN_MessageFormater.msgPrint(line.substring(6, line.length()), 1, 2);
+						SN_MessageFormater.msgPrint(line.substring(7, line.length()), 1, 2);
 					}
 					else if (line.contains("Client '") && line.contains("> ("))
 					{

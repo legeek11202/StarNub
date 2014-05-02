@@ -1,4 +1,4 @@
-Updated: 26Apr14
+Updated: 02May14
 
 Also Stat's, Process Crashes, Unresponsive, Wrapper Uptime, Uptime since last restart, Last restart
 Looping Key Listener
@@ -10,12 +10,8 @@ Network Check for Restarter
 Network Netty
 Pass Through
 
-HashMap Builder Player Name and IP
 Banned HashMap Builder
 Banned HashMapper Saver
-
-Configuration Checker
-Configuration Loader
 
 Client ID and Client Class
 
