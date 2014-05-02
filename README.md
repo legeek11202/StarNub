@@ -27,6 +27,7 @@ Current Features
 	- Checks the Starbound Server for a response via (UDP) every 15 seconds. (Restarts on Server lockups)
 	- Auto Re-starter (Configurable)
 - Clean console output. Only see player connects, disconnects and joins.
+- Localization (Wiki how to coming soon)
 
 Temporary Feature
 	- Press "1" in console and press enter to shut the server down. (Will be replaced with a future menu)
@@ -56,7 +57,7 @@ Milestone:
 	- Server Stat's
 
 Milestone:
-- Internationalization
+- Localization Flexibility (For plug-ins and ability to load from StarNub directory)
 
 Starbound
 	- No need to change your configuration port number (We will do that for you)

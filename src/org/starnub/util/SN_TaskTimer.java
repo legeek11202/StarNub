@@ -3,9 +3,11 @@ package org.starnub.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.starnub.StarNub;
 import org.starnub.managment.SN_MessageFormater;
 
 /*
@@ -17,7 +19,8 @@ public class SN_TaskTimer {
 	private static String questionAnswer = "";
 	private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	private boolean reading = true;
-
+	private static ResourceBundle s = StarNub.lang;
+	
 	public static String inputCall(String questionString,int length)  
 	{  
 		try
@@ -26,7 +29,6 @@ public class SN_TaskTimer {
 		}  
 		catch( Exception e )
 		{  
-			SN_MessageFormater.msgPrint("TaskTimer: Creation Error.", 0, 1);
 			e.printStackTrace();
 		}
 		return questionAnswer;
@@ -60,7 +62,6 @@ public class SN_TaskTimer {
     				} 
     				catch (IOException e) 
     				{
-    					SN_MessageFormater.msgPrint("TaskTimer in.readLine() Error", 0, 1);
     					e.printStackTrace();
     				}
     			}
@@ -68,7 +69,6 @@ public class SN_TaskTimer {
     		} 
     		catch (IOException e) 
     		{
-    			SN_MessageFormater.msgPrint("TaskTimer in.ready while loop Error", 0, 1);
     			e.printStackTrace();
     		}
     	}

@@ -12,17 +12,24 @@ import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
 import org.starnub.managment.SN_MessageFormater;
+import org.starnub.util.SN_TaskTimer;
+
+/*
+ * These strings are static. They will not be localized.
+ * All other strings will be based on local file.
+ * 
+ */
 
 public class SN_LocalizationLoader {
 	
+	private static String language;
+	
 	public static ResourceBundle getResources ()
 	{
-		return null;
-	}
-	
-	public static Locale getLocal ()
-	{
-		return null;
+		localConfig();
+		Locale locale = new Locale(language);
+		SN_MessageFormater.msgPrint("Language: "+language, 0, 0);
+		return ResourceBundle.getBundle("org.starnub.localization.Language", locale);
 	}
 	
 	private static void localConfig()
@@ -36,10 +43,12 @@ public class SN_LocalizationLoader {
 				try 
 				{
 					prop.load(starLocalizationInput);
+					language = prop.getProperty("Language");
+					language = language.toLowerCase();
 				} 
 				catch (IOException e) 
 				{
-					SN_MessageFormater.msgPrint("ConfigConfigurator: Error loading properties.", 0, 0);
+					SN_MessageFormater.msgPrint("LocalizationLoader: Error loading localization config.", 0, 1);
 					e.printStackTrace();
 				}
 			}
@@ -47,13 +56,29 @@ public class SN_LocalizationLoader {
 			{
 
 				FileOutputStream starLocalizationOutput = null;
-				
-				
+				SN_MessageFormater.msgPrint("No language configured.", 0, 0);
+				String answerString = SN_TaskTimer.inputCall("\n\n\n\nYou have 1 minutes to select your language. (Default English)"
+						+ "\nPlease type in the number and press 'Enter'."
+						+ "\n\nSupported Languages"
+						+ "\n==================="
+						+ "\n1. English"
+						+ "\n",60);
+				switch (answerString)
+				{
+				case "": language = "english"; break;
+				case "1": language = "english"; break;
+				default: 
+				{
+					SN_MessageFormater.msgPrint("Error language selection", 0, 0);
+					localConfig();
+				}
+				}
 				try 
 				{
+				prop.setProperty("Language", language);
 				starLocalizationOutput = new FileOutputStream(filePath);
 				prop.store(starLocalizationOutput, null);
-				SN_MessageFormater.msgPrint("StarNub is now configured.", 0, 0);
+				SN_MessageFormater.msgPrint("Language is now configured.", 0, 0);
 				}
 				catch (IOException io) 
 				{
@@ -75,11 +100,7 @@ public class SN_LocalizationLoader {
 						}
 					}	 
 				}
-				
 			}
-			
-			
-			//TODO load locaization
 	}
 	
 

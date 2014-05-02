@@ -7,12 +7,14 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
 import org.starnub.managment.SN_MessageFormater;
 
 public class SB_Query {
 	
+	private static ResourceBundle s = StarNub.lang;
 	static int sbPort = StarNub.configVariables.get("Starbound_Port");
 	
 	public static boolean getServerResponse ()
@@ -33,7 +35,7 @@ public class SB_Query {
 			ds.setSoTimeout(10000);
 		} catch (SocketException e1) 
 		{
-			SN_MessageFormater.msgPrint("Starbound Query: Unable to set the packet receive timeout period.", 0, 1);
+			SN_MessageFormater.msgPrint(s.getString("sb.q.1"), 0, 1);
 			e1.printStackTrace();
 		}
 		
@@ -55,19 +57,19 @@ public class SB_Query {
 				catch (SocketTimeoutException e) 
 				{
 					/* No response received after X second - Retry sending */
-					SN_MessageFormater.msgPrint("UDP Query: No response from the Starbound server. Packet "+packetAttempt+" of "+packetsTry+" tried." , 0, 1);
+					SN_MessageFormater.msgPrint(s.getString("sb.q.2")+"("+packetAttempt+"/"+packetsTry+")" , 0, 1);
 				}
 			}
 			ds.close();
 		}
 		catch (Exception e)
 		{
-			SN_MessageFormater.msgPrint("UDP Query: Error sending packets.", 0, 1);
+			SN_MessageFormater.msgPrint(s.getString("sb.q.3"), 0, 1);
 			return true;
 		}
-		SN_MessageFormater.msgPrint("UDP Query: The Starbound server could not be reached."
+		SN_MessageFormater.msgPrint(s.getString("sb.q.4")
 				+ "\n"
-				+ "Starbound Port: "+sbPort+ "StarNub Port: "+StarNub.configVariables.get("StarNub_Port"), 0, 1);
+				+ "Starbound Port: "+sbPort+ " StarNub Port: "+StarNub.configVariables.get("StarNub_Port"), 0, 1);
 		return false;
 	}
 	
@@ -109,7 +111,7 @@ public class SB_Query {
 				/* Tries the next port */
 			}
 		}
-		SN_MessageFormater.msgPrint("Starbound Query: Error: Creating Socket.", 0, 1);
+		SN_MessageFormater.msgPrint(s.getString("sb.q.5"), 0, 1);
 		return null;
 	}
 	

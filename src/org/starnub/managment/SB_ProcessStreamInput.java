@@ -10,15 +10,19 @@ package org.starnub.managment;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
 
 public class SB_ProcessStreamInput implements Runnable {
+	
+	private static ResourceBundle s = StarNub.lang;
 
 	public synchronized void run()
 		{  
 			String line;
-			
+			String c = s.getString("spsic");
+			String dc = s.getString("spsid");
 			BufferedReader input = new BufferedReader(new InputStreamReader(SB_ProcessManagment.getSbProcess().getInputStream()));
 			
 			try 
@@ -36,14 +40,16 @@ public class SB_ProcessStreamInput implements Runnable {
 						if (activity.equals("connected"))
 						{
 							StarNub.playersOnline.put(playerIP, playerName);
+							activity = c;
 						}
 						else if (activity.equals("disconnected"))
 						{
 							StarNub.playersOnline.remove(playerIP);
+							activity = dc;
 						}
 						else
 						{
-							SN_MessageFormater.msgPrint("StreamInput: Error with inserting or removing from array", 0, 1);
+							SN_MessageFormater.msgPrint(s.getString("sb.psi.1"), 0, 1);
 						}
 						SN_MessageFormater.msgPrint(playerName+" has "+activity+" ("+playerIP+").", 1, 0);
 					} 
@@ -53,7 +59,7 @@ public class SB_ProcessStreamInput implements Runnable {
 					} 
 					else if (line.contains("TcpServer"))
 					{
-						SN_MessageFormater.msgPrint("Starbound server online. Players may now connect to port "+StarNub.configVariables.get("StarNub_Port")+".", 1, 0);
+						SN_MessageFormater.msgPrint(s.getString("spsi")+" "+StarNub.configVariables.get("StarNub_Port")+".", 1, 0);
 					} 
 					else
 					{
@@ -62,7 +68,6 @@ public class SB_ProcessStreamInput implements Runnable {
 			} 
 			catch (IOException e) 
 			{
-				SN_MessageFormater.msgPrint("Starbound process stream issues.", 0, 1);
 				e.printStackTrace();
 			}
 	      }

@@ -2,6 +2,7 @@ package org.starnub.util;
 
 import java.io.File;
 
+import org.starnub.StarNub;
 import org.starnub.managment.SN_MessageFormater;
 
 /*
@@ -34,14 +35,14 @@ public class SN_Directories {
 					boolean result = directory.mkdir();  
 					if(result) 
 					{    
-						SN_MessageFormater.msgPrint(directory+" directory created.", 0, 0);
+						SN_MessageFormater.msgPrint(directory+StarNub.lang.getString("sndc"), 0, 0);
 					}
 				}
 			}
 		}
 		catch (Exception e)
 		{
-			SN_MessageFormater.msgPrint("Directory creation: Java Error Message: "+e.getMessage(), 0, 1);
+			e.printStackTrace();
 		}
 	}
 	

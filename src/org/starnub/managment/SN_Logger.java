@@ -6,6 +6,7 @@ import java.io.PrintStream;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.starnub.StarNub;
 
 /*
 * This class's method will push output to the console and log file.
@@ -37,7 +38,6 @@ public class SN_Logger {
     	}
     	catch (FileNotFoundException e)
     	{
-    		SN_MessageFormater.msgPrint("Logger files.", 0, 1);
 			e.printStackTrace();
     	}
 	}

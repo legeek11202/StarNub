@@ -1,5 +1,8 @@
 package org.starnub.managment;
 
+import java.util.ResourceBundle;
+
+import org.starnub.StarNub;
 import org.starnub.util.OS_GetFilePath;
 import org.starnub.managment.SB_ProcessStreamInput;
 
@@ -18,6 +21,8 @@ import org.starnub.managment.SB_ProcessStreamInput;
 
 public class SB_ProcessManagment {
 	
+	private static ResourceBundle s = StarNub.lang;
+	
 	private static Process sbProcess;
 	
 	public static Process getSbProcess() 
@@ -35,7 +40,6 @@ public class SB_ProcessManagment {
 		} 
 		catch (Exception e) 
 		{
-			SN_MessageFormater.msgPrint("Runtime exception when creating the Starbound server process.", 0, 1);
 			e.printStackTrace();
 		}	
 	}  
@@ -48,7 +52,6 @@ public class SB_ProcessManagment {
 		} 
 		catch (Exception e)
 		{
-			SN_MessageFormater.msgPrint("Runtime exception when destroying the Starbound server process.", 0, 1);
 			e.printStackTrace();
 		}
 	}

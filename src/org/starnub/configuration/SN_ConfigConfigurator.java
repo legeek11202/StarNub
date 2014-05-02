@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
 import org.starnub.managment.SN_MessageFormater;
@@ -14,11 +15,13 @@ import org.starnub.util.SN_TaskTimer;
 
 public class SN_ConfigConfigurator {
 	
+	private static ResourceBundle s = StarNub.lang;
+	
 	private static String[] snConfigQuestions = new String[]
 			{
-			"\nPlease enter the port that you want players to connect to. (Default: 21025)",
-			"\nPlease enter the port that you want Starbound to use to speak with StarNub. (Default: 21024)",
-			"\nPlease enter the amount of hours you want to use between Auto Restart Starbound. (Default: 4)",
+			"\n"+s.getString("cq1"),
+			"\n"+s.getString("cq2"),
+			"\n"+s.getString("cq3"),
 			};
     
 	private static String[]  snConfigOptions = new String[]
@@ -48,8 +51,8 @@ public class SN_ConfigConfigurator {
 			Properties prop = new Properties();
 			int a = 0;
 			String answerString;
-			SN_MessageFormater.msgPrint("Creating StarNub Configuration...", 0, 0);
-			SN_MessageFormater.msgPrint("\n\nThis prompt will only come up if your configuration is missing. \nType in the value or hit 'Enter' to accept the default value.", 0, 0);
+			SN_MessageFormater.msgPrint(s.getString("cc"), 0, 0);
+			SN_MessageFormater.msgPrint("\n\n"+s.getString("cc1")+"\n"+s.getString("cc2"), 0, 0);
 			/* Loop through array of configuration questions */
 			for(String qS : snConfigQuestions) 
 			{
@@ -68,21 +71,20 @@ public class SN_ConfigConfigurator {
 				a += 1;
 			}
 			SN_MessageFormater.msgPrint(
-			  "\nPlayers will connect to the following port: "+prop.getProperty(snConfigOptions[0])
-			  + "\nStarNub will communicate to Starbound on the following: "+prop.getProperty(snConfigOptions[1])
-			  + "\nYour Server will auto restart every "+prop.getProperty(snConfigOptions[2])+" hour(s).", 0, 0);
-			answerString = SN_TaskTimer.inputCall("\nAre these correct? (Y/N)(Default Y)",30);
+			  "\n"+s.getString("cqc1")+" "+prop.getProperty(snConfigOptions[0])
+			  + "\n"+s.getString("cqc2")+" "+prop.getProperty(snConfigOptions[1])
+			  + "\n"+s.getString("cqc3")+" "+prop.getProperty(snConfigOptions[2])+" "+s.getString("cqc4"), 0, 0);
+			answerString = SN_TaskTimer.inputCall("\n"+s.getString("cqc5"),30);
 			if (answerString.equalsIgnoreCase("Y") || answerString.isEmpty())
 			{
 				try 
 				{
 				starNubConfig = new FileOutputStream(filePath);
 				prop.store(starNubConfig, null);
-				SN_MessageFormater.msgPrint("StarNub is now configured.", 0, 0);
+				SN_MessageFormater.msgPrint(s.getString("cf"), 0, 0);
 				}
 				catch (IOException e) 
 				{
-					SN_MessageFormater.msgPrint("Configuration creation error.", 0, 1);
 	    			e.printStackTrace();
 				} 
 				finally 
@@ -95,7 +97,6 @@ public class SN_ConfigConfigurator {
 						} 
 						catch (IOException e) 
 						{
-							SN_MessageFormater.msgPrint("Configuration creation error.", 0, 1);
 			    			e.printStackTrace();
 						}
 					}	 
@@ -121,7 +122,6 @@ public class SN_ConfigConfigurator {
 			} 
 			catch (IOException e) 
 			{
-				SN_MessageFormater.msgPrint("ConfigConfigurator: Error loading properties.", 0, 0);
 				e.printStackTrace();
 			}
 			for(String keys : snConfigOptions) 
@@ -132,7 +132,7 @@ public class SN_ConfigConfigurator {
 		} 
 		catch (FileNotFoundException e) 
 		{
-			SN_MessageFormater.msgPrint("ConfigConfigurator: Configuration does not exsist.", 0, 0);
+			SN_MessageFormater.msgPrint(s.getString("sn.cc.3"), 0, 0);
 			configurationQuestions();
 		}
 	}
