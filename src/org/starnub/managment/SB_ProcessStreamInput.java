@@ -49,7 +49,7 @@ public class SB_ProcessStreamInput implements Runnable {
 					} 
 					else if (line.contains("Server version"))
 					{
-						SN_MessageFormater.msgPrint(line.substring(6, line.length()), 1, 0);
+						SN_MessageFormater.msgPrint(line.substring(6, line.length())+".", 1, 0);
 					} 
 					else if (line.contains("TcpServer"))
 					{

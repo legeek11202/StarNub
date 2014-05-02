@@ -1,4 +1,5 @@
 package org.starnub.util;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,7 +9,7 @@ import java.util.TimerTask;
 import org.starnub.managment.SN_MessageFormater;
 
 /*
- * This class is not function correctly. May not be possible to time user input.
+ * Coming soon.
  */
 
 public class SN_TaskTimer {
@@ -59,7 +60,7 @@ public class SN_TaskTimer {
     				} 
     				catch (IOException e) 
     				{
-    					SN_MessageFormater.msgPrint("TaskTimer in.readLine() Error: Java Message: "+e.getMessage(), 0, 1);
+    					SN_MessageFormater.msgPrint("TaskTimer in.readLine() Error", 0, 1);
     					e.printStackTrace();
     				}
     			}
@@ -67,7 +68,7 @@ public class SN_TaskTimer {
     		} 
     		catch (IOException e) 
     		{
-    			SN_MessageFormater.msgPrint("TaskTimer in.ready while loop Error: Java Message: "+e.getMessage(), 0, 1);
+    			SN_MessageFormater.msgPrint("TaskTimer in.ready while loop Error", 0, 1);
     			e.printStackTrace();
     		}
     	}
