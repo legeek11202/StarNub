@@ -29,8 +29,8 @@ Current Features
 - Clean console output. Only see player connects, disconnects and joins.
 - Localization (Wiki how to coming soon)
 
-Temporary Feature
-	- Press "1" in console and press enter to shut the server down. (Will be replaced with a future menu)
+- Server and wrapper shutdown
+	- Press "1" in console and press enter to shut the server down. 
 	
 Planned Features
 ================
@@ -46,54 +46,20 @@ Milestone:
 Milestone:
 - Plug Frame Work
 - StarNub API
-	
-Milestone:
-- Wrapper Console Menu
-	- Ungraceful Shutdown
-	- Restart Server
-	- Player/IP List 
-	- IP Banning
-	- Editable Ban List
-	- Server Stat's
 
 Milestone:
-- Localization Flexibility (For plug-ins and ability to load from StarNub directory)
+- Localization Flexibility (For plug-ins and ability to load from StarNub directory and merge of language files in case a language file is not updated, program will default to english for that string)
 
 Starbound
 	- No need to change your configuration port number (We will do that for you)
 	
+Milestone:
+- Remote or Local Console Administration Client (To be determined)
+	- Start, Stop, Restart Server
+	- Player / IP List 
+	- IP Banning
+	- Server Stat's (Restarts Data (AutoRestart Count, Unresponsive and Crashes)
+	
 Installation
 ============
-1. Place the StarNub.jar in your starbound directory.
-		Windows Example: C:\Program Files (x86)\Steam\steamapps\common\Starbound\StarNub.jar
-		Linux Example: /home/user/starbound/StarNub.jar
-		
-2. For Windows place server.bat into the same directory as StarNub.jar
-   For Linux place server.sh into the same directory as StarNub.jar
- 
-3. Run the server.bat or for Linux type ./server.sh
-
-(Coming Soon)4. First run will walk through a auto configuration of the wrapper through the console. If you do not select options 
-	defaults will be selected for you. They can be changes by accessing and editing the configuration called
-	StarNub.*** (Coming Soon).
-	
-Java 8 Installation on Linux
-============================
-The below tutorial was taken from: 
-http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html
-
-Method 1:
-
-1. sudo add-apt-repository ppa:webupd8team/java
-2. sudo apt-get update
-3. sudo apt-get install oracle-java8-installer
-
-Method 2:
-
-- Automated installation (auto accept license)
-1. echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
-
-On Completion: 
-
-1. java -version
-	- Should display the following line and then some extra data "java version 1.8.0"
+Moved to Wiki.

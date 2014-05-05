@@ -1,4 +1,4 @@
-package org.starnub.managment;
+package org.starnub.util.stream;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,7 +14,7 @@ import org.starnub.StarNub;
 * This method will return nothing.
 **/
 
-public class SN_Logger {
+public class MultiOutputStreamLogger {
 
 	public static void snLogger ()
 	{
@@ -27,8 +27,8 @@ public class SN_Logger {
     		FileOutputStream fout= new FileOutputStream("StarNub/Server Logs/"+timestamp+".log", true);
     		FileOutputStream ferr= new FileOutputStream("StarNub/Error Logs/"+timestamp+".log", true);
     		
-    		SN_MultiOutputStream multiOut= new SN_MultiOutputStream(System.out, fout);
-    		SN_MultiOutputStream multiErr= new SN_MultiOutputStream(System.err, ferr);
+    		MultiOutputStream multiOut= new MultiOutputStream(System.out, fout);
+    		MultiOutputStream multiErr= new MultiOutputStream(System.err, ferr);
     		
     		PrintStream stdout= new PrintStream(multiOut);
     		PrintStream stderr= new PrintStream(multiErr);
@@ -42,7 +42,7 @@ public class SN_Logger {
     	}
 	}
 		
-	public SN_Logger() 
+	public MultiOutputStreamLogger() 
 	{
 	}
 }

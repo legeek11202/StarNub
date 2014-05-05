@@ -1,8 +1,9 @@
-package org.starnub.util;
+package org.starnub.util.timers;
 
-import org.starnub.managment.SN_MessageFormater;
+import org.starnub.util.stream.SN_MessageFormater;
 
-public class SN_ThreadTimer {
+
+public class ThreadSleep_Timer {
 	
 	public static void startTimer(int timer)
 	{
@@ -17,7 +18,6 @@ public class SN_ThreadTimer {
 		}
 	}
 	
-	public SN_ThreadTimer() {
-		// TODO Auto-generated constructor stub
+	public ThreadSleep_Timer() {
 	}
 }

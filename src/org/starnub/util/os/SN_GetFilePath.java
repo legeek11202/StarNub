@@ -1,6 +1,7 @@
-package org.starnub.util;
+package org.starnub.util.os;
 
-import org.starnub.managment.SN_MessageFormater;
+import org.starnub.util.stream.SN_MessageFormater;
+
 
 
 /*
@@ -9,7 +10,7 @@ import org.starnub.managment.SN_MessageFormater;
 * This method will return a file path in the form of a String.
 **/
 
-public final class OS_GetFilePath {
+public final class SN_GetFilePath {
 	
 	private static String win32Path = "win32/starbound_server.exe";
 	private static String linux32Path = "./linux32/starbound_server";
@@ -28,7 +29,7 @@ public final class OS_GetFilePath {
     	} 
     	else 
     	{
-    		int linuxKernel = OS_GetLinuxKernel.linuxKernel();
+    		int linuxKernel = LinuxKernelBitVersion.linuxKernel();
  
     		switch (linuxKernel) 
     		{
@@ -49,7 +50,7 @@ public final class OS_GetFilePath {
     		}
     	}
 	}	
-	public OS_GetFilePath() 
+	public SN_GetFilePath() 
 	{
 	}
 }

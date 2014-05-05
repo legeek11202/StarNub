@@ -4,7 +4,8 @@ import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
 import org.starnub.network.SB_Query;
-import org.starnub.util.SN_ThreadTimer;
+import org.starnub.util.stream.SN_MessageFormater;
+import org.starnub.util.timers.ThreadSleep_Timer;
 
 /*
 * This class's method manages Starbound Server Monitoring
@@ -18,7 +19,11 @@ import org.starnub.util.SN_ThreadTimer;
 
 public class SB_ServerMonitor implements Runnable {
 	
-	private static ResourceBundle s = StarNub.lang;
+	private static ResourceBundle s = StarNub.language;
+	
+	int serverCrashesTemp = 0;
+	int serverUnresponsiveTemp = 0;
+	
 	
 	public synchronized void run () 
 	{
@@ -29,15 +34,14 @@ public class SB_ServerMonitor implements Runnable {
 		
 		/* Temporary */
 		/* Since Server Last Restart */
-		int serverCrashesTemp = 0;
-		int serverUnresponsiveTemp = 0;
+
 		@SuppressWarnings("unused")
 		int serverUptimeTemp = 0;	
 		
 		SN_MessageFormater.msgPrint(s.getString("ssm"), 0, 0);
 		SB_ProcessManagment.sb_ProcessStart();
 		/* Sleep for 2 minutes while the server boots up.*/
-		SN_ThreadTimer.startTimer(120);
+		ThreadSleep_Timer.startTimer(120);
 		
 		do 
 		{
@@ -57,9 +61,9 @@ public class SB_ServerMonitor implements Runnable {
 				serverUnresponsiveTemp += 1;
 				SN_MessageFormater.msgPrint(s.getString("ssmu1")+" "+serverUnresponsiveTemp+" "+s.getString("ssmu2"), 0, 1);
 				// Sleep for 2 minutes while the server boots up.
-				SN_ThreadTimer.startTimer(120);
+				ThreadSleep_Timer.startTimer(120);
 			}
-			SN_ThreadTimer.startTimer(15);
+			ThreadSleep_Timer.startTimer(15);
 			sbRestartTimer += 15; serverUptimeTemp += 15;
 			//TODO Correct serverUptime format
 		} 

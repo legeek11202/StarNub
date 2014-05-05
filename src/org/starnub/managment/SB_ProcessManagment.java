@@ -3,7 +3,7 @@ package org.starnub.managment;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
-import org.starnub.util.OS_GetFilePath;
+import org.starnub.util.os.SN_GetFilePath;
 import org.starnub.managment.SB_ProcessStreamInput;
 
 /*
@@ -21,7 +21,7 @@ import org.starnub.managment.SB_ProcessStreamInput;
 
 public class SB_ProcessManagment {
 	
-	private static ResourceBundle s = StarNub.lang;
+	private static ResourceBundle s = StarNub.language;
 	
 	private static Process sbProcess;
 	
@@ -34,7 +34,7 @@ public class SB_ProcessManagment {
 	{
 		try 
 		{
-			sbProcess = Runtime.getRuntime().exec(OS_GetFilePath.getFilePath());
+			sbProcess = Runtime.getRuntime().exec(SN_GetFilePath.getFilePath());
 			Runnable sb_StreamInput = new SB_ProcessStreamInput();
 			new Thread(sb_StreamInput).start();
 		} 

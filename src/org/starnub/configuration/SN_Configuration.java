@@ -3,13 +3,13 @@ package org.starnub.configuration;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
-import org.starnub.managment.SN_MessageFormater;
-import org.starnub.util.SN_Directories;
+import org.starnub.util.os.SN_Directories;
+import org.starnub.util.stream.SN_MessageFormater;
 import org.starnub.configuration.SN_ConfigConfigurator;
 
 public class SN_Configuration {
 	
-	private static ResourceBundle s = StarNub.lang;
+	private static ResourceBundle s = StarNub.language;
 
 	public static void snConfigurationCheck ()
 	{

@@ -10,12 +10,12 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
-import org.starnub.managment.SN_MessageFormater;
-import org.starnub.util.SN_TaskTimer;
+import org.starnub.util.stream.SN_MessageFormater;
+import org.starnub.util.timers.ConsoleInput_Timer;
 
 public class SN_ConfigConfigurator {
 	
-	private static ResourceBundle s = StarNub.lang;
+	private static ResourceBundle s = StarNub.language;
 	
 	private static String[] snConfigQuestions = new String[]
 			{
@@ -57,7 +57,7 @@ public class SN_ConfigConfigurator {
 			for(String qS : snConfigQuestions) 
 			{
 				/* Calls the TaskTimer and waits 30 second reply */
-				answerString = SN_TaskTimer.inputCall(qS,30);
+				answerString = ConsoleInput_Timer.inputCall(qS,30);
 				if (answerString.isEmpty())
 				{
 					prop.setProperty(snConfigOptions[a], snConfigValues[a]);
@@ -74,7 +74,7 @@ public class SN_ConfigConfigurator {
 			  "\n"+s.getString("cqc1")+" "+prop.getProperty(snConfigOptions[0])
 			  + "\n"+s.getString("cqc2")+" "+prop.getProperty(snConfigOptions[1])
 			  + "\n"+s.getString("cqc3")+" "+prop.getProperty(snConfigOptions[2])+" "+s.getString("cqc4"), 0, 0);
-			answerString = SN_TaskTimer.inputCall("\n"+s.getString("cqc5"),30);
+			answerString = ConsoleInput_Timer.inputCall("\n"+s.getString("cqc5"),30);
 			if (answerString.equalsIgnoreCase("Y") || answerString.isEmpty())
 			{
 				try 

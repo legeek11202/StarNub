@@ -1,9 +1,9 @@
-package org.starnub.util;
+package org.starnub.util.os;
 
 import java.io.File;
 
 import org.starnub.StarNub;
-import org.starnub.managment.SN_MessageFormater;
+import org.starnub.util.stream.SN_MessageFormater;
 
 /*
 * This class's method will check to make sure the directories 
@@ -35,7 +35,7 @@ public class SN_Directories {
 					boolean result = directory.mkdir();  
 					if(result) 
 					{    
-						SN_MessageFormater.msgPrint(directory+StarNub.lang.getString("sndc"), 0, 0);
+						SN_MessageFormater.msgPrint(directory+StarNub.language.getString("sndc"), 0, 0);
 					}
 				}
 			}

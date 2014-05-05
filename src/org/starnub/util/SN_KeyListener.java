@@ -1,6 +1,8 @@
-package org.starnub.managment;
+package org.starnub.util;
 
 import java.util.Scanner;
+
+import org.starnub.managment.SB_ProcessManagment;
 
 /*
  * Temporary Key Listener for program exit

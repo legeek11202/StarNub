@@ -13,10 +13,11 @@ import java.io.InputStreamReader;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
+import org.starnub.util.stream.SN_MessageFormater;
 
 public class SB_ProcessStreamInput implements Runnable {
 	
-	private static ResourceBundle s = StarNub.lang;
+	private static ResourceBundle s = StarNub.language;
 
 	public synchronized void run()
 		{  

@@ -1,4 +1,4 @@
-package org.starnub.util;
+package org.starnub.util.timers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,24 +8,22 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.starnub.StarNub;
-import org.starnub.managment.SN_MessageFormater;
 
 /*
  * Coming soon.
  */
 
-public class SN_TaskTimer {
+public class ConsoleInput_Timer {
 	
 	private static String questionAnswer = "";
 	private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	private boolean reading = true;
-	private static ResourceBundle s = StarNub.lang;
 	
 	public static String inputCall(String questionString,int length)  
 	{  
 		try
 		{  
-			new SN_TaskTimer().getInput(questionString,length);  
+			new ConsoleInput_Timer().getInput(questionString,length);  
 		}  
 		catch( Exception e )
 		{  
@@ -65,7 +63,7 @@ public class SN_TaskTimer {
     					e.printStackTrace();
     				}
     			}
-    			SN_ThreadTimer.startTimer(1);
+    			ThreadSleep_Timer.startTimer(1);
     		} 
     		catch (IOException e) 
     		{
@@ -74,7 +72,7 @@ public class SN_TaskTimer {
     	}
     }
 	
-	public SN_TaskTimer() 
+	public ConsoleInput_Timer() 
 	{
 	}
 

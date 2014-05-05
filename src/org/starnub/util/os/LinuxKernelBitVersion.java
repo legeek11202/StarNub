@@ -1,9 +1,9 @@
-package org.starnub.util;
+package org.starnub.util.os;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import org.starnub.managment.SN_MessageFormater;
+import org.starnub.util.stream.SN_MessageFormater;
 
 /*
 * This class's method will check to see the Linux Kernel bit version.
@@ -11,7 +11,7 @@ import org.starnub.managment.SN_MessageFormater;
 * This method will return a integer.
 **/
 
-public class OS_GetLinuxKernel {
+public class LinuxKernelBitVersion {
 
 		public static int linuxKernel() 
 		{
@@ -51,7 +51,7 @@ public class OS_GetLinuxKernel {
 			return linuxKernel;
 		}
 
-		public OS_GetLinuxKernel() 
+		public LinuxKernelBitVersion() 
 		{
 		}
 

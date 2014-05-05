@@ -17,10 +17,16 @@ public class SN_Stats {
 	/* Since Server Last Restart */
 	static int serverCrashesTemp = 0;
 	static int serverUnresponsiveTemp = 0;
-	static int serverUptimeTemp = 0;	
+	static int serverUptimeTemp = 0;
+	
+	public void getStat(){
+	
+	}
+	
+	public void setStat(){
+	}
 
 	public SN_Stats() {
-		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.starnub.managment;
+package org.starnub.util.stream;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
