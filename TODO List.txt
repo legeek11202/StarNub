@@ -1,55 +1,48 @@
-Updated: 02May14
-
-Also Stat's, Process Crashes, Unresponsive, Wrapper Uptime, Uptime since last restart, Last restart
-Looping Key Listener
-Menu . redirect output during this period.
-in game menu for admin
-configurable console output from sb
-language  makes two instances
-
-Network Check for Restarter
-Network Netty
-Pass Through
-
-Banned HashMap Builder
-Banned HashMapper Saver
-
+Updated: 09MAY14
+Features Addition:
+Starbound configuration auto-configuration
+Stat's Tracking (Process Crashes, Unresponsive, Wrapper Uptime, Uptime since last restart, Last restart)
+Wrapper Functionality Options (Half Wrapper or Full Wrapper)
+Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
+Localization flexibility and plug-in Localization option
 Client ID and Client Class
+Packet Classes
+Netty Handlers
 
-///////////////////////////////////////////
+
+
+Fixes:
+Linux UDP Query Issue #2
+Language resource is being created twice makes two instances
+Proxy half open connections
+Log rotation at midnight of local time
+
+
+Debug Additions:
+Benchmark - Process Time and Proxy Bandwidth
+
+
 Configurable:
 StarNub Port
 Starbound Port
 Restart Timer
 Language
-///////////////////////////////////////////
-Need to Fix:
-linux udp
 
 
-/// Log rotation upon new day, currently only new log starts when wrapper goes offline
-/// Peformance monitoring
+My Stuff:
+ByteBufferProcessor video 29.00 important for searching byte buffer
+alloc() over unpooled buffer
+slice() or duplicate() over copy
+bulkoperation over loops
+
+44.00 write and write flush multiple operations make runnable
+channel.eventLoop().execute(new Runnable(){..}
+
+48.00 remove handlers
+ 
+ 
 long start = System.currentTimeMillis ();
 method ();
 long end = System.currentTimeMillis ();
-
 System.out.println (“Time taken for execution is ” + (end – start));
-
-
-
-Read more: http://javarevisited.blogspot.com/2011/04/top-20-core-java-interview-questions.html#ixzz30rbsSSxE
-
-
-once network is working, remove input stream to null, and use network information
-.
-
- * ByteBufferProcessor video 29.00 important for searching byte buffer
- * alloc() over unpooled buffer
- * slice() or duplicate() over copy
- * bulkoperation over loops
- * 
- * 44.00 write and write flush multiple operations make runnable
- * channel.eventLoop().execute(new Runnable(){..}
- * 
- * 48.00 remove handlers
 
