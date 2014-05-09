@@ -1,4 +1,4 @@
-Updated: 28Apr14
+Updated: 09 MAY 14
 
 StarNub
 =======
@@ -28,6 +28,7 @@ Current Features
 	- Auto Re-starter (Configurable)
 - Clean console output. Only see player connects, disconnects and joins.
 - Localization (Wiki how to coming later)
+- Network Proxy (Pass Through Only Right Now)
 
 - Server and wrapper shutdown
 	- Press "1" in console and press enter to shut the server down. 
@@ -35,19 +36,16 @@ Current Features
 Planned Features
 ================
 Milestone:
-- Network pass through for internal testing (Netty IO)
-	
-Milestone:
-- Packet Classes
-	
-Milestone:
 - Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
 - StarNub API
+
+Milestone:
+- Packet Classes
 
 Milestone
 - Configurable wrapper functionality option. 
 	- Full Wrapper (Server Monitor, Network Proxy & Plug-In Loader, Remote Management Console)
-	- Partial Wrapper = Process Monitor Only (Possible Remote Management Console)
+	- Partial Wrapper =(Process Monitor Only (Possible Remote Management Console))
 	
 Milestone:
 - Localization Flexibility (For plug-ins and ability to load from StarNub directory and merge of language files in case a language file is not updated, program will default to english for that string)
