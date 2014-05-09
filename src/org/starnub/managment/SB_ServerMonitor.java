@@ -4,11 +4,12 @@ import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
 import org.starnub.network.SB_Query;
+import org.starnub.util.stream.MultiOutputStreamLogger;
 import org.starnub.util.stream.SN_MessageFormater;
 import org.starnub.util.timers.ThreadSleep_Timer;
 
 /*
-* This class's method manages Starbound Server Monitoring
+* This class's method manages Starbound SN_Server Monitoring
 * 
 * - Monitor the Process and Network Reply (Coming Soon)
 * if Process is not alive and/or network does not respond 
@@ -33,7 +34,7 @@ public class SB_ServerMonitor implements Runnable {
 		int sbRestartTimer = StarNub.configVariables.get("Auto_Restart_Timer");
 		
 		/* Temporary */
-		/* Since Server Last Restart */
+		/* Since SN_Server Last Restart */
 
 		@SuppressWarnings("unused")
 		int serverUptimeTemp = 0;	
@@ -45,6 +46,7 @@ public class SB_ServerMonitor implements Runnable {
 		
 		do 
 		{
+			
 			if (!SB_ProcessManagment.sb_ProcessStatus())
 			{
 				SN_MessageFormater.msgPrint(s.getString("ssmc"), 0, 1);

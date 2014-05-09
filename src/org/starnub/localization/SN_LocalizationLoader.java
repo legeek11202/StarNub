@@ -56,7 +56,8 @@ public class SN_LocalizationLoader {
 
 				FileOutputStream starLocalizationOutput = null;
 				SN_MessageFormater.msgPrint("No language configured.", 0, 0);
-				String answerString = ConsoleInput_Timer.inputCall("\n\n\n\nYou have 1 minutes to select your language. (Default English)"
+				String answerString = ConsoleInput_Timer.inputCall(""
+						+ "\n\n\n\nYou have 1 minutes to select your language. (Default English)"
 						+ "\nPlease type in the number and press 'Enter'."
 						+ "\n\nSupported Languages"
 						+ "\n==================="
@@ -64,25 +65,25 @@ public class SN_LocalizationLoader {
 						+ "\n",60);
 				switch (answerString)
 				{
-				case "": language = "english"; break;
-				case "1": language = "english"; break;
-				default: 
-				{
+					case "": language = "english"; break;
+					case "1": language = "english"; break;
+					default: 
+					{
 					SN_MessageFormater.msgPrint("Error language selection.", 0, 0);
 					localConfig();
-				}
+					}
 				}
 				try 
 				{
-				prop.setProperty("Language", language);
-				starLocalizationOutput = new FileOutputStream(filePath);
-				prop.store(starLocalizationOutput, null);
-				SN_MessageFormater.msgPrint("Language configured.", 0, 0);
+					prop.setProperty("Language", language);
+					starLocalizationOutput = new FileOutputStream(filePath);
+					prop.store(starLocalizationOutput, null);
+					SN_MessageFormater.msgPrint("Language configured.", 0, 0);
 				}
 				catch (IOException io) 
 				{
-					SN_MessageFormater.msgPrint("Configuration creation error.", 0, 1);
-	    			io.printStackTrace();
+					SN_MessageFormater.msgPrint("Language configuration creation error.", 0, 1);
+					io.printStackTrace();
 				} 
 				finally 
 				{
@@ -94,8 +95,8 @@ public class SN_LocalizationLoader {
 						} 
 						catch (IOException io) 
 						{
-							SN_MessageFormater.msgPrint("Configuration creation error.", 0, 1);
-			    			io.printStackTrace();
+							SN_MessageFormater.msgPrint("Language configuration creation error.", 0, 1);
+							io.printStackTrace();
 						}
 					}	 
 				}

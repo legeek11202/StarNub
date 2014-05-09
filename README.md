@@ -44,7 +44,7 @@ Milestone:
 - Packet Classes
 	
 Milestone:
-- Plug Frame Work
+- Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
 - StarNub API
 
 Milestone:

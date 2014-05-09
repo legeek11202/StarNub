@@ -2,7 +2,7 @@ package org.starnub.managment;
 
 /*
 * Coming Soon
-* 
+* TODO TO BE REMOVED UPON COMPLETION OF NETWORK
 * 
 * 
 */
@@ -10,6 +10,7 @@ package org.starnub.managment;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.SequenceInputStream;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
@@ -54,7 +55,7 @@ public class SB_ProcessStreamInput implements Runnable {
 						}
 						SN_MessageFormater.msgPrint(playerName+" has "+activity+" ("+playerIP+").", 1, 0);
 					} 
-					else if (line.contains("Server version"))
+					else if (line.contains("SN_Server version"))
 					{
 						SN_MessageFormater.msgPrint(line.substring(6, line.length())+".", 1, 0);
 					} 
@@ -64,7 +65,7 @@ public class SB_ProcessStreamInput implements Runnable {
 					} 
 					else
 					{
-				      // Do Nothing. We do not want Console spam. Starbound Server Log will contain warning or errors.
+				      // Do Nothing. We do not want Console spam. Starbound SN_Server Log will contain warning or errors.
 					}
 			} 
 			catch (IOException e) 
