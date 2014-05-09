@@ -11,7 +11,7 @@ import org.starnub.util.stream.SN_MessageFormater;
 /*
 * Coming Soon
 * TODO OPTION FOR WHEN USING NETWORKING
-* This class is used to filter and format the Starbound SN_Server Console Stream into Java
+* This class is used to filter and format the Starbound Server Console Stream into Java
 * and StarNub log files.
 * 
 */
@@ -35,7 +35,7 @@ public class SB_ProcessStreamInput implements Runnable {
 				{
 					while ((line = input.readLine()) != null); 
 					/* 
-					 * Discard Starbound SN_Server Process Stream. 
+					 * Discard Starbound Server Process Stream. 
 					 * Events will be handled by Netty IO handlers 
 					 * and network methods.
 					 * */	
@@ -83,12 +83,12 @@ public class SB_ProcessStreamInput implements Runnable {
 							/* Prints Player Connect and Disconnect to Console */
 							SN_MessageFormater.msgPrint(playerName+" has "+activity+" ("+playerIP+").", 1, 0);
 						} 
-						/* Prints Starbound SN_Server Version to console */
+						/* Prints Starbound Server Version to console */
 						else if (line.contains("SN_Server version"))
 						{
 							SN_MessageFormater.msgPrint(line.substring(6, line.length())+".", 1, 0);
 						} 
-						/* Prints when the Starbound SN_Server is ready to accept new connections */
+						/* Prints when the Starbound Server is ready to accept new connections */
 						else if (line.contains("TcpServer"))
 						{
 							SN_MessageFormater.msgPrint(lang.getString("spsi")+" "+StarNub.configVariables.get("StarNub_Port")+".", 1, 0);
@@ -99,7 +99,7 @@ public class SB_ProcessStreamInput implements Runnable {
 							 * Discard anything that did not pass the filter. 
 							 * 
 							 * This removed unwanted errors and or Starbound 
-							 * console spam. You may view the Starbound SN_Server
+							 * console spam. You may view the Starbound Server
 							 * log at /starbound/Starbound_Server.log if you 
 							 * want to see anything not filtered about.
 							 * */

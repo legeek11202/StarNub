@@ -7,11 +7,10 @@ import java.util.ResourceBundle;
 import org.starnub.configuration.SN_Configuration;
 import org.starnub.localization.SN_LocalizationLoader;
 import org.starnub.managment.SB_ServerMonitor;
-import org.starnub.network.SN_Server;
 import org.starnub.util.SN_KeyListener;
 import org.starnub.util.stream.MultiOutputStreamLogger;
 import org.starnub.util.stream.SN_MessageFormater;
-import org.starnub.util.timers.ThreadSleep;
+import org.starnub.util.timers.ThreadSleep_Timer;
 
 
 /*
@@ -55,20 +54,18 @@ public final class StarNub {
     	/* Status Tracker*/
     	
     	/* Network Initialization */
-    	
-    	/* Proxy Initialization */
-    	Runnable sn_Proxy = new SN_Server();
-    	new Thread (sn_Proxy).start();
+    		
+    		/* Proxy Server Initialization */
     	
     		/* Remote Console Administration */
     	
     	/* Starts the SN_Server WatchDog */
     	SN_MessageFormater.msgPrint(language.getString("sm1"), 0, 0);
-    	Runnable sb_Monitor = new SB_ServerMonitor();
-    	new Thread(sb_Monitor).start();
+    	Runnable sb_Watchdog = new SB_ServerMonitor();
+    	new Thread(sb_Watchdog).start();
     	SN_MessageFormater.msgPrint(language.getString("sm2"), 0, 0);
     	
-    	new ThreadSleep().timer(2);
+    	ThreadSleep_Timer.startTimer(2);
 
     	/* Starts the KeyListener */
     	SN_MessageFormater.msgPrint(language.getString("kl1"), 0, 0);

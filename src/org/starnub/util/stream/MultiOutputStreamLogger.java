@@ -24,7 +24,7 @@ public class MultiOutputStreamLogger {
 			String timestamp = new DateTime().toString(DateTimeFormat.forPattern("dd-MMM-yy"));
 			
 			/* Appends the data to one file. Each day starts a new log. */
-    		FileOutputStream fout= new FileOutputStream("StarNub/SN_Server Logs/"+timestamp+".log", true);
+    		FileOutputStream fout= new FileOutputStream("StarNub/Server Logs/"+timestamp+".log", true);
     		FileOutputStream ferr= new FileOutputStream("StarNub/Error Logs/"+timestamp+".log", true);
     		
     		MultiOutputStream multiOut= new MultiOutputStream(System.out, fout);

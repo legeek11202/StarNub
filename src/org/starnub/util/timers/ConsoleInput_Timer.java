@@ -6,11 +6,8 @@ import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Coming Soon.
- * @author Daniel Merwin(Underbalanced)
- * @version 1
- *              
+/*
+ * Coming soon.
  */
 
 public class ConsoleInput_Timer {
@@ -63,7 +60,7 @@ public class ConsoleInput_Timer {
     					e.printStackTrace();
     				}
     			}
-    			new ThreadSleep().timer(1);
+    			ThreadSleep_Timer.startTimer(1);
     		} 
     		catch (IOException e) 
     		{
