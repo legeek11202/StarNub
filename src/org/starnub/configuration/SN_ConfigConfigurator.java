@@ -15,13 +15,13 @@ import org.starnub.util.timers.ConsoleInput_Timer;
 
 public class SN_ConfigConfigurator {
 	
-	private static ResourceBundle s = StarNub.language;
+	private static ResourceBundle lang = StarNub.language;
 	
 	private static String[] snConfigQuestions = new String[]
 			{
-			"\n"+s.getString("cq1"),
-			"\n"+s.getString("cq2"),
-			"\n"+s.getString("cq3"),
+			"\n"+lang.getString("cq1"),
+			"\n"+lang.getString("cq2"),
+			"\n"+lang.getString("cq3"),
 			};
     
 	private static String[]  snConfigOptions = new String[]
@@ -51,8 +51,8 @@ public class SN_ConfigConfigurator {
 			Properties prop = new Properties();
 			int a = 0;
 			String answerString;
-			SN_MessageFormater.msgPrint(s.getString("cc"), 0, 0);
-			SN_MessageFormater.msgPrint("\n\n"+s.getString("cc1")+"\n"+s.getString("cc2"), 0, 0);
+			SN_MessageFormater.msgPrint(lang.getString("cc"), 0, 0);
+			SN_MessageFormater.msgPrint("\n\n"+lang.getString("cc1")+"\n"+lang.getString("cc2"), 0, 0);
 			/* Loop through array of configuration questions */
 			for(String qS : snConfigQuestions) 
 			{
@@ -71,17 +71,17 @@ public class SN_ConfigConfigurator {
 				a += 1;
 			}
 			SN_MessageFormater.msgPrint(
-			  "\n"+s.getString("cqc1")+" "+prop.getProperty(snConfigOptions[0])
-			  + "\n"+s.getString("cqc2")+" "+prop.getProperty(snConfigOptions[1])
-			  + "\n"+s.getString("cqc3")+" "+prop.getProperty(snConfigOptions[2])+" "+s.getString("cqc4"), 0, 0);
-			answerString = ConsoleInput_Timer.inputCall("\n"+s.getString("cqc5"),30);
+			  "\n"+lang.getString("cqc1")+" "+prop.getProperty(snConfigOptions[0])
+			  + "\n"+lang.getString("cqc2")+" "+prop.getProperty(snConfigOptions[1])
+			  + "\n"+lang.getString("cqc3")+" "+prop.getProperty(snConfigOptions[2])+" "+lang.getString("cqc4"), 0, 0);
+			answerString = ConsoleInput_Timer.inputCall("\n"+lang.getString("cqc5"),30);
 			if (answerString.equalsIgnoreCase("Y") || answerString.isEmpty())
 			{
 				try 
 				{
 				starNubConfig = new FileOutputStream(filePath);
 				prop.store(starNubConfig, null);
-				SN_MessageFormater.msgPrint(s.getString("cf"), 0, 0);
+				SN_MessageFormater.msgPrint(lang.getString("cf"), 0, 0);
 				}
 				catch (IOException e) 
 				{
@@ -132,7 +132,7 @@ public class SN_ConfigConfigurator {
 		} 
 		catch (FileNotFoundException e) 
 		{
-			SN_MessageFormater.msgPrint(s.getString("sn.cc.3"), 0, 0);
+			SN_MessageFormater.msgPrint(lang.getString("sn.cc.3"), 0, 0);
 			configurationQuestions();
 		}
 	}

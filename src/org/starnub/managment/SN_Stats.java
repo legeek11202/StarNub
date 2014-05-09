@@ -14,7 +14,7 @@ public class SN_Stats {
 	static int serverCrashesWrap = 0;
 	static int serverUnresponsiveWrap = 0;
 	
-	/* Since Server Last Restart */
+	/* Since SN_Server Last Restart */
 	static int serverCrashesTemp = 0;
 	static int serverUnresponsiveTemp = 0;
 	static int serverUptimeTemp = 0;

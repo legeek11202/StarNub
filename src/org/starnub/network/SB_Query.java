@@ -14,7 +14,7 @@ import org.starnub.util.stream.SN_MessageFormater;
 
 public class SB_Query {
 	
-	private static ResourceBundle s = StarNub.language;
+	private static ResourceBundle lang = StarNub.language;
 	static int sbPort = StarNub.configVariables.get("Starbound_Port");
 	
 	public static boolean getServerResponse ()
@@ -35,7 +35,7 @@ public class SB_Query {
 			ds.setSoTimeout(10000);
 		} catch (SocketException e1) 
 		{
-			SN_MessageFormater.msgPrint(s.getString("sb.q.1"), 0, 1);
+			SN_MessageFormater.msgPrint(lang.getString("sb.q.1"), 0, 1);
 			e1.printStackTrace();
 		}
 		
@@ -57,17 +57,17 @@ public class SB_Query {
 				catch (SocketTimeoutException e) 
 				{
 					/* No response received after X second - Retry sending */
-					SN_MessageFormater.msgPrint(s.getString("sb.q.2")+"("+packetAttempt+"/"+packetsTry+")" , 0, 1);
+					SN_MessageFormater.msgPrint(lang.getString("sb.q.2")+"("+packetAttempt+"/"+packetsTry+")" , 0, 1);
 				}
 			}
 			ds.close();
 		}
 		catch (Exception e)
 		{
-			SN_MessageFormater.msgPrint(s.getString("sb.q.3"), 0, 1);
+			SN_MessageFormater.msgPrint(lang.getString("sb.q.3"), 0, 1);
 			return true;
 		}
-		SN_MessageFormater.msgPrint(s.getString("sb.q.4")
+		SN_MessageFormater.msgPrint(lang.getString("sb.q.4")
 				+ "\n"
 				+ "Starbound Port: "+sbPort+ " StarNub Port: "+StarNub.configVariables.get("StarNub_Port"), 0, 1);
 		return false;
@@ -111,7 +111,7 @@ public class SB_Query {
 				/* Tries the next port */
 			}
 		}
-		SN_MessageFormater.msgPrint(s.getString("sb.q.5"), 0, 1);
+		SN_MessageFormater.msgPrint(lang.getString("sb.q.5"), 0, 1);
 		return null;
 	}
 	

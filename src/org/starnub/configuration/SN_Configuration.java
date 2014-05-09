@@ -9,16 +9,16 @@ import org.starnub.configuration.SN_ConfigConfigurator;
 
 public class SN_Configuration {
 	
-	private static ResourceBundle s = StarNub.language;
+	private static ResourceBundle lang = StarNub.language;
 
 	public static void snConfigurationCheck ()
 	{
-    	SN_MessageFormater.msgPrint(s.getString("dc"), 0, 0);
+    	SN_MessageFormater.msgPrint(lang.getString("dc"), 0, 0);
     	SN_Directories.snDirCheck();
-    	SN_MessageFormater.msgPrint(s.getString("dcc"), 0, 0);
-		SN_MessageFormater.msgPrint(s.getString("dvc"), 0, 0);
+    	SN_MessageFormater.msgPrint(lang.getString("dcc"), 0, 0);
+		SN_MessageFormater.msgPrint(lang.getString("dvc"), 0, 0);
 		SN_ConfigConfigurator.configurationValidation();
-		SN_MessageFormater.msgPrint("\n\n"+s.getString("uvf")+"\n"+StarNub.configVariables.toString()+"\n", 0, 0);	
+		SN_MessageFormater.msgPrint("\n\n"+lang.getString("uvf")+"\n"+StarNub.configVariables.toString()+"\n", 0, 0);	
 	}
 	
 	public SN_Configuration() 

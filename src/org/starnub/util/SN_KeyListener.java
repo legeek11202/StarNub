@@ -13,7 +13,7 @@ public class SN_KeyListener implements Runnable {
 
 	public synchronized void run() 
 	{
-		System.out.println("Press 1 and then enter to shutdown the Wrapper and Server.");
+		System.out.println("Press 1 and then enter to shutdown the Wrapper and SN_Server.");
 		Scanner sc = new Scanner(System.in);
 		int i = sc.nextInt();
 		System.out.println(i);

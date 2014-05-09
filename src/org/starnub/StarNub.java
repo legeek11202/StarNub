@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import org.starnub.configuration.SN_Configuration;
 import org.starnub.localization.SN_LocalizationLoader;
 import org.starnub.managment.SB_ServerMonitor;
-import org.starnub.managment.SN_Stats;
 import org.starnub.util.SN_KeyListener;
 import org.starnub.util.stream.MultiOutputStreamLogger;
 import org.starnub.util.stream.SN_MessageFormater;
@@ -46,7 +45,8 @@ public final class StarNub {
     	   
     	/* Initiates Logger (MultiOutputStream) */
     	SN_MessageFormater.msgPrint(language.getString("l1"), 0, 0);
-    	MultiOutputStreamLogger.snLogger ();
+    	MultiOutputStreamLogger Logger = new MultiOutputStreamLogger();
+    	Logger.snLogger();
     	SN_MessageFormater.msgPrint(language.getString("l2"), 0, 0);
     	
     	/* Plug-in Loader */
@@ -54,8 +54,12 @@ public final class StarNub {
     	/* Status Tracker*/
     	
     	/* Network Initialization */
+    		
+    		/* Proxy Server Initialization */
     	
-    	/* Starts the Server WatchDog */
+    		/* Remote Console Administration */
+    	
+    	/* Starts the SN_Server WatchDog */
     	SN_MessageFormater.msgPrint(language.getString("sm1"), 0, 0);
     	Runnable sb_Watchdog = new SB_ServerMonitor();
     	new Thread(sb_Watchdog).start();

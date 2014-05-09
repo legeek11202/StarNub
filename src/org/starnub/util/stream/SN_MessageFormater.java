@@ -25,6 +25,7 @@ public class SN_MessageFormater {
 
 	public static void msgPrint(String message,int server,int type)
 	{
+		/* Adds a fresh date for each entry to stdout */
 		new DateTime();
 		System.out.println(DateTime.now().toString(DateTimeFormat.forPattern("[HH:mm:ss]"))+serverArray[server]+typeArray[type]+message);
 	}

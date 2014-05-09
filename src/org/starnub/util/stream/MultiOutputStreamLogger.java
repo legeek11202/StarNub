@@ -6,7 +6,6 @@ import java.io.PrintStream;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
-import org.starnub.StarNub;
 
 /*
 * This class's method will push output to the console and log file.
@@ -16,11 +15,12 @@ import org.starnub.StarNub;
 
 public class MultiOutputStreamLogger {
 
-	public static void snLogger ()
+	
+	
+	public void snLogger ()
 	{
 		try
     	{
-
 			String timestamp = new DateTime().toString(DateTimeFormat.forPattern("dd-MMM-yy"));
 			
 			/* Appends the data to one file. Each day starts a new log. */

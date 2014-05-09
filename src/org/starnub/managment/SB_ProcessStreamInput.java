@@ -1,78 +1,117 @@
 package org.starnub.managment;
 
-/*
-* Coming Soon
-* TODO TO BE REMOVED UPON COMPLETION OF NETWORK
-* 
-* 
-*/
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.SequenceInputStream;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
 import org.starnub.util.stream.SN_MessageFormater;
 
+/*
+* Coming Soon
+* TODO OPTION FOR WHEN USING NETWORKING
+* This class is used to filter and format the Starbound Server Console Stream into Java
+* and StarNub log files.
+* 
+*/
+
 public class SB_ProcessStreamInput implements Runnable {
 	
-	private static ResourceBundle s = StarNub.language;
+	private static ResourceBundle lang = StarNub.language;
 
 	public synchronized void run()
-		{  
+	{  
 			String line;
-			String c = s.getString("spsic");
-			String dc = s.getString("spsid");
+			String c = lang.getString("spsic");
+			String dc = lang.getString("spsid");
 			BufferedReader input = new BufferedReader(new InputStreamReader(SB_ProcessManagment.getSbProcess().getInputStream()));
+			// TODO Import Variable
+			Boolean fullwrapper = false;
 			
-			try 
+			if (fullwrapper)
 			{
-				while ((line = input.readLine()) != null) 
-					if (line.contains("Info:  <"))
-					{
-						SN_MessageFormater.msgPrint(line.substring(7, line.length()), 1, 2);
-					}
-					else if (line.contains("Client '") && line.contains("> ("))
-					{
-						String playerName = line.substring((1+line.indexOf("'")),line.lastIndexOf("'"));
-						String playerIP = line.substring((1+line.indexOf("(")),line.lastIndexOf(":"));
-						String activity = line.substring((2+line.indexOf(")")));
-						if (activity.equals("connected"))
+				try 
+				{
+					while ((line = input.readLine()) != null); 
+					/* 
+					 * Discard Starbound Server Process Stream. 
+					 * Events will be handled by Netty IO handlers 
+					 * and network methods.
+					 * */	
+				}
+				catch (IOException e) 
+				{
+						e.printStackTrace();
+				}
+			}
+			else if (!fullwrapper) 
+			{	
+				try 
+				{
+					while ((line = input.readLine()) != null) 
+						/* Player Chat */
+						if (line.contains("Info:  <"))
 						{
-							StarNub.playersOnline.put(playerIP, playerName);
-							activity = c;
+							SN_MessageFormater.msgPrint(line.substring(7, line.length()), 1, 2);
 						}
-						else if (activity.equals("disconnected"))
+						else if (line.contains("Client '") && line.contains("> ("))
 						{
-							StarNub.playersOnline.remove(playerIP);
-							activity = dc;
-						}
+							/* Player Names */
+							String playerName = line.substring((1+line.indexOf("'")),line.lastIndexOf("'"));
+							/* Player IPS */
+							String playerIP = line.substring((1+line.indexOf("(")),line.lastIndexOf(":"));
+							/* Player Activity (Disconnects and Connects) */
+							String activity = line.substring((2+line.indexOf(")")));
+							/* Inserts player into Player Name/IP HashMap */
+							if (activity.equals("connected"))
+							{
+								StarNub.playersOnline.put(playerIP, playerName);
+								activity = c;
+							}
+							/* Removes a player from Player Name/IP HashMap */
+							else if (activity.equals("disconnected"))
+							{
+								StarNub.playersOnline.remove(playerIP);
+								activity = dc;
+							}
+							else
+							{
+								/* Error with HasMap message */
+								SN_MessageFormater.msgPrint(lang.getString("sb.psi.1"), 0, 1);
+							}	
+							/* Prints Player Connect and Disconnect to Console */
+							SN_MessageFormater.msgPrint(playerName+" has "+activity+" ("+playerIP+").", 1, 0);
+						} 
+						/* Prints Starbound Server Version to console */
+						else if (line.contains("SN_Server version"))
+						{
+							SN_MessageFormater.msgPrint(line.substring(6, line.length())+".", 1, 0);
+						} 
+						/* Prints when the Starbound Server is ready to accept new connections */
+						else if (line.contains("TcpServer"))
+						{
+							SN_MessageFormater.msgPrint(lang.getString("spsi")+" "+StarNub.configVariables.get("StarNub_Port")+".", 1, 0);
+						} 
 						else
 						{
-							SN_MessageFormater.msgPrint(s.getString("sb.psi.1"), 0, 1);
+							/* 
+							 * Discard anything that did not pass the filter. 
+							 * 
+							 * This removed unwanted errors and or Starbound 
+							 * console spam. You may view the Starbound Server
+							 * log at /starbound/Starbound_Server.log if you 
+							 * want to see anything not filtered about.
+							 * */
 						}
-						SN_MessageFormater.msgPrint(playerName+" has "+activity+" ("+playerIP+").", 1, 0);
-					} 
-					else if (line.contains("SN_Server version"))
-					{
-						SN_MessageFormater.msgPrint(line.substring(6, line.length())+".", 1, 0);
-					} 
-					else if (line.contains("TcpServer"))
-					{
-						SN_MessageFormater.msgPrint(s.getString("spsi")+" "+StarNub.configVariables.get("StarNub_Port")+".", 1, 0);
-					} 
-					else
-					{
-				      // Do Nothing. We do not want Console spam. Starbound SN_Server Log will contain warning or errors.
-					}
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
+				}
+				catch (IOException e) 
+				{
+					e.printStackTrace();
+				}
 			}
-	      }
+	}
+	
 	public SB_ProcessStreamInput() 
 	{
 	}
