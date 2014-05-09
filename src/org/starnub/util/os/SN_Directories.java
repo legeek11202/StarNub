@@ -23,7 +23,7 @@ public class SN_Directories {
 			String[] snDirectories = new String[]
 					{
 					"StarNub",
-					"StarNub/Server Logs",
+					"StarNub/SN_Server Logs",
 					"StarNub/Error Logs",
 					"StarNub/Plugins"
 					};
