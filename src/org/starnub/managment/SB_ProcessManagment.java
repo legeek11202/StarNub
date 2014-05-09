@@ -7,21 +7,19 @@ import org.starnub.util.os.SN_GetFilePath;
 import org.starnub.managment.SB_ProcessStreamInput;
 
 /*
-* This class's methods manages the Starbound Server as a subprocess
+* This class's methods manages the Starbound SN_Server as a subprocess
 * to the StarNub wrapper.
 * 
 * - Returns the process for other classes to use
 * - Run the Starbound_Server.exe as a subprocess
 * - Destroy the Starbound_Server.exe
 * - Restarts the Starbound_Server.exe
-* - Checks the status of the Starbound Server Subprocess 
+* - Checks the status of the Starbound SN_Server Subprocess 
 * 
 * These methods will return a boolean or nothing.
 **/
 
 public class SB_ProcessManagment {
-	
-	private static ResourceBundle s = StarNub.language;
 	
 	private static Process sbProcess;
 	
@@ -34,7 +32,9 @@ public class SB_ProcessManagment {
 	{
 		try 
 		{
-			sbProcess = Runtime.getRuntime().exec(SN_GetFilePath.getFilePath());
+			ProcessBuilder sbProcessBuild = new ProcessBuilder(SN_GetFilePath.getFilePath());
+			sbProcessBuild.redirectErrorStream(true);
+			sbProcess = sbProcessBuild.start();
 			Runnable sb_StreamInput = new SB_ProcessStreamInput();
 			new Thread(sb_StreamInput).start();
 		} 
