@@ -109,7 +109,7 @@ public class SN_ConfigConfigurator {
 			}	
 	}
 	
-	public static void configurationValidation()
+	private static void configurationValidation()
 	{
 
 		Properties prop = new Properties();

@@ -8,11 +8,12 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.starnub.StarNub;
 
 /*
- * TODO: Information
+ * TODO: Information																		
+ * 
  */
 public class SN_Server implements Runnable {
 
-		public synchronized void run()
+		public void run()
 	    {
 
 	    	final int snServerPort = StarNub.configVariables.get("StarNub_Port");
@@ -33,7 +34,8 @@ public class SN_Server implements Runnable {
 	        	{
 					starNubMainInboundSocket
 					
-						/* Sets the Parent and Child Threads */
+						/* Sets the Parent and child threads for the socket and then 
+						 * channels created per client connection*/
 						.group(bossGroup, workerGroup)  	
 						
 						/* Creates a channel Instance */

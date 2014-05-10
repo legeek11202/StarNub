@@ -1,0 +1,32 @@
+StarNub Wrapper API (Work In Progress)
+=======
+This is just to start documenting stuff. 
+Java doc's will be included in the final build along with this documentation.
+
+
+Utility API
+===========
+StarNub Utility API:
+
+Class:
+org.starnub.util.timers.ThreadSleep.java
+Function: Sleeps a thread for X Seconds. "new ThreadSleep().timer(120);"
+
+
+
+JSON:
+We are using Simple JSON Parse. The link is here. The classes will be available @
+
+import org.starnub.util.simplson
+import org.starnub.util.simplson.parser
+
+https://code.google.com/p/json-simple/
+
+Decoding Objects
+https://code.google.com/p/json-simple/wiki/DecodingExamples
+
+Encoding Objects
+https://code.google.com/p/json-simple/wiki/EncodingExamples
+
+The rest of the user guides
+https://code.google.com/p/json-simple/w/list

@@ -29,7 +29,7 @@ public final class StarNub {
 	{
     }
 	
-    public static void main(String [ ] args)
+    public static void main(String [] args)
 	{
     	System.out.println("\n"
     			+ "=============================================\n"
@@ -42,7 +42,7 @@ public final class StarNub {
     	SN_MessageFormater.msgPrint(language.getString("ss"), 0, 0);
     	
     	/* Runs the StarNub configuration checker */
-    	SN_Configuration.snConfigurationCheck();
+    	SN_Configuration.checkConfiguration();
     	   
     	/* Initiates Logger (MultiOutputStream) */
     	SN_MessageFormater.msgPrint(language.getString("l1"), 0, 0);

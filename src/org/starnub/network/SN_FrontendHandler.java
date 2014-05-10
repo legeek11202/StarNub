@@ -40,7 +40,7 @@ public class SN_FrontendHandler extends ChannelInboundHandlerAdapter  {
         	.group(inboundChannel.eventLoop())
         	
         	/* We are connecting this channel to the channel being created.
-        	 * In short we are extending it (See Diagram) */
+        	 * In short we are extending it */
         	.channel(ctx.channel().getClass())
         	
         	

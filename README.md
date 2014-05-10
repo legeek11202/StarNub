@@ -28,7 +28,7 @@ Current Features
 	- Auto Re-starter (Configurable)
 - Clean console output. Only see player connects, disconnects and joins.
 - Localization (Wiki how to coming later)
-- Network Proxy (Pass Through Only Right Now)
+- Network Proxy (Pass through only right now)
 
 - Server and wrapper shutdown
 	- Press "1" in console and press enter to shut the server down. 

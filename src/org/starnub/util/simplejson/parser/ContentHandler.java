@@ -1,4 +1,4 @@
-package org.json.simple.parser;
+package org.starnub.util.simplejson.parser;
 
 import java.io.IOException;
 

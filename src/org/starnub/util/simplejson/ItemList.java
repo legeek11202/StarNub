@@ -2,7 +2,7 @@
  * $Id: ItemList.java,v 1.1 2006/04/15 14:10:48 platform Exp $
  * Created on 2006-3-24
  */
-package org.json.simple;
+package org.starnub.util.simplejson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
  */
 public class ItemList {
 	private String sp=",";
-	List items=new ArrayList();
+	List<String> items=new ArrayList<String>();
 	
 	
 	public ItemList(){}
@@ -35,7 +35,7 @@ public class ItemList {
 		split(s,sp,items,isMultiToken);
 	}
 	
-	public List getItems(){
+	public List<String> getItems(){
 		return this.items;
 	}
 	
@@ -43,7 +43,7 @@ public class ItemList {
 		return (String[])this.items.toArray();
 	}
 	
-	public void split(String s,String sp,List append,boolean isMultiToken){
+	public void split(String s,String sp,List<String> append,boolean isMultiToken){
 		if(s==null || sp==null)
 			return;
 		if(isMultiToken){
@@ -57,7 +57,7 @@ public class ItemList {
 		}
 	}
 	
-	public void split(String s,String sp,List append){
+	public void split(String s,String sp,List<String> append){
 		if(s==null || sp==null)
 			return;
 		int pos=0;

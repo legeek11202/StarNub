@@ -1,1 +1,1 @@
-java -Xms25M -Xmx50M -jar StarNub.jar
+java -Xms25M -Xmx150M -jar StarNub.jar
