@@ -43,7 +43,7 @@ public class SB_ConfigConfigurator {
 		} 
 		catch (ParseException e) 
 		{
-		e.printStackTrace();
+			e.printStackTrace();
 		}
     }
  

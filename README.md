@@ -22,6 +22,7 @@ Current Features
 - No need to start the Starbound Server
 - No need to write a configuration file (First run, we will ask you questions)
 	- Configuration Options (Auto Restart Timer, Starbound and StarNub Ports)
+	- No need to change your Starbound configuration port number (We do that for you, We do not change it back though!)
 - Server Monitor
 	- Checks the Starbound Server process every 15 seconds. (Restarts on missing process(Crashes))
 	- Checks the Starbound Server for a response via (UDP) every 15 seconds. (Restarts on Server lockups)
@@ -49,9 +50,6 @@ Milestone
 	
 Milestone:
 - Localization Flexibility (For plug-ins and ability to load from StarNub directory and merge of language files in case a language file is not updated, program will default to english for that string)
-
-Starbound
-	- No need to change your configuration port number (We will do that for you)
 	
 Milestone:
 - Remote & Local Console Administration Client (To be determined)

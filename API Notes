@@ -8,17 +8,18 @@ Utility API
 ===========
 StarNub Utility API:
 
-Class:
+Thread Sleep Class:
 org.starnub.util.timers.ThreadSleep.java
 Function: Sleeps a thread for X Seconds. "new ThreadSleep().timer(120);"
 
 
 
-JSON:
-We are using Simple JSON Parse. The link is here. The classes will be available @
+Simple JSON:
+We are using Simple JSON Parser. The links below will explain how to use the API 
 
-import org.starnub.util.simplson
-import org.starnub.util.simplson.parser
+The classes will be available @
+import org.starnub.util.simplson.<Class Name>
+import org.starnub.util.simplson.parser.<Class Name>
 
 https://code.google.com/p/json-simple/
 

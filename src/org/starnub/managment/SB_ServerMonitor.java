@@ -3,7 +3,6 @@ package org.starnub.managment;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
-import org.starnub.network.SB_Query;
 import org.starnub.util.stream.SN_MessageFormater;
 import org.starnub.util.timers.ThreadSleep;
 
@@ -19,63 +18,87 @@ import org.starnub.util.timers.ThreadSleep;
 
 public class SB_ServerMonitor implements Runnable {
 	
-	private static ResourceBundle s = StarNub.language;
+	private static ResourceBundle s = StarNub.language; /* Language resource pack, used to reduce characters below */
 	
-	int serverCrashesTemp = 0;
-	int serverUnresponsiveTemp = 0;
+	int serverCrashesTemp = 0; // TODO Not Final
+	int serverUnresponsiveTemp = 0; // TODO Not Final
+	int serverUptimeTemp = 0; // TODO Not Final
 	
-	
+	private static final int autoRestartTime = (StarNub.configVariables.get("Auto_Restart_Timer")*3600); /* Converts the auto restart timer into seconds */
+
 	public synchronized void run () 
 	{
-		// TODO: Configurable variable in hours
-		//3600 is 60 Minutes x 60 Seconds.
-		final int autoRestartTimer = (24*3600);
-		int sbRestartTimer = StarNub.configVariables.get("Auto_Restart_Timer");
+		serverMonitor();
+	}
+	
+	//TODO Method clean up
+	private void serverMonitor ()
+	{
+		int sbCurrentUptime = 0;
 		
-		/* Temporary */
-		/* Since SN_Server Last Restart */
-
-		@SuppressWarnings("unused")
-		int serverUptimeTemp = 0;	
-		
-		SN_MessageFormater.msgPrint(s.getString("ssm"), 0, 0);
-		SB_ProcessManagment.sb_ProcessStart();
-		/* Sleep for 2 minutes while the server boots up.*/
-		new ThreadSleep().timer(120);
+		processStartup();
 		
 		do 
 		{
-			
-			if (!SB_ProcessManagment.sb_ProcessStatus())
+			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check.");}
+			switch (statusChecker())
 			{
-				SN_MessageFormater.msgPrint(s.getString("ssmc"), 0, 1);
-				/* Add a crash to the crash trackers */
-				serverCrashesTemp += 1;
-				SN_MessageFormater.msgPrint(s.getString("ssmc1")+" "+serverCrashesTemp+" "+s.getString("ssmc2"), 0, 1);
-				run ();
-			}
-			else if (!SB_Query.getServerResponse())
-			{
-				SN_MessageFormater.msgPrint(s.getString("ssmu"), 0, 1);
-				SB_ProcessManagment.sb_ProcessRestart();
-				/* Add a unresponsive to the unresponsive trackers */
-				serverUnresponsiveTemp += 1;
-				SN_MessageFormater.msgPrint(s.getString("ssmu1")+" "+serverUnresponsiveTemp+" "+s.getString("ssmu2"), 0, 1);
-				// Sleep for 2 minutes while the server boots up.
-				new ThreadSleep().timer(120);
-			}
-			new ThreadSleep().timer(15);
-			sbRestartTimer += 15; serverUptimeTemp += 15;
-			//TODO Correct serverUptime format
+			case "statusOk" : new ThreadSleep().timer(15); sbCurrentUptime += 15; serverUptimeTemp += 15; break; // TODO Not Final //TODO Correct serverUptime format
+			case "pCrash" : serverCrashesTemp += 1; processCrashed(); break; // TODO Not Final
+			case "sUnresp" : serverUnresponsiveTemp += 1; serverUnresponsive(); break;  // TODO Not Final
+			}			
+			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Repeating Monitoring Loop.");}
 		} 
-		while (sbRestartTimer <= autoRestartTimer);
-		
-		/* Add a restart to the restart tracker */
-		// TODO
-		SN_MessageFormater.msgPrint(s.getString("ssmar1")+" "+autoRestartTimer+" "+s.getString("ssmar2"), 0, 0);
-		// TODO Add a server broadcast for restart when network and packets added
+		while (sbCurrentUptime <= autoRestartTime);
+		if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Auto Restarting Server.");}
+
+		SN_MessageFormater.msgPrint(s.getString("ssmar1")+" "+autoRestartTime+" "+s.getString("ssmar2"), 0, 0);
+		// TODO Add a server broadcast for restart when network and packets added  //TODO Stats update Here autorestart, total uptime
 		SB_ProcessManagment.sb_ProcessKill();
-		run();	 
+		serverMonitor();
+	}
+	
+	private String statusChecker ()
+	{
+		
+		if (!SB_ProcessManagment.sb_ProcessStatus())
+		{
+			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Process Crashed");}
+			return "pCrash";
+		}
+//		else if (!SB_UDP_Query.getServerResponse())
+//		{
+//			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Unresponsive");}
+//			return "sUnresp";
+//		}
+		else
+		{
+		if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Ok");}
+		return "statusOk";
+		}
+	}
+	
+	private void processStartup ()
+	{
+		SN_MessageFormater.msgPrint(s.getString("ssm"), 0, 0);
+		SB_ProcessManagment.sb_ProcessStart(); /* Start SB Server process */
+		if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Sleeping for 2 Minutes while the SB Server starts Up.");}
+		//TODO Convert to a response when server starts to start the monitor
+		new ThreadSleep().timer(120); /* Sleep for 2 minutes while the server boots up.*/ 
+	}
+	
+	private void processCrashed ()
+	{
+		SN_MessageFormater.msgPrint(s.getString("ssmc"), 0, 1);
+		SN_MessageFormater.msgPrint(s.getString("ssmc1")+" "+serverCrashesTemp+" "+s.getString("ssmc2"), 0, 1);
+		processStartup(); /* Start SB Server process */
+	}
+	
+	private void serverUnresponsive ()
+	{
+		SN_MessageFormater.msgPrint(s.getString("ssmu"), 0, 1);
+		SN_MessageFormater.msgPrint(s.getString("ssmu1")+" "+serverUnresponsiveTemp+" "+s.getString("ssmu2"), 0, 1);
+		SB_ProcessManagment.sb_ProcessRestart(); /* Restart's the the server monitor if the Process has Crashed */
 	}
 	
 	public SB_ServerMonitor() 

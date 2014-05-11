@@ -1,5 +1,6 @@
 package org.starnub.managment;
 
+import org.starnub.StarNub;
 import org.starnub.util.os.SN_GetFilePath;
 
 /*
@@ -28,10 +29,13 @@ public class SB_ProcessManagment {
 	{
 		try 
 		{
+			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Building SB Server ProcessBuild.");}
 			ProcessBuilder sbProcessBuild = new ProcessBuilder(SN_GetFilePath.getFilePath());
 			sbProcessBuild.redirectErrorStream(true);
+			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Setting SB Server Process.");}
 			sbProcess = sbProcessBuild.start();
 			Runnable sb_StreamInput = new SB_ProcessStreamInput();
+			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Running SB Server Process.");}
 			new Thread(sb_StreamInput).start();
 		} 
 		catch (Exception e) 
@@ -44,7 +48,9 @@ public class SB_ProcessManagment {
 	{
 		try 
 		{
+			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Destroying SB Server Process.");}
 			sbProcess.destroy();
+			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: SB Server Process Destroyed.");}
 		} 
 		catch (Exception e)
 		{
@@ -62,6 +68,7 @@ public class SB_ProcessManagment {
 	{
 		try 
 		{
+			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Checking if SB Server Process is alive.");}
 			return sbProcess.isAlive();
 		} 
 		catch (Exception e)

@@ -13,18 +13,28 @@ import org.starnub.util.stream.MultiOutputStreamLogger;
 import org.starnub.util.stream.SN_MessageFormater;
 import org.starnub.util.timers.ThreadSleep;
 
-
 /*
  * Represents the StarNub core.
  */
 
 public final class StarNub {
 	
+	public final class Debug 
+	{
+		public static final boolean ON = true; /* Poor Mans #ifdef */
+	} 
+	
+	
+	/*  Debug Statments
+	 *  if (Debug.ON) {System.out.println("Debug: ");}
+	 *  if (StarNub.Debug.ON) {System.out.println("Debug: ");}
+	 */
+	
 	public static ResourceBundle language = SN_LocalizationLoader.getResources(); 
 	public static Map<String, Integer> configVariables = new HashMap<String, Integer>();
 	public static Map<String, String> playersOnline = new HashMap<String, String>();
 	public static Map<String, String> bannedPlayers = new HashMap<String, String>();
-	
+
 	public StarNub() 
 	{
     }
@@ -43,38 +53,34 @@ public final class StarNub {
     	
     	/* Runs the StarNub configuration checker */
     	SN_Configuration.checkConfiguration();
-    	   
+    	
     	/* Initiates Logger (MultiOutputStream) */
-    	SN_MessageFormater.msgPrint(language.getString("l1"), 0, 0);
-    	MultiOutputStreamLogger Logger = new MultiOutputStreamLogger();
-    	Logger.snLogger();
-    	SN_MessageFormater.msgPrint(language.getString("l2"), 0, 0);
+    	new MultiOutputStreamLogger().snLogger();
+    	SN_MessageFormater.msgPrint(language.getString("l"), 0, 0);
     	
     	/* Plug-in Loader */
     	
     	/* Status Tracker*/
     	
-    	/* Network Initialization */
-    	
+    
     	/* Proxy Initialization */
     	Runnable sn_Proxy = new SN_Server();
+//    	Runnable sn_UDP_Proxy = new SN_UDP_Server();
     	new Thread (sn_Proxy).start();
-    	
-    		/* Remote Console Administration */
+//    	new Thread (sn_UDP_Proxy).start();
     	
     	/* Starts the SN_Server WatchDog */
-    	SN_MessageFormater.msgPrint(language.getString("sm1"), 0, 0);
     	Runnable sb_Monitor = new SB_ServerMonitor();
     	new Thread(sb_Monitor).start();
-    	SN_MessageFormater.msgPrint(language.getString("sm2"), 0, 0);
+    	SN_MessageFormater.msgPrint(language.getString("sm"), 0, 0);
     	
+    	/* Pause Thread */
     	new ThreadSleep().timer(2);
 
     	/* Starts the KeyListener */
-    	SN_MessageFormater.msgPrint(language.getString("kl1"), 0, 0);
     	Runnable sn_KeyListener = new SN_KeyListener();
     	new Thread(sn_KeyListener).start();
-    	SN_MessageFormater.msgPrint(language.getString("kl2"), 0, 0);
+    	SN_MessageFormater.msgPrint(language.getString("kl"), 0, 0);
 
 	}
 }

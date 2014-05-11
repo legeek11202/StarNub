@@ -1,6 +1,5 @@
 Updated: 09MAY14
 Features Addition:
-Starbound configuration auto-configuration
 Stat's Tracking (Process Crashes, Unresponsive, Wrapper Uptime, Uptime since last restart, Last restart)
 Wrapper Functionality Options (Half Wrapper or Full Wrapper)
 Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
@@ -15,6 +14,7 @@ Fixes:
 Linux UDP Query Issue #2
 Language resource is being created twice makes two instances
 Proxy half open connections
+Proxy UDP through
 Log rotation at midnight of local time
 
 

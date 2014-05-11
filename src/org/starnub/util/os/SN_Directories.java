@@ -14,12 +14,11 @@ import org.starnub.util.stream.SN_MessageFormater;
 
 public class SN_Directories {
 
-	// Directory Checker
-
 	public static void snDirCheck() 
 	{
 		try
 		{
+			/* Directories we want to use */
 			String[] snDirectories = new String[]
 					{
 					"StarNub",
@@ -27,6 +26,8 @@ public class SN_Directories {
 					"StarNub/Error Logs",
 					"StarNub/Plugins"
 					};
+			
+			/* Checks each directory to see if it exist */
 			for(String strDirectory : snDirectories)
 			{
 				File directory = new File(strDirectory);
@@ -34,7 +35,8 @@ public class SN_Directories {
 				{
 					boolean result = directory.mkdir();  
 					if(result) 
-					{    
+					{   
+						/* Prints if a directory was created or not */
 						SN_MessageFormater.msgPrint(directory+StarNub.language.getString("sndc"), 0, 0);
 					}
 				}

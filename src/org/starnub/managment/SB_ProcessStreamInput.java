@@ -64,22 +64,23 @@ public class SB_ProcessStreamInput implements Runnable {
 							/* Player Activity (Disconnects and Connects) */
 							String activity = line.substring((2+line.indexOf(")")));
 							/* Inserts player into Player Name/IP HashMap */
-							if (activity.equals("connected"))
-							{
-								StarNub.playersOnline.put(playerIP, playerName);
-								activity = c;
-							}
-							/* Removes a player from Player Name/IP HashMap */
-							else if (activity.equals("disconnected"))
-							{
-								StarNub.playersOnline.remove(playerIP);
-								activity = dc;
-							}
-							else
-							{
-								/* Error with HasMap message */
-								SN_MessageFormater.msgPrint(lang.getString("sb.psi.1"), 0, 1);
-							}	
+							//TODO Re-enable Disabled for build network testing
+//							if (activity.equals("connected"))
+//							{
+//								StarNub.playersOnline.put(playerIP, playerName);
+//								activity = c;
+//							}
+//							/* Removes a player from Player Name/IP HashMap */
+//							else if (activity.equals("disconnected"))
+//							{
+//								StarNub.playersOnline.remove(playerIP);
+//								activity = dc;
+//							}
+//							else
+//							{
+//								/* Error with HasMap message */
+//								SN_MessageFormater.msgPrint(lang.getString("sb.psi.1"), 0, 1);
+//							}	
 							/* Prints Player Connect and Disconnect to Console */
 							SN_MessageFormater.msgPrint(playerName+" has "+activity+" ("+playerIP+").", 1, 0);
 						} 

@@ -25,15 +25,15 @@ public class SN_Configuration {
 
 	private static void snConfigurationCheck ()
 	{
-    	SN_MessageFormater.msgPrint(lang.getString("dc"), 0, 0);
+		/* Directory Check */
     	SN_Directories.snDirCheck();
-    	SN_MessageFormater.msgPrint(lang.getString("dcc"), 0, 0);
-		SN_MessageFormater.msgPrint(lang.getString("dvc"), 0, 0);
+    	SN_MessageFormater.msgPrint(lang.getString("dc"), 0, 0);
+    	/* Configuration Validation */
 		SN_ConfigConfigurator.validateConfig();
 		SN_MessageFormater.msgPrint("\n\n"+lang.getString("uvf")+"\n"+StarNub.configVariables.toString()+"\n", 0, 0);
-		SN_MessageFormater.msgPrint(lang.getString("sbcc1"), 0, 0);
+		/* Configure starbound.config */
 		SB_ConfigConfigurator.sbConfigConfiguration();
-		SN_MessageFormater.msgPrint(lang.getString("sbcc2"), 0, 0);
+		SN_MessageFormater.msgPrint(lang.getString("sbcc"), 0, 0);
 	}
 	
 	public SN_Configuration() 
