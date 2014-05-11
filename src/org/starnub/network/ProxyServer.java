@@ -11,7 +11,7 @@ import org.starnub.StarNub;
  * TODO: Information																		
  * 
  */
-public class SN_Server implements Runnable {
+public class ProxyServer implements Runnable {
 
 		public void run()
 	    {
@@ -46,7 +46,7 @@ public class SN_Server implements Runnable {
 							/* Initializes the channel and calls the Server Initializer to 
 							 * set up this channels handlers 
 						 	 * */
-							.childHandler(new SN_ServerInitializer(sbRemoteHost, sbRemotePort))
+							.childHandler(new ProxyServerInitializer(sbRemoteHost, sbRemotePort))
 							
 							/* Finally we are going to bind the Server Socket */
 							.bind(snServerPort).channel().closeFuture().sync();

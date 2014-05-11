@@ -1,4 +1,4 @@
-package org.starnub.network;
+package org.starnub.network.handlers;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
@@ -7,11 +7,11 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class SN_BackendHandler extends ChannelInboundHandlerAdapter  {
+public class ProxyBackendHandler extends ChannelInboundHandlerAdapter  {
 
 	private final Channel inboundChannel;
 
-	public SN_BackendHandler(Channel inboundChannel) 
+	public ProxyBackendHandler(Channel inboundChannel) 
 	{
 		this.inboundChannel = inboundChannel;
 	}
@@ -46,14 +46,14 @@ public class SN_BackendHandler extends ChannelInboundHandlerAdapter  {
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception 
 	{
-	SN_FrontendHandler.closeOnFlush(inboundChannel);
+	ProxyFrontendHandler.closeOnFlush(inboundChannel);
 	}
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception 
 	{
 	cause.printStackTrace();
-	SN_FrontendHandler.closeOnFlush(ctx.channel());
+	ProxyFrontendHandler.closeOnFlush(ctx.channel());
 	}
 	
 }

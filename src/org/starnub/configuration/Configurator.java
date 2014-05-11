@@ -10,10 +10,10 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
-import org.starnub.util.stream.SN_MessageFormater;
+import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.timers.ConsoleInput_Timer;
 
-public class SN_ConfigConfigurator {
+public class Configurator {
 	
 	private static ResourceBundle lang = StarNub.language;
 	
@@ -51,8 +51,8 @@ public class SN_ConfigConfigurator {
 			Properties prop = new Properties();
 			int a = 0;
 			String answerString;
-			SN_MessageFormater.msgPrint(lang.getString("cc"), 0, 0);
-			SN_MessageFormater.msgPrint("\n\n"+lang.getString("cc1")+"\n"+lang.getString("cc2"), 0, 0);
+			MessageFormater.msgPrint(lang.getString("cc"), 0, 0);
+			MessageFormater.msgPrint("\n\n"+lang.getString("cc1")+"\n"+lang.getString("cc2"), 0, 0);
 			/* Loop through array of configuration questions */
 			for(String qS : snConfigQuestions) 
 			{
@@ -70,7 +70,7 @@ public class SN_ConfigConfigurator {
 				}
 				a += 1;
 			}
-			SN_MessageFormater.msgPrint(
+			MessageFormater.msgPrint(
 			  "\n"+lang.getString("cqc1")+" "+prop.getProperty(snConfigOptions[0])
 			  + "\n"+lang.getString("cqc2")+" "+prop.getProperty(snConfigOptions[1])
 			  + "\n"+lang.getString("cqc3")+" "+prop.getProperty(snConfigOptions[2])+" "+lang.getString("cqc4"), 0, 0);
@@ -81,7 +81,7 @@ public class SN_ConfigConfigurator {
 				{
 				starNubConfig = new FileOutputStream(filePath);
 				prop.store(starNubConfig, null);
-				SN_MessageFormater.msgPrint(lang.getString("cf"), 0, 0);
+				MessageFormater.msgPrint(lang.getString("cf"), 0, 0);
 				}
 				catch (IOException e) 
 				{
@@ -132,12 +132,12 @@ public class SN_ConfigConfigurator {
 		} 
 		catch (FileNotFoundException e) 
 		{
-			SN_MessageFormater.msgPrint(lang.getString("sn.cc.3"), 0, 0);
+			MessageFormater.msgPrint(lang.getString("sn.cc.3"), 0, 0);
 			configurationQuestions();
 		}
 	}
 	
-	public SN_ConfigConfigurator() 
+	public Configurator() 
 	{
 	}
 }

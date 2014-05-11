@@ -1,4 +1,4 @@
-package org.starnub.network;
+package org.starnub.network.handlers;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
@@ -8,19 +8,19 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class SN_FrontendHandler extends ChannelInboundHandlerAdapter  {
+public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter  {
     
     private final String sbRemoteHost;
     private final int sbRemotePort;
     private volatile Channel outboundChannel;
     
-    public SN_FrontendHandler(String remoteHost, int remotePort) 
+    public ProxyFrontendHandler(String remoteHost, int remotePort) 
     {
         this.sbRemoteHost = remoteHost;
         this.sbRemotePort = remotePort;
     }
 	
-    /* This method is automatically when this channel is active */
+    /* Transmission */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception 
     {
@@ -50,7 +50,7 @@ public class SN_FrontendHandler extends ChannelInboundHandlerAdapter  {
         	 * receive data from Starbound Server and forward it back on to 
         	 * the Starbound Client.
         	 * */
-        	.handler(new SN_BackendHandler(inboundChannel));
+        	.handler(new ProxyBackendHandler(inboundChannel));
         
         	/* This channel future is setting up a response to a event that has 
         	 * not happened yet. When the channel connects then the 
@@ -76,7 +76,7 @@ public class SN_FrontendHandler extends ChannelInboundHandlerAdapter  {
         	});
 	}
     
-    /* Forwards the data to the next handler */
+    /* Receiving Data */
 	@Override
 	public void channelRead(final ChannelHandlerContext ctx, Object msg) throws Exception 
 	{

@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
-import org.starnub.util.stream.SN_MessageFormater;
+import org.starnub.util.stream.MessageFormater;
 
 /*
 * Coming Soon
@@ -16,7 +16,7 @@ import org.starnub.util.stream.SN_MessageFormater;
 * 
 */
 
-public class SB_ProcessStreamInput implements Runnable {
+public class SbProcessStreamInput implements Runnable {
 	
 	private static ResourceBundle lang = StarNub.language;
 
@@ -25,7 +25,7 @@ public class SB_ProcessStreamInput implements Runnable {
 			String line;
 			String c = lang.getString("spsic");
 			String dc = lang.getString("spsid");
-			BufferedReader input = new BufferedReader(new InputStreamReader(SB_ProcessManagment.getSbProcess().getInputStream()));
+			BufferedReader input = new BufferedReader(new InputStreamReader(SbProcessManagment.getSbProcess().getInputStream()));
 			// TODO Import Variable
 			Boolean fullwrapper = false;
 			
@@ -53,7 +53,7 @@ public class SB_ProcessStreamInput implements Runnable {
 						/* Player Chat */
 						if (line.contains("Info:  <"))
 						{
-							SN_MessageFormater.msgPrint(line.substring(7, line.length()), 1, 2);
+							MessageFormater.msgPrint(line.substring(7, line.length()), 1, 2);
 						}
 						else if (line.contains("Client '") && line.contains("> ("))
 						{
@@ -82,17 +82,17 @@ public class SB_ProcessStreamInput implements Runnable {
 //								SN_MessageFormater.msgPrint(lang.getString("sb.psi.1"), 0, 1);
 //							}	
 							/* Prints Player Connect and Disconnect to Console */
-							SN_MessageFormater.msgPrint(playerName+" has "+activity+" ("+playerIP+").", 1, 0);
+							MessageFormater.msgPrint(playerName+" has "+activity+" ("+playerIP+").", 1, 0);
 						} 
 						/* Prints Starbound SN_Server Version to console */
 						else if (line.contains("SN_Server version"))
 						{
-							SN_MessageFormater.msgPrint(line.substring(6, line.length())+".", 1, 0);
+							MessageFormater.msgPrint(line.substring(6, line.length())+".", 1, 0);
 						} 
 						/* Prints when the Starbound SN_Server is ready to accept new connections */
 						else if (line.contains("TcpServer"))
 						{
-							SN_MessageFormater.msgPrint(lang.getString("spsi")+" "+StarNub.configVariables.get("StarNub_Port")+".", 1, 0);
+							MessageFormater.msgPrint(lang.getString("spsi")+" "+StarNub.configVariables.get("StarNub_Port")+".", 1, 0);
 						} 
 						else
 						{
@@ -113,7 +113,7 @@ public class SB_ProcessStreamInput implements Runnable {
 			}
 	}
 	
-	public SB_ProcessStreamInput() 
+	public SbProcessStreamInput() 
 	{
 	}
 }

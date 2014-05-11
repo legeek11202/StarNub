@@ -3,7 +3,7 @@ package org.starnub.util.os;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import org.starnub.util.stream.SN_MessageFormater;
+import org.starnub.util.stream.MessageFormater;
 
 /*
 * This class's method will check to see the Linux Kernel bit version.
@@ -34,7 +34,7 @@ public class LinuxKernelBitVersion {
 			catch (Exception e) 
 			{
 				linuxKernel = 0;
-				SN_MessageFormater.msgPrint("Linux uname -m Java Message: "+e.getMessage(), 0, 1);
+				MessageFormater.msgPrint("Linux uname -m Java Message: "+e.getMessage(), 0, 1);
 			} 
 			if (output.contains("x86_64"))
 			{

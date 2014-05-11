@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import org.starnub.util.stream.SN_MessageFormater;
+import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.timers.ConsoleInput_Timer;
 
 /*
@@ -18,7 +18,7 @@ import org.starnub.util.timers.ConsoleInput_Timer;
  * 
  */
 
-public class SN_LocalizationLoader {
+public class LocalizationLoader {
 	
 	private static String language;
 	
@@ -26,7 +26,7 @@ public class SN_LocalizationLoader {
 	{
 		localConfig();
 		Locale locale = new Locale(language);
-		SN_MessageFormater.msgPrint("Language: "+language, 0, 0);
+		MessageFormater.msgPrint("Language: "+language, 0, 0);
 		return ResourceBundle.getBundle("org.starnub.localization.language", locale);
 	}
 	
@@ -53,7 +53,7 @@ public class SN_LocalizationLoader {
 			{
 
 				FileOutputStream starLocalizationOutput = null;
-				SN_MessageFormater.msgPrint("No language configured.", 0, 0);
+				MessageFormater.msgPrint("No language configured.", 0, 0);
 				String answerString = ConsoleInput_Timer.inputCall(""
 						+ "\n\n\n\nYou have 1 minutes to select your language. (Default English)"
 						+ "\nPlease type in the number and press 'Enter'."
@@ -67,7 +67,7 @@ public class SN_LocalizationLoader {
 					case "1": language = "english"; break;
 					default: 
 					{
-					SN_MessageFormater.msgPrint("Error language selection.", 0, 0);
+					MessageFormater.msgPrint("Error language selection.", 0, 0);
 					localConfig();
 					}
 				}
@@ -76,11 +76,11 @@ public class SN_LocalizationLoader {
 					prop.setProperty("Language", language);
 					starLocalizationOutput = new FileOutputStream(filePath);
 					prop.store(starLocalizationOutput, null);
-					SN_MessageFormater.msgPrint("Language configured.", 0, 0);
+					MessageFormater.msgPrint("Language configured.", 0, 0);
 				}
 				catch (IOException io) 
 				{
-					SN_MessageFormater.msgPrint("Language configuration creation error.", 0, 1);
+					MessageFormater.msgPrint("Language configuration creation error.", 0, 1);
 					io.printStackTrace();
 				} 
 				finally 
@@ -93,7 +93,7 @@ public class SN_LocalizationLoader {
 						} 
 						catch (IOException io) 
 						{
-							SN_MessageFormater.msgPrint("Language configuration creation error.", 0, 1);
+							MessageFormater.msgPrint("Language configuration creation error.", 0, 1);
 							io.printStackTrace();
 						}
 					}	 
@@ -101,6 +101,6 @@ public class SN_LocalizationLoader {
 			}
 	}
 
-	public SN_LocalizationLoader() {
+	public LocalizationLoader() {
 	}
 }

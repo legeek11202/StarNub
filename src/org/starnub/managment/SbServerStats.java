@@ -1,6 +1,6 @@
 package org.starnub.managment;
 
-public class SN_Stats {
+public class SbServerStats {
 
 	// TODO push variables to menu, add all time counters
 	
@@ -26,7 +26,7 @@ public class SN_Stats {
 	public void setStat(){
 	}
 
-	public SN_Stats() {
+	public SbServerStats() {
 	}
 
 }

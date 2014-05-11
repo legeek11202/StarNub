@@ -2,14 +2,14 @@ package org.starnub.util;
 
 import java.util.Scanner;
 
-import org.starnub.managment.SB_ProcessManagment;
+import org.starnub.managment.SbProcessManagment;
 
 /*
  * Temporary Key Listener for program exit
  * Future - StarNub Menu Options
  */
 
-public class SN_KeyListener implements Runnable {
+public class KeyListener implements Runnable {
 
 	public synchronized void run() 
 	{
@@ -21,16 +21,16 @@ public class SN_KeyListener implements Runnable {
 		if (i == 1) 
 		{
 			/* Exit program (Not Graceful) */
-			if(SB_ProcessManagment.sb_ProcessStatus())
+			if(SbProcessManagment.sb_ProcessStatus())
 			{
-			SB_ProcessManagment.sb_ProcessKill();
+			SbProcessManagment.sb_ProcessKill();
 			}
 			System.exit(1);
 		}
 		sc.close();
 	}
 	
-	public SN_KeyListener() 
+	public KeyListener() 
 	{
 	}
 }

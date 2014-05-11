@@ -11,7 +11,7 @@ import org.starnub.util.simplejson.JSONPrettyPrint;
 import org.starnub.util.simplejson.parser.JSONParser;
 import org.starnub.util.simplejson.parser.ParseException;
 
-public class SB_ConfigConfigurator {
+public class SbConfigurator {
 	
     public static void sbConfigConfiguration() 
     {
@@ -47,6 +47,6 @@ public class SB_ConfigConfigurator {
 		}
     }
  
-	public SB_ConfigConfigurator() {
+	public SbConfigurator() {
 	}
 }

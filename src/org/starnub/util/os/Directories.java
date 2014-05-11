@@ -3,7 +3,7 @@ package org.starnub.util.os;
 import java.io.File;
 
 import org.starnub.StarNub;
-import org.starnub.util.stream.SN_MessageFormater;
+import org.starnub.util.stream.MessageFormater;
 
 /*
 * This class's method will check to make sure the directories 
@@ -12,7 +12,7 @@ import org.starnub.util.stream.SN_MessageFormater;
 * This method will return nothing.
 **/
 
-public class SN_Directories {
+public class Directories {
 
 	public static void snDirCheck() 
 	{
@@ -37,7 +37,7 @@ public class SN_Directories {
 					if(result) 
 					{   
 						/* Prints if a directory was created or not */
-						SN_MessageFormater.msgPrint(directory+StarNub.language.getString("sndc"), 0, 0);
+						MessageFormater.msgPrint(directory+StarNub.language.getString("sndc"), 0, 0);
 					}
 				}
 			}
@@ -48,7 +48,7 @@ public class SN_Directories {
 		}
 	}
 	
-	public SN_Directories() 
+	public Directories() 
 	{
 	}
 }

@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import org.starnub.configuration.SN_Configuration;
-import org.starnub.localization.SN_LocalizationLoader;
-import org.starnub.managment.SB_ServerMonitor;
-import org.starnub.network.SN_Server;
-import org.starnub.util.SN_KeyListener;
+import org.starnub.configuration.ConfigurationCheck;
+import org.starnub.localization.LocalizationLoader;
+import org.starnub.managment.SbServerMonitor;
+import org.starnub.network.ProxyServer;
+import org.starnub.util.KeyListener;
 import org.starnub.util.stream.MultiOutputStreamLogger;
-import org.starnub.util.stream.SN_MessageFormater;
+import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.timers.ThreadSleep;
 
 /*
@@ -30,7 +30,7 @@ public final class StarNub {
 	 *  if (StarNub.Debug.ON) {System.out.println("Debug: ");}
 	 */
 	
-	public static ResourceBundle language = SN_LocalizationLoader.getResources(); 
+	public static ResourceBundle language = LocalizationLoader.getResources(); 
 	public static Map<String, Integer> configVariables = new HashMap<String, Integer>();
 	public static Map<String, String> playersOnline = new HashMap<String, String>();
 	public static Map<String, String> bannedPlayers = new HashMap<String, String>();
@@ -49,14 +49,14 @@ public final class StarNub {
     			+ "===        Teihoo                         ===\n"
     			+ "=============================================\n");
     	
-    	SN_MessageFormater.msgPrint(language.getString("ss"), 0, 0);
+    	MessageFormater.msgPrint(language.getString("ss"), 0, 0);
     	
     	/* Runs the StarNub configuration checker */
-    	SN_Configuration.checkConfiguration();
+    	ConfigurationCheck.checkConfiguration();
     	
     	/* Initiates Logger (MultiOutputStream) */
     	new MultiOutputStreamLogger().snLogger();
-    	SN_MessageFormater.msgPrint(language.getString("l"), 0, 0);
+    	MessageFormater.msgPrint(language.getString("l"), 0, 0);
     	
     	/* Plug-in Loader */
     	
@@ -64,23 +64,23 @@ public final class StarNub {
     	
     
     	/* Proxy Initialization */
-    	Runnable sn_Proxy = new SN_Server();
+    	Runnable sn_Proxy = new ProxyServer();
 //    	Runnable sn_UDP_Proxy = new SN_UDP_Server();
     	new Thread (sn_Proxy).start();
 //    	new Thread (sn_UDP_Proxy).start();
     	
     	/* Starts the SN_Server WatchDog */
-    	Runnable sb_Monitor = new SB_ServerMonitor();
+    	Runnable sb_Monitor = new SbServerMonitor();
     	new Thread(sb_Monitor).start();
-    	SN_MessageFormater.msgPrint(language.getString("sm"), 0, 0);
+    	MessageFormater.msgPrint(language.getString("sm"), 0, 0);
     	
     	/* Pause Thread */
     	new ThreadSleep().timer(2);
 
     	/* Starts the KeyListener */
-    	Runnable sn_KeyListener = new SN_KeyListener();
+    	Runnable sn_KeyListener = new KeyListener();
     	new Thread(sn_KeyListener).start();
-    	SN_MessageFormater.msgPrint(language.getString("kl"), 0, 0);
+    	MessageFormater.msgPrint(language.getString("kl"), 0, 0);
 
 	}
 }

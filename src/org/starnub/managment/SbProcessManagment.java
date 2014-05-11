@@ -1,7 +1,7 @@
 package org.starnub.managment;
 
 import org.starnub.StarNub;
-import org.starnub.util.os.SN_GetFilePath;
+import org.starnub.util.os.GetFilePath;
 
 /*
 * This class's methods manages the Starbound SN_Server as a subprocess
@@ -16,7 +16,7 @@ import org.starnub.util.os.SN_GetFilePath;
 * These methods will return a boolean or nothing.
 **/
 
-public class SB_ProcessManagment {
+public class SbProcessManagment {
 	
 	private static Process sbProcess;
 	
@@ -30,11 +30,11 @@ public class SB_ProcessManagment {
 		try 
 		{
 			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Building SB Server ProcessBuild.");}
-			ProcessBuilder sbProcessBuild = new ProcessBuilder(SN_GetFilePath.getFilePath());
+			ProcessBuilder sbProcessBuild = new ProcessBuilder(GetFilePath.getFilePath());
 			sbProcessBuild.redirectErrorStream(true);
 			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Setting SB Server Process.");}
 			sbProcess = sbProcessBuild.start();
-			Runnable sb_StreamInput = new SB_ProcessStreamInput();
+			Runnable sb_StreamInput = new SbProcessStreamInput();
 			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Running SB Server Process.");}
 			new Thread(sb_StreamInput).start();
 		} 
@@ -77,7 +77,7 @@ public class SB_ProcessManagment {
 		}
 	}
 		
-    public SB_ProcessManagment() 
+    public SbProcessManagment() 
     {
     }
 }

@@ -5,7 +5,7 @@ package org.starnub.plugin;
 //import net.xeoh.plugins.base.PluginManager;
 //import net.xeoh.plugins.base.impl.PluginManagerFactory;
 
-public class SN_PluginLoader {
+public class PluginLoader {
 	
 	
 	public static void snPluginLoader ()
@@ -14,6 +14,6 @@ public class SN_PluginLoader {
 //	pluginManager.addPluginsFrom(new File("StarNub/plugins/").toURI());
 	}
 
-	public SN_PluginLoader() {
+	public PluginLoader() {
 	}
 }

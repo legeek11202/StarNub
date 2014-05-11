@@ -1,6 +1,6 @@
 package org.starnub.util.os;
 
-import org.starnub.util.stream.SN_MessageFormater;
+import org.starnub.util.stream.MessageFormater;
 
 
 
@@ -10,7 +10,7 @@ import org.starnub.util.stream.SN_MessageFormater;
 * This method will return a file path in the form of a String.
 **/
 
-public final class SN_GetFilePath {
+public final class GetFilePath {
 	
 	private static String win32Path = "win32/starbound_server.exe";
 	private static String linux32Path = "./linux32/starbound_server";
@@ -24,7 +24,7 @@ public final class SN_GetFilePath {
     	
     	if (osWindows == true)
     	{
-    			SN_MessageFormater.msgPrint("Using Win32 Starbound_Server.exe.", 0, 0);
+    			MessageFormater.msgPrint("Using Win32 Starbound_Server.exe.", 0, 0);
     			return win32Path;
     	} 
     	else 
@@ -35,12 +35,12 @@ public final class SN_GetFilePath {
     		{
     		case 1: 
     		{
-				SN_MessageFormater.msgPrint("Using Linux64 Starbound_Server.", 0, 0);
+				MessageFormater.msgPrint("Using Linux64 Starbound_Server.", 0, 0);
     			return linux64Path;
     		}
     		case 2: 
     		{
-    			SN_MessageFormater.msgPrint("Using Linux32 Starbound_Server.", 0, 0);
+    			MessageFormater.msgPrint("Using Linux32 Starbound_Server.", 0, 0);
     			return linux32Path;
     		}
     		default:
@@ -50,7 +50,7 @@ public final class SN_GetFilePath {
     		}
     	}
 	}	
-	public SN_GetFilePath() 
+	public GetFilePath() 
 	{
 	}
 }

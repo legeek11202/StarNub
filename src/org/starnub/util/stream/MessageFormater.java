@@ -9,7 +9,7 @@ import org.joda.time.format.DateTimeFormat;
 * This method will return nothing.
 **/
 
-public class SN_MessageFormater {
+public class MessageFormater {
 	
 	private static String[] serverArray= new String[]
 			{
@@ -30,7 +30,7 @@ public class SN_MessageFormater {
 		System.out.println(DateTime.now().toString(DateTimeFormat.forPattern("[HH:mm:ss]"))+serverArray[server]+typeArray[type]+message);
 	}
 	
-	public SN_MessageFormater() 
+	public MessageFormater() 
 	{
 	}
 
