@@ -62,12 +62,6 @@ public class SbProcessManagment {
 		}
 	}
 	
-	public static void sb_ProcessRestart()
-	{
-		sb_ProcessKill();
-		sb_ProcessStart();
-	}
-	
 	public static boolean sb_ProcessStatus ()
 	{
 		try 
