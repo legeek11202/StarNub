@@ -82,7 +82,7 @@ public final class StarNub {
     	new Thread(sn_KeyListener).start();
     	MessageFormater.msgPrint(language.getString("kl"), 0, 0);
     	
-    	// Loop to refresh the log, also add snuptime stat to sn Stats
+    	// TODO Loop to refresh the log, also add snuptime stat to sn Stats
 
 	}
 }
