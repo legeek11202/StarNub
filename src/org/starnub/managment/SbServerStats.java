@@ -2,11 +2,12 @@ package org.starnub.managment;
 
 public class SbServerStats {
 
-	/* Uptime Trackers */
-	private static Date snOnlineTime = null; /* Plain SN Uptime date used in calculation */ //TODO get time
-	private static Date sbOnlineTime = null; /* Plain SB Uptime date used in calculation */ //TODO get time
+	/* Time Trackers */
+	private static Date snOnlineTime = null; 
+	private static Date sbOnlineTime = null; 
+	private static Date lastAutoRestart = null;
 	
-	/* All Time Tracker */ //TODO Load from file
+	/* For Ever Tracker */ //TODO Load from file
 	private static int sbAutoRestarts = 0;
 	private static int sbCrashes = 0;
 	private static int sbUnresponsive = 0;
@@ -16,7 +17,7 @@ public class SbServerStats {
 	private static int sbCrashesWrap = 0;
 	private static int sbUnresponsiveWrap = 0;
 	
-	/* Since SB Last Autorestart Restart */
+	/* Since SB Last Auto Restart */
 	private static int sbCrashesTemp = 0;
 	private static int sbUnresponsiveTemp = 0;
 	
@@ -37,6 +38,7 @@ public class SbServerStats {
 	
 	public String getSnUptime() { return; } //TODO Math
 	public String getSbUptime() { return; } //TODO Math
+	public Date getLastAutoRestart() { return lastAutoRestart; } //TODO FORMATING
 	
 	public int getSbAutoRestarts() { return sbAutoRestarts; }
 	public int getSbAutoRestartsWrap() { return sbAutoRestartsWrap; }
@@ -51,6 +53,7 @@ public class SbServerStats {
 	
 	public void setSnOnlineTime() { snOnlineTime = DateTime(); }
 	public void setSbOnlineTime() { SbOnlineTime = DateTime(); }
+	public void setLastAutoRestart() { lastAutoRestart = DateTime(); }
 	
 	public void addSbAutoRestarts() { sbAutoRestarts += 1; sbAutoRestartsWrap += 1; }
 	public void addSbCrashes() { sbCrashes += 1; sbCrashesWrap += 1; sbCrashesTemp += 1; }
