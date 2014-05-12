@@ -15,7 +15,9 @@ import org.joda.time.format.DateTimeFormat;
 
 public class MultiOutputStreamLogger {
 
-	
+	public MultiOutputStreamLogger() 
+	{
+	}
 	
 	public void snLogger ()
 	{
@@ -40,9 +42,5 @@ public class MultiOutputStreamLogger {
     	{
 			e.printStackTrace();
     	}
-	}
-		
-	public MultiOutputStreamLogger() 
-	{
 	}
 }

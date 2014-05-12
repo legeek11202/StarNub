@@ -13,6 +13,10 @@ import org.starnub.util.simplejson.parser.ParseException;
 
 public class SbConfigurator {
 	
+	public SbConfigurator() 
+	{
+	}
+	
     public static void sbConfigConfiguration() 
     {
     	configStarboundConfiguration();
@@ -46,7 +50,4 @@ public class SbConfigurator {
 			e.printStackTrace();
 		}
     }
- 
-	public SbConfigurator() {
-	}
 }

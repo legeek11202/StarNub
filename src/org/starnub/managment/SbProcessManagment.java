@@ -20,6 +20,10 @@ public class SbProcessManagment {
 	
 	private static Process sbProcess;
 	
+    public SbProcessManagment() 
+    {
+    }
+	
 	public static Process getSbProcess() 
 	{ 
 		return sbProcess; 
@@ -76,8 +80,4 @@ public class SbProcessManagment {
 			return false;
 		}
 	}
-		
-    public SbProcessManagment() 
-    {
-    }
 }

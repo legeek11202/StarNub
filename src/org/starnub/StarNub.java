@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.starnub.configuration.ConfigurationCheck;
-import org.starnub.localization.LocalizationLoader;
+import org.starnub.localization.LanguageLoader;
 import org.starnub.managment.SbServerMonitor;
 import org.starnub.network.ProxyServer;
 import org.starnub.util.KeyListener;
@@ -19,6 +19,10 @@ import org.starnub.util.timers.ThreadSleep;
 
 public final class StarNub {
 	
+	public StarNub() 
+	{
+    }
+	
 	public final class Debug 
 	{
 		public static final boolean ON = true; /* Poor Mans #ifdef */
@@ -30,14 +34,10 @@ public final class StarNub {
 	 *  if (StarNub.Debug.ON) {System.out.println("Debug: ");}
 	 */
 	
-	public static ResourceBundle language = LocalizationLoader.getResources(); 
+	public static ResourceBundle language = LanguageLoader.getResources(); 
 	public static Map<String, Integer> configVariables = new HashMap<String, Integer>();
 	public static Map<String, String> playersOnline = new HashMap<String, String>();
 	public static Map<String, String> bannedPlayers = new HashMap<String, String>();
-
-	public StarNub() 
-	{
-    }
 	
     public static void main(String [] args)
 	{

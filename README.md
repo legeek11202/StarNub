@@ -1,4 +1,4 @@
-Updated: 09 MAY 14
+Updated: 11 MAY 14
 
 StarNub
 =======
@@ -23,9 +23,9 @@ Current Features
 - No need to write a configuration file (First run, we will ask you questions)
 	- Configuration Options (Auto Restart Timer, Starbound and StarNub Ports)
 	- No need to change your Starbound configuration port number (We do that for you, We do not change it back though!)
-- Server Monitor
-	- Checks the Starbound Server process every 15 seconds. (Restarts on missing process(Crashes))
-	- Checks the Starbound Server for a response via (TCP) every 15 seconds. (Restarts on Server lockups)
+- Server Monitor (Checks every 20 seconds)
+	- Checks the Starbound Server process every 15 seconds. (Restarts on Server crashes)
+	- Checks the Starbound Server for a response via (TCP)(Restarts on Server lockups)
 	- Auto Re-starter (Configurable)
 - Clean console output. Only see player connects, disconnects and joins.
 - Localization (Wiki how to coming later)
@@ -42,11 +42,6 @@ Milestone:
 
 Milestone:
 - Packet Classes
-
-Milestone
-- Configurable wrapper functionality option. 
-	- Full Wrapper (Server Monitor, Network Proxy & Plug-In Loader, Remote Management Console)
-	- Partial Wrapper =(Process Monitor Only (Possible Remote Management Console))
 	
 Milestone:
 - Localization Flexibility (For plug-ins and ability to load from StarNub directory and merge of language files in case a language file is not updated, program will default to english for that string)

@@ -16,6 +16,10 @@ public final class GetFilePath {
 	private static String linux32Path = "./linux32/starbound_server";
 	private static String linux64Path = "./linux64/starbound_server";
 	
+	public GetFilePath() 
+	{
+	}
+	
 	public static String getFilePath ()
 	{	
 		
@@ -50,7 +54,4 @@ public final class GetFilePath {
     		}
     	}
 	}	
-	public GetFilePath() 
-	{
-	}
 }

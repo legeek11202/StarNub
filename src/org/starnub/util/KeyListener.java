@@ -10,6 +10,10 @@ import org.starnub.managment.SbProcessManagment;
  */
 
 public class KeyListener implements Runnable {
+	
+	public KeyListener() 
+	{
+	}
 
 	public synchronized void run() 
 	{
@@ -28,9 +32,5 @@ public class KeyListener implements Runnable {
 			System.exit(1);
 		}
 		sc.close();
-	}
-	
-	public KeyListener() 
-	{
 	}
 }

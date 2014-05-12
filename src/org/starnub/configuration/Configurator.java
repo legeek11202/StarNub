@@ -40,6 +40,10 @@ public class Configurator {
 
 	private static String filePath = "StarNub/StarNub.config";
 	
+	public Configurator() 
+	{
+	}
+	
 	public static void validateConfig()
 	{
 		configurationValidation();
@@ -135,9 +139,5 @@ public class Configurator {
 			MessageFormater.msgPrint(lang.getString("sn.cc.3"), 0, 0);
 			configurationQuestions();
 		}
-	}
-	
-	public Configurator() 
-	{
 	}
 }

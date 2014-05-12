@@ -19,6 +19,10 @@ import org.starnub.util.stream.MessageFormater;
 public class SbProcessStreamInput implements Runnable {
 	
 	private static ResourceBundle lang = StarNub.language;
+	
+	public SbProcessStreamInput() 
+	{
+	}
 
 	public synchronized void run()
 	{  
@@ -111,10 +115,6 @@ public class SbProcessStreamInput implements Runnable {
 					e.printStackTrace();
 				}
 			}
-	}
-	
-	public SbProcessStreamInput() 
-	{
 	}
 }
 

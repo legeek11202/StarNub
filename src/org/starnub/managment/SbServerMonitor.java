@@ -3,6 +3,7 @@ package org.starnub.managment;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
+import org.starnub.network.QueryServer;
 import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.timers.ThreadSleep;
 
@@ -26,6 +27,10 @@ public class SbServerMonitor implements Runnable {
 	
 	private static final int autoRestartTime = (StarNub.configVariables.get("Auto_Restart_Timer")*3600); /* Converts the auto restart timer into seconds */
 
+	public SbServerMonitor() 
+	{
+	}
+	
 	public synchronized void run () 
 	{
 		serverMonitor();
@@ -43,7 +48,7 @@ public class SbServerMonitor implements Runnable {
 			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check.");}
 			switch (statusChecker())
 			{
-			case "statusOk" : new ThreadSleep().timer(15); sbCurrentUptime += 15; serverUptimeTemp += 15; break; // TODO Not Final //TODO Correct serverUptime format
+			case "statusOk" : new ThreadSleep().timer(20); sbCurrentUptime += 15; serverUptimeTemp += 15; break; // TODO Not Final //TODO Correct serverUptime format
 			case "pCrash" : serverCrashesTemp += 1; processCrashed(); break; // TODO Not Final
 			case "sUnresp" : serverUnresponsiveTemp += 1; serverUnresponsive(); break;  // TODO Not Final
 			}			
@@ -65,11 +70,11 @@ public class SbServerMonitor implements Runnable {
 			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Process Crashed");}
 			return "pCrash";
 		}
-//		else if (!SB_UDP_Query.getServerResponse())
-//		{
-//			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Unresponsive");}
-//			return "sUnresp";
-//		}
+		else if (!QueryServer.serverStatus())
+		{
+			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Unresponsive");}
+			return "sUnresp";
+		}
 		else
 		{
 		if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Ok");}
@@ -98,9 +103,5 @@ public class SbServerMonitor implements Runnable {
 		MessageFormater.msgPrint(s.getString("ssmu"), 0, 1);
 		MessageFormater.msgPrint(s.getString("ssmu1")+" "+serverUnresponsiveTemp+" "+s.getString("ssmu2"), 0, 1);
 		SbProcessManagment.sb_ProcessRestart(); /* Restart's the the server monitor if the Process has Crashed */
-	}
-	
-	public SbServerMonitor() 
-	{
 	}
 }

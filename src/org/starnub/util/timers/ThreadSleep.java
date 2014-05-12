@@ -19,6 +19,9 @@ public class ThreadSleep {
 	 * the amount of seconds to sleep the thread.
 	 *              
 	 */
+	public ThreadSleep() 
+	{
+	}
 	
 	public void timer(int timer)
 	{
@@ -30,8 +33,5 @@ public class ThreadSleep {
 		{
 			e.printStackTrace();
 		}
-	}
-	
-	public ThreadSleep() {
 	}
 }

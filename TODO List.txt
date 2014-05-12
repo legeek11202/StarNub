@@ -1,13 +1,12 @@
 Updated: 09MAY14
 Features Addition:
+Proper proxy Connection closing
 Stat's Tracking (Process Crashes, Unresponsive, Wrapper Uptime, Uptime since last restart, Last restart)
-Wrapper Functionality Options (Half Wrapper or Full Wrapper)
 Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
 Localization flexibility and plug-in Localization option
 Client ID and Client Class
 Packet Classes
 Netty Handlers
-
 
 
 Fixes:
@@ -20,7 +19,6 @@ Log rotation at midnight of local time
 
 Debug Additions:
 Benchmark - Process Time and Proxy Bandwidth
-
 
 Configurable:
 StarNub Port

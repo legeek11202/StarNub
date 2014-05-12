@@ -7,13 +7,13 @@ package org.starnub.plugin;
 
 public class PluginLoader {
 	
+	public PluginLoader() 
+	{
+	}
 	
 	public static void snPluginLoader ()
 	{
 //	PluginManager pluginManager = PluginManagerFactory.createPluginManager();
 //	pluginManager.addPluginsFrom(new File("StarNub/plugins/").toURI());
-	}
-
-	public PluginLoader() {
 	}
 }

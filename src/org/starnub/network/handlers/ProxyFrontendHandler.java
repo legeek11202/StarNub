@@ -101,6 +101,7 @@ public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter  {
 		}
 	}
     
+	/* Inactive Channel */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception 
     {
@@ -110,8 +111,10 @@ public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter  {
     	}
 	}
 
+    /* Exceptions */
 	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception 
+	{
 		cause.printStackTrace();
 		System.out.println("Channel exception");	
     }

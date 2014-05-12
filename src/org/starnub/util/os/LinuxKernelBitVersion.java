@@ -13,6 +13,10 @@ import org.starnub.util.stream.MessageFormater;
 
 public class LinuxKernelBitVersion {
 
+		public LinuxKernelBitVersion() 
+		{
+		}
+	
 		public static int linuxKernel() 
 		{
 			
@@ -50,9 +54,4 @@ public class LinuxKernelBitVersion {
 			}
 			return linuxKernel;
 		}
-
-		public LinuxKernelBitVersion() 
-		{
-		}
-
 }

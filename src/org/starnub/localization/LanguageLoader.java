@@ -18,9 +18,13 @@ import org.starnub.util.timers.ConsoleInput_Timer;
  * 
  */
 
-public class LocalizationLoader {
+public class LanguageLoader {
 	
 	private static String language;
+	
+	public LanguageLoader() 
+	{
+	}
 	
 	public static ResourceBundle getResources ()
 	{
@@ -37,7 +41,7 @@ public class LocalizationLoader {
 		
 			try 
 			{
-				InputStream starLocalizationInput = new FileInputStream("StarNub/Localization.config");
+				InputStream starLocalizationInput = new FileInputStream("StarNub/Language.config");
 				try 
 				{
 					prop.load(starLocalizationInput);
@@ -99,8 +103,5 @@ public class LocalizationLoader {
 					}	 
 				}
 			}
-	}
-
-	public LocalizationLoader() {
 	}
 }

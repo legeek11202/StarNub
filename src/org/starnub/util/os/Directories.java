@@ -13,6 +13,10 @@ import org.starnub.util.stream.MessageFormater;
 **/
 
 public class Directories {
+	
+	public Directories() 
+	{
+	}
 
 	public static void snDirCheck() 
 	{
@@ -46,9 +50,5 @@ public class Directories {
 		{
 			e.printStackTrace();
 		}
-	}
-	
-	public Directories() 
-	{
 	}
 }

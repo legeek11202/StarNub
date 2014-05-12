@@ -19,6 +19,10 @@ public class ConsoleInput_Timer {
 	private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	private boolean reading = true;
 	
+	public ConsoleInput_Timer() 
+	{
+	}
+	
 	public static String inputCall(String questionString,int length)  
 	{  
 		try
@@ -71,9 +75,4 @@ public class ConsoleInput_Timer {
     		}
     	}
     }
-	
-	public ConsoleInput_Timer() 
-	{
-	}
-
 }

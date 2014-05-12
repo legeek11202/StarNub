@@ -18,6 +18,10 @@ public class ConfigurationCheck {
 	
 	private static ResourceBundle lang = StarNub.language;
 	
+	public ConfigurationCheck() 
+	{
+	}
+	
 	public static void checkConfiguration()
 	{
 		snConfigurationCheck();
@@ -36,7 +40,4 @@ public class ConfigurationCheck {
 		MessageFormater.msgPrint(lang.getString("sbcc"), 0, 0);
 	}
 	
-	public ConfigurationCheck() 
-	{
-	}
 }

@@ -13,6 +13,10 @@ public class MultiOutputStream extends OutputStream {
 	
 		OutputStream[] outputStreams;
 		
+		public MultiOutputStream ()
+		{
+		}
+		
 		public MultiOutputStream(OutputStream... outputStreams)
 		{
 			this.outputStreams= outputStreams; 
@@ -51,8 +55,5 @@ public class MultiOutputStream extends OutputStream {
 		{
 			for (OutputStream out: outputStreams)
 				out.close();
-		}
-		public MultiOutputStream ()
-		{
 		}
 	}

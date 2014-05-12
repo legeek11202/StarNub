@@ -19,14 +19,14 @@ public class SbServerStats {
 	static int serverUnresponsiveTemp = 0;
 	static int serverUptimeTemp = 0;
 	
+	public SbServerStats() 
+	{
+	}
+	
 	public void getStat(){
 	
 	}
 	
 	public void setStat(){
 	}
-
-	public SbServerStats() {
-	}
-
 }
