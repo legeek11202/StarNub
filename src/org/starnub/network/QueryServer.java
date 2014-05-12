@@ -27,11 +27,12 @@ public class QueryServer {
 	
 	private static void serverQuery ()
 	{
+		
     	final String sbRemoteHost = "127.0.0.1";
     	final int sbRemotePort = StarNub.configVariables.get("Starbound_Port");
-    	
     	int txAttemps = 0; /* We want to attempt to connect several times */
-		do
+	
+	do
     	{
     		
     	/* We are going to use one group of threads. Default's 50.*/
@@ -67,12 +68,12 @@ public class QueryServer {
         				}
         			});
         			f.channel().closeFuture().sync();	
-			} 
+			}
+        	}
         	catch (Exception e) 
         	{
-				if (StarNub.Debug.ON) {System.out.println("Debug: Server Query: Server Check. Status: Unresponsive");}
-				status = false; /* Connection not made server is not responsive */
-			}
+			if (StarNub.Debug.ON) {System.out.println("Debug: Server Query: Server Check. Status: Unresponsive");}
+			status = false; /* Connection not made server is not responsive */
         	}
         finally
         {
