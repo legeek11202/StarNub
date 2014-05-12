@@ -10,9 +10,11 @@ import org.starnub.util.timers.ThreadSleep;
 /*
 * This class's method manages Starbound SN_Server Monitoring
 * 
-* - Monitor the Process and Network Reply (Coming Soon)
-* if Process is not alive and/or network does not respond 
-* will reboot the server.
+* This class will start up the server monitor. It will start 
+* the SB Server. When the server is reachable it will begin
+* the Server Monitor. It will go through the server checker 
+* if all return true then it will execute the switch which 
+* determins how to control ther server.
 * 
 * This method returns nothing.
 * */
@@ -20,8 +22,8 @@ import org.starnub.util.timers.ThreadSleep;
 public class SbServerMonitor implements Runnable {
 	
 	private static ResourceBundle s = StarNub.language; /* Language resource pack, used to reduce characters below */
-	
 	private static final int autoRestartTime = (StarNub.configVariables.get("Auto_Restart_Timer")*3600); /* Converts the auto restart timer into seconds */
+	public s = new SbServerStats;
 
 	public SbServerMonitor() 
 	{
@@ -36,8 +38,7 @@ public class SbServerMonitor implements Runnable {
 	private void serverMonitor ()
 	{
 		
-		s = new SbServerStats;
-
+		//TODO Stats reset/intiialization
 		processStartup();
 		
 		do 
@@ -53,11 +54,11 @@ public class SbServerMonitor implements Runnable {
 		} 
 		while (sbCurrentUptime <= autoRestartTime); //TODO Need to calculate current uptime on cycle.
 		if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Auto Restarting Server.");}
-
+		//TODO Server autoresponse change and addition for variable stats
 		MessageFormater.msgPrint(s.getString("ssmar1")+" "+autoRestartTime+" "+s.getString("ssmar2"), 0, 0);
 		// TODO Add a server broadcast for restart when network and packets added  //TODO Stats update Here autorestart, total uptime
-		SbProcessManagment.sb_ProcessKill();
-		serverMonitor();
+		SbProcessManagment.sb_ProcessKill(); /* Kill the Process */
+		serverMonitor(); /* Restart this method to clear the stats */
 	}
 	
 	private String statusChecker ()
@@ -84,8 +85,9 @@ public class SbServerMonitor implements Runnable {
 		MessageFormater.msgPrint(s.getString("ssm"), 0, 0);
 		SbProcessManagment.sb_ProcessStart(); /* Start SB Server process */
 		if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Sleeping for 2 Minutes while the SB Server starts Up.");}
-		//TODO Convert to a response when server starts to start the monitor
-		new ThreadSleep().timer(120); /* Sleep for 2 minutes while the server boots up.*/ //TODO Consistant server checker
+		//TODO Convert to a response when server starts to start the monitor... 
+		while (!QueryServer.serverStatus()) {new ThreadSleep().timer(5)}; /* We will check the server until it is online. */
+		//TODO set the sbuptime stat
 	}
 	
 	private void processCrashed ()
