@@ -77,8 +77,8 @@ public class SbServerMonitor implements Runnable {
 		}
 		else
 		{
-		if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Ok");}
-		return "statusOk";
+			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Ok");}
+			return "statusOk";
 		}
 	}
 	
