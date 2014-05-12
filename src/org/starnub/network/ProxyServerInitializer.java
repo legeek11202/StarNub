@@ -20,9 +20,6 @@ public class ProxyServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     public void initChannel(SocketChannel ch) throws Exception 
     {
-    	/* Testing handler */
-    	//ch.pipeline().addFirst(new TestHandler());
-    	
     	/* This handler will handle data coming from a Starbound Client into the Proxy
     	 * when the data is received this Handler will open a channel to the Starbound 
     	 * Server. This handler is the last handler in this channel */
