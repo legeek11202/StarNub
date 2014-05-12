@@ -81,6 +81,8 @@ public final class StarNub {
     	Runnable sn_KeyListener = new KeyListener();
     	new Thread(sn_KeyListener).start();
     	MessageFormater.msgPrint(language.getString("kl"), 0, 0);
+    	
+    	// Loop to refresh the log, also add snuptime stat to sn Stats
 
 	}
 }
