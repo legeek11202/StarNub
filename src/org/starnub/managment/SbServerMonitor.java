@@ -21,10 +21,6 @@ public class SbServerMonitor implements Runnable {
 	
 	private static ResourceBundle s = StarNub.language; /* Language resource pack, used to reduce characters below */
 	
-	int serverCrashesTemp = 0; // TODO Not Final
-	int serverUnresponsiveTemp = 0; // TODO Not Final
-	int serverUptimeTemp = 0; // TODO Not Final
-	
 	private static final int autoRestartTime = (StarNub.configVariables.get("Auto_Restart_Timer")*3600); /* Converts the auto restart timer into seconds */
 
 	public SbServerMonitor() 
