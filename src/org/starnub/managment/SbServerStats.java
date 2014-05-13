@@ -40,8 +40,8 @@ public class SbServerStats {
 	public long getSnOnlineTime() { return snOnlineTime; }
 	public long getSbOnlineTime() { return sbOnlineTime; }
 	
-	public long getSnUptime() { return snOnlineTime - System.currentTimeMillis(); } //TODO Formatting
-	public long getSbUptime() { return sbOnlineTime - System.currentTimeMillis(); } //TODO Formatting
+	public long getSnUptime() { return System.currentTimeMillis()-snOnlineTime; } //TODO Formatting
+	public long getSbUptime() { return System.currentTimeMillis()-sbOnlineTime; } //TODO Formatting
 	
 	public long getLastAutoRestart() { return lastAutoRestart; } //TODO FORMATING
 	
