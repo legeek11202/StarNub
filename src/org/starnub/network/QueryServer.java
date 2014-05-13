@@ -19,24 +19,24 @@ public class QueryServer {
 	{
 	}
 	
-	public static Boolean serverStatus ()
+	public static Boolean serverStatus (int type)
 	{
-		serverQuery();
+		serverQuery(type);
 		return status;
 	}
 	
-	private static void serverQuery ()
+	private static void serverQuery (int type)
 	{
 		
     	final String sbRemoteHost = "127.0.0.1";
     	final int sbRemotePort = StarNub.configVariables.get("Starbound_Port");
     	int txAttemps = 0; /* We want to attempt to connect several times */
 	
-	do
+    	do
     	{
     		
-    	/* We are going to use one group of threads. Default's 50.*/
-        EventLoopGroup queryGroup = new NioEventLoopGroup(); 
+    	/* We are going to use one group of threads. */
+        EventLoopGroup queryGroup = new NioEventLoopGroup(1); 
         	try 
         	{
         	/* Initiate a client bootstrap for the server */
@@ -61,30 +61,39 @@ public class QueryServer {
         					} 
         					else 
         					{
-        						if (StarNub.Debug.ON) {System.out.println("Debug: Server Query: Server Check. Status: Unresponsive");}
+        						if(type == 1) { if (StarNub.Debug.ON) {System.out.println("Debug: Server Query: Server Check. Status: Unresponsive");} }
         						status = false; /* Connection not made server is not responsive */
         						f.channel().close(); /* Closing Connection */
         					}
         				}
         			});
         			f.channel().closeFuture().sync();	
-			}
+			
+        		}
+        		catch (Exception e) 
+        		{
+        			if(type == 1) { if (StarNub.Debug.ON) {System.out.println("Debug: Server Query: Server Check. Status: Unresponsive");} }
+        			status = false; /* Connection not made server is not responsive */
+        		}
         	}
-        	catch (Exception e) 
+        	finally
         	{
-			if (StarNub.Debug.ON) {System.out.println("Debug: Server Query: Server Check. Status: Unresponsive");}
-			status = false; /* Connection not made server is not responsive */
+        		queryGroup.shutdownGracefully();
+        	} 
+        	
+        	if (!status)
+        	{
+        		if(type == 1) /* Query attempt for status check */
+        		{ 
+        			txAttemps += 1; /* Decrement tries */
+        			new ThreadSleep().timer(10); /* Wait until retry */
+        			MessageFormater.msgPrint(StarNub.language.getString("sb.q.1")+" ("+txAttemps+"/12).", 0, 1); 
+        		}
+        		else if (type ==2) /* Server coming online */
+        		{
+        			new ThreadSleep().timer(5); /* Shorter wait due to nature*/
+        		}
         	}
-        finally
-        {
-        	queryGroup.shutdownGracefully();
-        } 
-        /* We will decrement the tries and wait some seconds */
-        if (!status)
-        {
-        	txAttemps += 1; new ThreadSleep().timer(10);
-        	MessageFormater.msgPrint(StarNub.language.getString("sb.q.1")+" ("+txAttemps+"/12).", 0, 1);
-        }
     	} while (!status && txAttemps < 12);
     }
 }

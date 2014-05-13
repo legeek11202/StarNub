@@ -4,13 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
 import org.starnub.configuration.ConfigurationCheck;
 import org.starnub.localization.LanguageLoader;
 import org.starnub.managment.SbServerMonitor;
 import org.starnub.network.ProxyServer;
 import org.starnub.util.KeyListener;
-import org.starnub.util.stream.MultiOutputStreamLogger;
 import org.starnub.util.stream.MessageFormater;
+import org.starnub.util.stream.MultiOutputStreamLogger;
 import org.starnub.util.timers.ThreadSleep;
 
 /*
@@ -81,8 +83,21 @@ public final class StarNub {
     	Runnable sn_KeyListener = new KeyListener();
     	new Thread(sn_KeyListener).start();
     	MessageFormater.msgPrint(language.getString("kl"), 0, 0);
-    	
-    	// TODO Loop to refresh the log, also add snuptime stat to sn Stats
 
+    	/* Log Refresher */
+    	int loggerRefresh = new DateTime().getDayOfMonth();
+    	int infinite = 0;
+    	if (Debug.ON) {System.out.println("Debug: StarNub: Today is: "+loggerRefresh);}
+		do 
+		{
+			while (loggerRefresh == new DateTime().getDayOfMonth())
+			{
+				new ThreadSleep().timer(5);
+			}
+			new MultiOutputStreamLogger().snLogger();
+			loggerRefresh = new DateTime().getDayOfMonth();
+		}
+    	while (infinite == 0);
+    	
 	}
 }

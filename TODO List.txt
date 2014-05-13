@@ -1,19 +1,20 @@
 Updated: 09MAY14
 Features Addition:
-Proper proxy Connection closing
+Proper proxy Connection closing - Idle State
+monitor variables + auto restart, simplify
 Stat's Tracking (Process Crashes, Unresponsive, Wrapper Uptime, Uptime since last restart, Last restart)
+---STABLE RELEASE HERE---
 Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
 Localization flexibility and plug-in Localization option
-Client ID and Client Class
+
 Packet Classes
-Netty Handlers
+Netty Handlers - Client ID and Client Class
+
 
 
 Fixes:
-Linux UDP Query Issue #2
 Language resource is being created twice makes two instances
 Proxy half open connections
-Proxy UDP through
 Log rotation at midnight of local time
 
 

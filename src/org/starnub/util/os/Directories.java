@@ -26,7 +26,7 @@ public class Directories {
 			String[] snDirectories = new String[]
 					{
 					"StarNub",
-					"StarNub/SN_Server Logs",
+					"StarNub/Server Logs",
 					"StarNub/Error Logs",
 					"StarNub/Plugins"
 					};

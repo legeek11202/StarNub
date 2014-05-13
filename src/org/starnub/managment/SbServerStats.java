@@ -1,11 +1,12 @@
 package org.starnub.managment;
 
+
 public class SbServerStats {
 
 	/* Time Trackers */
-	private static Date snOnlineTime = null; 
-	private static Date sbOnlineTime = null; 
-	private static Date lastAutoRestart = null;
+	private static long snOnlineTime; /* Java time stamp in milliseconds */
+	private static long sbOnlineTime; /* Divide by /1000 for Unix time stamp */
+	private static long lastAutoRestart; 
 	
 	/* For Ever Tracker */ //TODO Load from file
 	private static int sbAutoRestarts = 0;
@@ -36,9 +37,13 @@ public class SbServerStats {
 		
 	}
 	
-	public String getSnUptime() { return; } //TODO Math
-	public String getSbUptime() { return; } //TODO Math
-	public Date getLastAutoRestart() { return lastAutoRestart; } //TODO FORMATING
+	public long getSnOnlineTime() { return snOnlineTime; }
+	public long getSbOnlineTime() { return sbOnlineTime; }
+	
+	public long getSnUptime() { return snOnlineTime - System.currentTimeMillis(); } //TODO Formatting
+	public long getSbUptime() { return sbOnlineTime - System.currentTimeMillis(); } //TODO Formatting
+	
+	public long getLastAutoRestart() { return lastAutoRestart; } //TODO FORMATING
 	
 	public int getSbAutoRestarts() { return sbAutoRestarts; }
 	public int getSbAutoRestartsWrap() { return sbAutoRestartsWrap; }
@@ -51,13 +56,13 @@ public class SbServerStats {
 	public int getSbUnresponsiveWrap() { return sbUnresponsiveWrap; }
 	public int getSbUnresponsiveTemp() { return sbUnresponsiveTemp; }
 	
-	public void setSnOnlineTime() { snOnlineTime = DateTime(); }
-	public void setSbOnlineTime() { SbOnlineTime = DateTime(); }
-	public void setLastAutoRestart() { lastAutoRestart = DateTime(); }
+	public void setSnOnlineTime() { snOnlineTime = System.currentTimeMillis(); }
+	public void setSbOnlineTime() { sbOnlineTime = System.currentTimeMillis(); }
+	public void setLastAutoRestart() { lastAutoRestart = System.currentTimeMillis(); }
 	
 	public void addSbAutoRestarts() { sbAutoRestarts += 1; sbAutoRestartsWrap += 1; }
 	public void addSbCrashes() { sbCrashes += 1; sbCrashesWrap += 1; sbCrashesTemp += 1; }
 	public void addSbUnresponsive()	{ sbUnresponsive += 1; sbUnresponsiveWrap += 1; sbUnresponsiveTemp += 1; }
 	
-	public void resetTempStats() { sbCrashesTemp = 0; sbUnresponsiveTemp = 0; Date sbOnlineTime = new DateTime(); }
+	public void resetTempStats() { sbCrashesTemp = 0; sbUnresponsiveTemp = 0; sbOnlineTime = System.currentTimeMillis(); }
 }

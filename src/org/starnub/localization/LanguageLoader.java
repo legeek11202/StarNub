@@ -21,6 +21,10 @@ import org.starnub.util.timers.ConsoleInput_Timer;
 public class LanguageLoader {
 	
 	private static String language;
+	private static Properties prop = new Properties();
+	private static String filePath = "StarNub/Language.config";
+	private static InputStream languagInput;
+	private static FileOutputStream starLocalizationOutput;
 	
 	public LanguageLoader() 
 	{
@@ -35,73 +39,76 @@ public class LanguageLoader {
 	}
 	
 	private static void localConfig()
-	{
-		Properties prop = new Properties();
-		String filePath = "StarNub/Localization.config";
-		
+	{	
+		try 
+		{
+			languagInput = new FileInputStream(filePath);
 			try 
 			{
-				InputStream starLocalizationInput = new FileInputStream("StarNub/Language.config");
-				try 
-				{
-					prop.load(starLocalizationInput);
-					language = prop.getProperty("Language");
-					language = language.toLowerCase();
-				} 
-				catch (IOException e) 
-				{
-					e.printStackTrace();
-				}
-			}
-			catch (FileNotFoundException e) 
+				prop.load(languagInput);
+				String languagePre = prop.getProperty("Language");
+				language = languagePre.toLowerCase();
+			} 
+			catch (IOException e) 
 			{
-
-				FileOutputStream starLocalizationOutput = null;
-				MessageFormater.msgPrint("No language configured.", 0, 0);
-				String answerString = ConsoleInput_Timer.inputCall(""
-						+ "\n\n\n\nYou have 1 minutes to select your language. (Default English)"
-						+ "\nPlease type in the number and press 'Enter'."
-						+ "\n\nSupported Languages"
-						+ "\n==================="
-						+ "\n1. English"
-						+ "\n",60);
-				switch (answerString)
-				{
-					case "": language = "english"; break;
-					case "1": language = "english"; break;
-					default: 
-					{
-					MessageFormater.msgPrint("Error language selection.", 0, 0);
-					localConfig();
-					}
-				}
+				e.printStackTrace();
+			}
+		} 
+		catch (FileNotFoundException e1) 
+		{
+			langConfigCreator();
+		}
+	}
+		
+	private static void langConfigCreator()
+	{
+		MessageFormater.msgPrint("No language configured.", 0, 0);
+		String answerString = ConsoleInput_Timer.inputCall(""
+				+ "\n\n\n\nYou have 1 minutes to select your language. (Default English)"
+				+ "\nPlease type in the number and press 'Enter'."
+				+ "\n\nSupported Languages"
+				+ "\n==================="
+				+ "\n1. English"
+				+ "\n",60);
+		switch (answerString)
+		{
+			case "": language = "english"; break;
+			case "1": language = "english"; break;
+			default: 
+			{
+			MessageFormater.msgPrint("Error language selection.", 0, 0);
+			langConfigCreator();
+			}
+		}
+		try 
+		{
+			FileOutputStream languageOutput = new FileOutputStream(filePath);
+			prop.setProperty("Language", language);
+			prop.store(languageOutput, null);
+			MessageFormater.msgPrint("Language configured.", 0, 0);
+		}
+		catch (IOException io) 
+		{
+			MessageFormater.msgPrint("Language configuration creation error.", 0, 1);
+			io.printStackTrace();
+			langConfigCreator();
+		} 
+		finally 
+		{
+			if (starLocalizationOutput != null) 
+			{
 				try 
 				{
-					prop.setProperty("Language", language);
-					starLocalizationOutput = new FileOutputStream(filePath);
-					prop.store(starLocalizationOutput, null);
-					MessageFormater.msgPrint("Language configured.", 0, 0);
-				}
+					starLocalizationOutput.close();
+				} 
 				catch (IOException io) 
 				{
 					MessageFormater.msgPrint("Language configuration creation error.", 0, 1);
 					io.printStackTrace();
-				} 
-				finally 
-				{
-					if (starLocalizationOutput != null) 
-					{
-						try 
-						{
-							starLocalizationOutput.close();
-						} 
-						catch (IOException io) 
-						{
-							MessageFormater.msgPrint("Language configuration creation error.", 0, 1);
-							io.printStackTrace();
-						}
-					}	 
 				}
+
 			}
+		}
 	}
 }
+		

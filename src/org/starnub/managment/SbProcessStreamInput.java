@@ -94,10 +94,10 @@ public class SbProcessStreamInput implements Runnable {
 							MessageFormater.msgPrint(line.substring(6, line.length())+".", 1, 0);
 						} 
 						/* Prints when the Starbound SN_Server is ready to accept new connections */
-						else if (line.contains("TcpServer"))
-						{
-							MessageFormater.msgPrint(lang.getString("spsi")+" "+StarNub.configVariables.get("StarNub_Port")+".", 1, 0);
-						} 
+//						else if (line.contains("TcpServer"))
+//						{
+//							MessageFormater.msgPrint(lang.getString("spsi")+" "+StarNub.configVariables.get("StarNub_Port")+".", 1, 0);
+//						} 
 						else
 						{
 							/* 
