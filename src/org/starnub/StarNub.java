@@ -5,14 +5,14 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.joda.time.DateTime;
-import org.starnub.core.configuration.ConfigurationCheck;
-import org.starnub.core.localization.LanguageLoader;
-import org.starnub.core.managment.SbServerMonitor;
-import org.starnub.core.util.KeyListener;
-import org.starnub.core.util.stream.MessageFormater;
-import org.starnub.core.util.stream.MultiOutputStreamLogger;
-import org.starnub.core.util.timers.ThreadSleep;
-import org.starnub.full.network.ProxyServer;
+import org.starnub.configuration.ConfigurationCheck;
+import org.starnub.localization.LanguageLoader;
+import org.starnub.managment.SbServerMonitor;
+import org.starnub.network.ProxyServer;
+import org.starnub.util.KeyListener;
+import org.starnub.util.stream.MessageFormater;
+import org.starnub.util.stream.MultiOutputStreamLogger;
+import org.starnub.util.timers.ThreadSleep;
 
 /*
  * Represents the StarNub core.
@@ -26,12 +26,12 @@ public final class StarNub {
 	
 	public final class Debug 
 	{
-		public static final boolean ON = true; /* Poor Mans #ifdef */
+		public static final boolean ON = false; /* Poor Mans #ifdef */
 	} 
 	
-	public final class fullWrapper 
+	public final class DebugPartialWrapper 
 	{
-		public static final boolean ON = true; /* Turns on or off features */
+		public static final boolean ON = false; /* Turns on or off features */
 	} 
 	
 	/*  Debug Statements
@@ -63,7 +63,7 @@ public final class StarNub {
     	new MultiOutputStreamLogger().snLogger();
     	MessageFormater.msgPrint(language.getString("l"), 0, 0);
     	
-    	if  (StarNub.fullWrapper.ON) 
+    	if  (StarNub.DebugPartialWrapper.ON) 
     	{
         /* Plug-in Loader */
     		
