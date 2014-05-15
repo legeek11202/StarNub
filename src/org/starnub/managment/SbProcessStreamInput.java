@@ -26,7 +26,7 @@ public class SbProcessStreamInput implements Runnable {
 			String line;
 			BufferedReader input = new BufferedReader(new InputStreamReader(SbProcessManagment.getSbProcess().getInputStream()));
 	    	
-			if  (StarNub.DebugPartialWrapper.ON) /* Full wrapper, stream will not be used */
+			if  (StarNub.DebugFullWrapper.ON) /* Full wrapper, stream will not be used */
 	    	{
 				try 
 				{

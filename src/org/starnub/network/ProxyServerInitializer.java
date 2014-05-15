@@ -4,6 +4,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
 
+import org.starnub.network.handlers.PacketInspector;
 import org.starnub.network.handlers.ProxyFrontendHandler;
 
 public class ProxyServerInitializer extends ChannelInitializer<SocketChannel> {
@@ -24,7 +25,6 @@ public class ProxyServerInitializer extends ChannelInitializer<SocketChannel> {
     	/* This handler will handle data coming from a Starbound Client into the Proxy
     	 * when the data is received this Handler will open a channel to the Starbound 
     	 * Server. This handler is the last handler in this channel */
-    	ch.pipeline().addFirst(new IdleStateHandler(5, 5, 0));
-    	ch.pipeline().addLast(new ProxyFrontendHandler(sbRemoteHost, sbRemotePort));
+    	ch.pipeline().addFirst("PacketInspector", new PacketInspector(sbRemoteHost, sbRemotePort));
     }
 }

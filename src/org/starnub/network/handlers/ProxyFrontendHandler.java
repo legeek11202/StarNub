@@ -1,6 +1,13 @@
 package org.starnub.network.handlers;
 
+import java.net.SocketAddress;
+
+import org.starnub.StarNub;
+import org.starnub.network.ProxyServer;
+import org.starnub.network.packets.PacketData.KnownPackets;
+
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -20,10 +27,34 @@ public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter  {
         this.sbRemotePort = remotePort;
     }
 	
+    /* Channel Start */
+    @Override
+    public void handlerAdded(ChannelHandlerContext ctx)throws Exception 
+    {
+    	
+    }
+
+
     /* Transmission */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception 
     {
+    	
+    	// Working code
+//    	while (!clientconnect){ /*Psuedo */read byte buffer apcket id, set clientconnect }/* Wait for client connect packet */
+//    		while (!notchecked) /* Incase the player changes IP */
+//    		{ 	
+//    			for(InetAddresses ip : bannedIPs) 
+//    				if (connectingIP == ip)
+//    				{
+//    					ctx.close()
+//    				}
+//    				else
+//    				{
+//    					break;
+//    				}}
+    	
+    	
     	/* Get this channels contexts for later use so that we can tie the 
     	 * StarNub Client Connector into the same thread*/
     	final Channel inboundChannel = ctx.channel();
@@ -76,12 +107,12 @@ public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter  {
         	});
 	}
     
-    /* Receiving Data */
+	 /* Receiving Data */
 	@Override
 	public void channelRead(final ChannelHandlerContext ctx, Object msg) throws Exception 
 	{
 		if (outboundChannel.isActive()) 
-		{
+		{	
 			outboundChannel.writeAndFlush(msg).addListener(new ChannelFutureListener() 
 			{
 				@Override
@@ -89,7 +120,7 @@ public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter  {
 				{
 					if (future.isSuccess()) 
 					{
-						/* was able to flush out data, start to read the next chunk */
+						/* Was able to flush out data, start to read the next chunk */
 						ctx.channel().read();
 					} 
 					else 

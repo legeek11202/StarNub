@@ -1,6 +1,8 @@
 package org.starnub.network.packets;
 
-public enum KnownPackets {
+public class PacketData {
+
+	public enum KnownPackets {
 	
         ProtocolVersion(0),
         ConnectionResponse(1),
@@ -61,4 +63,6 @@ public enum KnownPackets {
     	public int getKnownPackets() {
     	   return KnownPackets;
     	 }
+    	
+	}
 }

@@ -1,22 +1,23 @@
-Updated: 09MAY14
+Updated: 14MAY14
 Features Addition:
-Proper proxy Connection closing - Idle State
-monitor variables + auto restart, simplify
-Stat's Tracking (Process Crashes, Unresponsive, Wrapper Uptime, Uptime since last restart, Last restart)
----STABLE RELEASE HERE---
+-Fix Idle State Connections
+-PacketInspector (Inspects IP & UUID checks for bans / Checks for invalid packets)
+-If IPban bypass, and UUID ban found, Ban new IP.
+---STABLE RELEASE AFTER ABOVE---
+
+Features:
 Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
 Localization flexibility and plug-in Localization option
+Modify language language configuration to use main configuration
 
-Packet Classes
-Netty Handlers - Client ID and Client Class
+Packet Classes/Netty Handlers - Client ID and Client Class
 
-
+(Possible Features)
+Performance Monitoring Option
+Remote Console/Web Interface
 
 Fixes:
-Language resource is being created twice makes two instances
-Proxy half open connections
-Log rotation at midnight of local time
-
+Language resource is being created twice makes two instances (Verify)
 
 Debug Additions:
 Benchmark - Process Time and Proxy Bandwidth
@@ -29,19 +30,19 @@ Language
 
 
 My Stuff:
-ByteBufferProcessor video 29.00 important for searching byte buffer
+video 29.00 ByteBufferProcessor important for searching byte buffer
 alloc() over unpooled buffer
 slice() or duplicate() over copy
-bulkoperation over loops
+bulk operation over loops
 
-44.00 write and write flush multiple operations make runnable
+video 44.00 write and write flush multiple operations make runnable
 channel.eventLoop().execute(new Runnable(){..}
 
-48.00 remove handlers
+video 48.00 remove handlers
  
  
+Performance Monitor + recording tp database for evaluations
 long start = System.currentTimeMillis ();
 method ();
 long end = System.currentTimeMillis ();
-System.out.println (“Time taken for execution is ” + (end – start));
-
+System.out.println (ï¿½Time taken for execution is ï¿½ + (end ï¿½ start));

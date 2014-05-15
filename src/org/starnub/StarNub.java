@@ -26,12 +26,17 @@ public final class StarNub {
 	
 	public final class Debug 
 	{
-		public static final boolean ON = false; /* Poor Mans #ifdef */
+		public static final boolean ON = true; /* Poor Mans #ifdef */
 	} 
 	
-	public final class DebugPartialWrapper 
+	public final class NetworkDebug 
 	{
-		public static final boolean ON = false; /* Turns on or off features */
+		public static final boolean ON = true; /* Poor Mans #ifdef */
+	} 
+	
+	public final class DebugFullWrapper 
+	{
+		public static final boolean ON = true; /* Turns on or off features */
 	} 
 	
 	/*  Debug Statements
@@ -63,7 +68,7 @@ public final class StarNub {
     	new MultiOutputStreamLogger().snLogger();
     	MessageFormater.msgPrint(language.getString("l"), 0, 0);
     	
-    	if  (StarNub.DebugPartialWrapper.ON) 
+    	if  (StarNub.DebugFullWrapper.ON) 
     	{
         /* Plug-in Loader */
     		

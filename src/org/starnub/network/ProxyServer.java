@@ -1,19 +1,27 @@
 package org.starnub.network;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 import org.starnub.StarNub;
+import org.starnub.network.packets.PacketData;
+import org.starnub.network.packets.PacketData.KnownPackets;
 
 /*
  * TODO: Information																		
  * 
  */
 
+
 public class ProxyServer implements Runnable {
 
+		public static KnownPackets[] packetType = KnownPackets.values();
+		
 		public void run()
 	    {
 
