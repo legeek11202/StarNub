@@ -36,7 +36,7 @@ public class SbProcessManagment {
 			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Building SB Server ProcessBuild.");}
 			ProcessBuilder sbProcessBuild = new ProcessBuilder(GetFilePath.getFilePath());
 			sbProcessBuild.redirectErrorStream(true);
-			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Setting SB Server Process.");}
+			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Setting up SB Server Process.");}
 			sbProcess = sbProcessBuild.start();
 			Runnable sb_StreamInput = new SbProcessStreamInput();
 			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Running SB Server Process.");}

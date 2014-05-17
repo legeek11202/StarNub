@@ -26,7 +26,7 @@ public class SbServerMonitor implements Runnable {
 	private static final int autoRestartTime = StarNub.configVariables.get("Auto_Restart_Timer"); /* Auto restart timer in hours */
 	private static int snPort = StarNub.configVariables.get("StarNub_Port");		
 	public static SbServerStats s = new SbServerStats();
-
+	
 	public SbServerMonitor() 
 	{
 	}
@@ -42,12 +42,12 @@ public class SbServerMonitor implements Runnable {
 		
 		s.resetTempStats(); /* Refresh Temporary Stat's */
 		processStartup();
-		/* Create a restart time stamp (Hours = Restart config variable (((Hours * Minutes)*Seconds)*Milliseconds) ) */
+		/* Create a restart time stamp (Hours = Restart configuration variable (((Hours * Minutes)*Seconds)*Milliseconds) ) */
 		long futureAutoRestartTime = s.getSbOnlineTime()+(((autoRestartTime*60)*60)*1000);
 
 		do 
 		{
-			if (StarNub.Debug.ON){System.out.println("Debug: Server Monitor: Server Check. SB uptime in milliseconds "+s.getSbUptime());}
+			if (StarNub.Debug.ON){System.out.println("Debug: Server Monitor: Server Check. SB uptime in milliseconds "+s.getSbUptime()+".");}
 			switch (statusChecker())
 			{
 			case "statusOk" : new ThreadSleep().timer(20); break;
@@ -56,7 +56,7 @@ public class SbServerMonitor implements Runnable {
 			}			
 			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Repeating Monitoring Loop.");}
 		} 
-		while (System.currentTimeMillis() <= futureAutoRestartTime); //TODO Need to calculate current uptime on cycle.
+		while (System.currentTimeMillis() <= futureAutoRestartTime); //TODO Need to calculate current up time on cycle.
 		if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Auto Restarting Server.");}
 		s.addSbAutoRestarts(); /* Decrement auto restart counter */
 		MessageFormater.msgPrint(lang.getString("ssmar1")+" "+autoRestartTime+" "+lang.getString("ssmar2"), 0, 0);

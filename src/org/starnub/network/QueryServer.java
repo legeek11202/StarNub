@@ -1,8 +1,12 @@
 package org.starnub.network;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -44,7 +48,43 @@ public class QueryServer {
         		snTxQuerySb /* Configuring the Bootstrap */
         		.group(queryGroup) /* Any channels Spawned will use this thread pool */				
         		.channel(NioSocketChannel.class) /* Creates a channel Instance */
-        		.handler(new QueryInitializer()); /* Handler to work with channel events */			
+        		.handler(new ChannelInitializer<Channel> ()
+        		{ 
+        				/* We use an initializer to set up any handlers for this channel */
+        				@Override
+        				public void initChannel(Channel ch) throws Exception 
+        				{
+        					/* Handler for future use with packets and connection assurance */
+        					ch.pipeline().addLast(new ChannelInboundHandlerAdapter()
+        					{
+        						/* Receiving */
+        						@Override
+        						public void channelRead(final ChannelHandlerContext ctx, Object msg) throws Exception 
+        						{
+        							Object serverVersion = StarNub.serverVersion;
+        							if (serverVersion == null)
+        							{
+        							StarNub.serverVersion = msg;
+        							if (StarNub.Debug.ON) {System.out.println("Debug: Server Query: Server Check. Status: Responsive");}
+            						status = true; /* If connection is made server is responsive */
+            						if (StarNub.Debug.ON) {System.out.println("Debug: Server Query: Server Check. Status: Responsive"+status);}
+        							}
+        						}  
+        						/* When receiving is complete */
+        					    @Override
+        					    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception 
+        					    {
+            						ctx.close(); /* Closing Connection */
+        						}	
+        						@Override
+        						public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception 
+        						{
+        							/* Do nothing */
+        					    }
+        					});
+        			    }
+        		});	
+       
         		try 
         		{
         			ChannelFuture f = snTxQuerySb.connect(sbRemoteHost, sbRemotePort).sync();
@@ -55,9 +95,7 @@ public class QueryServer {
         				{
         					if (future.isSuccess()) 
         					{
-        						if (StarNub.Debug.ON) {System.out.println("Debug: Server Query: Server Check. Status: Responsive");}
-        						status = true; /* If connection is made server is responsive */
-        						f.channel().close(); /* Closing Connection */
+        						if (StarNub.Debug.ON) {System.out.println("Debug: Server Query: Server Check. Status: 3 Way Handshake Complete");}
         					} 
         					else 
         					{
@@ -68,7 +106,6 @@ public class QueryServer {
         				}
         			});
         			f.channel().closeFuture().sync();	
-			
         		}
         		catch (Exception e) 
         		{

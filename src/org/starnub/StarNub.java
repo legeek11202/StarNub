@@ -24,30 +24,41 @@ public final class StarNub {
 	{
     }
 	
+	//     Debugging Classes Start    //
 	public final class Debug 
 	{
-		public static final boolean ON = true; /* Poor Mans #ifdef */
-	} 
-	
-	public final class NetworkDebug 
-	{
-		public static final boolean ON = true; /* Poor Mans #ifdef */
+		public static final boolean ON = true; /* Messages Toggle */
 	} 
 	
 	public final class DebugFullWrapper 
 	{
-		public static final boolean ON = true; /* Turns on or off features */
+		public static final boolean ON = true; /* Proxy Toggle */
 	} 
 	
 	/*  Debug Statements
 	 *  if (Debug.ON) {System.out.println("Debug: ");}
 	 *  if (StarNub.Debug.ON) {System.out.println("Debug: ");}
 	 */
+	//  Debugging Classes End     //
+	
+	/* Since arrays are faster we will keep the bans in arrays */
+	/* Arrays will be updated upon /banned or /unbanned commands */
+	public static void setBannedIps ()
+	{
+//		bannedIps =;
+	}
+	
+	public static void setBannedUuids ()
+	{
+//		bannedUuids =;
+	}
 	
 	public static ResourceBundle language = LanguageLoader.getResources(); 
 	public static Map<String, Integer> configVariables = new HashMap<String, Integer>();
+	public static Object serverVersion;
 	public static Map<String, String> playersOnline = new HashMap<String, String>();
-	public static Map<String, String> bannedPlayers = new HashMap<String, String>();
+	public static String[] bannedIps;
+	public static String[] bannedUuids;
 	
     public static void main(String [] args)
 	{

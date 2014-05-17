@@ -1,6 +1,5 @@
 Updated: 14MAY14
 Features Addition:
--Fix Idle State Connections
 -PacketInspector (Inspects IP & UUID checks for bans / Checks for invalid packets)
 -If IPban bypass, and UUID ban found, Ban new IP.
 ---STABLE RELEASE AFTER ABOVE---
