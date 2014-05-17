@@ -10,7 +10,7 @@ import org.starnub.util.stream.MessageFormater;
  * This class manages the starbound configuration.
  *
  * @author Daniel Merwin(Underbalanced)
- * @version 1
+ * @version 1.0, 17 May 2014 (Incomplete)
  *              
  */
 

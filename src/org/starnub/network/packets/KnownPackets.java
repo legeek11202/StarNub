@@ -1,6 +1,21 @@
 package org.starnub.network.packets;
 
-	public enum KnownPackets {
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * KnownPackets Enumerator
+ * <p>
+ * Credit goes to:
+ * <br>
+ * Starbound-Dev - (http://starbound-dev.org/)
+ * 
+ * @author Daniel (Underbalanced) (StarNub.org)
+ * @version 1.0, 17 May 2014 (Incomplete)
+ * 
+ */
+
+public enum KnownPackets {
 	
         ProtocolVersion(0),
         ConnectionResponse(1),

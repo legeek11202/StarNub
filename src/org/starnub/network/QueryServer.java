@@ -16,16 +16,15 @@ import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.timers.ThreadSleep;
 
 /**
- * This class will start a client conenction to the Starbound server and get a
+ * This class will start a client connection to the Starbound server and get a
  * handshake which results in the server sending a Protocol Packet in which we
  * will capture for later use.
  * <p>
- * Credit to Netty.io (Asynchronous API) examples.
+ * Credit goes to Netty.io (Asynchronous API) examples.
  * <p>
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1
- * 
+ * @version 1.0, 17 May 2014 (Incomplete)
  */
 
 public class QueryServer {
@@ -59,10 +58,7 @@ public class QueryServer {
 				/* Client Bootstrap */
 				Bootstrap snTxQuerySb = new Bootstrap();
 				snTxQuerySb /* Configuring the Bootstrap */
-				.group(queryGroup) /*
-									 * Any channels Spawned will use this thread
-									 * pool
-									 */
+				.group(queryGroup)
 				.channel(NioSocketChannel.class) /* Creates a channel Instance */
 				.handler(new ChannelInitializer<Channel>() {
 					/* Initializer to set up handlers for this channel */
@@ -84,14 +80,9 @@ public class QueryServer {
 											StarNub.serverVersion = msg;
 											if (StarNub.Debug.ON)
 											{
-												System.out
-														.println("Debug: Server Query: Server Check. Status: Responsive.");
+												System.out.println("Debug: Server Query: Server Check. Status: Responsive.");
 											}
-											status = true; /*
-															 * If connection is
-															 * made server is
-															 * responsive
-															 */
+											status = true; 
 										}
 									}
 
@@ -101,7 +92,7 @@ public class QueryServer {
 											ChannelHandlerContext ctx)
 											throws Exception
 									{
-										ctx.close(); /* Closing Connection */
+										ctx.close();
 									}
 
 									@Override
@@ -128,8 +119,7 @@ public class QueryServer {
 							{
 								if (StarNub.Debug.ON)
 								{
-									System.out
-											.println("Debug: Server Query: Server Check. Status: 3 Way Handshake Complete.");
+									System.out.println("Debug: Server Query: Server Check. Status: 3 Way Handshake Complete.");
 								}
 							} else
 							{
@@ -137,15 +127,11 @@ public class QueryServer {
 								{
 									if (StarNub.Debug.ON)
 									{
-										System.out
-												.println("Debug: Server Query: Server Check. Status: Unresponsive");
+										System.out.println("Debug: Server Query: Server Check. Status: Unresponsive");
 									}
 								}
-								status = false; /*
-												 * Connection not made server is
-												 * not responsive
-												 */
-								f.channel().close(); /* Closing Connection */
+								status = false; 
+								f.channel().close(); 
 							}
 						}
 					});
@@ -156,14 +142,10 @@ public class QueryServer {
 					{
 						if (StarNub.Debug.ON)
 						{
-							System.out
-									.println("Debug: Server Query: Server Check. Status: Unresponsive.");
+							System.out.println("Debug: Server Query: Server Check. Status: Unresponsive.");
 						}
 					}
-					status = false; /*
-									 * Connection not made server is not
-									 * responsive
-									 */
+					status = false; 
 				}
 			} finally
 			{
@@ -177,8 +159,7 @@ public class QueryServer {
 					txAttemps += 1; /* Decrement tries */
 					new ThreadSleep().timer(10); /* Wait until retry */
 					MessageFormater.msgPrint(
-							StarNub.language.getString("sb.q.1") + " ("
-									+ txAttemps + "/12).", 0, 1);
+							StarNub.language.getString("sb.q.1") + " ("+ txAttemps + "/12).", 0, 1);
 				} else if (type == 2) /* Server coming online */
 				{
 					new ThreadSleep().timer(5); /* Shorter wait due to nature */

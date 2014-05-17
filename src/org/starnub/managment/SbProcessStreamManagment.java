@@ -14,7 +14,7 @@ import org.starnub.util.stream.MessageFormater;
  * just discard the stream as we make our own from the network stack.
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1 (Incomplete)
+ * @version 1.0, 17 May 2014 (Incomplete)
  * 
  */
 

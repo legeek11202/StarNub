@@ -8,8 +8,9 @@ import java.util.TimerTask;
 
 /**
  * Coming Soon.
+ * 
  * @author Daniel Merwin(Underbalanced)
- * @version 1
+ * @version 1.0, 17 May 2014 (Incomplete)
  *              
  */
 

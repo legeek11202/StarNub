@@ -12,14 +12,14 @@ import org.starnub.StarNub;
  * NioEventLoopGroup specifies a specific amount of threads. The default amount
  * of threads are (CPUs * 2).
  * <p>
- * Credit to Netty.io (Asynchronous API) examples.
+ * Credit goes to Netty.io (Asynchronous API) examples.
  * <p>
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1
- *          <p>
- *          v2 Will support UDP pass through
- * 
+ * @version 1.0, 17 May 2014
+ *          <br>
+ *          TODO: Will support UDP pass through
+ *
  */
 
 public class ProxyServer implements Runnable {

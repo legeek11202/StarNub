@@ -7,7 +7,7 @@ import org.starnub.util.os.GetFilePath;
  * This class will create and manage the Starbound_Server Process.
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1
+ * @version 1.0, 17 May 2014 (Incomplete)
  * 
  */
 

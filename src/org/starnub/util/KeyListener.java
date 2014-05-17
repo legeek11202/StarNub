@@ -8,12 +8,11 @@ import org.starnub.managment.SbProcessManagment;
  * This class will wait for input.
  * <p>
  * Input:
- * <p>
+ * <br>
  * 1 - Terminates the Server Wrapper and Server.
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1
- * 
+ * @version 1.0, 17 May 2014
  */
 
 public class KeyListener implements Runnable {

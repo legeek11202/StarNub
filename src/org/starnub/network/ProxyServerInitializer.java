@@ -11,12 +11,11 @@ import org.starnub.network.handlers.Frontend;
 /**
  * This class initializes the initial channel handlers.
  * <p>
- * Credit to Netty.io (Asynchronous API) examples.
+ * Credit goes to Netty.io (Asynchronous API) examples.
  * <p>
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1 (Incomplete)
- * 
+ * @version 1.0, 17 May 2014 (Incomplete)
  */
 
 public class ProxyServerInitializer extends ChannelInitializer<SocketChannel> {
