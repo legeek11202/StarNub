@@ -12,6 +12,8 @@ public class SbServerStats {
 	private static int sbAutoRestarts = 0;
 	private static int sbCrashes = 0;
 	private static int sbUnresponsive = 0;
+	//TODO Player joins
+	//TODO Unique players seen
 	
 	/* Since Wrapper Start */
 	private static int sbAutoRestartsWrap = 0;

@@ -25,7 +25,7 @@ Current Features
 	- No need to change your Starbound configuration port number (We do that for you, We do not change it back though!)
 - Server Monitor (Checks every 20 seconds)
 	- Checks the Starbound Server process every 15 seconds. (Restarts on Server crashes)
-	- Checks the Starbound Server for a response via (TCP)(Restarts on Server lockups)
+	- Checks the Starbound Server for a response via (TCP) (Restarts on Server lockups)
 	- Auto Re-starter (Configurable)
 - Clean console output. Only see player connects, disconnects and joins.
 - Localization (Wiki how to coming later)

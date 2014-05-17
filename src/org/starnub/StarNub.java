@@ -1,5 +1,9 @@
 package org.starnub;
 
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.util.concurrent.GlobalEventExecutor;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -43,20 +47,12 @@ public final class StarNub {
 	
 	/* Since arrays are faster we will keep the bans in arrays */
 	/* Arrays will be updated upon /banned or /unbanned commands */
-	public static void setBannedIps ()
-	{
-//		bannedIps =;
-	}
-	
-	public static void setBannedUuids ()
-	{
-//		bannedUuids =;
-	}
 	
 	public static ResourceBundle language = LanguageLoader.getResources(); 
 	public static Map<String, Integer> configVariables = new HashMap<String, Integer>();
 	public static Object serverVersion;
 	public static Map<String, String> playersOnline = new HashMap<String, String>();
+	public static final ChannelGroup clientChannels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 	public static String[] bannedIps;
 	public static String[] bannedUuids;
 	
@@ -112,6 +108,11 @@ public final class StarNub {
 			while (loggerRefresh == new DateTime().getDayOfMonth())
 			{
 				new ThreadSleep().timer(5);
+				/* Place POST data processing methods here */
+				/*
+				 * Post processing of player data and math for stat's
+				 * 
+				 */
 			}
 			new MultiOutputStreamLogger().snLogger();
 			loggerRefresh = new DateTime().getDayOfMonth();

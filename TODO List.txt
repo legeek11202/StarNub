@@ -1,10 +1,11 @@
 Updated: 14MAY14
 Features Addition:
--PacketInspector (Inspects IP & UUID checks for bans / Checks for invalid packets)
+-Connection (Inspects IP & UUID checks for bans / Checks for invalid packets)
 -If IPban bypass, and UUID ban found, Ban new IP.
 ---STABLE RELEASE AFTER ABOVE---
 
 Features:
+SQLLite for player, uuid, ip and ban storage
 Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
 Localization flexibility and plug-in Localization option
 Modify language language configuration to use main configuration

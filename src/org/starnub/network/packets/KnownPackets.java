@@ -1,7 +1,5 @@
 package org.starnub.network.packets;
 
-public class PacketData {
-
 	public enum KnownPackets {
 	
         ProtocolVersion(0),
@@ -65,4 +63,4 @@ public class PacketData {
     	 }
     	
 	}
-}
+

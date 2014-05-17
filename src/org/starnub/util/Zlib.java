@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 
+import org.starnub.StarNub;
+
 public class Zlib
 {
 	
@@ -26,11 +28,12 @@ public class Zlib
 			}
 			catch (DataFormatException e)
 			{
+				if (StarNub.Debug.ON) {System.out.println("Debug: Zlib Deflator: Error deflating.");}
+				e.printStackTrace();
+				break;
 			}
 		}
-
 		bos.close();
-		
 		return bos.toByteArray();
 		
 	}

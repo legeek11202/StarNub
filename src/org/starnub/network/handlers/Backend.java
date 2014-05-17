@@ -7,11 +7,11 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class ProxyBackendHandler extends ChannelInboundHandlerAdapter  {
+public class Backend extends ChannelInboundHandlerAdapter  {
 
 	private final Channel inboundChannel;
 
-	public ProxyBackendHandler(Channel inboundChannel) 
+	public Backend(Channel inboundChannel) 
 	{
 		this.inboundChannel = inboundChannel;
 	}
@@ -46,14 +46,14 @@ public class ProxyBackendHandler extends ChannelInboundHandlerAdapter  {
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception 
 	{
-		ProxyFrontendHandler.closeOnFlush(inboundChannel);
+		Frontend.closeOnFlush(inboundChannel);
 	}
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception 
 	{
 		cause.printStackTrace();
-		ProxyFrontendHandler.closeOnFlush(ctx.channel());
+		Frontend.closeOnFlush(ctx.channel());
 	}
 	
 }

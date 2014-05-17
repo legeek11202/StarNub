@@ -3,73 +3,120 @@ package org.starnub.managment;
 import org.starnub.StarNub;
 import org.starnub.util.os.GetFilePath;
 
-/*
-* This class's methods manages the Starbound SN_Server as a subprocess
-* to the StarNub wrapper.
-* 
-* - Returns the process for other classes to use
-* - Run the Starbound_Server.exe as a subprocess
-* - Destroy the Starbound_Server.exe
-* - Restarts the Starbound_Server.exe
-* - Checks the status of the Starbound SN_Server Subprocess 
-* 
-* These methods will return a boolean or nothing.
-**/
+/**
+ * This class will create and manage the Starbound_Server Process.
+ * 
+ * @author Daniel (Underbalanced) (StarNub.org)
+ * @version 1
+ * 
+ */
 
 public class SbProcessManagment {
-	
-	private static Process sbProcess;
-	
-    public SbProcessManagment() 
-    {
-    }
-	
-	public static Process getSbProcess() 
-	{ 
-		return sbProcess; 
+
+	private static Process	sbProcess;
+
+	public SbProcessManagment()
+	{
 	}
-	
-	public static void sb_ProcessStart() 
+
+	/**
+	 * This method will return a file path based on the OS Version and Bit
+	 * Version.
+	 * 
+	 * @return A Process that represents the Starbound Server Subprocess of this
+	 *         Java VM.
+	 * 
+	 */
+
+	public static Process getSbProcess()
 	{
-		try 
+		return sbProcess;
+	}
+
+	/**
+	 * This method will build and start the Starbound Process and Starbound
+	 * Stream Managers.
+	 */
+
+	public static void sb_ProcessStart()
+	{
+		try
 		{
-			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Building SB Server ProcessBuild.");}
-			ProcessBuilder sbProcessBuild = new ProcessBuilder(GetFilePath.getFilePath());
+			if (StarNub.Debug.ON)
+			{
+				System.out
+						.println("Debug: Process Managment: Building SB Server ProcessBuild.");
+			}
+			ProcessBuilder sbProcessBuild = new ProcessBuilder(
+					GetFilePath.getFilePath());
 			sbProcessBuild.redirectErrorStream(true);
-			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Setting up SB Server Process.");}
+			if (StarNub.Debug.ON)
+			{
+				System.out
+						.println("Debug: Process Managment: Setting up SB Server Process.");
+			}
 			sbProcess = sbProcessBuild.start();
-			Runnable sb_StreamInput = new SbProcessStreamInput();
-			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Running SB Server Process.");}
+			Runnable sb_StreamInput = new SbProcessStreamManagment();
+			if (StarNub.Debug.ON)
+			{
+				System.out
+						.println("Debug: Process Managment: Running SB Server Process.");
+			}
 			new Thread(sb_StreamInput).start();
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}	
-	}  
-	
-	public static void sb_ProcessKill () 
-	{
-		try 
-		{
-			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Destroying SB Server Process.");}
-			sbProcess.destroy();
-			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: SB Server Process Destroyed.");}
-		} 
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
-	public static boolean sb_ProcessStatus ()
+
+	/**
+	 * This method will kill the running Starbound Server Subprocess within this
+	 * Java VM.
+	 */
+
+	public static void sb_ProcessKill()
 	{
-		try 
+		try
 		{
-			if (StarNub.Debug.ON) {System.out.println("Debug: Process Managment: Checking if SB Server Process is alive.");}
+			if (StarNub.Debug.ON)
+			{
+				System.out
+						.println("Debug: Process Managment: Destroying SB Server Process.");
+			}
+			sbProcess.destroy();
+			if (StarNub.Debug.ON)
+			{
+				System.out
+						.println("Debug: Process Managment: SB Server Process Destroyed.");
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * This method will return a boolean whether the Starbound Server Subprocess
+	 * is still alive.
+	 * 
+	 * @return <p>
+	 *         True - Alive
+	 *         <p>
+	 *         False - No process
+	 * 
+	 */
+
+	public static boolean sb_ProcessStatus()
+	{
+		try
+		{
+			if (StarNub.Debug.ON)
+			{
+				System.out
+						.println("Debug: Process Managment: Checking if SB Server Process is alive.");
+			}
 			return sbProcess.isAlive();
-		} 
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			return false;
 		}

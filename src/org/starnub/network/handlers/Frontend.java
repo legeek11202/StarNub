@@ -4,7 +4,6 @@ import java.net.SocketAddress;
 
 import org.starnub.StarNub;
 import org.starnub.network.ProxyServer;
-import org.starnub.network.packets.PacketData.KnownPackets;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -15,48 +14,30 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter  {
+public class Frontend extends ChannelInboundHandlerAdapter  {
     
     private final String sbRemoteHost;
     private final int sbRemotePort;
     private volatile Channel outboundChannel;
     
-    public ProxyFrontendHandler(String remoteHost, int remotePort) 
+    public Frontend(String remoteHost, int remotePort) 
     {
         this.sbRemoteHost = remoteHost;
         this.sbRemotePort = remotePort;
     }
 	
-    /* Channel Start */
+    /* Executes once when handler is added */
     @Override
     public void handlerAdded(ChannelHandlerContext ctx)throws Exception 
     {
-    	
     }
-
-
-    /* Transmission */
+  
+    /* Executes once when channel becomes active */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception 
     {
-    	
-    	// Working code
-//    	while (!clientconnect){ /*Psuedo */read byte buffer apcket id, set clientconnect }/* Wait for client connect packet */
-//    		while (!notchecked) /* Incase the player changes IP */
-//    		{ 	
-//    			for(InetAddresses ip : bannedIPs) 
-//    				if (connectingIP == ip)
-//    				{
-//    					ctx.close()
-//    				}
-//    				else
-//    				{
-//    					break;
-//    				}}
-    	
-    	
     	/* Get this channels contexts for later use so that we can tie the 
-    	 * StarNub Client Connector into the same thread*/
+    	 * StarNub Client Connector into the same event loop*/
     	final Channel inboundChannel = ctx.channel();
     	
     	/* We are setting up a client Bootstrap. This will be used to 
@@ -81,7 +62,7 @@ public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter  {
         	 * receive data from Starbound Server and forward it back on to 
         	 * the Starbound Client.
         	 * */
-        	.handler(new ProxyBackendHandler(inboundChannel));
+        	.handler(new Backend(inboundChannel));
         
         	/* This channel future is setting up a response to a event that has 
         	 * not happened yet. When the channel connects then the 
@@ -96,6 +77,11 @@ public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter  {
         			if (future.isSuccess()) 
         			{
         				/* If StarNub connects to the Starbound Server this will execute */
+        				if (StarNub.Debug.ON) {System.out.println("Debug: Frontend: Connected to Starbound Server.");}
+        				/* We want to add this channel to the Global list */
+        				StarNub.clientChannels.add(ctx.channel());
+        				if (StarNub.Debug.ON) {System.out.println("Debug: Frontend: Player joined current channels"+StarNub.clientChannels);}
+        				/* Start Processing Data */
         				inboundChannel.read();
         			} 
         			else 
@@ -107,7 +93,7 @@ public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter  {
         	});
 	}
     
-	 /* Receiving Data */
+	/* Receiving Data */
 	@Override
 	public void channelRead(final ChannelHandlerContext ctx, Object msg) throws Exception 
 	{
@@ -138,6 +124,12 @@ public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter  {
     {
     	if (outboundChannel != null) 
     	{
+    		/* Removing this channel from the Global List */
+    		StarNub.clientChannels.remove(ctx.channel());
+    		if (StarNub.Debug.ON) {System.out.println("Debug: Frontend: Player quit current channels"+StarNub.clientChannels);}
+    		/* Remove player from the Global Player list */ // TODO Complete player removal from list
+//    		String remoteIp = ctx.channel().remoteAddress().toString();
+//    		String connectingIp = remoteIp.substring(1,remoteIp.lastIndexOf(":"));
     		closeOnFlush(outboundChannel);
     	}
 	}
