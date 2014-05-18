@@ -37,21 +37,48 @@ Current Features
 Planned Features
 ================
 Milestone:
-- Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
-- StarNub API
+- Network Functionality
+	-Players connecting have IP and UUID checked for a ban.
+		- If player IP is changed to avoid a ban, but the UUID is banned, we will ban the new IP for you and let you know we did in console and logs.
+		- Invalid packets will be dropped, and after X bad packets we will drop the connection
+			- If they try to connect and send bad packets after a few disconnects, we will ban the IP for you and let you know we did in console and logs.
+	- Statistics: 
+		- Unique Connections
+		- Player Online Last
+		- Player Play Time
 
 Milestone:
-- Packet Classes
-	
+Various statistics information
+Information Processing and Storage Methods (SQLite)
+
+Milestone:
+- Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
+- StarNub API
+- Documentation
+		
+Milestone:
+SQL Option over SQLite (Needs a class to auto migrate)
+
 Milestone:
 - Localization Flexibility (For plug-ins and ability to load from StarNub directory and merge of language files in case a language file is not updated, program will default to english for that string)
+- Wiki Update
+
+Milestone:
+- Code refinement
 	
 Milestone:
-- Remote & Local Console Administration Client (To be determined)
+(iPhone and Android Application) 
+(To be determined, further away time wise, will probably cooperative project with Mitch528)
+- Regular Users
+	- Can chat in-game
+	- Access Server Statistics
+	- Access Online Player List
+	
+- Administrators and Moderators can administer servers without being in game 
 	- Start, Stop, Restart Server
-	- Player / IP List 
-	- IP Banning (With Full Wrapper)
-	- Server Stat's (Restarts Data (AutoRestart Count, Unresponsive and Crashes)
+	- Access Online Player List + IP List 
+	- Access Server Statistics
+	- Ban, kick and mute players.
 	
 Installation
 ============
