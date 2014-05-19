@@ -65,7 +65,8 @@ Milestone:
 
 Milestone:
 - Code refinement
-	
+- auto updater
+
 Milestone:
 (iPhone and Android Application) 
 (To be determined, further away time wise, will probably cooperative project with Mitch528)

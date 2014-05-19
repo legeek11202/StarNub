@@ -28,7 +28,7 @@ public class KeyListener implements Runnable {
 		Scanner sc = new Scanner(System.in);
 		int i = sc.nextInt();
 		System.out.println(i);
-
+		//TODO Graceful Exit and miss type corrector
 		if (i == 1)
 		{
 			/* Exit program (Not Graceful) */

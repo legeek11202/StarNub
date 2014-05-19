@@ -1,16 +1,16 @@
 package org.starnub.network.handlers;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.ByteToMessageDecoder;
+import io.netty.handler.codec.compression.ZlibDecoder;
+
 import java.util.List;
 
 import org.starnub.StarNub;
 import org.starnub.datatypes.VLQ;
 import org.starnub.network.StarboundStream;
 import org.starnub.util.Zlib;
-
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.ByteToMessageDecoder;
-import io.netty.handler.codec.compression.ZlibDecoder;
 
 public class PacketDecoder extends ByteToMessageDecoder
 {
@@ -34,47 +34,52 @@ public class PacketDecoder extends ByteToMessageDecoder
 		
 		StarboundStream stream = new StarboundStream(bb);
 		
+		if (StarNub.Debug.ON) { System.out.println("Readable Bytes in ByteBuf: "+stream.getBuf().readableBytes()); }
+		
 		byte packetId = stream.getBuf().readByte();/* Reader has moved*/
+		
+		if (StarNub.Debug.ON) { System.out.println("Readable Bytes in ByteBuf: "+stream.getBuf().readableBytes()); }
 		
 		VLQ vlq = stream.readSignedVLQ();
 		
-		int len;
-		
-		len = vlq.getLength() + 1;
+		if (StarNub.Debug.ON) { System.out.println("Readable Bytes in ByteBuf: "+stream.getBuf().readableBytes()); }
 		
 		long vlqvalue = vlq.getValue();
 		
-		boolean compressed = vlqvalue < 0;
+		int len = vlq.getLength();
+		
+		boolean compressed = vlq.getValue() < 0;
 		
 		if (compressed)
-		{
-			len = Math.abs(len);
+		{ 
+			vlqvalue = -vlqvalue; 
 		}
 		
-		if (bb.readableBytes() < vlqvalue) /* Did not get all the data */
+		if (bb.readableBytes() < vlq.getValue()) //didn't get all of the data
 		{
 			bb.resetReaderIndex();
 			return;
 		}
 		
-//		byte[] data = bb.readBytes(len).array();
-		byte[] data = stream.readByteArray();
-//		byte[] data = new byte[len];
+		if (StarNub.Debug.ON) { System.out.println("Readable Bytes in ByteBuf: "+stream.getBuf().readableBytes()); }
 		
+		System.out.println("Packet ID:"+packetId);
+		System.out.println("VLQ: "+vlq);
+		System.out.println("VLQ Length: "+len);
+		System.out.println("VLQ Value: "+vlqvalue);
+		System.out.println("Compressed?: "+compressed);
+		
+		byte[] data = stream.getBuf().readBytes(stream.getBuf().readableBytes()).array();
+		
+		if (StarNub.Debug.ON) { System.out.println("Readable Bytes in ByteBuf: "+stream.getBuf().readableBytes()); }
 		
 		if (compressed)
-		{
-			data = Zlib.decompress(data);
+		{ 
+			System.out.println("Decompress");
+			data = new Zlib().decompress(data); 
 		}
 		
-		System.out.println(packetId);
-		System.out.println(vlq);
-		System.out.println(len);
-		System.out.println(vlqvalue);
-		System.out.println(compressed);
-		System.out.println(data);
-		System.out.println(out);
 		
-	   	if (StarNub.Debug.ON) {System.out.println("Debug: Packet Decoder: Packet ID: "+packetId+". Packet Length: "+vlq+". Data: "+data+".");}
+	   	if (StarNub.Debug.ON) {System.out.println("Debug: Packet Decoder: End. ");}
 	}
 }

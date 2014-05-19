@@ -1,5 +1,10 @@
 package org.starnub.network.packets;
 
+import java.util.Map;
+
+import org.starnub.datatypes.Variant;
+import org.starnub.datatypes.VariantHashmap;
+
 /**
  * Packet Class.
  * <p>
@@ -18,60 +23,60 @@ public class GiveItemPacket {
 		return 21;
 	}
 
-	// public String ItemName;
-	// public long Count;
-	// public VariantDict ItemProperties;
-	//
-	// public GiveItemPacket()
-	// {
-	// ItemProperties = new VariantDict();
-	// }
-	//
-	// /**
-	// * @return the itemName
-	// */
-	// public String getItemName()
-	// {
-	// return ItemName;
-	// }
-	//
-	// /**
-	// * @param itemName the itemName to set
-	// */
-	// public void setItemName(String itemName)
-	// {
-	// ItemName = itemName;
-	// }
-	//
-	// /**
-	// * @return the count
-	// */
-	// public long getCount()
-	// {
-	// return Count;
-	// }
-	//
-	// /**
-	// * @param count the count to set
-	// */
-	// public void setCount(long count)
-	// {
-	// Count = count;
-	// }
-	//
-	// /**
-	// * @return the itemProperties
-	// */
-	// public VariantDict getItemProperties()
-	// {
-	// return ItemProperties;
-	// }
-	//
-	// /**
-	// * @param itemProperties the itemProperties to set
-	// */
-	// public void setItemProperties(VariantDict itemProperties)
-	// {
-	// ItemProperties = itemProperties;
-	// }
+	 public String ItemName;
+	 public long Count;
+	 public Map<String, Variant> ItemProperties;
+	
+	 public GiveItemPacket()
+	 {
+	 ItemProperties = new VariantHashmap().VariantHashmap;
+	 }
+	
+	 /**
+	 * @return the itemName
+	 */
+	 public String getItemName()
+	 {
+	 return ItemName;
+	 }
+	
+	 /**
+	 * @param itemName the itemName to set
+	 */
+	 public void setItemName(String itemName)
+	 {
+	 ItemName = itemName;
+	 }
+	
+	 /**
+	 * @return the count
+	 */
+	 public long getCount()
+	 {
+	 return Count;
+	 }
+	
+	 /**
+	 * @param count the count to set
+	 */
+	 public void setCount(long count)
+	 {
+	 Count = count;
+	 }
+	
+	 /**
+	 * @return the itemProperties
+	 */
+	 public Map<String, Variant> getItemProperties()
+	 {
+	 return ItemProperties;
+	 }
+	
+	 /**
+	 * @param itemProperties the itemProperties to set
+	 */
+	 public void setItemProperties(Map<String, Variant> itemProperties)
+	 {
+	 ItemProperties = itemProperties;
+	 }
 }

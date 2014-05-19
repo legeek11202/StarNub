@@ -74,8 +74,8 @@ public class ConnectionInspector extends ChannelInboundHandlerAdapter {
 			{
 				/* Needs PacketInspector *Maybe* */
 				/* Needs Encoder */
-				ctx.pipeline().addLast("Frontend",
-						new Frontend(sbRemoteHost, sbRemotePort));
+				ctx.pipeline().addBefore("Frontend", "PacketEncoder", new PacketEncoder());
+				ctx.pipeline().addLast("Frontend", new Frontend(sbRemoteHost, sbRemotePort));
 			}
 		}
 	}

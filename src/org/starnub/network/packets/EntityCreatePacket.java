@@ -19,7 +19,7 @@ public class EntityCreatePacket {
 	public byte PacketId()
 	{
 		return 42;
-	}
+	}//TODO
 
 	// public List<Entity> Entities;
 	//

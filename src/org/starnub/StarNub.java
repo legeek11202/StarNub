@@ -75,7 +75,7 @@ public final class StarNub {
     	new MultiOutputStreamLogger().snLogger();
     	MessageFormater.msgPrint(language.getString("l"), 0, 0);
     	
-    	if  (StarNub.DebugFullWrapper.ON) 
+    	if  (StarNub.DebugFullWrapper.ON)
     	{
         /* Plug-in Loader */
     		
