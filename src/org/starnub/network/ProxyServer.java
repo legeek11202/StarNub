@@ -1,6 +1,7 @@
 package org.starnub.network;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -38,13 +39,12 @@ public class ProxyServer implements Runnable {
 			/* Initiate the server bootstrap */
 			ServerBootstrap starNubInbound_TCP_Socket = new ServerBootstrap();
 			try
-			{
+			{	/* Bootstrap configuration */
 				starNubInbound_TCP_Socket
-						/* Bootstrap configuration */
-						.group(bossGroup, workerGroup)
 						/* Acceptor thread, Worker thread */
-						.channel(NioServerSocketChannel.class)
+						.group(bossGroup, workerGroup)
 						/* Channel instance */
+						.channel(NioServerSocketChannel.class)
 						/* Server Initializer to set up this channels handlers */
 						.childHandler(
 								new ProxyServerInitializer(sbRemoteHost,

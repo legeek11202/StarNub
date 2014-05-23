@@ -34,23 +34,9 @@ public class ProxyServerInitializer extends ChannelInitializer<SocketChannel> {
 	public void initChannel(SocketChannel ch) throws Exception
 	{
 		/*
-		 * This handler will handle data coming from a Starbound Client into the
-		 * Proxy when the data is received this Handler will open a channel to
-		 * the Starbound Server. This handler is the last handler in this
-		 * channel
-		 */
-
-		/* Packet decoder will open and read SB Data */
-		ch.pipeline().addFirst("PacketDecoder", new PacketDecoder());
-		/*
 		 * Connection Inspector will check the IP and UUID for bans before it
 		 * removes itself
 		 */
-		// ch.pipeline().addAfter("PacketDecoder", "ConnectionInspector", new
-		// ConnectionInspector(sbRemoteHost, sbRemotePort));
-
-		/* Debug Version */
-		// ch.pipeline().addFirst("ConnectionInspection", new
-		// ConnectionInspector(sbRemoteHost, sbRemotePort));
+		 ch.pipeline().addFirst(new ConnectionInspector());
 	}
 }
