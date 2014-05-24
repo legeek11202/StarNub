@@ -9,45 +9,59 @@ import io.netty.buffer.ByteBuf;
 
 public class StarboundStream
 {
-	
+	/* Buffer from Netty IO */
 	private ByteBuf buf;
 	
-	public StarboundStream(ByteBuf buf)
+	public ByteBuf getBuf()
+	{
+		return buf;
+	}
+
+	public void setBuf(ByteBuf buf)
 	{
 		this.buf = buf;
 	}
 	
+	/* Stream */
+	public StarboundStream(ByteBuf buf)
+	{
+		this.buf = buf;
+	}
+
+	/* ByteArray */
+	public byte[] readByteArray()
+	{
+		VLQ vlq = readVLQ();
+		int len = (int) vlq.getValue();
+		return buf.readBytes(len).array();
+	}
+	public void writeByteArray(byte[] bytes)
+	{
+		buf.writeBytes(VLQ.createVLQ(bytes.length));
+		buf.writeBytes(bytes);
+	}
+	
+	/* VLQ */
 	public VLQ readVLQ()
 	{
 		return VLQ.unsignedFromBuffer(buf);
 	}
-	
-	public VLQ readSignedVLQ()
-	{
-		return VLQ.signedFromBuffer(buf);
-	}
-	
 	public void writeVLQ(long value)
 	{
 		buf.writeBytes(VLQ.createVLQ(value));
 	}
 	
+	/* sVLQ */
+	public VLQ readSignedVLQ()
+	{
+		return VLQ.signedFromBuffer(buf);
+	}
 	public void writeSignedVLQ(long value)
 	{
 		buf.writeBytes(VLQ.createSignedVLQ(value));
 	}
-	
-	public byte[] readByteArray()
-	{
-		
-		VLQ vlq = readVLQ();
-		
-		int len = (int) vlq.getValue();
-		
-		return buf.readBytes(len).array();
-		
-	}
-	
+
+	/* String */
 	public String readString()
 	{
 		try
@@ -59,36 +73,38 @@ public class StarboundStream
 			return null;
 		}
 	}
-
-	public Variant readVariant() throws Exception
-	{
-		return Variant.fromStream(this);
-	}
-
-	public void writeVariant(Variant var)
-	{
-		var.writeTo(this);
-	}
-	
 	public void writeString(String str)
 	{
 		writeByteArray(str.getBytes(Charset.forName("UTF-8")));
 	}
 	
-	public void writeByteArray(byte[] bytes)
+	/* Variant */
+	public Variant readVariant() throws Exception
 	{
-		buf.writeBytes(VLQ.createVLQ(bytes.length));
-		buf.writeBytes(bytes);
+		return Variant.fromStream(this);
+	}
+	public void writeVariant(Variant var)
+	{
+		var.writeTo(this);
 	}
 
-	public ByteBuf getBuf()
-	{
-		return buf;
-	}
+	
+	
 
-	public void setBuf(ByteBuf buf)
-	{
-		this.buf = buf;
-	}
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+
 	
 }

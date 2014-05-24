@@ -1,5 +1,7 @@
 package org.starnub.network.packets;
 
+import org.starnub.network.StarboundStream;
+
 /**
  * Packet Class.
  * <p>
@@ -12,7 +14,7 @@ package org.starnub.network.packets;
  * @version 1.0, 17 May 2014 (Incomplete)
  * 
  */
-public class ChatReceivedPacket {
+public class ChatReceivedPacket extends Packet {
 
 	public byte PacketId()
 	{
@@ -71,7 +73,7 @@ public class ChatReceivedPacket {
 	 * @param clientId
 	 *            the clientId to set
 	 */
-	public void setClientId(long clientId)
+	public void setClientId(int clientId)
 	{
 		ClientId = clientId;
 	}
@@ -109,4 +111,25 @@ public class ChatReceivedPacket {
 	{
 		Message = message;
 	}
+	
+	@Override
+	public void Read(StarboundStream stream)
+    {
+        Channel = stream.getBuf().readByte();
+        World = stream.readString();
+        ClientId = stream.getBuf().readUnsignedInt();
+        Name = stream.readString();
+        Message = stream.readString();
+    }
+
+	@Override
+    public void Write(StarboundStream stream)
+    {
+        stream.getBuf().writeByte(Channel);
+        stream.writeString(World);
+        stream.getBuf().writeInt((int) ClientId);
+        stream.writeString(Name);
+        stream.writeString(Message);
+    }
+    
 }
