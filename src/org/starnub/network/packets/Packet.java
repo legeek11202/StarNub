@@ -43,9 +43,9 @@ public class Packet extends AbstractPacket {
 	}
 
 	@Override
-	public boolean isIsReceive()
+	public boolean getIsReceive()
 	{
-		return super.isIsReceive();
+		return super.getIsReceive();
 	}
 
 	@Override

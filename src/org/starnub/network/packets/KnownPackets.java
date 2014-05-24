@@ -1,7 +1,6 @@
 package org.starnub.network.packets;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * KnownPackets Enumerator

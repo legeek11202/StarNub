@@ -2,6 +2,8 @@ package org.starnub.network.packets;
 
 import java.util.List;
 
+import org.starnub.network.StarboundStream;
+
 /**
  * Packet Class.
  * <p>
@@ -11,10 +13,11 @@ import java.util.List;
  * Starbound-Dev - (http://starbound-dev.org/)
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1.0, 17 May 2014 (Incomplete)
+ * @version 1.0, 24 May 2014
  * 
  */
-public class SpawnEntityPacket {
+public class SpawnEntityPacket extends Packet {
+	
 	public byte PacketId()
 	{
 		return 29;
@@ -42,4 +45,17 @@ public class SpawnEntityPacket {
 	// {
 	// Entities = entities;
 	// }
+
+	@Override
+	void Read(StarboundStream stream)
+	{
+
+	}
+
+	@Override
+	void Write(StarboundStream stream)
+	{
+
+		
+	}
 }

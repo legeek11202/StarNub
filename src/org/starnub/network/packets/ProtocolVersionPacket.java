@@ -9,18 +9,23 @@ package org.starnub.network.packets;
  * Starbound-Dev - (http://starbound-dev.org/)
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1.0, 17 May 2014 (Incomplete)
+ * @version 1.0, 24 May 2014
  * 
  */
-public class ProtocolVersionPacket {
+public class ProtocolVersionPacket extends Packet {
+	
 	public byte PacketId()
 	{
 		return 0;
 	}
 
-	public long	ProtocolVersion;
+	public byte[] ProtocolVersion;
 
-	public ProtocolVersionPacket(long protocolVersion)
+	public ProtocolVersionPacket()
+	{
+	}
+	
+	public ProtocolVersionPacket(byte[] protocolVersion)
 	{
 		ProtocolVersion = protocolVersion;
 	}
@@ -28,7 +33,7 @@ public class ProtocolVersionPacket {
 	/**
 	 * @return the protocolVersion
 	 */
-	public long getProtocolVersion()
+	public byte[] getProtocolVersion()
 	{
 		return ProtocolVersion;
 	}
@@ -37,7 +42,7 @@ public class ProtocolVersionPacket {
 	 * @param protocolVersion
 	 *            the protocolVersion to set
 	 */
-	public void setProtocolVersion(long protocolVersion)
+	public void setProtocolVersion(byte[] protocolVersion)
 	{
 		ProtocolVersion = protocolVersion;
 	}

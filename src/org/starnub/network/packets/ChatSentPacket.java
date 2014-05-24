@@ -1,5 +1,7 @@
 package org.starnub.network.packets;
 
+import org.starnub.network.StarboundStream;
+
 /**
  * Packet Class.
  * <p>
@@ -9,10 +11,10 @@ package org.starnub.network.packets;
  * Starbound-Dev - (http://starbound-dev.org/)
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1.0, 17 May 2014 (Incomplete)
+ * @version 1.0, 24 May 2014 
  * 
  */
-public class ChatSentPacket {
+public class ChatSentPacket extends Packet {
 
 	public byte PacketId()
 	{
@@ -56,4 +58,17 @@ public class ChatSentPacket {
 		Channel = channel;
 	}
 
+	@Override
+    public void Read(StarboundStream stream)
+    {
+        Message = stream.readString();
+        Channel = (byte) stream.getBuf().readUnsignedByte();
+    }
+	
+	@Override
+    public  void Write(StarboundStream stream)
+    {
+        stream.writeString(Message);
+        stream.getBuf().writeByte(Channel);
+    }
 }

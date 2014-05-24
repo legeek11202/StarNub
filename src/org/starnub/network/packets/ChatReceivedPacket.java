@@ -11,7 +11,7 @@ import org.starnub.network.StarboundStream;
  * Starbound-Dev - (http://starbound-dev.org/)
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1.0, 17 May 2014 (Incomplete)
+ * @version 1.0, 24 May 2014
  * 
  */
 public class ChatReceivedPacket extends Packet {
@@ -23,7 +23,7 @@ public class ChatReceivedPacket extends Packet {
 
 	public byte		Channel;
 	public String	World;
-	public long		ClientId;
+	public int		ClientId;
 	public String	Name;
 	public String	Message;
 
@@ -115,9 +115,9 @@ public class ChatReceivedPacket extends Packet {
 	@Override
 	public void Read(StarboundStream stream)
     {
-        Channel = stream.getBuf().readByte();
+        Channel = (byte) stream.getBuf().readUnsignedByte();
         World = stream.readString();
-        ClientId = stream.getBuf().readUnsignedInt();
+        ClientId = (int) stream.getBuf().readUnsignedInt();
         Name = stream.readString();
         Message = stream.readString();
     }
@@ -127,9 +127,8 @@ public class ChatReceivedPacket extends Packet {
     {
         stream.getBuf().writeByte(Channel);
         stream.writeString(World);
-        stream.getBuf().writeInt((int) ClientId);
+        stream.getBuf().writeInt(ClientId);
         stream.writeString(Name);
         stream.writeString(Message);
     }
-    
 }

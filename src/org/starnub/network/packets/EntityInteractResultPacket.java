@@ -1,6 +1,7 @@
 package org.starnub.network.packets;
 
 import org.starnub.datatypes.Variant;
+import org.starnub.network.StarboundStream;
 
 /**
  * Packet Class.
@@ -11,10 +12,11 @@ import org.starnub.datatypes.Variant;
  * Starbound-Dev - (http://starbound-dev.org/)
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1.0, 17 May 2014 (Incomplete)
+ * @version 1.0, 24 May 2014
  * 
  */
-public class EntityInteractResultPacket {
+public class EntityInteractResultPacket extends Packet {
+	
 	public byte PacketId()
 	{
 		return 24;
@@ -75,4 +77,16 @@ public class EntityInteractResultPacket {
 		Results = results;
 	}
 
+	@Override
+	void Read(StarboundStream stream)
+	{
+
+	}
+
+	@Override
+	void Write(StarboundStream stream)
+	{
+
+		
+	}
 }

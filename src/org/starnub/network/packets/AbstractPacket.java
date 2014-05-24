@@ -4,9 +4,9 @@ import org.starnub.network.StarboundStream;
 
 public abstract class AbstractPacket {
 
-	public byte PacketId;
-    public boolean Ignore;
-    public boolean IsReceive;
+	private byte PacketId;
+	private boolean Ignore;
+	private boolean IsReceive;
 
     abstract void Read(StarboundStream stream);
 
@@ -32,7 +32,7 @@ public abstract class AbstractPacket {
 		Ignore = ignore;
 	}
 
-	public boolean isIsReceive()
+	public boolean getIsReceive()
 	{
 		return IsReceive;
 	}

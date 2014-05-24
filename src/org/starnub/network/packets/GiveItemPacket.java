@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.starnub.datatypes.Variant;
 import org.starnub.datatypes.VariantHashmap;
+import org.starnub.network.StarboundStream;
 
 /**
  * Packet Class.
@@ -14,10 +15,11 @@ import org.starnub.datatypes.VariantHashmap;
  * Starbound-Dev - (http://starbound-dev.org/)
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1.0, 17 May 2014 (Incomplete)
+ * @version 1.0, 24 May 2014
  * 
  */
-public class GiveItemPacket {
+public class GiveItemPacket extends Packet {
+	
 	public byte PacketId()
 	{
 		return 21;
@@ -79,4 +81,17 @@ public class GiveItemPacket {
 	 {
 	 ItemProperties = itemProperties;
 	 }
+	 
+	@Override
+	void Read(StarboundStream stream)
+	{
+
+	}
+
+	@Override
+	void Write(StarboundStream stream)
+	{
+
+			
+	}
 }

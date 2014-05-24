@@ -15,6 +15,7 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.handler.timeout.IdleStateHandler;
 
 import org.starnub.StarNub;
+import org.starnub.network.StarboundStream;
 import org.starnub.util.stream.MessageFormater;
 
 public class ConnectionInspector extends ChannelInboundHandlerAdapter {
@@ -50,7 +51,7 @@ public class ConnectionInspector extends ChannelInboundHandlerAdapter {
 			{
 				case 0: 
 					/* IP is not banned, send the client the server version */
-					ctx.writeAndFlush(StarNub.serverVersion);
+//					ctx.writeAndFlush(bb);
 					if (StarNub.Debug.ON) {System.out.println("Debug: Packet Decoder: Server version sent to client.");}
 					/* Add the regular PacketDecoder to channel */
 					ctx.pipeline().addLast("PacketDecoder", new PacketDecoder());

@@ -1,5 +1,7 @@
 package org.starnub.network.packets;
 
+import org.starnub.network.StarboundStream;
+
 /**
  * Packet Class.
  * <p>
@@ -9,10 +11,11 @@ package org.starnub.network.packets;
  * Starbound-Dev - (http://starbound-dev.org/)
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1.0, 17 May 2014 (Incomplete)
+ * @version 1.0, 24 May 2014
  * 
  */
-public class UniverseTimeUpdatePacket {
+public class UniverseTimeUpdatePacket extends Packet {
+	
 	public byte PacketId()
 	{
 		return 5;
@@ -40,5 +43,18 @@ public class UniverseTimeUpdatePacket {
 	public void setTime(long time)
 	{
 		Time = time;
+	}
+	
+	@Override
+	void Read(StarboundStream stream)
+	{
+
+	}
+
+	@Override
+	void Write(StarboundStream stream)
+	{
+
+		
 	}
 }

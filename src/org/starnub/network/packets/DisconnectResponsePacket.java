@@ -1,5 +1,7 @@
 package org.starnub.network.packets;
 
+import org.starnub.network.StarboundStream;
+
 /**
  * Packet Class.
  * <p>
@@ -9,10 +11,10 @@ package org.starnub.network.packets;
  * Starbound-Dev - (http://starbound-dev.org/)
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1.0, 17 May 2014 (Incomplete)
+ * @version 1.0, 24 May 2014
  * 
  */
-public class DisconnectResponsePacket {
+public class DisconnectResponsePacket extends Packet {
 
 	public byte PacketId()
 	{
@@ -41,5 +43,18 @@ public class DisconnectResponsePacket {
 	public void setUnknown(byte unknown)
 	{
 		Unknown = unknown;
+	}
+
+	@Override
+	void Read(StarboundStream stream)
+	{
+
+	}
+
+	@Override
+	void Write(StarboundStream stream)
+	{
+
+		
 	}
 }
