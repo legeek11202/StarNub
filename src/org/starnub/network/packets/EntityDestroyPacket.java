@@ -21,9 +21,9 @@ public class EntityDestroyPacket extends Packet {
 		return 44;
 	}
 
-	public long		EntityId;
-	public Boolean	Death;
-	public byte[]	Unknown;
+	private long	EntityId;
+	private Boolean	Death;
+	private byte[]	Unknown;
 
 	/**
 	 * @return the entityId
@@ -77,15 +77,14 @@ public class EntityDestroyPacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+		* //TODO
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+		//TODO
 	}
 }

@@ -21,7 +21,7 @@ public class HeartbeatPacket extends Packet {
 		return 48;
 	}
 
-	public long	CurrentStep;
+	private long CurrentStep;
 
 	/**
 	 * @return the currentStep
@@ -41,15 +41,14 @@ public class HeartbeatPacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        CurrentStep = stream.readVLQ();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+		stream.writeVLQ(CurrentStep);
 	}
 }

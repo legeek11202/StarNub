@@ -1,5 +1,7 @@
 package org.starnub.network.packets;
 
+import org.starnub.network.StarboundStream;
+
 /**
  * Packet Class.
  * <p>
@@ -19,13 +21,13 @@ public class ProtocolVersionPacket extends Packet {
 		return 0;
 	}
 
-	public byte[] ProtocolVersion;
+	private int ProtocolVersion;
 
 	public ProtocolVersionPacket()
 	{
 	}
 	
-	public ProtocolVersionPacket(byte[] protocolVersion)
+	public ProtocolVersionPacket(int protocolVersion)
 	{
 		ProtocolVersion = protocolVersion;
 	}
@@ -33,7 +35,7 @@ public class ProtocolVersionPacket extends Packet {
 	/**
 	 * @return the protocolVersion
 	 */
-	public byte[] getProtocolVersion()
+	public int getProtocolVersion()
 	{
 		return ProtocolVersion;
 	}
@@ -42,8 +44,20 @@ public class ProtocolVersionPacket extends Packet {
 	 * @param protocolVersion
 	 *            the protocolVersion to set
 	 */
-	public void setProtocolVersion(byte[] protocolVersion)
+	public void setProtocolVersion(int protocolVersion)
 	{
 		ProtocolVersion = protocolVersion;
+	}
+
+	@Override
+	public void Read(StarboundStream stream)
+	{
+        ProtocolVersion = stream.readInt();
+	}
+
+	@Override
+	public void Write(StarboundStream stream)
+	{
+        stream.writeInt(ProtocolVersion);
 	}
 }

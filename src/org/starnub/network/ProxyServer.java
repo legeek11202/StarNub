@@ -47,12 +47,10 @@ public class ProxyServer implements Runnable {
 						.channel(NioServerSocketChannel.class)
 						/* Server Initializer to set up this channels handlers */
 						.childHandler(
+								 /* Bind the Server Socket */
 								new ProxyServerInitializer(sbRemoteHost,
 										sbRemotePort)).bind(snServerPort)
-						.channel().closeFuture().sync(); /*
-														 * Bind the Server
-														 * Socket
-														 */
+						.channel().closeFuture().sync(); 
 			} catch (InterruptedException e)
 			{
 				e.printStackTrace();

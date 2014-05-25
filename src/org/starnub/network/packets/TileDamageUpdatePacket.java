@@ -21,14 +21,14 @@ public class TileDamageUpdatePacket extends Packet {
 		return 19;
 	}
 
-	public long		TileX;
-	public long		TileY;
-	public byte		Unknown;
-	public float	Damage;
-	public float	DamageEffect;
-	public float	SourcePosX;
-	public float	SourcePosY;
-	public byte		DamageType;
+	private int	TileX;
+	private int	TileY;
+	private byte	Unknown;
+	private float	Damage;
+	private float	DamageEffect;
+	private float	SourcePosX;
+	private float	SourcePosY;
+	private byte	DamageType;
 
 	public TileDamageUpdatePacket()
 	{
@@ -54,7 +54,7 @@ public class TileDamageUpdatePacket extends Packet {
 	 * @param tileX
 	 *            the tileX to set
 	 */
-	public void setTileX(long tileX)
+	public void setTileX(int tileX)
 	{
 		TileX = tileX;
 	}
@@ -71,7 +71,7 @@ public class TileDamageUpdatePacket extends Packet {
 	 * @param tileY
 	 *            the tileY to set
 	 */
-	public void setTileY(long tileY)
+	public void setTileY(int tileY)
 	{
 		TileY = tileY;
 	}
@@ -179,16 +179,29 @@ public class TileDamageUpdatePacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        TileX = stream.readInt();
+        TileY = stream.readInt();
+        Unknown = stream.readUnsignedByte();
+        Damage = stream.readFloatInt32();
+        DamageEffect = stream.readFloatInt32();
+        SourcePosX = stream.readFloatInt32();
+        SourcePosY = stream.readFloatInt32();
+        DamageType = stream.readUnsignedByte();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeInt(TileX);
+        stream.writeInt(TileY);
+        stream.writeByte(Unknown);
+        stream.writeFloatInt32(Damage);
+        stream.writeFloatInt32(DamageEffect);
+        stream.writeFloatInt32(SourcePosX);
+        stream.writeFloatInt32(SourcePosY);
+        stream.writeByte(DamageType);
 	}
 }
 

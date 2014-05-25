@@ -21,15 +21,15 @@ public class DamageNotificationPacket extends Packet {
 		return 45;
 	}
 
-	public long		CauseEntityId;
-	public long		TargetEntityId;
-	public long		PositionX;
-	public long		PositionY;
-	public long		Damage;
-	public byte		DamageKind;
-	public String	DamageSourceKind;
-	public String	TargetMaterialKind;
-	public byte		HitResultKind;
+	private long	CauseEntityId;
+	private long	TargetEntityId;
+	private long	PositionX;
+	private long	PositionY;
+	private long	Damage;
+	private byte	DamageKind;
+	private String	DamageSourceKind;
+	private String	TargetMaterialKind;
+	private byte	HitResultKind;
 
 	/**
 	 * @return the causeEntityId
@@ -185,15 +185,30 @@ public class DamageNotificationPacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        CauseEntityId = stream.readSignedVLQ();
+        TargetEntityId = stream.readSignedVLQ();
+        PositionX = stream.readSignedVLQ() / 100;
+        PositionY = stream.readSignedVLQ() / 100;
+        Damage = stream.readSignedVLQ() / 100;
+        DamageKind = stream.readUnsignedByte();
+        DamageSourceKind = stream.readString();
+        TargetMaterialKind = stream.readString();
+        HitResultKind = stream.readUnsignedByte();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeSignedVLQ(CauseEntityId);
+        stream.writeSignedVLQ(TargetEntityId);
+        stream.writeSignedVLQ(PositionX * 100);
+        stream.writeSignedVLQ(PositionY * 100);
+        stream.writeSignedVLQ(Damage * 100);
+        stream.writeByte(DamageKind);
+        stream.writeString(DamageSourceKind);
+        stream.writeString(TargetMaterialKind);
+        stream.writeByte(HitResultKind);
 	}
 }

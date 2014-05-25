@@ -21,7 +21,7 @@ public class ClientContextUpdatePacket extends Packet {
 		return 13;
 	}
 
-	public byte[]	Data;
+	private byte[]	Data;
 
 	// public World World; //TODO Need to add world read
 
@@ -64,15 +64,14 @@ public class ClientContextUpdatePacket extends Packet {
 	// }
 	
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+		* //TODO
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeInt8Array(Data);
 	}
 }

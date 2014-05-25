@@ -50,7 +50,7 @@ public class SbServerMonitor implements Runnable {
 			if (StarNub.Debug.ON){System.out.println("Debug: Server Monitor: Server Check. SB uptime in milliseconds "+s.getSbUptime()+".");}
 			switch (statusChecker())
 			{
-			case "statusOk" : new ThreadSleep().timer(20); break;
+			case "statusOk" : new ThreadSleep().timer(30); break;
 			case "pCrash" : processCrashed(); break;
 			case "sUnresp" : serverUnresponsive(); break;  
 			}			

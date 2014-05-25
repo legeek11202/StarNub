@@ -48,15 +48,14 @@ public class EntityCreatePacket extends Packet {
 	//
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+		* //TODO
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+		//TODO
 	}
 }

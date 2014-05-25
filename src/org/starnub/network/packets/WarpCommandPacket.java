@@ -21,9 +21,9 @@ public class WarpCommandPacket extends Packet {
 		return 10;
 	}
 
-	public WarpType			WarpType;
-	public WorldCoordinate	Coordinates;
-	public String			Player;
+	private WarpType		WarpType;
+	private WorldCoordinate	Coordinates;
+	private String			Player;
 
 	public WarpCommandPacket()
 	{
@@ -82,15 +82,27 @@ public class WarpCommandPacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        WarpType = (WarpType) stream.readUnsignedInt();
+        Coordinates = stream.ReadWorldCoordinate();
+        Player = stream.readString();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
+    stream.writeInt((uint) WarpType);
+    stream.WriteWorldCoordinate(Coordinates);
+    stream.writeString(Player);
+	}
 
-		
+	public enum WarpType
+	{
+		MoveShip(1),
+		WarpUp(2),
+		WarpOtherShip(3),
+		WarpDown(4),
+		WarpHome(5)
 	}
 }

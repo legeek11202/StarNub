@@ -22,13 +22,13 @@ public class ClientConnectPacket extends Packet {
 		return 7;
 	}
 
-	public String	AssetDigest;
-	public Variant	Claim;
-	public byte[]	UUID;
-	public String	PlayerName;
-	public String	Species;
-	public byte[]	Shipworld;
-	public String	Account;
+	private String	AssetDigest;
+	private Variant	Claim;
+	private byte[]	UUID;
+	private String	PlayerName;
+	private String	Species;
+	private byte[]	Shipworld;
+	private String	Account;
 
 	public ClientConnectPacket()
 	{
@@ -46,15 +46,30 @@ public class ClientConnectPacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        AssetDigest = stream.readString();
+        try { Claim = stream.readVariant(); } catch (Exception e) { e.printStackTrace(); }
+        boolean uuid = stream.readBoolean();
+        if (uuid)
+            UUID = stream.readInt8Array(16);//TODO Verify
+        PlayerName = stream.readString();
+        Species = stream.readString();
+        Shipworld = stream.readInt8Array();
+        Account = stream.readString();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeString(AssetDigest);
+        stream.writeVariant(Claim);
+        stream.writeBoolean(UUID != null);
+        if (UUID != null)
+            stream.writeInt8Array(UUID, false);
+        stream.writeString(PlayerName);
+        stream.writeString(Species);
+        stream.writeInt8Array(Shipworld);
+        stream.writeString(Account);
 	}
 }

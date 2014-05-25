@@ -22,9 +22,9 @@ public class EntityInteractResultPacket extends Packet {
 		return 24;
 	}
 
-	public long		ClientId;
-	public long		EntityId;
-	public Variant	Results;
+	private int	ClientId;
+	private int	EntityId;
+	private Variant	Results;
 
 	/**
 	 * @return the clientId
@@ -38,7 +38,7 @@ public class EntityInteractResultPacket extends Packet {
 	 * @param clientId
 	 *            the clientId to set
 	 */
-	public void setClientId(long clientId)
+	public void setClientId(int clientId)
 	{
 		ClientId = clientId;
 	}
@@ -55,7 +55,7 @@ public class EntityInteractResultPacket extends Packet {
 	 * @param entityId
 	 *            the entityId to set
 	 */
-	public void setEntityId(long entityId)
+	public void setEntityId(int entityId)
 	{
 		EntityId = entityId;
 	}
@@ -78,15 +78,18 @@ public class EntityInteractResultPacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        ClientId = stream.readUnsignedInt();
+        EntityId = stream.readInt();
+        try { Results = stream.readVariant(); } catch (Exception e) { e.printStackTrace(); }
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeInt(ClientId);
+        stream.writeInt(EntityId);
+        stream.writeVariant(Results);
 	}
 }

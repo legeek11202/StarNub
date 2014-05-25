@@ -27,10 +27,14 @@ public class Frontend extends ChannelInboundHandlerAdapter  {
     }
 	
     /* Executes once when handler is added */
-    @Override
-    public void handlerAdded(ChannelHandlerContext ctx)throws Exception 
-    {
-    }
+	@Override
+	public void handlerAdded(ChannelHandlerContext ctx) throws Exception
+	{
+		if (StarNub.Debug.ON)
+		{
+			System.out.println("Debug: Frontend: Handler Added.");
+		}
+	}
   
     /* Executes once when channel becomes active */
     @Override

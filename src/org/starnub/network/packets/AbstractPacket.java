@@ -8,9 +8,9 @@ public abstract class AbstractPacket {
 	private boolean Ignore;
 	private boolean IsReceive;
 
-    abstract void Read(StarboundStream stream);
+    public abstract void Read(StarboundStream stream);
 
-    abstract void Write(StarboundStream stream);
+    public abstract void Write(StarboundStream stream);
     
     public byte getPacketId()
 	{

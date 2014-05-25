@@ -16,9 +16,9 @@ import org.starnub.network.StarboundStream;
  */
 public class UnknownPacket extends Packet {
 
-	public byte		PacketId;
-	public boolean	Compressed;
-	public byte[]	Data;
+	private byte	PacketId;
+	private boolean	Compressed;
+	private byte[]	Data;
 	private int		Length;
 
 	public UnknownPacket()
@@ -104,15 +104,14 @@ public class UnknownPacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        stream.read(Data, 0, Data.length);
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.Write(Data, 0, Data.length);
 	}
 }

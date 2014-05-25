@@ -21,7 +21,7 @@ public class WorldStopPacket extends Packet {
 		return 15;
 	}
 
-	public String	Status;
+	private String	Status;
 
 	public WorldStopPacket()
 	{
@@ -45,15 +45,14 @@ public class WorldStopPacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        Status = stream.readString();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeString(Status);	
 	}
 }

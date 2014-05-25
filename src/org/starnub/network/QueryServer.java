@@ -1,6 +1,9 @@
 package org.starnub.network;
 
+import java.util.List;
+
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -10,8 +13,11 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.ByteToMessageDecoder;
 
+import org.starnub.ServerVersion;
 import org.starnub.StarNub;
+import org.starnub.datatypes.VLQ;
 import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.timers.ThreadSleep;
 
@@ -67,23 +73,14 @@ public class QueryServer {
 					{
 						/* Inbound Handler */
 						ch.pipeline().addLast(
-								new ChannelInboundHandlerAdapter() {
+								new ByteToMessageDecoder() {
 									/* Receiving Data */
 									@Override
 									public void channelRead(
 											final ChannelHandlerContext ctx,
 											Object msg) throws Exception
 									{
-										Object serverVersion = StarNub.serverVersion;
-										if (serverVersion == null)
-										{
-											StarNub.serverVersion = msg;
-											if (StarNub.Debug.ON)
-											{
-												System.out.println("Debug: Server Query: Server Check. Status: Responsive.");
-											}
-											status = true; 
-										}
+								
 									}
 
 									/* When receiving is complete */
@@ -101,6 +98,21 @@ public class QueryServer {
 											Throwable cause) throws Exception
 									{
 										/* Do nothing */
+									}
+
+									@Override
+									protected void decode(
+											ChannelHandlerContext ctx,
+											ByteBuf bb, List<Object> out)
+													throws Exception
+									{
+										/*Server Version Packet Here */
+										if (StarNub.Debug.ON)
+										{
+											System.out.println("Debug: Server Query: Server Check. Status: Responsive.");
+										}
+										status = true; 	
+										
 									}
 								});
 					}

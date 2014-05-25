@@ -22,9 +22,9 @@ public class UpdateWorldPropertiesPacket extends Packet {
 		return 47;
 	}
 
-	public byte		NumPairs;
-	public String	PropertyName;
-	public Variant	PropertyValue;
+	private byte	NumPairs;
+	private String	PropertyName;
+	private Variant	PropertyValue;
 
 	/**
 	 * @return the numPairs
@@ -78,15 +78,18 @@ public class UpdateWorldPropertiesPacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        NumPairs = stream.readUnsignedByte();
+        PropertyName = stream.readString();
+        PropertyValue = stream.readVariant();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeByte(NumPairs);
+        stream.writeString(PropertyName);
+        stream.writeVariant(PropertyValue);	
 	}
 }

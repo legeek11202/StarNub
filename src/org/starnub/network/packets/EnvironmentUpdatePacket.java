@@ -21,8 +21,8 @@ public class EnvironmentUpdatePacket extends Packet {
 		return 23;
 	}
 
-	public byte[]	Sky;
-	public byte[]	Weather;
+	private byte[]	Sky;
+	private byte[]	Weather;
 
 	public EnvironmentUpdatePacket()
 	{
@@ -65,15 +65,16 @@ public class EnvironmentUpdatePacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        Sky = stream.readInt8Array();
+        Weather = stream.readInt8Array();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeInt8Array(Sky);
+        stream.writeInt8Array(Weather);
 	}
 }

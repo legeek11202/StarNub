@@ -21,8 +21,8 @@ public class EntityUpdatePacket extends Packet {
 		return 43;
 	}
 
-	public long		EntityId;
-	public byte[]	Unknown;
+	private long	EntityId;
+	private byte[]	Unknown;
 
 	/**
 	 * @return the entityId
@@ -59,15 +59,14 @@ public class EntityUpdatePacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+		*//TODO
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+		//TODO
 	}
 }

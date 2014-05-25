@@ -21,7 +21,7 @@ public class RequestDropPacket extends Packet {
 		return 28;
 	}
 
-	public long	EntityId;
+	private long EntityId;
 
 	/**
 	 * @return the entityId
@@ -41,15 +41,16 @@ public class RequestDropPacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
+        int discarded;
 
+        EntityId = stream.readSignedVLQ();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeSignedVLQ(EntityId);	
 	}
 }

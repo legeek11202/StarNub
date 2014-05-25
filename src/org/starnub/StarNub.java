@@ -1,18 +1,31 @@
 package org.starnub;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
+import java.net.InetAddress;
+import java.net.SocketAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import org.joda.time.DateTime;
 import org.starnub.configuration.ConfigurationCheck;
+import org.starnub.datatypes.VLQ;
 import org.starnub.localization.LanguageLoader;
 import org.starnub.managment.SbServerMonitor;
 import org.starnub.network.ProxyServer;
+import org.starnub.network.packets.ProtocolVersionPacket;
 import org.starnub.util.KeyListener;
 import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.stream.MultiOutputStreamLogger;
@@ -23,7 +36,7 @@ import org.starnub.util.timers.ThreadSleep;
  */
 
 public final class StarNub {
-	
+
 	public StarNub() 
 	{
     }
@@ -50,11 +63,11 @@ public final class StarNub {
 	
 	public static ResourceBundle language = LanguageLoader.getResources(); 
 	public static Map<String, Integer> configVariables = new HashMap<String, Integer>();
-	public static Object serverVersion;
 	public static Map<String, String> playersOnline = new HashMap<String, String>();
 	public static final ChannelGroup clientChannels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
-	public static String[] bannedIps;
-	public static String[] bannedUuids;
+	public static List<InetAddress> bannedIps = new ArrayList<InetAddress>();
+	public static List<String> bannedUuids = new ArrayList<String>();
+	public static ProtocolVersionPacket serverVersion = new ProtocolVersionPacket();
 	
     public static void main(String [] args)
 	{

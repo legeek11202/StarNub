@@ -21,7 +21,7 @@ public class ClientDisconnectPacket extends Packet {
 		return 8;
 	}
 
-	public byte	Unknown;
+	private byte	Unknown;
 
 	public ClientDisconnectPacket()
 	{
@@ -46,15 +46,14 @@ public class ClientDisconnectPacket extends Packet {
 	}
 	
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+		Unknown = stream.readUnsignedByte();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+		stream.writeByte(Unknown);
 	}
 }

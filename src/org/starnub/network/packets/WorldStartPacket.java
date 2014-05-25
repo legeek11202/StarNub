@@ -22,15 +22,15 @@ public class WorldStartPacket extends Packet {
 		return 14;
 	}
 
-	public Variant	Planet;
-	public Variant	WorldStructure;
-	public byte[]	Sky;
-	public byte[]	Weather;
-	public float	SpawnX;
-	public float	SpawnY;
-	public Variant	WorldProperties;
-	public long		ClientId;
-	public boolean	Local;
+	private Variant	Planet;
+	private Variant	WorldStructure;
+	private byte[]	Sky;
+	private byte[]	Weather;
+	private float	SpawnX;
+	private float	SpawnY;
+	private Variant	WorldProperties;
+	private int	ClientId;
+	private boolean	Local;
 
 	/**
 	 * @return the planet
@@ -186,15 +186,31 @@ public class WorldStartPacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        Planet = stream.readVariant();
+        WorldStructure = stream.readVariant();
+        Sky = stream.readInt8Array();
+        Weather = stream.readInt8Array();
+        SpawnX = stream.readFloatInt32();
+        SpawnY = stream.readFloatInt32();
+        WorldProperties = stream.readVariant();
+        ClientId = stream.readUnsignedInt();
+        Local = stream.readBoolean();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
+        stream.writeVariant(Planet);
+        stream.writeVariant(WorldStructure);
+        stream.writeInt8Array(Sky);
+        stream.writeInt8Array(Weather);
+        stream.writeFloatInt32(SpawnX);
+        stream.writeFloatInt32(SpawnY);
+        stream.writeVariant(WorldProperties);
+        stream.writeInt(ClientId);
+        stream.writeBoolean(Local);
 		
 	}
 }

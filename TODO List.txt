@@ -5,6 +5,7 @@ Features Addition:
 ---STABLE RELEASE AFTER ABOVE---
 
 Features:
+Console access that will hold message printing while using menu
 SQLLite for player, uuid, ip and ban storage
 Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
 Localization flexibility and plug-in Localization option
@@ -45,4 +46,7 @@ Performance Monitor + recording tp database for evaluations
 long start = System.currentTimeMillis ();
 method ();
 long end = System.currentTimeMillis ();
-System.out.println (�Time taken for execution is � + (end � start));
+System.out.println ("Time taken for execution is " + (end � start));
+
+
+IPs list of 61K IP's to test the performance of banned IP checks. It took only .27 seconds (270 milliseconds) to load the 61K addresses. When a I connected it took only .9 Seconds (900 milliseconds) to check the connecting IP against all 61K addresses. Ok back to work! 

@@ -46,15 +46,15 @@ public class UniverseTimeUpdatePacket extends Packet {
 	}
 	
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        int discarded;
+        Time = stream.readSignedVLQ();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeSignedVLQ(Time);
 	}
 }

@@ -1,5 +1,7 @@
 package org.starnub.network.handlers;
 
+import org.starnub.StarNub;
+
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -14,6 +16,16 @@ public class Backend extends ChannelInboundHandlerAdapter  {
 	public Backend(Channel inboundChannel) 
 	{
 		this.inboundChannel = inboundChannel;
+	}
+	
+	/* On Handler Add */
+	@Override
+	public void handlerAdded(ChannelHandlerContext ctx) throws Exception
+	{
+		if (StarNub.Debug.ON)
+		{
+			System.out.println("Debug: Backend: Handler Added.");
+		}
 	}
 
 	@Override

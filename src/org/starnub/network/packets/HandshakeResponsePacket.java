@@ -21,8 +21,8 @@ public class HandshakeResponsePacket extends Packet {
 		return 9;
 	}
 
-	public String	ClaimMessage;
-	public String	PasswordHash;
+	private String	ClaimMessage;
+	private String	PasswordHash;
 
 	/**
 	 * @param passwordHash
@@ -67,15 +67,16 @@ public class HandshakeResponsePacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        ClaimMessage = stream.readString();
+        PasswordHash = stream.readString();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeString(ClaimMessage);
+        stream.writeString(PasswordHash);
 	}
 }

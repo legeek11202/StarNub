@@ -21,8 +21,8 @@ public class ChatSentPacket extends Packet {
 		return 11;
 	}
 
-	public String	Message;
-	public byte		Channel;
+	private String	Message;
+	private byte	Channel;
 
 	/**
 	 * @return the message
@@ -62,13 +62,13 @@ public class ChatSentPacket extends Packet {
     public void Read(StarboundStream stream)
     {
         Message = stream.readString();
-        Channel = (byte) stream.getBuf().readUnsignedByte();
+        Channel = stream.readUnsignedByte();
     }
 	
 	@Override
     public  void Write(StarboundStream stream)
     {
         stream.writeString(Message);
-        stream.getBuf().writeByte(Channel);
+        stream.writeByte(Channel);
     }
 }

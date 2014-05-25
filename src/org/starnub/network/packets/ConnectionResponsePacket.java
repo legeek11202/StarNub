@@ -1,5 +1,7 @@
 package org.starnub.network.packets;
 
+import org.starnub.datatypes.VLQ;
+import org.starnub.datatypes.Variant;
 import org.starnub.network.StarboundStream;
 
 /**
@@ -21,94 +23,302 @@ public class ConnectionResponsePacket extends Packet {
 		return 1;
 	}
 
-	public boolean	Success;
-	public long		ClientId;
-	public String	RejectionReason;
-	public byte[]	Unknown;
-
+	private boolean	Success;
+	private long	ClientId;
+	private String	RejectionReason;
+	private boolean CelestialInformation;
+	private int 	OrbitalLevels;
+	private int	 	ChunkSize;
+	private int		XYCoordinateMin;
+	private int		XYCoordinateMax;
+	private int		ZCoordinateMin;
+	private int		ZCoordinateMax;
+	private VLQ		NumberofSectors;
+	private String	SectorId;
+	private String 	SectorName;
+	private long	SectorSeed;
+	private String	SectorPrefix;
+	private Variant Parameters;
+	private Variant SectorConfig;
+	
 	public ConnectionResponsePacket()
 	{
 		Unknown = new byte[0];
 	}
 
+
 	/**
-	 * @return the success
+	 * @return the celestialInformation
 	 */
-	public boolean isSuccess()
+	public boolean isCelestialInformation()
 	{
-		return Success;
+		return CelestialInformation;
 	}
 
 	/**
-	 * @param success
-	 *            the success to set
+	 * @param celestialInformation the celestialInformation to set
 	 */
-	public void setSuccess(boolean success)
+	public void setCelestialInformation(boolean celestialInformation)
 	{
-		Success = success;
+		CelestialInformation = celestialInformation;
 	}
 
 	/**
-	 * @return the clientId
+	 * @return the orbitalLevels
 	 */
-	public long getClientId()
+	public int getOrbitalLevels()
 	{
-		return ClientId;
+		return OrbitalLevels;
 	}
 
 	/**
-	 * @param clientId
-	 *            the clientId to set
+	 * @param orbitalLevels the orbitalLevels to set
 	 */
-	public void setClientId(long clientId)
+	public void setOrbitalLevels(int orbitalLevels)
 	{
-		ClientId = clientId;
+		OrbitalLevels = orbitalLevels;
 	}
 
 	/**
-	 * @return the rejectionReason
+	 * @return the chunkSize
 	 */
-	public String getRejectionReason()
+	public int getChunkSize()
 	{
-		return RejectionReason;
+		return ChunkSize;
 	}
 
 	/**
-	 * @param rejectionReason
-	 *            the rejectionReason to set
+	 * @param chunkSize the chunkSize to set
 	 */
-	public void setRejectionReason(String rejectionReason)
+	public void setChunkSize(int chunkSize)
 	{
-		RejectionReason = rejectionReason;
+		ChunkSize = chunkSize;
 	}
 
 	/**
-	 * @return the unknown
+	 * @return the xYCoordinateMin
 	 */
-	public byte[] getUnknown()
+	public int getXYCoordinateMin()
 	{
-		return Unknown;
+		return XYCoordinateMin;
 	}
 
 	/**
-	 * @param unknown
-	 *            the unknown to set
+	 * @param xYCoordinateMin the xYCoordinateMin to set
 	 */
-	public void setUnknown(byte[] unknown)
+	public void setXYCoordinateMin(int xYCoordinateMin)
 	{
-		Unknown = unknown;
+		XYCoordinateMin = xYCoordinateMin;
+	}
+
+	/**
+	 * @return the xYCoordinateMax
+	 */
+	public int getXYCoordinateMax()
+	{
+		return XYCoordinateMax;
+	}
+
+	/**
+	 * @param xYCoordinateMax the xYCoordinateMax to set
+	 */
+	public void setXYCoordinateMax(int xYCoordinateMax)
+	{
+		XYCoordinateMax = xYCoordinateMax;
+	}
+
+	/**
+	 * @return the zCoordinateMin
+	 */
+	public int getZCoordinateMin()
+	{
+		return ZCoordinateMin;
+	}
+
+	/**
+	 * @param zCoordinateMin the zCoordinateMin to set
+	 */
+	public void setZCoordinateMin(int zCoordinateMin)
+	{
+		ZCoordinateMin = zCoordinateMin;
+	}
+
+	/**
+	 * @return the zCoordinateMax
+	 */
+	public int getZCoordinateMax()
+	{
+		return ZCoordinateMax;
+	}
+
+	/**
+	 * @param zCoordinateMax the zCoordinateMax to set
+	 */
+	public void setZCoordinateMax(int zCoordinateMax)
+	{
+		ZCoordinateMax = zCoordinateMax;
+	}
+
+	/**
+	 * @return the numberofSectors
+	 */
+	public VLQ getNumberofSectors()
+	{
+		return NumberofSectors;
+	}
+
+	/**
+	 * @param numberofSectors the numberofSectors to set
+	 */
+	public void setNumberofSectors(VLQ numberofSectors)
+	{
+		NumberofSectors = numberofSectors;
+	}
+
+	/**
+	 * @return the sectorId
+	 */
+	public String getSectorId()
+	{
+		return SectorId;
+	}
+
+	/**
+	 * @param sectorId the sectorId to set
+	 */
+	public void setSectorId(String sectorId)
+	{
+		SectorId = sectorId;
+	}
+
+	/**
+	 * @return the sectorName
+	 */
+	public String getSectorName()
+	{
+		return SectorName;
+	}
+
+	/**
+	 * @param sectorName the sectorName to set
+	 */
+	public void setSectorName(String sectorName)
+	{
+		SectorName = sectorName;
+	}
+
+	/**
+	 * @return the sectorSeed
+	 */
+	public long getSectorSeed()
+	{
+		return SectorSeed;
+	}
+
+	/**
+	 * @param sectorSeed the sectorSeed to set
+	 */
+	public void setSectorSeed(long sectorSeed)
+	{
+		SectorSeed = sectorSeed;
+	}
+
+	/**
+	 * @return the sectorPrefix
+	 */
+	public String getSectorPrefix()
+	{
+		return SectorPrefix;
+	}
+
+	/**
+	 * @param sectorPrefix the sectorPrefix to set
+	 */
+	public void setSectorPrefix(String sectorPrefix)
+	{
+		SectorPrefix = sectorPrefix;
+	}
+
+	/**
+	 * @return the parameters
+	 */
+	public Variant getParameters()
+	{
+		return Parameters;
+	}
+
+	/**
+	 * @param parameters the parameters to set
+	 */
+	public void setParameters(Variant parameters)
+	{
+		Parameters = parameters;
+	}
+
+	/**
+	 * @return the sectorConfig
+	 */
+	public Variant getSectorConfig()
+	{
+		return SectorConfig;
+	}
+
+	/**
+	 * @param sectorConfig the sectorConfig to set
+	 */
+	public void setSectorConfig(Variant sectorConfig)
+	{
+		SectorConfig = sectorConfig;
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        Success = stream.readBoolean();
+        ClientId = stream.readVLQ();
+        RejectionReason = stream.readString();
+        CelestialInformation = stream.readBoolean();
+        if(CelestialInformation) 
+        {
+    	OrbitalLevels = stream.readUnsignedInt();
+    	ChunkSize = stream.readUnsignedInt();
+    	XYCoordinateMin = stream.readUnsignedInt();
+    	XYCoordinateMax = stream.readUnsignedInt();
+    	ZCoordinateMin = stream.readUnsignedInt();
+    	ZCoordinateMax = stream.readUnsignedInt();
+    	NumberofSectors = stream.readVLQ();
+    	SectorId = stream.readString();
+    	SectorName = stream.readString();
+    	SectorSeed = stream.readLong();
+    	SectorPrefix = stream.readString();
+    	Parameters = stream.readVariant();
+    	SectorConfig = stream.readVariant();
+        }
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
+        stream.writeBoolean(Success);
+        stream.writeVLQ(ClientId);
+        stream.writeString(RejectionReason);
+        if(CelestialInformation) 
+        {
+        stream.writeBoolean(CelestialInformation);
+    	stream.writeInt(OrbitalLevels);
+    	stream.writeInt(ChunkSize);
+    	stream.writeInt(XYCoordinateMin);
+    	stream.writeInt(XYCoordinateMax);
+    	stream.writeInt(ZCoordinateMin);
+    	stream.writeInt(ZCoordinateMax);
+    	stream.writeVLQ(NumberofSectors);
+    	stream.writeString(SectorId);
+    	stream.writeString(SectorName);
+    	stream.writeLong(SectorSeed);
+    	stream.writeString(SectorPrefix);
+    	stream.writeVariant(Parameters);
+    	stream.writeVariant(SectorConfig);
+        }
 		
 	}
 }

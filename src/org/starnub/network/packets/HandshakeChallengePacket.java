@@ -21,9 +21,9 @@ public class HandshakeChallengePacket extends Packet {
 		return 3;
 	}
 
-	public String	Claim;
-	public String	Salt;
-	public int		Rounds;
+	private String	Claim;
+	private String	Salt;
+	private int		Rounds;
 
 	public HandshakeChallengePacket()
 	{
@@ -82,15 +82,18 @@ public class HandshakeChallengePacket extends Packet {
 	}
 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        Claim = stream.readString();
+        Salt = stream.readString();
+        Rounds = stream.readInt();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+        stream.writeString(Claim);
+        stream.writeString(Salt);
+        stream.writeInt(Rounds);
 	}
 }

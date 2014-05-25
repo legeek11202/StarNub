@@ -21,7 +21,7 @@ public class CloseContainerPacket extends Packet {
 		return 34;
 	}
 
-	public long	EntityId;
+	private long	EntityId;
 
 	/**
 	 * @return the entityId
@@ -41,15 +41,15 @@ public class CloseContainerPacket extends Packet {
 	}
 	
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        * //TODO 
+        EntityId = stream.readSignedVLQ();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-		
+		stream.writeSignedVLQ(EntityId);
 	}
 }

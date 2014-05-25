@@ -25,9 +25,9 @@ public class GiveItemPacket extends Packet {
 		return 21;
 	}
 
-	 public String ItemName;
-	 public long Count;
-	 public Map<String, Variant> ItemProperties;
+	 private String ItemName;
+	 private long Count;
+	 private Map<String, Variant> ItemProperties;
 	
 	 public GiveItemPacket()
 	 {
@@ -83,15 +83,18 @@ public class GiveItemPacket extends Packet {
 	 }
 	 
 	@Override
-	void Read(StarboundStream stream)
+	public void Read(StarboundStream stream)
 	{
-
+        ItemName = stream.readString();
+        Count = stream.readVLQ();
+        ItemProperties = (Map<String, Variant>) stream.readVariant().getValue();
 	}
 
 	@Override
-	void Write(StarboundStream stream)
+	public void Write(StarboundStream stream)
 	{
-
-			
+        stream.writeString(ItemName);
+        stream.writeVLQ(Count);
+        try { stream.writeVariant(new Variant(ItemProperties)); } catch (Exception e) { e.printStackTrace(); }	
 	}
 }

@@ -21,11 +21,11 @@ public class ChatReceivedPacket extends Packet {
 		return 4;
 	}
 
-	public byte		Channel;
-	public String	World;
-	public int		ClientId;
-	public String	Name;
-	public String	Message;
+	private byte	Channel;
+	private String	World;
+	private int		ClientId;
+	private String	Name;
+	private String	Message;
 
 	/**
 	 * @return the channel
@@ -115,9 +115,9 @@ public class ChatReceivedPacket extends Packet {
 	@Override
 	public void Read(StarboundStream stream)
     {
-        Channel = (byte) stream.getBuf().readUnsignedByte();
+        Channel = stream.readUnsignedByte();
         World = stream.readString();
-        ClientId = (int) stream.getBuf().readUnsignedInt();
+        ClientId = stream.readUnsignedInt();
         Name = stream.readString();
         Message = stream.readString();
     }
@@ -125,9 +125,9 @@ public class ChatReceivedPacket extends Packet {
 	@Override
     public void Write(StarboundStream stream)
     {
-        stream.getBuf().writeByte(Channel);
+        stream.writeByte(Channel);
         stream.writeString(World);
-        stream.getBuf().writeInt(ClientId);
+        stream.writeInt(ClientId);
         stream.writeString(Name);
         stream.writeString(Message);
     }
