@@ -13,6 +13,9 @@ import org.starnub.util.stream.MessageFormater;
 public class BanCheck {
 
 	
+	private static ClientConnectPacket connectPacket;
+	private static UUID connectingUuid;
+
 	public static InetAddress ipChecker(ChannelHandlerContext ctx)
 	{
 		InetAddress connectingIp = ((InetSocketAddress) ctx.channel().remoteAddress()).getAddress();
@@ -36,12 +39,12 @@ public class BanCheck {
 		return connectingIp;
 	}
 	
-	public static Object uuidChecker(ChannelHandlerContext ctx, Object msg, InetAddress connectingIp)
+	public static TempClient uuidChecker(ChannelHandlerContext ctx, Object msg, InetAddress connectingIp)
 	{
 		if (ClientConnectPacket.class.equals(msg.getClass()))
 		{
-			ClientConnectPacket connectPacket = (ClientConnectPacket) msg;
-		 	UUID connectingUuid = UUID.nameUUIDFromBytes(connectPacket.getUUID());
+			connectPacket = (ClientConnectPacket) msg;
+		 	connectingUuid = UUID.nameUUIDFromBytes(connectPacket.getUUID());
 			try
 				{
 						for (UUID bannedUuid : StarNub.bannedUuids)
@@ -59,17 +62,9 @@ public class BanCheck {
 				{
 					/* No UUIDs are in the ban list */
 				}
-				System.out.println(connectingIp.toString());
-				//TODO add Backend context
-			 	String playername = connectPacket.getPlayerName();
-				TempClient clientRecord = new TempClient(playername,connectingUuid,connectingIp,ctx);
-				msg = (Object) connectPacket;
-				/* Remove this handler as it is no longer needed */
 			}
-		//DEBUG
-		
-		/* Add packet, Out sends to next handler */
-		return (msg);
+		//TODO add Backend context
+		return new TempClient(connectPacket.getPlayerName(),connectingUuid,connectingIp, ctx);
 	}
 	
 	public static void isBanned(ChannelHandlerContext ctx, String reason, InetAddress connectingIp)

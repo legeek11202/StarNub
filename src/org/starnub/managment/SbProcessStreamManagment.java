@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.starnub.util.stream.MessageFormater;
+
 /**
  * This class will direct the Starbound Subprocess Stream which must be dealt
  * with or it will I/O Block. While it has formatted output this is for partial
@@ -30,13 +32,13 @@ public class SbProcessStreamManagment implements Runnable {
 			{
 				while ((line = input.readLine()) != null)
 				{
-					System.out.println(line);
-//					/* Player Chat */
-//					if (line.contains("Info:  <"))
-//					{
-//						MessageFormater.msgPrint(
-//								line.substring(7, line.length()), 1, 2);
-//					}
+//					System.out.println(line); /* Prints all data */
+					/* Player Chat */
+					if (line.contains("Info:  <"))
+					{
+						MessageFormater.msgPrint(
+								line.substring(7, line.length()), 1, 2);
+					}
 //					else if (line.contains("Client '") && line.contains("> ("))
 //					{
 //						/* Player Names */
@@ -52,23 +54,24 @@ public class SbProcessStreamManagment implements Runnable {
 //						MessageFormater.msgPrint(playerName + " has "
 //								+ activity + " (" + playerIP + ").", 1, 0);
 //					}
-//					/* Prints Starbound SN_Server Version to console */
-//					else if (line.contains("SN_Server version"))
-//					{
-//						MessageFormater.msgPrint(
-//								line.substring(6, line.length()) + ".", 1, 0);
-//					} 
-//					else
-//					{
-//						/*
-//						 * Discard anything that did not pass the filter.
-//						 * 
-//						 * This removed unwanted errors and or Starbound console
-//						 * spam. You may view the Starbound SN_Server log at
-//						 * /starbound/Starbound_Server.log if you want to see
-//						 * anything not filtered about.
-//						 */
-//					}
+					//TODO KEEP
+					/* Prints Starbound SN_Server Version to console */
+					else if (line.contains("SN_Server version"))
+					{
+						MessageFormater.msgPrint(
+								line.substring(6, line.length()) + ".", 1, 0);
+					} 
+					else
+					{
+						/*
+						 * Discard anything that did not pass the filter.
+						 * 
+						 * This removed unwanted errors and or Starbound console
+						 * spam. You may view the Starbound SN_Server log at
+						 * /starbound/Starbound_Server.log if you want to see
+						 * anything not filtered about.
+						 */
+					}
 				}
 			}
 			catch (IOException e)

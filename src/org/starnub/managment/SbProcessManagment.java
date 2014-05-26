@@ -42,28 +42,14 @@ public class SbProcessManagment {
 	{
 		try
 		{
-			if (StarNub.Debug.ON)
-			{
-				System.out
-						.println("Debug: Process Managment: Building SB Server ProcessBuild.");
-			}
 			ProcessBuilder sbProcessBuild = new ProcessBuilder(
 					GetFilePath.getFilePath());
 			sbProcessBuild.redirectErrorStream(true);
-			if (StarNub.Debug.ON)
-			{
-				System.out
-						.println("Debug: Process Managment: Setting up SB Server Process.");
-			}
 			sbProcess = sbProcessBuild.start();
 			Runnable sb_StreamInput = new SbProcessStreamManagment();
-			if (StarNub.Debug.ON)
-			{
-				System.out
-						.println("Debug: Process Managment: Running SB Server Process.");
-			}
 			new Thread(sb_StreamInput).start();
-		} catch (Exception e)
+		} 
+			catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -78,18 +64,9 @@ public class SbProcessManagment {
 	{
 		try
 		{
-			if (StarNub.Debug.ON)
-			{
-				System.out
-						.println("Debug: Process Managment: Destroying SB Server Process.");
-			}
 			sbProcess.destroy();
-			if (StarNub.Debug.ON)
-			{
-				System.out
-						.println("Debug: Process Managment: SB Server Process Destroyed.");
-			}
-		} catch (Exception e)
+		} 
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -110,13 +87,9 @@ public class SbProcessManagment {
 	{
 		try
 		{
-			if (StarNub.Debug.ON)
-			{
-				System.out
-						.println("Debug: Process Managment: Checking if SB Server Process is alive.");
-			}
 			return sbProcess.isAlive();
-		} catch (Exception e)
+		} 
+		catch (Exception e)
 		{
 			return false;
 		}

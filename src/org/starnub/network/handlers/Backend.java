@@ -17,20 +17,12 @@ public class Backend extends ChannelInboundHandlerAdapter  {
 	{
 		this.inboundChannel = inboundChannel;
 	}
-	
-	/* On Handler Add */
-	@Override
-	public void handlerAdded(ChannelHandlerContext ctx) throws Exception
-	{
-		if (StarNub.Debug.ON)
-		{
-			System.out.println("Debug: Backend: Handler Added.");
-		}
-	}
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception 
 	{
+		
+		
 		ctx.read();
 		ctx.write(Unpooled.EMPTY_BUFFER);
 	}

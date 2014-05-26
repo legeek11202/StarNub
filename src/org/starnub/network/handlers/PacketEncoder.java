@@ -11,8 +11,10 @@ import java.util.List;
 import org.starnub.network.StarboundStream;
 import org.starnub.network.packets.Packet;
 
+@SuppressWarnings("rawtypes")
 public class PacketEncoder extends MessageToMessageDecoder {
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void decode(ChannelHandlerContext ctx, Object msg, List out)
 			throws Exception
@@ -35,6 +37,5 @@ public class PacketEncoder extends MessageToMessageDecoder {
 		mainStream.getBuf().writeBytes(payloadStream.getBuf().readBytes(vlqvalue));
 		
 		out.add(mainStream.getBuf());
-
 	}
 }

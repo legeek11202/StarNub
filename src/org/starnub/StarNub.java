@@ -18,6 +18,7 @@ import org.starnub.localization.LanguageLoader;
 import org.starnub.managment.SbServerMonitor;
 import org.starnub.network.ProxyServer;
 import org.starnub.network.handlers.PacketStats;
+import org.starnub.network.handlers.ServerMessaging;
 import org.starnub.network.handlers.TempClient;
 import org.starnub.util.KeyListener;
 import org.starnub.util.stream.MessageFormater;
@@ -130,6 +131,7 @@ public final class StarNub {
 				String stats = ps.packetStats();
 				System.err.println(stats);
 				timer = 0;
+				ServerMessaging.test(clientChannels);
 				}
 			}
 			new MultiOutputStreamLogger().snLogger();

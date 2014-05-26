@@ -42,17 +42,15 @@ public class SbServerMonitor implements Runnable {
 
 		do 
 		{
-			if (StarNub.Debug.ON){System.out.println("Debug: Server Monitor: Server Check. SB uptime in milliseconds "+s.getSbUptime()+".");}
 			switch (statusChecker())
 			{
 			case "statusOk" : new ThreadSleep().timer(30); break;
 			case "pCrash" : processCrashed(); break;
 			case "sUnresp" : serverUnresponsive(); break;  
 			}			
-			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Repeating Monitoring Loop.");}
 		} 
 		while (System.currentTimeMillis() <= futureAutoRestartTime); //TODO - Need to calculate current up time on cycle.
-		if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Auto Restarting Server.");}
+		
 		s.addSbAutoRestarts(); /* Decrement auto restart counter */
 		MessageFormater.msgPrint(lang.getString("ssmar1")+" "+autoRestartTime+" "+lang.getString("ssmar2"), 0, 0);
 		SbProcessManagment.sb_ProcessKill(); /* Kill the Process */
@@ -63,17 +61,14 @@ public class SbServerMonitor implements Runnable {
 	{
 		if (!SbProcessManagment.sb_ProcessStatus())
 		{
-			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Process Crashed");}
 			return "pCrash";
 		}
 		else if (!SbQueryProcessor.serverStatus(1))
 		{
-			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Unresponsive");}
 			return "sUnresp";
 		}
 		else
 		{
-			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Ok");}
 			return "statusOk";
 		}
 	}
