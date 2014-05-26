@@ -23,6 +23,7 @@ public class PacketDecoder extends ByteToMessageDecoder
 	byte packetId;
 	private Packet packet;
 	private TempClient PlayerRecord;
+	private String playerName;
 	
 	/* On Handler Add */
 	@Override
@@ -35,8 +36,25 @@ public class PacketDecoder extends ByteToMessageDecoder
 	@Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception 
 	{
-		StarNub.playersOnline.remove(PlayerRecord.getPlayerName(), PlayerRecord);
-		MessageFormater.msgPrint(PlayerRecord.getPlayerName() + " has disconnected on IP (" + (connectingIp.toString().substring(1, connectingIp.toString().length())) + ").", 0, 0);
+		
+		if (playerName != null) 
+		{ 
+			ServerMessaging.playerDisconnect(playerName,ctx); 
+			MessageFormater.msgPrint(PlayerRecord.getPlayerName() + " has disconnected on IP (" + (connectingIp.toString().substring(1, connectingIp.toString().length())) + ").", 0, 0);
+		}
+		try 
+		{
+			StarNub.playersOnline.remove(PlayerRecord.getPlayerName(), PlayerRecord);
+			StarNub.clientChannels.remove(ctx.channel());
+		}
+		catch (NullPointerException e)
+		{
+			/* Do Nothing */
+		}
+			
+		//TODO Move to decoder
+		/* Removing this channel from the Global List */
+		/* Remove player from the Global Player list */ // TODO Complete player removal from list
 	}
 
 	@Override
@@ -111,8 +129,16 @@ public class PacketDecoder extends ByteToMessageDecoder
 				/* TODO Move this to server side packet on the server side decoder
 				 * This will be a minimal intercepter
 				 */
-				StarNub.playersOnline.put(PlayerRecord.getPlayerName(), PlayerRecord);
-				MessageFormater.msgPrint(PlayerRecord.getPlayerName() + " has connected on IP (" + (connectingIp.toString().substring(1, connectingIp.toString().length())) + ").", 0, 0);
+				playerName = PlayerRecord.getPlayerName();
+				StarNub.playersOnline.put(playerName, PlayerRecord);
+				if (playerName != null) 
+				{ 
+					ServerMessaging.playerConnect(playerName,ctx); 
+					MessageFormater.msgPrint(playerName + " has connected on IP (" + (connectingIp.toString().substring(1, connectingIp.toString().length())) + ").", 0, 0);
+				}
+				/* If StarNub connects to the Starbound Server this will execute */
+				//TODO Move to decoder
+				StarNub.clientChannels.add(ctx.channel());
 			}
 			case 8: 	 {PacketStats.ClientDisconnectPacket++; out.add(packet); break;}
 			case 9: 	 {PacketStats.HandshakeResponsePacket++; out.add(packet); break;}

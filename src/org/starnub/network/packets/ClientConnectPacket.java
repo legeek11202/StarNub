@@ -162,7 +162,7 @@ public class ClientConnectPacket extends Packet {
 	public void Read(StarboundStream stream)
 	{
         AssetDigest = stream.readString();
-        try { Claim = stream.readVariant(); } catch (Exception e) { e.printStackTrace(); }
+        try { Claim = stream.readVariant(); } catch (Exception e) { /* e.printStackTrace() */; }//DEBUG
         boolean uuid = stream.readBoolean();
         if (uuid)
             UUID = stream.readInt8Array(16);

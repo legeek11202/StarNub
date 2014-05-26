@@ -39,10 +39,10 @@ public class Directories {
 					boolean result = directory.mkdir();
 					if (result)
 					{
-						/* Prints if a directory was created or not */
-						MessageFormater.msgPrint(
-								directory + StarNub.language.getString("sndc"),
-								0, 0);
+//						/* Prints if a directory was created or not */
+//						MessageFormater.msgPrint(
+//								directory + StarNub.language.getString("sndc"),
+//								0, 0);
 					}
 				}
 			}

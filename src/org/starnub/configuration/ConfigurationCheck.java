@@ -3,6 +3,7 @@ package org.starnub.configuration;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
+import org.starnub.localization.LanguageLoader;
 import org.starnub.util.os.Directories;
 import org.starnub.util.stream.MessageFormater;
 
@@ -29,9 +30,12 @@ public class ConfigurationCheck {
 
 	private static void snConfigurationCheck ()
 	{
+		
 		/* Directory Check */
     	Directories.snDirCheck();
-    	MessageFormater.msgPrint(lang.getString("dc"), 0, 0);
+//    	MessageFormater.msgPrint(lang.getString("dc"), 0, 0);
+    	/* */
+
     	/* Configuration Validation */
 		Configurator.validateConfig();
 		MessageFormater.msgPrint("\n\n"+lang.getString("uvf")+"\n"+StarNub.configVariables.toString()+"\n", 0, 0);

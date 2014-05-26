@@ -19,6 +19,7 @@ public class PacketEncoder extends MessageToMessageDecoder {
 	protected void decode(ChannelHandlerContext ctx, Object msg, List out)
 			throws Exception
 	{	
+		//TODO Recomress
 		Packet packet = (Packet) msg;
 		
 		ByteBuf bb1 = buffer();

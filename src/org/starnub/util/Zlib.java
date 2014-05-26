@@ -51,7 +51,7 @@ public class Zlib {
 		}
 		catch (UnsupportedEncodingException uee)
 		{
-			uee.printStackTrace();
+//			uee.printStackTrace();//DEBUG
 		}
 
 		return returnValues;
@@ -106,7 +106,7 @@ public class Zlib {
 		}
 		catch (DataFormatException dfe)
 		{
-			dfe.printStackTrace();
+//			dfe.printStackTrace();//DEBUG
 		}
 
 		inflater.end();
@@ -135,7 +135,7 @@ public class Zlib {
 		}
 		catch (UnsupportedEncodingException uee)
 		{
-			uee.printStackTrace();
+//			uee.printStackTrace();//DEBUG
 		}
 
 		return returnValue;

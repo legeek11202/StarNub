@@ -56,6 +56,7 @@ public final class StarNub {
 	/* Since arrays are faster we will keep the bans in arrays */
 	/* Arrays will be updated upon /banned or /unbanned commands */
 	
+	//FIXME Language and no directories
 	public static ResourceBundle language = LanguageLoader.getResources(); 
 	public static Map<String, Integer> configVariables = new HashMap<String, Integer>();
 	public static Map<String, TempClient> playersOnline = new HashMap<String, TempClient>();
@@ -114,6 +115,7 @@ public final class StarNub {
     	
     	//TODO clean up stats timer = packetstats
     	int timer = 0;
+    	int timer2 = 0;
 
 		do 
 		{
@@ -122,18 +124,23 @@ public final class StarNub {
 				
 				new ThreadSleep().timer(5);
 				timer += 5;
+				timer2 += 5;
 				/* Place POST data processing methods here */
 				/*
 				 * Post processing of player data and math for stat's
 				 * 
 				 */
-				while (timer >= 300)
+				while (timer >= 600)
 				{
-				//FINAL_REMOVE - PacketStat Tracking
-				String stats = ps.packetStats();
-				System.err.println(stats);
+					//TODO Make Broadcast Plugin
 				timer = 0;
-				ServerMessaging.test(clientChannels);
+				ServerMessaging.test();
+				}
+				while (timer2 >= 3600)
+				{
+					//FINAL_REMOVE - PacketStat Tracking
+					System.err.println(ps.packetStats());
+				timer2 = 0;
 				}
 			}
 			new MultiOutputStreamLogger().snLogger();

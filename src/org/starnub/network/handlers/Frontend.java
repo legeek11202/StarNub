@@ -64,10 +64,6 @@ public class Frontend extends ChannelInboundHandlerAdapter  {
         		{
         			if (future.isSuccess()) 
         			{
-        				/* If StarNub connects to the Starbound Server this will execute */
-        				//TODO Move to decoder
-        				StarNub.clientChannels.add(ctx.channel());
-        				
         				/* Start Processing Data */
         				inboundChannel.read();
         			} 
@@ -111,10 +107,6 @@ public class Frontend extends ChannelInboundHandlerAdapter  {
     {
     	if (outboundChannel != null) 
     	{
-    		//TODO Move to decoder
-    		/* Removing this channel from the Global List */
-    		StarNub.clientChannels.remove(ctx.channel());
-    		/* Remove player from the Global Player list */ // TODO Complete player removal from list
     		closeOnFlush(outboundChannel);
     	}
 	}
@@ -123,8 +115,6 @@ public class Frontend extends ChannelInboundHandlerAdapter  {
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception 
 	{
-		cause.printStackTrace();
-		System.out.println("Channel exception");	
     }
     
     static void closeOnFlush(Channel ch) 
