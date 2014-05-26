@@ -35,17 +35,17 @@ public class Variant
     public static Variant fromStream(StarboundStream stream) throws Exception
     {
         Variant variant = new Variant();
-        byte type = stream.getBuf().readByte();
+        byte type = stream.readUnsignedByte();
         switch (type)
         {
             case 1:
                 variant.value = null;
                 break;
             case 2:
-                variant.value = stream.getBuf().readDouble();
+                variant.value = stream.readDoubleInt64();
                 break;
             case 3:
-                variant.value = stream.getBuf().readBoolean();
+                variant.value = stream.readBoolean();
                 break;
             case 4:
                 variant.value = stream.readVLQ().getValue();
@@ -77,21 +77,21 @@ public class Variant
     {
         if (value == null)
         {
-            stream.getBuf().writeByte(1);
+            stream.writeByte(1);
         }
         else if (value instanceof Double)
         {
-    		stream.getBuf().writeByte(2);
+    		stream.writeByte(2);
             stream.getBuf().writeDouble((double)value);
         }
         else if (value instanceof Boolean)
         {
-            stream.getBuf().writeByte(3);
+            stream.writeByte(3);
             stream.getBuf().writeBoolean((boolean)value);
         }
         else if (value instanceof Long)
         {
-            stream.getBuf().writeByte(4);
+            stream.writeByte(4);
             stream.writeVLQ((long)value);
         }
         else if (value instanceof String)
