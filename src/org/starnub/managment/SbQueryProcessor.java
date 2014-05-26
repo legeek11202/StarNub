@@ -5,6 +5,13 @@ import org.starnub.network.QueryServer;
 import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.timers.ThreadSleep;
 
+/**
+ * This class will manage Queryies to the Starbound Server.
+ * 
+ * @author Daniel (Underbalanced) (StarNub.org)
+ * @version 1.0, 26 May 2014
+ */
+
 public class SbQueryProcessor {
 
 	private static boolean status;
@@ -18,7 +25,6 @@ public class SbQueryProcessor {
 	public static boolean serverStatus(int i)
 	{
 		type = i;
-		System.out.println(type);
 		queryProcessor();
 		return status;
 	}

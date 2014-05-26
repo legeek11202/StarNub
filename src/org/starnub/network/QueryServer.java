@@ -24,14 +24,13 @@ import org.starnub.util.timers.ThreadSleep;
 
 /**
  * This class will start a client connection to the Starbound server and get a
- * handshake which results in the server sending a Protocol Packet in which we
- * will capture for later use.
+ * handshake which will tell us if the server is responsive or not.
  * <p>
  * Credit goes to Netty.io (Asynchronous API) examples.
  * <p>
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1.0, 17 May 2014 (Incomplete)
+ * @version 1.0, 26 May 2014
  */
 
 public class QueryServer {
@@ -80,12 +79,8 @@ public class QueryServer {
 						{
 							if (future.isSuccess())
 							{
-								if (StarNub.Debug.ON)//FINAL_REMOVE
-								{	
-									System.out.println("Debug: Server Query: Server Check. Status: 3 Way Handshake Complete.");
-									status = true; 
-									f.channel().close(); 
-								}
+								status = true; 
+								f.channel().close(); 
 							} 
 							else
 							{

@@ -7,17 +7,13 @@ import org.starnub.network.QueryServer;
 import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.timers.ThreadSleep;
 
-/*
-* This class's method manages Starbound SN_Server Monitoring
-* 
-* This class will start up the server monitor. It will start 
-* the SB Server. When the server is reachable it will begin
-* the Server Monitor. It will go through the server checker 
-* if all return true then it will execute the switch which 
-* Determines how to control their server.
-* 
-* This method returns nothing.
-* */
+/**
+ * This class will monitors the Starbound Server and 
+ * tracks statistics about its up time, restarts, ect.
+ * 
+ * @author Daniel (Underbalanced) (StarNub.org)
+ * @version 1.0, 26 May 2014
+ */
 
 public class SbServerMonitor implements Runnable {
 	
