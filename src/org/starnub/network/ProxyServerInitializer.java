@@ -20,13 +20,8 @@ import org.starnub.network.handlers.Frontend;
 
 public class ProxyServerInitializer extends ChannelInitializer<SocketChannel> {
 
-	private final String sbRemoteHost;
-	private final int sbRemotePort;
-
-	public ProxyServerInitializer(String sbRemoteHost, int sbRemotePort)
+	public ProxyServerInitializer()
 	{
-		this.sbRemoteHost = sbRemoteHost;
-		this.sbRemotePort = sbRemotePort;
 	}
 
 	/* We use an initializer to set up any handlers for this channel */
@@ -37,6 +32,6 @@ public class ProxyServerInitializer extends ChannelInitializer<SocketChannel> {
 		 * Connection Inspector will check the IP and UUID for bans before it
 		 * removes itself
 		 */
-		 ch.pipeline().addFirst(new ConnectionInspector());
+		 ch.pipeline().addFirst("PacketDecoder", new PacketDecoder());
 	}
 }

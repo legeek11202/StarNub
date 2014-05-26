@@ -33,12 +33,12 @@ public class StarboundStream
 	{
 		return readUnsignedByte() != 0;
 	}
-    public void writeBoolean(boolean value)
-    {
-    	buf.writeByte(value ? (byte)1 : (byte)0);
-    }
+	public void writeBoolean(boolean value)
+	{
+		buf.writeByte(value ? (byte)1 : (byte)0);
+	}
 	
-	/* Byte 8 Int Array */
+	/* ByteArray int8 */
 	public byte[] readInt8Array()
 	{
 		return buf.readBytes(1).array();
@@ -51,12 +51,12 @@ public class StarboundStream
 	{
 		buf.writeBytes(bytes);
 	}
-    public void writeInt8Array(byte[] value, boolean includeLength)
-    {
-        if (includeLength)
-            writeVLQ((long)value.length);
-        buf.writeBytes(value, 0, value.length);
-    }
+	public void writeInt8Array(byte[] value, boolean includeLength)
+	{
+		if (includeLength)
+			writeVLQ((long)value.length);
+		buf.writeBytes(value, 0, value.length);
+	}
     
 	/* Byte 16 Int Array */
 	public byte[] readInt16Array()
@@ -99,13 +99,13 @@ public class StarboundStream
 	}
 	
 	/* Byte Array Packet Data */
-	public byte[] readByteArrayPacketData()
+	public byte[] readVLQIntArray()
 	{
 		VLQ vlq = readVLQ();
 		int len = (int) vlq.getValue();
 		return buf.readBytes(len).array();
 	}
-	public void writeByteArrayPacketData(byte[] bytes)
+	public void writeVLQIntArray(byte[] bytes)
 	{
 		buf.writeBytes(VLQ.createVLQ(bytes.length));
 		buf.writeBytes(bytes);
@@ -120,6 +120,12 @@ public class StarboundStream
 	{
 		buf.writeByte(value);
 	}
+	/* Write Multiple Bytes*/
+	public void writeByte(int value) 
+	{
+		buf.writeByte(value);
+	}
+	
 	
 	/* Unsigned Short*/
 	public short readUnsignedShort()
@@ -175,6 +181,25 @@ public class StarboundStream
 		buf.writeFloat(value);
 	}
 	
+	/* Double */
+	public double readDoubleInt64()
+	{
+		return buf.readDouble();
+	}
+	public void writeDoubleInt64(double value)
+	{
+		buf.writeDouble(value);
+	}
+	
+	/* Read All Bytes */
+	public byte[] readAllBytes()
+	{
+		return buf.readBytes(buf.readableBytes()).array();
+	}
+	public void writeAllBytes(byte[] bytes)
+	{
+		buf.writeBytes(bytes);
+	}	
 	
 	/* VLQ */
 	public VLQ readVLQ()
@@ -201,7 +226,7 @@ public class StarboundStream
 	{
 		try
 		{
-			return new String(readByteArrayPacketData(), Charset.forName("UTF-8"));
+			return new String(readVLQIntArray(), Charset.forName("UTF-8"));
 		}
 		catch (Exception e)
 		{
@@ -210,7 +235,7 @@ public class StarboundStream
 	}
 	public void writeString(String str)
 	{
-		writeByteArrayPacketData(str.getBytes(Charset.forName("UTF-8")));
+		writeVLQIntArray(str.getBytes(Charset.forName("UTF-8")));
 	}
 	
 	/* Variant */
@@ -221,8 +246,11 @@ public class StarboundStream
 	public void writeVariant(Variant var)
 	{
 		var.writeTo(this);
-	}
-
-
+	}	
 	
+	/* Length of current Buffer*/
+	public int getBufferSize()
+	{
+		return buf.readableBytes();
+	}
 }

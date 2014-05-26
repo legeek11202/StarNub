@@ -4,70 +4,76 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.List;
-
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.codec.ByteToMessageDecoder;
-import io.netty.handler.timeout.IdleStateHandler;
+import java.util.UUID;
 
 import org.starnub.StarNub;
-import org.starnub.network.StarboundStream;
+import org.starnub.network.packets.ClientConnectPacket;
 import org.starnub.util.stream.MessageFormater;
 
-public class ConnectionInspector extends ChannelInboundHandlerAdapter {
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.MessageToMessageDecoder;
+
+
+public class ConnectionInspector extends MessageToMessageDecoder {
+	
+	private boolean	uuidBanned;
+	private boolean	uuidChecked;
+	private InetAddress	connectingIp;
+
+	public ConnectionInspector(InetAddress connectingIp)
+	{
+		this.connectingIp = connectingIp;
+	}
 
 	/* On Handler Add */
 	@Override
 	public void handlerAdded(ChannelHandlerContext ctx) throws Exception
 	{
-		if (StarNub.Debug.ON) { System.out.println("Debug: Connection Inspector: Handler Added."); }
-		
-		InetAddress connectingIp = ((InetSocketAddress) ctx.channel().remoteAddress()).getAddress();
 
-		int banned = 0;
+	}
+
+	@Override
+	protected void decode(ChannelHandlerContext ctx, Object msg, List out)
+			throws Exception
+	{
+		//TODO UUID BAN CHECK
+		if (StarNub.Debug.ON) {System.out.println("Debug: Connection Inspector: Check UUID Ban Start.");}
 		
-		if (StarNub.Debug.ON) { System.out.println("Debug: Connection Inspector: IP Connecting: "+connectingIp + "."); }
-		
-		try
+		if (ClientConnectPacket.class.equals(msg.getClass()))
 		{
-			for (InetAddress bannedip : StarNub.bannedIps)
-			{
-				System.out.println(bannedip);
-				if (bannedip.equals(connectingIp))
+			System.out.println("Debug: Connection Inspector: Checking UUID Ban.");
+			ClientConnectPacket connectPacket = (ClientConnectPacket) msg;
+			byte[] uuidBytes = connectPacket.getUUID();
+		 	UUID connectingUuid = UUID.nameUUIDFromBytes(uuidBytes);
+		 	String playername = connectPacket.getPlayerName();
+			System.out.println("UUID: "+connectingUuid);
+			try
 				{
-					banned = 1;
+						for (UUID bannedUuid : StarNub.bannedUuids)
+						{
+							System.out.println(bannedUuid);
+							if (bannedUuid.equals(connectingUuid))
+							{
+								/* Close channel due to Banned IP */
+								// TODO add banned IP message
+								BannedPlayer.isBanned(ctx, "uuid", connectingIp);
+								uuidBanned = true;
+								break;
+							}	
+						}
+						uuidChecked = true;
 				}
-			}	
-		}
-		catch (NullPointerException e)
-		{
-			/* No IPs are in the ban list */
-		}
-		switch (banned)
-			{
-				case 0: 
-					/* IP is not banned, send the client the server version */
-//					ctx.writeAndFlush(bb);
-					if (StarNub.Debug.ON) {System.out.println("Debug: Packet Decoder: Server version sent to client.");}
-					/* Add the regular PacketDecoder to channel */
-					ctx.pipeline().addLast("PacketDecoder", new PacketDecoder());
-					/* Remove this handler as it is no longer needed */
-					ctx.pipeline().remove(this);
-					break;
-				case 1: 
-					MessageFormater.msgPrint(StarNub.language.getString("banned")
-							+ " IP: " + connectingIp + ".", 0, 0);
-					/* Send to Logger */
-					// TODO Logger
-					/* Send a client disconnect with reason */
-					// TODO Write packet for above??
-					/* Close channel due to Banned IP */
-					ctx.close();
-					break;
+				catch (NullPointerException e)
+				{
+					/* No UUIDs are in the ban list */
+				}
+				if (StarNub.Debug.ON) {System.out.println("Debug: Connection Inspector: End.");}
+				TempClient playernames = new TempClient(playername,connectingUuid,connectingIp,ctx);
+				msg = (Object) connectPacket;
+				System.out.println("Removing Inspector");
+				ctx.pipeline().remove(this);
 			}
+		/* Remove this handler as it is no longer needed */
+		out.add(msg);
 	}
 }

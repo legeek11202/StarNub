@@ -1,5 +1,6 @@
 package org.starnub.network.packets;
 
+import org.starnub.datatypes.VLQ;
 import org.starnub.network.StarboundStream;
 
 /**
@@ -21,12 +22,12 @@ public class CloseContainerPacket extends Packet {
 		return 34;
 	}
 
-	private long	EntityId;
+	private VLQ EntityId;
 
 	/**
 	 * @return the entityId
 	 */
-	public long getEntityId()
+	public VLQ getEntityId()
 	{
 		return EntityId;
 	}
@@ -35,7 +36,7 @@ public class CloseContainerPacket extends Packet {
 	 * @param entityId
 	 *            the entityId to set
 	 */
-	public void setEntityId(long entityId)
+	public void setEntityId(VLQ entityId)
 	{
 		EntityId = entityId;
 	}
@@ -43,7 +44,6 @@ public class CloseContainerPacket extends Packet {
 	@Override
 	public void Read(StarboundStream stream)
 	{
-        * //TODO 
         EntityId = stream.readSignedVLQ();
 	}
 

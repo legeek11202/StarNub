@@ -68,7 +68,7 @@ public class ClientConnectPacket extends Packet {
 	}
 
 	/**
-	 * @return the uUID
+	 * @return the UUID
 	 */
 	public byte[] getUUID()
 	{
@@ -76,11 +76,11 @@ public class ClientConnectPacket extends Packet {
 	}
 
 	/**
-	 * @param uUID the uUID to set
+	 * @param UUID the UUID to set
 	 */
-	public void setUUID(byte[] uUID)
+	public void setUUID(byte[] UUID)
 	{
-		UUID = uUID;
+		UUID = UUID;
 	}
 
 	/**
@@ -165,10 +165,10 @@ public class ClientConnectPacket extends Packet {
         try { Claim = stream.readVariant(); } catch (Exception e) { e.printStackTrace(); }
         boolean uuid = stream.readBoolean();
         if (uuid)
-            UUID = stream.readInt8Array(16);//TODO Verify
+            UUID = stream.readInt8Array(16);
         PlayerName = stream.readString();
         Species = stream.readString();
-        Shipworld = stream.readInt8Array();
+        Shipworld = stream.readVLQIntArray();
         Account = stream.readString();
 	}
 
@@ -182,7 +182,7 @@ public class ClientConnectPacket extends Packet {
             stream.writeInt8Array(UUID, false);
         stream.writeString(PlayerName);
         stream.writeString(Species);
-        stream.writeInt8Array(Shipworld);
+        stream.writeVLQIntArray(Shipworld);
         stream.writeString(Account);
 	}
 }

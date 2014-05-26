@@ -54,13 +54,13 @@ public class PassThroughPacket extends Packet {
 	@Override
 	public void Read(StarboundStream stream)
 	{
-		stream.readByteArrayPacketData();
+		payload = stream.readAllBytes();
 	}
 
 	@Override
 	public void Write(StarboundStream stream)
 	{
-		stream.writeByteArrayPacketData(payload);
+		stream.writeAllBytes(payload);
 	}
 	
 	

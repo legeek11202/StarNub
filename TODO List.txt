@@ -31,6 +31,12 @@ Language
 
 
 My Stuff:
+Channel 1: Client -> Server
+[PacketDecoder, PacketEncoder, Frontend, DefaultChannelPipeline$TailHandler#0]
+
+Channel 2: Client <- Server 
+[Backend#0, DefaultChannelPipeline$TailHandler#0]
+
 video 29.00 ByteBufferProcessor important for searching byte buffer
 alloc() over unpooled buffer
 slice() or duplicate() over copy

@@ -25,10 +25,8 @@ import org.starnub.StarNub;
 
 public class ProxyServer implements Runnable {
 
-	final int snServerPort = StarNub.configVariables.get("StarNub_Port");
-	final String sbRemoteHost = "127.0.0.1";
-	final int sbRemotePort = StarNub.configVariables.get("Starbound_Port");
-
+	private final int snServerPort = StarNub.configVariables.get("StarNub_Port");
+	
 	@Override
 	public void run()
 	{
@@ -48,8 +46,7 @@ public class ProxyServer implements Runnable {
 						/* Server Initializer to set up this channels handlers */
 						.childHandler(
 								 /* Bind the Server Socket */
-								new ProxyServerInitializer(sbRemoteHost,
-										sbRemotePort)).bind(snServerPort)
+								new ProxyServerInitializer()).bind(snServerPort)
 						.channel().closeFuture().sync(); 
 			} catch (InterruptedException e)
 			{

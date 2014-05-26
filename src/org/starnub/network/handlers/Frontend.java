@@ -16,30 +16,18 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class Frontend extends ChannelInboundHandlerAdapter  {
     
-    private final String sbRemoteHost;
-    private final int sbRemotePort;
+	private final String sbRemoteHost = "127.0.0.1";
+	private final int sbRemotePort = StarNub.configVariables.get("Starbound_Port");
     private volatile Channel outboundChannel;
     
-    public Frontend(String remoteHost, int remotePort) 
+    public Frontend() 
     {
-        this.sbRemoteHost = remoteHost;
-        this.sbRemotePort = remotePort;
     }
-	
+    
     /* Executes once when handler is added */
 	@Override
 	public void handlerAdded(ChannelHandlerContext ctx) throws Exception
 	{
-		if (StarNub.Debug.ON)
-		{
-			System.out.println("Debug: Frontend: Handler Added.");
-		}
-	}
-  
-    /* Executes once when channel becomes active */
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception 
-    {
     	/* Get this channels contexts for later use so that we can tie the 
     	 * StarNub Client Connector into the same event loop*/
     	final Channel inboundChannel = ctx.channel();
@@ -82,8 +70,7 @@ public class Frontend extends ChannelInboundHandlerAdapter  {
         			{
         				/* If StarNub connects to the Starbound Server this will execute */
         				if (StarNub.Debug.ON) {System.out.println("Debug: Frontend: Connected to Starbound Server.");}
-        				/* We want to add this channel to the Global list */
-        				StarNub.clientChannels.add(ctx.channel());
+
         				if (StarNub.Debug.ON) {System.out.println("Debug: Frontend: Player joined current channels"+StarNub.clientChannels);}
         				/* Start Processing Data */
         				inboundChannel.read();
@@ -95,6 +82,13 @@ public class Frontend extends ChannelInboundHandlerAdapter  {
         			}
         		}
         	});
+	}
+  
+    /* Executes once when channel becomes active */
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception 
+    {
+
 	}
     
 	/* Receiving Data */
