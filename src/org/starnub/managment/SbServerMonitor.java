@@ -56,7 +56,7 @@ public class SbServerMonitor implements Runnable {
 			}			
 			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Repeating Monitoring Loop.");}
 		} 
-		while (System.currentTimeMillis() <= futureAutoRestartTime); //TODO Need to calculate current up time on cycle.
+		while (System.currentTimeMillis() <= futureAutoRestartTime); //TODO - Need to calculate current up time on cycle.
 		if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Auto Restarting Server.");}
 		s.addSbAutoRestarts(); /* Decrement auto restart counter */
 		MessageFormater.msgPrint(lang.getString("ssmar1")+" "+autoRestartTime+" "+lang.getString("ssmar2"), 0, 0);
@@ -71,7 +71,7 @@ public class SbServerMonitor implements Runnable {
 			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Process Crashed");}
 			return "pCrash";
 		}
-		else if (!QueryServer.serverStatus(1))
+		else if (!SbQueryProcessor.serverStatus(1))
 		{
 			if (StarNub.Debug.ON) {System.out.println("Debug: Server Monitor: Server Check. Status: Unresponsive");}
 			return "sUnresp";
@@ -87,7 +87,7 @@ public class SbServerMonitor implements Runnable {
 	{
 		MessageFormater.msgPrint(lang.getString("ssm"), 0, 0);
 		SbProcessManagment.sb_ProcessStart(); /* Start SB Server process */
-		while (!QueryServer.serverStatus(2)) {} /* We will check the server until it is online. */
+		while (!SbQueryProcessor.serverStatus(2)) {} /* We will check the server until it is online. */
 		MessageFormater.msgPrint(lang.getString("sta")+" "+snPort+".", 0, 0);
 		s.setSbOnlineTime(); /* Set the time SB came online */
 	}

@@ -18,6 +18,7 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 import org.starnub.ServerVersion;
 import org.starnub.StarNub;
 import org.starnub.datatypes.VLQ;
+import org.starnub.network.packets.Packet;
 import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.timers.ThreadSleep;
 
@@ -41,21 +42,15 @@ public class QueryServer {
 	{
 	}
 
-	public static Boolean serverStatus(int type)
+	public static boolean serverStatus()
 	{
-		serverQuery(type);
-		return status;
+		serverQuery(); return status;
 	}
 
-	private static void serverQuery(int type)
+	private static void serverQuery()
 	{
-
 		final String sbRemoteHost = "127.0.0.1";
 		final int sbRemotePort = StarNub.configVariables.get("Starbound_Port");
-		int txAttemps = 0; /* We want to attempt to connect several times */
-
-		do
-		{
 
 			/* Using one group of threads */
 			EventLoopGroup queryGroup = new NioEventLoopGroup(1);
@@ -72,52 +67,8 @@ public class QueryServer {
 					public void initChannel(Channel ch) throws Exception
 					{
 						/* Inbound Handler */
-						ch.pipeline().addLast(
-								new ByteToMessageDecoder() {
-									/* Receiving Data */
-									@Override
-									public void channelRead(
-											final ChannelHandlerContext ctx,
-											Object msg) throws Exception
-									{
-								
-									}
-
-									/* When receiving is complete */
-									@Override
-									public void channelReadComplete(
-											ChannelHandlerContext ctx)
-											throws Exception
-									{
-										ctx.close();
-									}
-
-									@Override
-									public void exceptionCaught(
-											ChannelHandlerContext ctx,
-											Throwable cause) throws Exception
-									{
-										/* Do nothing */
-									}
-
-									@Override
-									protected void decode(
-											ChannelHandlerContext ctx,
-											ByteBuf bb, List<Object> out)
-													throws Exception
-									{
-										/*Server Version Packet Here */
-										if (StarNub.Debug.ON)
-										{
-											System.out.println("Debug: Server Query: Server Check. Status: Responsive.");
-										}
-										status = true; 	
-										
-									}
-								});
-					}
-				});
-
+						ch.pipeline().addLast(new ChannelInboundHandlerAdapter() { });
+					}});
 				try
 				{
 					ChannelFuture f = snTxQuerySb.connect(sbRemoteHost,
@@ -129,19 +80,15 @@ public class QueryServer {
 						{
 							if (future.isSuccess())
 							{
-								if (StarNub.Debug.ON)
-								{
+								if (StarNub.Debug.ON)//FINAL_REMOVE
+								{	
 									System.out.println("Debug: Server Query: Server Check. Status: 3 Way Handshake Complete.");
+									status = true; 
+									f.channel().close(); 
 								}
-							} else
+							} 
+							else
 							{
-								if (type == 1)
-								{
-									if (StarNub.Debug.ON)
-									{
-										System.out.println("Debug: Server Query: Server Check. Status: Unresponsive");
-									}
-								}
 								status = false; 
 								f.channel().close(); 
 							}
@@ -150,33 +97,12 @@ public class QueryServer {
 					f.channel().closeFuture().sync();
 				} catch (Exception e)
 				{
-					if (type == 1)
-					{
-						if (StarNub.Debug.ON)
-						{
-							System.out.println("Debug: Server Query: Server Check. Status: Unresponsive.");
-						}
-					}
-					status = false; 
+					status = false;
 				}
-			} finally
+			} 
+					finally
 			{
 				queryGroup.shutdownGracefully();
 			}
-
-			if (!status)
-			{
-				if (type == 1) /* Query attempt for status check */
-				{
-					txAttemps += 1; /* Decrement tries */
-					new ThreadSleep().timer(10); /* Wait until retry */
-					MessageFormater.msgPrint(
-							StarNub.language.getString("sb.q.1") + " ("+ txAttemps + "/12).", 0, 1);
-				} else if (type == 2) /* Server coming online */
-				{
-					new ThreadSleep().timer(5); /* Shorter wait due to nature */
-				}
-			}
-		} while (!status && txAttemps < 12);
 	}
 }
