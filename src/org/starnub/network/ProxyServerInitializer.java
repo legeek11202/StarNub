@@ -2,11 +2,8 @@ package org.starnub.network;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.timeout.IdleStateHandler;
 
-import org.starnub.network.handlers.ConnectionInspector;
 import org.starnub.network.handlers.PacketDecoder;
-import org.starnub.network.handlers.Frontend;
 
 /**
  * This class initializes the initial channel handlers.

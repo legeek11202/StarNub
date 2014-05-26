@@ -1,9 +1,9 @@
 package org.starnub.datatypes;
 
+import io.netty.buffer.ByteBuf;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import io.netty.buffer.ByteBuf;
 
 public class VLQ
 {

@@ -1,11 +1,11 @@
 package org.starnub.network;
 
+import io.netty.buffer.ByteBuf;
+
 import java.nio.charset.Charset;
 
 import org.starnub.datatypes.VLQ;
 import org.starnub.datatypes.Variant;
-
-import io.netty.buffer.ByteBuf;
 
 public class StarboundStream
 {

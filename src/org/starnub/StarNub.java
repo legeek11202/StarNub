@@ -1,31 +1,24 @@
 package org.starnub;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.ObjectInputStream;
 import java.net.InetAddress;
-import java.net.SocketAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.UUID;
 
 import org.joda.time.DateTime;
 import org.starnub.configuration.ConfigurationCheck;
-import org.starnub.datatypes.VLQ;
 import org.starnub.localization.LanguageLoader;
 import org.starnub.managment.SbServerMonitor;
 import org.starnub.network.ProxyServer;
-import org.starnub.network.packets.ProtocolVersionPacket;
+import org.starnub.network.handlers.PacketStats;
+import org.starnub.network.handlers.TempClient;
 import org.starnub.util.KeyListener;
 import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.stream.MultiOutputStreamLogger;
@@ -63,11 +56,11 @@ public final class StarNub {
 	
 	public static ResourceBundle language = LanguageLoader.getResources(); 
 	public static Map<String, Integer> configVariables = new HashMap<String, Integer>();
-	public static Map<String, String> playersOnline = new HashMap<String, String>();
+	public static Map<String, TempClient> playersOnline = new HashMap<String, TempClient>();
 	public static final ChannelGroup clientChannels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 	public static List<InetAddress> bannedIps = new ArrayList<InetAddress>();
-	public static List<String> bannedUuids = new ArrayList<String>();
-	public static ProtocolVersionPacket serverVersion = new ProtocolVersionPacket();
+	public static List<UUID> bannedUuids = new ArrayList<UUID>();
+	public static PacketStats ps = new PacketStats();
 	
     public static void main(String [] args)
 	{
@@ -115,17 +108,29 @@ public final class StarNub {
     	/* Log Refresher */
     	int loggerRefresh = new DateTime().getDayOfMonth();
     	int infinite = 0;
-    	if (Debug.ON) {System.out.println("Debug: StarNub: Today is: "+loggerRefresh);}
+    	
+    	//TODO clean up stats timer = packetstats
+    	int timer = 0;
+
 		do 
 		{
 			while (loggerRefresh == new DateTime().getDayOfMonth())
 			{
+				
 				new ThreadSleep().timer(5);
+				timer += 5;
 				/* Place POST data processing methods here */
 				/*
 				 * Post processing of player data and math for stat's
 				 * 
 				 */
+				while (timer >= 20)
+				{
+				//FINAL_REMOVE - PacketStat Tracking
+				String stats = ps.packetStats();
+				System.err.println(stats);
+				timer = 0;
+				}
 			}
 			new MultiOutputStreamLogger().snLogger();
 			loggerRefresh = new DateTime().getDayOfMonth();

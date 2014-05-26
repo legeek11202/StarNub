@@ -1,13 +1,13 @@
 package org.starnub.network.handlers;
 
-import org.starnub.StarNub;
-
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+
+import org.starnub.StarNub;
 
 public class Backend extends ChannelInboundHandlerAdapter  {
 

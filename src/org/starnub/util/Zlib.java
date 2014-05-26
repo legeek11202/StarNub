@@ -1,8 +1,11 @@
 package org.starnub.util;
 
-import java.io.*;
-import java.util.*;
-import java.util.zip.*;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.DataFormatException;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 public class Zlib {
 	

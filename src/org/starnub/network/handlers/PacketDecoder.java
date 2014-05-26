@@ -6,7 +6,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.util.List;
 
 import org.starnub.StarNub;
@@ -21,53 +20,22 @@ public class PacketDecoder extends ByteToMessageDecoder
 {
 	private InetAddress	connectingIp;
 	private boolean	ipBanned;
+	byte packetId;
+	PacketStats ps = StarNub.ps;
+	private Packet	packet;
 	
 	/* On Handler Add */
 	@Override
 	public void handlerAdded(ChannelHandlerContext ctx) throws Exception
 	{
-		if (StarNub.Debug.ON) { System.out.println("Debug: Connection Inspector: Handler Added."); }
-		
-		InetAddress connectingIp = ((InetSocketAddress) ctx.channel().remoteAddress()).getAddress();
-		
-		if (StarNub.Debug.ON) { System.out.println("Debug: Connection Inspector: IP Connecting: "+connectingIp + "."); }
-		
-		try
-		{
-			for (InetAddress bannedip : StarNub.bannedIps)
-			{
-				System.out.println(bannedip);
-				if (bannedip.equals(connectingIp))
-				{
-					BannedPlayer.isBanned(ctx, "ip", connectingIp );
-					break;
-				}
-			}	
-		}
-		catch (NullPointerException e)
-		{
-			/* No IPs are in the ban list */
-		}
-		if (StarNub.Debug.ON) {System.out.println("Debug: Packet Decoder: Server version sent to client.");}
-		ctx.pipeline().addAfter("PacketDecoder", "ConnectionInspector", new ConnectionInspector(connectingIp));
-		ctx.pipeline().addLast("Frontend", new Frontend());
-		ctx.pipeline().addBefore("Frontend", "PacketEncoder", new PacketEncoder());
+		connectingIp = BanCheck.ipChecker(ctx);
 	}
-	
-    /* Executes once when channel becomes active */
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception 
-    {	
-    	
-    }
-	
+
 	@Override
 	public void decode(ChannelHandlerContext ctx, ByteBuf bb, List<Object>out) throws Exception
 	{	
-		System.out.println("Decoder Start");
 		if (bb.readableBytes() <= 1)
-		{ /* If no readable bytes */
-			System.out.println("Readable Bytes: "+bb.readableBytes());
+		{ 	/* If no readable bytes */
 			return;
 		}
 		
@@ -95,50 +63,89 @@ public class PacketDecoder extends ByteToMessageDecoder
 			bb.resetReaderIndex();
 			return;
 		}
-		
-		if (StarNub.Debug.ON) { System.out.println("Readable Bytes in ByteBuf: "+mainStream.getBuf().readableBytes()); }
 	
 		byte[] data = mainStream.getBuf().readBytes((int) vlqvalue).array();
 		
 		if (compressed)
 		{ 
-			System.out.println("Decompressing");
 			data = new Zlib().decompress(data); 
 		}
 
 		ByteBuf paylaod = Unpooled.copiedBuffer(data);
 		
 		StarboundStream stream = new StarboundStream(paylaod);
-		
-		System.out.println("Decoder Starting Packet");
-		Packet packet = null;
+
 		KnownPackets packetType = KnownPackets.getKnownPackets(packetId);
-		System.out.println("Packet Type: "+packetType);
+
 		if (packetType == null)
 		{
 			return;
 		}
-		else if (packetType != null)
-        {
+		else
+        {			
 			packet = packetType.makeNewPacket();
-			System.out.println("Packet: "+packet);
-			
-        }
-        if (packet != null)
-        {
-			if (PassThroughPacket.class.equals(packet.getClass()));
-			{
-				packet.setPacketId(packetId);
-			}
+			//DEBUG
+        	System.out.println("Packet: "+packet);
+				if (PassThroughPacket.class.equals(packet.getClass()));
+				{
+					packet.setPacketId(packetId);
+				}
         	packet.setIsReceive(true);
         	packet.Read(stream);
         }
-        System.out.println(ctx.channel().pipeline().names());
 		
-		System.out.println(packet.getPacketId());
-		byte PacketId = packet.getPacketId();
-		
-		out.add(packet);
-	   	if (StarNub.Debug.ON) {System.out.println("Debug: Packet Decoder: End. ");}
+		switch (packetId)
+		{
+			/* Most common packets will be at top */
+			case 0: 	 {ps.ProtocolVersionPacket++; out.add(packet); break;}
+			case 1: 	 {ps.ConnectionResponsePacket++; out.add(packet); break;}
+			case 2: 	 {ps.DisconnectResponsePacket++; out.add(packet); break;}
+			case 3: 	 {ps.HandshakeChallengePacket++; out.add(packet); break;}
+			case 4: 	 {ps.ChatReceivedPacket++; out.add(packet); break;}
+			case 5: 	 {ps.UniverseTimeUpdatePacket++; out.add(packet); break;}
+			case 6: 	 {ps.CelestialResponsePacket++; out.add(packet); break;}
+			case 7: 	 {ps.ClientConnectPacket++; BanCheck.uuidChecker(ctx, packet, connectingIp); out.add(packet); break;}
+			case 8: 	 {ps.ClientDisconnectPacket++; out.add(packet); break;}
+			case 9: 	 {ps.HandshakeResponsePacket++; out.add(packet); break;}
+			case 10: 	 {ps.WarpCommandPacket++; out.add(packet); break;}
+			case 11: 	 {ps.ChatSentPacket++; out.add(packet); break;}
+			case 12: 	 {ps.CelestialRequestPacket++; out.add(packet); break;}
+			case 13: 	 {ps.ClientContextUpdatePacket++; out.add(packet); break;}
+			case 14: 	 {ps.WorldStartPacket++; out.add(packet); break;}
+			case 15: 	 {ps.WorldStopPacket++; out.add(packet); break;}
+			case 16: 	 {ps.TileArrayUpdatePacket++; out.add(packet); break;}
+			case 17: 	 {ps.TileUpdatePacket++; out.add(packet); break;}
+			case 18: 	 {ps.TileLiquidUpdatePacket++; out.add(packet); break;}
+			case 19: 	 {ps.TileDamageUpdatePacket++; out.add(packet); break;}
+			case 20: 	 {ps.TileModificationFailurePacket++; out.add(packet); break;}
+			case 21: 	 {ps.GiveItemPacket++; out.add(packet); break;}
+			case 22: 	 {ps.SwapContainerResultPacket++; out.add(packet); break;}
+			case 23: 	 {ps.EnvironmentUpdatePacket++; out.add(packet); break;}
+			case 24: 	 {ps.EntityInteractResultPacket++; out.add(packet); break;}
+			case 25: 	 {ps.ModifyTileListPacket++; out.add(packet); break;}
+			case 26: 	 {ps.DamageTilePacket++; out.add(packet); break;}
+			case 27: 	 {ps.DamageTileGroupPacket++; out.add(packet); break;}
+			case 28: 	 {ps.RequestDropPacket++; out.add(packet); break;}
+			case 29: 	 {ps.SpawnEntityPacket++; out.add(packet); break;}
+			case 30: 	 {ps.EntityInteractPacket++; out.add(packet); break;}
+			case 31: 	 {ps.ConnectWirePacket++; out.add(packet); break;}
+			case 32: 	 {ps.DisconnectAllWiresPacket++; out.add(packet); break;}
+			case 33: 	 {ps.OpenContainerPacket++; out.add(packet); break;}
+			case 34: 	 {ps.CloseContainerPacket++; out.add(packet); break;}
+			case 35: 	 {ps.SwapContainerPacket++; out.add(packet); break;}
+			case 36: 	 {ps.ItemApplyContainerPacket++; out.add(packet); break;}
+			case 37: 	 {ps.StartCraftingContainerPacket++; out.add(packet); break;}
+			case 38: 	 {ps.StopCraftingContainerPacket++; out.add(packet); break;}
+			case 39: 	 {ps.BurnContainerPacket++; out.add(packet); break;}
+			case 40: 	 {ps.ClearContainerPacket++; out.add(packet); break;}
+			case 41: 	 {ps.WorldClientStateUpdatePacket++; out.add(packet); break;}
+			case 42: 	 {ps.EntityCreatePacket++; out.add(packet); break;}
+			case 43: 	 {ps.EntityUpdatePacket++; out.add(packet); break;}
+			case 44: 	 {ps.EntityDestroyPacket++; out.add(packet); break;}
+			case 45: 	 {ps.DamageNotificationPacket++; out.add(packet); break;}
+			case 46: 	 {ps.StatusEffectRequestPacket++; out.add(packet); break;}
+			case 47: 	 {ps.UpdateWorldPropertiesPacket++; out.add(packet); break;}
+			case 48: 	 {ps.HeartbeatPacket++; out.add(packet); break;}
+		}	
 	}
 }

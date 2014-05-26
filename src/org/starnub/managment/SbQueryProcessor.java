@@ -16,7 +16,7 @@ public class SbQueryProcessor {
 
 	private static boolean status;
 	private static int type; /* 1 = Regular Query, 2 = Server Startup */
-	private static int	txAttemps = 0;
+	private static int	txAttemps = 0; /* Query Attempts */
 
 	public SbQueryProcessor()
 	{
@@ -42,7 +42,7 @@ public class SbQueryProcessor {
 			}
 			if (!status && type == 2)
 			{
-				new ThreadSleep().timer(5); /* Shorter wait due to nature */
+				new ThreadSleep().timer(5); /* Shorter wait due to start up query */
 				MessageFormater.msgPrint(StarNub.language.getString("sb.q.2"), 0, 0);
 			}
 		}

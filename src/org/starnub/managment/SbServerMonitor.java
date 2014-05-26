@@ -3,7 +3,6 @@ package org.starnub.managment;
 import java.util.ResourceBundle;
 
 import org.starnub.StarNub;
-import org.starnub.network.QueryServer;
 import org.starnub.util.stream.MessageFormater;
 import org.starnub.util.timers.ThreadSleep;
 

@@ -1,26 +1,16 @@
 package org.starnub.network;
 
-import java.util.List;
-
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.ByteToMessageDecoder;
 
-import org.starnub.ServerVersion;
 import org.starnub.StarNub;
-import org.starnub.datatypes.VLQ;
-import org.starnub.network.packets.Packet;
-import org.starnub.util.stream.MessageFormater;
-import org.starnub.util.timers.ThreadSleep;
 
 /**
  * This class will start a client connection to the Starbound server and get a
