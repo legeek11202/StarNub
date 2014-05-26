@@ -1,6 +1,5 @@
 package org.starnub.managment;
 
-import org.starnub.StarNub;
 import org.starnub.util.os.GetFilePath;
 
 /**

@@ -7,8 +7,6 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-import org.starnub.StarNub;
-
 public class Backend extends ChannelInboundHandlerAdapter  {
 
 	private final Channel inboundChannel;
@@ -21,8 +19,6 @@ public class Backend extends ChannelInboundHandlerAdapter  {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception 
 	{
-		
-		
 		ctx.read();
 		ctx.write(Unpooled.EMPTY_BUFFER);
 	}

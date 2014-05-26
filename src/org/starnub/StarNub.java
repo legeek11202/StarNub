@@ -17,6 +17,7 @@ import org.starnub.configuration.ConfigurationCheck;
 import org.starnub.localization.LanguageLoader;
 import org.starnub.managment.SbServerMonitor;
 import org.starnub.network.ProxyServer;
+import org.starnub.network.UDPProxyServer;
 import org.starnub.network.handlers.PacketStats;
 import org.starnub.network.handlers.ServerMessaging;
 import org.starnub.network.handlers.TempClient;
@@ -87,10 +88,11 @@ public final class StarNub {
         /* Plug-in Loader */
     		
     	/* Proxy Initialization */
+    		//TODO UDP Checker for thread crash
     	Runnable sn_Proxy = new ProxyServer();
-//    	Runnable sn_UDP_Proxy = new SN_UDP_Server();
+    	Runnable sn_UDP_Proxy = new UDPProxyServer();
     	new Thread (sn_Proxy).start();
-//    	new Thread (sn_UDP_Proxy).start();
+    	new Thread (sn_UDP_Proxy).start();
     	}
     	
     	/* Starts the SN_Server WatchDog */
@@ -125,7 +127,7 @@ public final class StarNub {
 				 * Post processing of player data and math for stat's
 				 * 
 				 */
-				while (timer >= 20)
+				while (timer >= 300)
 				{
 				//FINAL_REMOVE - PacketStat Tracking
 				String stats = ps.packetStats();

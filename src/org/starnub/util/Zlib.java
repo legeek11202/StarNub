@@ -57,6 +57,7 @@ public class Zlib {
 		return returnValues;
 	}
 
+	@SuppressWarnings("unused")
 	public byte[] decompress(byte[] bytesToDecompress)
 	{
 		byte[] returnValues = null;

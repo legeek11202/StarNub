@@ -16,9 +16,9 @@ import org.starnub.StarNub;
  * <p>
  * 
  * @author Daniel (Underbalanced) (StarNub.org)
- * @version 1.0, 17 May 2014
+ * @version 1.0, 26 May 2014
  *          <br>
- *          TODO: Will support UDP pass through
+ *         
  *
  */
 
@@ -31,27 +31,28 @@ public class ProxyServer implements Runnable {
 	{
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
+
+		
 		try
 		{
 			/* Initiate the server bootstrap */
 			ServerBootstrap starNubInbound_TCP_Socket = new ServerBootstrap();
-			try
-			{	/* Bootstrap configuration */
-				starNubInbound_TCP_Socket
-						/* Acceptor thread, Worker thread */
-						.group(bossGroup, workerGroup)
-						/* Channel instance */
-						.channel(NioServerSocketChannel.class)
-						/* Server Initializer to set up this channels handlers */
-						.childHandler(
-								 /* Bind the Server Socket */
-								new ProxyServerInitializer()).bind(snServerPort)
-						.channel().closeFuture().sync(); 
-			} catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-		} finally
+			starNubInbound_TCP_Socket
+					/* Acceptor thread, Worker thread */
+					.group(bossGroup, workerGroup)
+					/* Channel instance */
+					.channel(NioServerSocketChannel.class)
+					/* Server Initializer to set up this channels handlers */
+					.childHandler(
+							 /* Bind the Server Socket */
+							new ProxyServerInitializer())
+					.bind(snServerPort).channel().closeFuture().sync();
+		} 
+		catch (InterruptedException e) 
+		{
+			e.printStackTrace();
+		}
+		finally
 		{
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();

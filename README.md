@@ -23,13 +23,20 @@ Current Features
 - No need to write a configuration file (First run, we will ask you questions)
 	- Configuration Options (Auto Restart Timer, Starbound and StarNub Ports)
 	- No need to change your Starbound configuration port number (We do that for you, We do not change it back though!)
-- Server Monitor (Checks every 20 seconds)
-	- Checks the Starbound Server process every 15 seconds. (Restarts on Server crashes)
+- Server Monitor (Checks every 30 seconds)
+	- Checks the Starbound Server process to see if its running. (Restarts on Server crashes)
 	- Checks the Starbound Server for a response via (TCP). (Restarts on Server lockups)
 	- Auto Re-starter (Configurable)
 - Clean console output. Only see player connects, disconnects and joins.
 - Localization (Wiki how to coming later)
 - Network Proxy (Pass through only right now)
+
+- Network Functionality
+	- Players connecting have IP and UUID checked for a ban.
+	- No way to add or remove yet (Coming Soon)
+
+- Test Build:
+	Server broadcast hard coded
 
 - Server and wrapper shutdown
 	- Press "1" in console and press enter to shut the server down. 
@@ -42,6 +49,7 @@ Milestone:
 		- If player IP is changed to avoid a ban, but the UUID is banned, we will ban the new IP for you and let you know we did in console and logs.
 		- Invalid packets will be dropped, and after X bad packets we will drop the connection
 			- If they try to connect and send bad packets after a few disconnects, we will ban the IP for you and let you know we did in console and logs.
+	
 	- Statistics: 
 		- Unique Connections
 		- Player Online Last

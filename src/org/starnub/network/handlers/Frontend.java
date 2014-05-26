@@ -79,13 +79,6 @@ public class Frontend extends ChannelInboundHandlerAdapter  {
         		}
         	});
 	}
-  
-    /* Executes once when channel becomes active */
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception 
-    {
-
-	}
     
 	/* Receiving Data */
 	@Override

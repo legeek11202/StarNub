@@ -36,7 +36,7 @@ public class PacketDecoder extends ByteToMessageDecoder
     public void channelInactive(ChannelHandlerContext ctx) throws Exception 
 	{
 		StarNub.playersOnline.remove(PlayerRecord.getPlayerName(), PlayerRecord);
-		MessageFormater.msgPrint(PlayerRecord.getPlayerName() + " has disconnected on IP (" + (connectingIp.toString().substring(1, connectingIp.toString().length())) + ").", 1, 0);
+		MessageFormater.msgPrint(PlayerRecord.getPlayerName() + " has disconnected on IP (" + (connectingIp.toString().substring(1, connectingIp.toString().length())) + ").", 0, 0);
 	}
 
 	@Override
@@ -108,11 +108,11 @@ public class PacketDecoder extends ByteToMessageDecoder
 			{	
 				PacketStats.ClientConnectPacket++; 
 				PlayerRecord = BanCheck.uuidChecker(ctx, packet, connectingIp); 
-				/* TODO Move this to serverside packet on the server side decoder
+				/* TODO Move this to server side packet on the server side decoder
 				 * This will be a minimal intercepter
 				 */
 				StarNub.playersOnline.put(PlayerRecord.getPlayerName(), PlayerRecord);
-				MessageFormater.msgPrint(PlayerRecord.getPlayerName() + " has connected on IP (" + (connectingIp.toString().substring(1, connectingIp.toString().length())) + ").", 1, 0);
+				MessageFormater.msgPrint(PlayerRecord.getPlayerName() + " has connected on IP (" + (connectingIp.toString().substring(1, connectingIp.toString().length())) + ").", 0, 0);
 			}
 			case 8: 	 {PacketStats.ClientDisconnectPacket++; out.add(packet); break;}
 			case 9: 	 {PacketStats.HandshakeResponsePacket++; out.add(packet); break;}
@@ -120,7 +120,6 @@ public class PacketDecoder extends ByteToMessageDecoder
 			case 11: 	 
 			{
 				PacketStats.ChatSentPacket++; 
-				ServerMessaging.chatSent(packet);
 				out.add(packet); break;
 			}
 			case 12: 	 {PacketStats.CelestialRequestPacket++; out.add(packet); break;}
@@ -156,7 +155,6 @@ public class PacketDecoder extends ByteToMessageDecoder
 			case 4: 	 
 			{
 				PacketStats.ChatReceivedPacket++; 
-				ServerMessaging.chatReceived(packet);
 				out.add(packet); break;
 			}
 			case 5: 	 {PacketStats.UniverseTimeUpdatePacket++; out.add(packet); break;} /* S -> C*/
