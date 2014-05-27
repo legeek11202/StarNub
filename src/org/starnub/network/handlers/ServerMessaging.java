@@ -9,6 +9,7 @@ import io.netty.channel.group.ChannelGroup;
 import org.starnub.StarNub;
 import org.starnub.network.StarboundStream;
 import org.starnub.network.packets.ChatReceivedPacket;
+import org.starnub.network.packets.ChatSentPacket;
 import org.starnub.network.packets.Packet;
 
 public class ServerMessaging {
@@ -22,6 +23,7 @@ public class ServerMessaging {
 	}
 	static ChannelGroup clientchannels = StarNub.clientChannels;
 	
+	//TODO research writing channel and reading, causing issues
 	public static void test()
 	{
 		//TODO Temporary
@@ -32,44 +34,31 @@ public class ServerMessaging {
 		clientchannels.write(msg);
 	}
 	
-	public static void playerConnect(String playerName, ChannelHandlerContext ctx)
-	{
-		String name = "^#ff0000;SERVER";
-		String message = "^#00FF00;"+playerName+" has connected.";
-		Object msg = packager(name, message);
-		for (Channel c: clientchannels) 
-		{
-			 if (c != ctx.channel()) 
-			 {
-				 c.write(msg);
-			 }
-		}
-	}
-
-	public static void playerDisconnect(String playerName, ChannelHandlerContext ctx)
-	{
-		String name = "^#ff0000;SERVER";
-		String message = "^#00FF00;"+playerName+" has disconnected.";
-		Object msg = packager(name, message);
-		for (Channel c: clientchannels) 
-		{
-			 if (c != ctx.channel()) 
-			 {
-				 c.write(msg);
-			 }
-		}
-		
-	}
-	
+//	public static void playerConnect(String playerName, ChannelHandlerContext ctx)
+//	{
+//		String name = "^#ff0000;SERVER";
+//		String message = "^#00FF00;"+playerName+" has connected.";
+//		Object msg = packager(name, message);
+//		clientchannels.write(msg);
+//	}
+//
+//	public static void playerDisconnect(String playerName, ChannelHandlerContext ctx)
+//	{
+//		String name = "^#ff0000;SERVER";
+//		String message = "^#00FF00;"+playerName+" has disconnected.";
+//		Object msg = packager(name, message);
+//		clientchannels.write(msg);
+//	}
+//	
 	public static Object packager(String name, String message)
 	{
-		ChatReceivedPacket packet = new ChatReceivedPacket();
+		ChatSentPacket packet = new ChatSentPacket();
 		packet.setChannel((byte) 1);
-		packet.setName(name);
-		packet.setWorld("");
-		packet.setClientId(1000);
-		packet.setWorld("");
-		packet.setClientId(1000);
+//		packet.setName(name);
+//		packet.setWorld("");
+//		packet.setClientId(1000);
+//		packet.setWorld("");
+//		packet.setClientId(1000);
 		packet.setMessage(message);
 		ByteBuf bb1 = buffer();
 		ByteBuf bb2 = buffer();

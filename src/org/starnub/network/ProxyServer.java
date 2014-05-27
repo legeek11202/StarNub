@@ -31,7 +31,7 @@ public class ProxyServer implements Runnable {
 	{
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
-
+		EventLoopGroup handlerGroup = new NioEventLoopGroup();
 		
 		try
 		{
@@ -47,6 +47,8 @@ public class ProxyServer implements Runnable {
 							 /* Bind the Server Socket */
 							new ProxyServerInitializer())
 					.bind(snServerPort).channel().closeFuture().sync();
+			
+			//FIXME Set buffer to larger amount
 		} 
 		catch (InterruptedException e) 
 		{

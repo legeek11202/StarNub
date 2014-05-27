@@ -130,7 +130,7 @@ public final class StarNub {
 				 * Post processing of player data and math for stat's
 				 * 
 				 */
-				while (timer >= 600)
+				while (timer >= 20)
 				{
 					//TODO Make Broadcast Plugin
 				timer = 0;

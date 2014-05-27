@@ -4,6 +4,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 
 import org.starnub.network.handlers.PacketDecoder;
+import org.starnub.network.handlers.PacketHandler;
 
 /**
  * This class initializes the initial channel handlers.
@@ -30,5 +31,6 @@ public class ProxyServerInitializer extends ChannelInitializer<SocketChannel> {
 		 * removes itself
 		 */
 		 ch.pipeline().addFirst("PacketDecoder", new PacketDecoder());
+		 ch.pipeline().addAfter("PacketDecoder", "PacketHandler", new PacketHandler());
 	}
 }
