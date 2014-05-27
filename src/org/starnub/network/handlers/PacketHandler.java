@@ -55,7 +55,8 @@ public class PacketHandler extends MessageToMessageDecoder{
 		packet = (Packet) msg;
 		packetId = packet.getPacketId();
 		
-		System.out.println(packetId);
+		//DEBUG
+//		System.out.println(packetId);
 
 		switch (packetId)
 		{

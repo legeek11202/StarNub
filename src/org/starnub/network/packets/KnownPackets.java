@@ -77,18 +77,9 @@ public enum KnownPackets {
             
         }
 
-        public Packet makeNewPacket() {
-            try
-			{
-				return this.packetType.newInstance();
-			} catch (InstantiationException e)
-			{
-				e.printStackTrace();
-			} catch (IllegalAccessException e)
-			{
-				e.printStackTrace();
-			}
-			return null;
+        public Packet makeNewPacket() throws Exception 
+        {	
+        	return this.packetType.newInstance();
         }
         
         

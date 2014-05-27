@@ -18,35 +18,44 @@ public class PacketDecoder extends ByteToMessageDecoder
 {
 
 	private Packet packet;
-
+	private long vlqvalue;
+	private boolean compressed;
+	private VLQ vlq;
+	private byte packetId;
+	private boolean firstCycle = true; /* Byte Buffer Cycle */
+	StarboundStream mainStream;
+	
 	@Override
 	public void decode(ChannelHandlerContext ctx, ByteBuf bb, List<Object>out) throws Exception
 	{	
 		if (bb.readableBytes() <= 1)
-		{ 	/* If no readable bytes */
-			return;
+		{ 	
+			return; /* No readable bytes */
 		}
+
+		if (firstCycle) /* We only want to perform these functions once */
+		{  	
+			bb.markReaderIndex(); /* Puts the bytebuf reader at 0 */
+
+			mainStream = new StarboundStream(bb);
 		
-		bb.markReaderIndex(); /* Puts the bytebuf reader at 0 */
+			packetId = (byte) mainStream.getBuf().readUnsignedByte();/* Reader has moved*/
 		
-		StarboundStream mainStream = new StarboundStream(bb);
+			vlq = mainStream.readSignedVLQ();
 		
-		byte packetId = (byte) mainStream.getBuf().readUnsignedByte();/* Reader has moved*/
+			vlqvalue = vlq.getValue();
 		
-		VLQ vlq = mainStream.readSignedVLQ();
+			compressed = vlq.getValue() < 0;
 		
-		long vlqvalue = vlq.getValue();
-		
-		boolean compressed = vlq.getValue() < 0;
-		
-		if (compressed)
-		{ 
-			vlqvalue = -vlqvalue; 
+			if (compressed)
+			{ 
+				vlqvalue = -vlqvalue; 
+			}
 		}
 		
 		if (bb.readableBytes() < vlqvalue) //didn't get all of the data
 		{
-			bb.resetReaderIndex();
+			firstCycle  = false; /* Not enough bytes in buffer */
 			return;
 		}
 	
@@ -62,23 +71,30 @@ public class PacketDecoder extends ByteToMessageDecoder
 		StarboundStream stream = new StarboundStream(paylaod);
 
 		KnownPackets packetType = KnownPackets.getKnownPackets(packetId);
-
-		if (packetType == null)
+		
+		try 
+		{ 
+			packet = packetType.makeNewPacket(); 
+		} 
+		catch (Exception e) 
 		{
-			return;
-		}
-		else
-        {		
-			packet = packetType.makeNewPacket();
 			//DEBUG
-//        	System.out.println("Packet: "+packet);
-				if (PassThroughPacket.class.equals(packet.getClass()));
-				{
-					packet.setPacketId(packetId);
-				}
-        	packet.setIsReceive(true);
-        	packet.Read(stream);
-        }
+//			System.out.println("DEBUG: Error creating packet class.");
+			firstCycle  = true;
+		}
+		
+		if (PassThroughPacket.class.equals(packet.getClass()));
+		{
+			packet.setPacketId(packetId);
+		}
+		
+        packet.setIsReceive(true);
+        packet.Read(stream);
+        	
+        //DEBUG
+//        System.out.println("Packet: "+packet);
+        
 		out.add(packet);
-		}	
+		firstCycle  = true;
+		}
 }
