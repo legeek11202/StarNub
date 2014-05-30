@@ -43,7 +43,7 @@ public class HeartbeatPacket extends Packet {
 	@Override
 	public void Read(StarboundStream stream)
 	{
-        CurrentStep = stream.readVLQ();
+        CurrentStep = stream.readVLQ().getValue();
 	}
 
 	@Override

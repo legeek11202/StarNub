@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.util.List;
 
 import org.starnub.StarNub;
+import org.starnub.network.packets.HeartbeatPacket;
 import org.starnub.network.packets.Packet;
 import org.starnub.util.stream.MessageFormater;
 
@@ -109,7 +110,10 @@ public class PacketHandler extends MessageToMessageDecoder{
 
 			/* Both <-> */
 			case 13: 	 {PacketStats.ClientContextUpdatePacket++; out.add(packet); break;}
-			case 48: 	 {PacketStats.HeartbeatPacket++; out.add(packet); break;}
+			case 48: 	 {
+				HeartbeatPacket hbpacket = (HeartbeatPacket) packet;
+				System.out.println(hbpacket.getCurrentStep());
+				PacketStats.HeartbeatPacket++; out.add(packet); break;}
 			case 42: 	 {PacketStats.EntityCreatePacket++; out.add(packet); break;}
 			case 43: 	 {PacketStats.EntityUpdatePacket++; out.add(packet); break;}
 			

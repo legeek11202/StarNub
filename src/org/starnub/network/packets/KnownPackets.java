@@ -65,7 +65,7 @@ public enum KnownPackets {
         DamageNotificationPacket(PassThroughPacket.class, 45),
         StatusEffectRequestPacket(PassThroughPacket.class, 46),
         UpdateWorldPropertiesPacket(PassThroughPacket.class, 47),
-        HeartbeatPacket(PassThroughPacket.class, 48);
+        HeartbeatPacket(HeartbeatPacket.class, 48);
         
         
         private final Class<? extends Packet> packetType;
