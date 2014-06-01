@@ -33,8 +33,8 @@ public class ProxyServerInitializer extends ChannelInitializer<SocketChannel> {
 		 * removes itself
 		 */
 		 ch.pipeline().addFirst("PacketDecoder", new PacketDecoder());
-		 ch.pipeline().addAfter("PacketDecoder", "PacketEncoder", new PacketEncoder());
-		 ch.pipeline().addAfter("PacketEncoder", "Frontend", new Frontend());
+//		 ch.pipeline().addAfter("PacketDecoder", "PacketEncoder", new PacketEncoder());
+//		 ch.pipeline().addAfter("PacketEncoder", "Frontend", new Frontend());
 //		 ch.pipeline().addAfter("PacketDecoder", "PacketHandler", new PacketHandler());
 	}
 }

@@ -1,25 +1,29 @@
 package org.starnub.network.handlers;
 
-
 import static io.netty.buffer.Unpooled.buffer;
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.MessageToMessageDecoder;
 
-import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+
+import io.netty.buffer.ByteBuf;
 
 import org.starnub.network.StarboundStream;
 import org.starnub.network.packets.Packet;
 import org.starnub.util.Zlib;
 
-public class PacketEncoder extends MessageToMessageDecoder<Object> {
+public class ServerSidePacketQue implements Runnable {
+
+	public static ArrayBlockingQueue<Packet> ServerPacketQue = new ArrayBlockingQueue<Packet>(1000);
+	
+	Packet packet;
 	
 	@Override
-	protected void decode(ChannelHandlerContext ctx, Object msg, List<Object> out)
-			throws Exception
-	{	
-		Packet packet = (Packet) msg;
+	public void run() {
 
+			try {
+				packet = ServerPacketQue.take();
+			} catch (InterruptedException e) {
+			}
+		
 		StarboundStream mainStream = new StarboundStream(buffer());
 		StarboundStream payloadStream = new StarboundStream(buffer());
 
@@ -37,7 +41,11 @@ public class PacketEncoder extends MessageToMessageDecoder<Object> {
 		mainStream.writeByte(packet.getPacketId()); /* Writing the Packet ID */
 		mainStream.writeSignedVLQ(payloadLength); /* Writing the Signed VLQ */
 		mainStream.writeAllBytes(data); /* Writing the Packet ID */
-
-		out.add(mainStream.getBuf());
+		
+		Object msg = mainStream.getBuf();
+		
+		packet.getClientCTX().writeAndFlush(msg);
+	
 	}
+
 }

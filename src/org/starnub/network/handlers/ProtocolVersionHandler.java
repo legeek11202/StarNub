@@ -19,9 +19,8 @@ public class ProtocolVersionHandler extends MessageToMessageDecoder<Object> {
 		if (StarNub.ProtocolVersionPacket.getProtocolVersion() == 0)
 		{
 			ProtocolVersionPacket pvp = (ProtocolVersionPacket) msg;
-			int pvpint = pvp.getProtocolVersion();
-			StarNub.ProtocolVersionPacket.setProtocolVersion(pvpint);
-			MessageFormater.msgPrint("Server Protocol Version: "+pvpint+".", 0, 0);
+			StarNub.ProtocolVersionPacket.setProtocolVersion(pvp.getProtocolVersion());
+			MessageFormater.msgPrint("Server Protocol Version: "+pvp.getProtocolVersion()+".", 0, 0);
 		}
 		SbQueryProcessor.setStatus(true);
 		ctx.close();

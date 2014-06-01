@@ -20,7 +20,9 @@ import org.starnub.managment.SbServerMonitor;
 import org.starnub.network.ConnectedClient;
 import org.starnub.network.ProxyServer;
 import org.starnub.network.UDPProxyServer;
+import org.starnub.network.handlers.ClientSidePacketQue;
 import org.starnub.network.handlers.PacketStats;
+import org.starnub.network.handlers.ServerSidePacketQue;
 import org.starnub.network.packets.ProtocolVersionPacket;
 import org.starnub.util.KeyListener;
 import org.starnub.util.os.Directories;
@@ -111,7 +113,11 @@ public final class StarNub {
     	/* Proxy Initialization */
     		//TODO UDP Checker for thread crash
     	Runnable sn_Proxy = new ProxyServer();
+    	Runnable ClientSidePacketQue = new ClientSidePacketQue();
+    	Runnable ServerSidePacketQue = new ServerSidePacketQue();
     	Runnable sn_UDP_Proxy = new UDPProxyServer();
+    	new Thread (ClientSidePacketQue).start();
+    	new Thread (ServerSidePacketQue).start();
     	new Thread (sn_Proxy).start();
     	new Thread (sn_UDP_Proxy).start();
     	

@@ -5,14 +5,12 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
 import java.util.List;
 
-import org.starnub.StarNub;
 import org.starnub.datatypes.VLQ;
 import org.starnub.network.StarboundStream;
 import org.starnub.network.packets.KnownPackets;
@@ -20,9 +18,7 @@ import org.starnub.network.packets.Packet;
 import org.starnub.network.packets.PassThroughPacket;
 import org.starnub.util.Zlib;
 
-
-
-public class PacketDecoder extends ByteToMessageDecoder
+public class ServerPacketDecoder extends ByteToMessageDecoder
 {
 
 	private Packet packet;
@@ -34,10 +30,10 @@ public class PacketDecoder extends ByteToMessageDecoder
 	StarboundStream mainStream;
 	private ChannelHandlerContext clientCTX;
 	private ChannelHandlerContext serverCTX;
-	private volatile Channel outboundChannel;
 	
-	private final String sbRemoteHost = "127.0.0.1";
-	private final int sbRemotePort = StarNub.configVariables.get("Starbound_Port");
+	public ServerPacketDecoder(ChannelHandlerContext clientCTX) {
+		this.clientCTX = clientCTX;
+	}
 
 	@Override
 	public void decode(ChannelHandlerContext ctx, ByteBuf bb, List<Object>out) throws Exception
@@ -104,57 +100,22 @@ public class PacketDecoder extends ByteToMessageDecoder
 		
         packet.setIsReceive(true);
         packet.Read(stream);
-        
+        	
         /* Routing */
         packet.setClientCTX(clientCTX);
         packet.setServerCTX(serverCTX);
-        	
+        
         //DEBUG
         System.out.println("Packet: "+packet);
         
-		ClientSidePacketQue.ClientPacketQue.put(packet);
+        ServerSidePacketQue.ServerPacketQue.put(packet);
 		firstCycle  = true;
 		}
 	
 	@Override
 	public void handlerAdded(ChannelHandlerContext ctx) throws Exception
 	{
-		clientCTX = ctx;
-    	/* Get this channels contexts for later use so that we can tie the 
-    	 * StarNub Client Connector into the same event loop*/
-    	final Channel inboundChannel = ctx.channel();
-    	
-    	/* We are setting up a client Bootstrap. This will be used to 
-    	 * connect StarNub to the Starbound Server*/
-    	Bootstrap starNubMainOutboundSocket = new Bootstrap();
-        
-    	/* We are calling on the server bootstrap to configure it */
-        starNubMainOutboundSocket
-        
-        	/* We are assigning this bootstrap to use this channels thread 
-        	 * when creating the next channel */
-        	.group(inboundChannel.eventLoop())
-        	
-        	/* We are connecting this channel to the channel being created.
-        	 * In short we are extending it */
-        	.channel(ctx.channel().getClass())
-        	
-        	.option(ChannelOption.TCP_NODELAY,true)
-        	
-        	/* This handler we are currently in is handling the data from the 
-        	 * Starbound clients to the the Client Socket. Below this Handler
-        	 * is being added in order for the client socket to be able to 
-        	 * receive data from Starbound Server and forward it back on to 
-        	 * the Starbound Client.
-        	 * */
-        	.handler(new ServerPacketDecoder(clientCTX));
-        
-        	/* This channel future is setting up a response to a event that has 
-        	 * not happened yet. When the channel connects then the 
-        	 * ChannelFutureListener will respond and start working */
-    		ChannelFuture f = starNubMainOutboundSocket.connect(sbRemoteHost, sbRemotePort);
-    		outboundChannel = f.channel();
-    		serverCTX = outboundChannel.pipeline().firstContext();
+		serverCTX = ctx;
 	}
-	
 }
+

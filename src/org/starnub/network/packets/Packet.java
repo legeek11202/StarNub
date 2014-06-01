@@ -1,5 +1,7 @@
 package org.starnub.network.packets;
 
+import io.netty.channel.ChannelHandlerContext;
+
 import org.starnub.network.StarboundStream;
 
 public class Packet extends AbstractPacket {
@@ -52,6 +54,26 @@ public class Packet extends AbstractPacket {
 	public void setIsReceive(boolean isReceive)
 	{
 		super.setIsReceive(isReceive);
+	}
+
+	@Override
+	public ChannelHandlerContext getServerCTX() {
+		return super.getServerCTX();
+	}
+
+	@Override
+	public void setServerCTX(ChannelHandlerContext serverCTX) {
+		super.setServerCTX(serverCTX);
+	}
+
+	@Override
+	public ChannelHandlerContext getClientCTX() {
+		return super.getClientCTX();
+	}
+
+	@Override
+	public void setClientCTX(ChannelHandlerContext clientCTX) {
+		super.setClientCTX(clientCTX);
 	}
 
 }
