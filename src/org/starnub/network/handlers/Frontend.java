@@ -7,6 +7,7 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.ChannelOption;
 
 import org.starnub.StarNub;
 
@@ -43,6 +44,7 @@ public class Frontend extends ChannelInboundHandlerAdapter  {
         	 * In short we are extending it */
         	.channel(ctx.channel().getClass())
         	
+        	.option(ChannelOption.TCP_NODELAY,true)
         	
         	/* This handler we are currently in is handling the data from the 
         	 * Starbound clients to the the Client Socket. Below this Handler

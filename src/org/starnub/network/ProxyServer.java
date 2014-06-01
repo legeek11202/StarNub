@@ -1,6 +1,7 @@
 package org.starnub.network;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -31,7 +32,6 @@ public class ProxyServer implements Runnable {
 	{
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
-		EventLoopGroup handlerGroup = new NioEventLoopGroup();
 		
 		try
 		{
@@ -42,13 +42,13 @@ public class ProxyServer implements Runnable {
 					.group(bossGroup, workerGroup)
 					/* Channel instance */
 					.channel(NioServerSocketChannel.class)
+					/* Attempt to help reduce bandwidth due to Starbound small packets */
+					.childOption(ChannelOption.TCP_NODELAY,true)
 					/* Server Initializer to set up this channels handlers */
 					.childHandler(
 							 /* Bind the Server Socket */
 							new ProxyServerInitializer())
 					.bind(snServerPort).channel().closeFuture().sync();
-			
-			//FIXME Set buffer to larger amount
 		} 
 		catch (InterruptedException e) 
 		{
