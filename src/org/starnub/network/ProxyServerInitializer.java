@@ -3,7 +3,9 @@ package org.starnub.network;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 
+import org.starnub.network.handlers.Frontend;
 import org.starnub.network.handlers.PacketDecoder;
+import org.starnub.network.handlers.PacketEncoder;
 import org.starnub.network.handlers.PacketHandler;
 
 /**
@@ -31,6 +33,8 @@ public class ProxyServerInitializer extends ChannelInitializer<SocketChannel> {
 		 * removes itself
 		 */
 		 ch.pipeline().addFirst("PacketDecoder", new PacketDecoder());
-		 ch.pipeline().addAfter("PacketDecoder", "PacketHandler", new PacketHandler());
+		 ch.pipeline().addAfter("PacketDecoder", "PacketEncoder", new PacketEncoder());
+		 ch.pipeline().addAfter("PacketEncoder", "Frontend", new Frontend());
+//		 ch.pipeline().addAfter("PacketDecoder", "PacketHandler", new PacketHandler());
 	}
 }

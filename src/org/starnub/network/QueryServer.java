@@ -2,15 +2,15 @@ package org.starnub.network;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 import org.starnub.StarNub;
+import org.starnub.managment.SbQueryProcessor;
+import org.starnub.network.handlers.PacketDecoder;
+import org.starnub.network.handlers.ProtocolVersionHandler;
 
 /**
  * This class will start a client connection to the Starbound server and get a
@@ -25,15 +25,13 @@ import org.starnub.StarNub;
 
 public class QueryServer {
 
-	private static boolean status = true;
-
 	public QueryServer()
 	{
 	}
 
-	public static boolean serverStatus()
+	public static void serverStatus()
 	{
-		serverQuery(); return status;
+		serverQuery();
 	}
 
 	private static void serverQuery()
@@ -56,36 +54,17 @@ public class QueryServer {
 					public void initChannel(Channel ch) throws Exception
 					{
 						/* Inbound Handler */
-						ch.pipeline().addLast(new ChannelInboundHandlerAdapter() { });
-					}});
-				try
-				{
-					ChannelFuture f = snTxQuerySb.connect(sbRemoteHost,
-							sbRemotePort).sync();
-					f.addListener(new ChannelFutureListener() {
-						@Override
-						public void operationComplete(ChannelFuture future)
-								throws Exception
-						{
-							if (future.isSuccess())
-							{
-								status = true; 
-								f.channel().close(); 
-							} 
-							else
-							{
-								status = false; 
-								f.channel().close(); 
-							}
-						}
-					});
-					f.channel().closeFuture().sync();
-				} catch (Exception e)
-				{
-					status = false;
-				}
+						ch.pipeline().addFirst("PacketDecoder", new PacketDecoder());
+						ch.pipeline().addAfter("PacketDecoder", "ProtocolVersion", new ProtocolVersionHandler());
+					}})
+				.connect(sbRemoteHost,sbRemotePort).channel().closeFuture().sync();
+					
 			} 
-					finally
+			catch (Exception e)
+			{
+				SbQueryProcessor.setStatus(false);
+			}
+			finally
 			{
 				queryGroup.shutdownGracefully();
 			}

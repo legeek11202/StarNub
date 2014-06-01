@@ -2,7 +2,6 @@ package org.starnub.util.os;
 
 import java.io.File;
 
-import org.starnub.StarNub;
 import org.starnub.util.stream.MessageFormater;
 
 /**
@@ -39,10 +38,10 @@ public class Directories {
 					boolean result = directory.mkdir();
 					if (result)
 					{
-//						/* Prints if a directory was created or not */
-//						MessageFormater.msgPrint(
-//								directory + StarNub.language.getString("sndc"),
-//								0, 0);
+						/* Prints if a directory was created or not */
+						MessageFormater.msgPrint(
+								directory + "directory created.",
+								0, 0);
 					}
 				}
 			}

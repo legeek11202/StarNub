@@ -17,7 +17,7 @@ import java.util.Map;
 
 public enum KnownPackets {
 	
-        ProtocolVersionPacket(PassThroughPacket.class, 0),
+        ProtocolVersionPacket(ProtocolVersionPacket.class, 0),
         ConnectionResponsePacket(PassThroughPacket.class, 1),
         DisconnectResponsePacket(PassThroughPacket.class, 2),
         HandshakeChallengePacket(PassThroughPacket.class, 3),

@@ -1,5 +1,8 @@
 package org.starnub.network.handlers;
 
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.MessageToMessageDecoder;
+
 import java.net.InetAddress;
 import java.util.List;
 
@@ -7,9 +10,6 @@ import org.starnub.StarNub;
 import org.starnub.network.packets.HeartbeatPacket;
 import org.starnub.network.packets.Packet;
 import org.starnub.util.stream.MessageFormater;
-
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.MessageToMessageDecoder;
 
 public class PacketHandler extends MessageToMessageDecoder{
 

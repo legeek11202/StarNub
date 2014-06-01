@@ -1,4 +1,4 @@
-package org.starnub.network.handlers;
+package org.starnub.network.util;
 
 import static io.netty.buffer.Unpooled.buffer;
 import io.netty.buffer.ByteBuf;

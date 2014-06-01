@@ -22,6 +22,10 @@ public class SbQueryProcessor {
 	{
 	}
 
+	public static void setStatus(boolean status) {
+		SbQueryProcessor.status = status;
+	}
+
 	public static boolean serverStatus(int i)
 	{
 		type = i;
@@ -33,7 +37,7 @@ public class SbQueryProcessor {
 	{
 		while (!status)
 		{
-			status = QueryServer.serverStatus();
+			QueryServer.serverStatus();
 			if (!status && txAttemps < 12 && type == 1 )
 			{
 				txAttemps += 1; /* Decrement tries */
