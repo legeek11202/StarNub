@@ -1,6 +1,7 @@
-package org.starnub.network.packets;
+package network.packets;
 
 import network.StarboundStream;
+import network.Packet;
 
 /**
  * Packet Class.
@@ -9,50 +10,42 @@ import network.StarboundStream;
  * SirCmpwn - (https://github.com/SirCmpwn/StarNet) <br>
  * Mitch528 - (https://github.com/Mitch528/SharpStar) <br>
  * Starbound-Dev - (http://starbound-dev.org/)
- * 
- * @author Daniel (Underbalanced) (StarNub.org)
+ *
+ * @author Daniel (Underbalanced) (www.StarNub.org)
  * @version 1.0, 24 May 2014
- * 
  */
 public class WorldStopPacket extends Packet {
-	
-	public byte PacketId()
-	{
-		return 15;
-	}
 
-	private String	Status;
+    private String Status;
 
-	public WorldStopPacket()
-	{
-	}
+    public WorldStopPacket() {
+    }
 
-	/**
-	 * @return the status
-	 */
-	public String getStatus()
-	{
-		return Status;
-	}
+    public byte PacketId() {
+        return 15;
+    }
 
-	/**
-	 * @param status
-	 *            the status to set
-	 */
-	public void setStatus(String status)
-	{
-		Status = status;
-	}
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return Status;
+    }
 
-	@Override
-	public void Read(StarboundStream stream)
-	{
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    @Override
+    public void Read(StarboundStream stream) {
         Status = stream.readString();
-	}
+    }
 
-	@Override
-	public void Write(StarboundStream stream)
-	{
-        stream.writeString(Status);	
-	}
+    @Override
+    public void Write(StarboundStream stream) {
+        stream.writeString(Status);
+    }
 }

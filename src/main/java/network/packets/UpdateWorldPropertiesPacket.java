@@ -1,7 +1,8 @@
-package org.starnub.network.packets;
+package network.packets;
 
-import network.StarboundStream;
 import datatypes.Variant;
+import network.StarboundStream;
+import network.Packet;
 
 /**
  * Packet Class.
@@ -10,86 +11,73 @@ import datatypes.Variant;
  * SirCmpwn - (https://github.com/SirCmpwn/StarNet) <br>
  * Mitch528 - (https://github.com/Mitch528/SharpStar) <br>
  * Starbound-Dev - (http://starbound-dev.org/)
- * 
- * @author Daniel (Underbalanced) (StarNub.org)
+ *
+ * @author Daniel (Underbalanced) (www.StarNub.org)
  * @version 1.0, 24 May 2014
- * 
  */
 public class UpdateWorldPropertiesPacket extends Packet {
-	
-	public byte PacketId()
-	{
-		return 47;
-	}
 
-	private byte	NumPairs;
-	private String	PropertyName;
-	private Variant	PropertyValue;
+    private byte NumPairs;
+    private String PropertyName;
+    private Variant PropertyValue;
 
-	/**
-	 * @return the numPairs
-	 */
-	public byte getNumPairs()
-	{
-		return NumPairs;
-	}
+    public byte PacketId() {
+        return 47;
+    }
 
-	/**
-	 * @param numPairs
-	 *            the numPairs to set
-	 */
-	public void setNumPairs(byte numPairs)
-	{
-		NumPairs = numPairs;
-	}
+    /**
+     * @return the numPairs
+     */
+    public byte getNumPairs() {
+        return NumPairs;
+    }
 
-	/**
-	 * @return the propertyName
-	 */
-	public String getPropertyName()
-	{
-		return PropertyName;
-	}
+    /**
+     * @param numPairs the numPairs to set
+     */
+    public void setNumPairs(byte numPairs) {
+        NumPairs = numPairs;
+    }
 
-	/**
-	 * @param propertyName
-	 *            the propertyName to set
-	 */
-	public void setPropertyName(String propertyName)
-	{
-		PropertyName = propertyName;
-	}
+    /**
+     * @return the propertyName
+     */
+    public String getPropertyName() {
+        return PropertyName;
+    }
 
-	/**
-	 * @return the propertyValue
-	 */
-	public Variant getPropertyValue()
-	{
-		return PropertyValue;
-	}
+    /**
+     * @param propertyName the propertyName to set
+     */
+    public void setPropertyName(String propertyName) {
+        PropertyName = propertyName;
+    }
 
-	/**
-	 * @param propertyValue
-	 *            the propertyValue to set
-	 */
-	public void setPropertyValue(Variant propertyValue)
-	{
-		PropertyValue = propertyValue;
-	}
+    /**
+     * @return the propertyValue
+     */
+    public Variant getPropertyValue() {
+        return PropertyValue;
+    }
 
-	@Override
-	public void Read(StarboundStream stream)
-	{
+    /**
+     * @param propertyValue the propertyValue to set
+     */
+    public void setPropertyValue(Variant propertyValue) {
+        PropertyValue = propertyValue;
+    }
+
+    @Override
+    public void Read(StarboundStream stream) {
         NumPairs = stream.readUnsignedByte();
         PropertyName = stream.readString();
-        PropertyValue = stream.readVariant();
-	}
+        try { PropertyValue = stream.readVariant(); } catch (Exception e) { e.printStackTrace(); }
+    }
 
-	@Override
-	public void Write(StarboundStream stream)
-	{
+    @Override
+    public void Write(StarboundStream stream) {
         stream.writeByte(NumPairs);
         stream.writeString(PropertyName);
-        stream.writeVariant(PropertyValue);	
-	}
+        stream.writeVariant(PropertyValue);
+    }
 }

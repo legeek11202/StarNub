@@ -8,136 +8,119 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 public class Zlib {
-	
-	public Zlib()
-	{
-	}
 
-	public byte[] compress(byte[] bytesToCompress)
-	{		
-		Deflater deflater = new Deflater();
-		deflater.setInput(bytesToCompress);
-		deflater.finish();
+    public Zlib() {
+    }
 
-		byte[] bytesCompressed = new byte[Short.MAX_VALUE];
+    public byte[] compress(byte[] bytesToCompress) {
+        Deflater deflater = new Deflater();
+        deflater.setInput(bytesToCompress);
+        deflater.finish();
 
-		int numberOfBytesAfterCompression = deflater.deflate(bytesCompressed);
+        byte[] bytesCompressed = new byte[Short.MAX_VALUE];
 
-		byte[] returnValues = new byte[numberOfBytesAfterCompression];
+        int numberOfBytesAfterCompression = deflater.deflate(bytesCompressed);
 
-		System.arraycopy
-		(
-			bytesCompressed,
-			0,
-			returnValues,
-			0,
-			numberOfBytesAfterCompression
-		);
+        byte[] returnValues = new byte[numberOfBytesAfterCompression];
 
-		return returnValues;
-	}
+        System.arraycopy
+                (
+                        bytesCompressed,
+                        0,
+                        returnValues,
+                        0,
+                        numberOfBytesAfterCompression
+                );
 
-	public byte[] compress(String stringToCompress)
-	{		
-		byte[] returnValues = null;
+        return returnValues;
+    }
 
-		try
-		{
+    public byte[] compress(String stringToCompress) {
+        byte[] returnValues = null;
 
-			returnValues = this.compress
-			(
-				stringToCompress.getBytes("UTF-8")
-			);
-		}
-		catch (UnsupportedEncodingException uee)
-		{
-			uee.printStackTrace();//DEBUG
-		}
+        try {
 
-		return returnValues;
-	}
+            returnValues = this.compress
+                    (
+                            stringToCompress.getBytes("UTF-8")
+                    );
+        } catch (UnsupportedEncodingException uee) {
+            uee.printStackTrace();//DEBUG
+        }
 
-	@SuppressWarnings("unused")
-	public byte[] decompress(byte[] bytesToDecompress)
-	{
-		byte[] returnValues = null;
+        return returnValues;
+    }
 
-		Inflater inflater = new Inflater();
+    @SuppressWarnings("unused")
+    public byte[] decompress(byte[] bytesToDecompress) {
+        byte[] returnValues = null;
 
-		int numberOfBytesToDecompress = bytesToDecompress.length;
+        Inflater inflater = new Inflater();
 
-		inflater.setInput
-		(
-			bytesToDecompress,
-			0,
-			numberOfBytesToDecompress
-		);
+        int numberOfBytesToDecompress = bytesToDecompress.length;
 
-		int bufferSizeInBytes = numberOfBytesToDecompress;
+        inflater.setInput
+                (
+                        bytesToDecompress,
+                        0,
+                        numberOfBytesToDecompress
+                );
 
-		int numberOfBytesDecompressedSoFar = 0;
-		List<Byte> bytesDecompressedSoFar = new ArrayList<Byte>();
+        int bufferSizeInBytes = numberOfBytesToDecompress;
 
-		try
-		{
-			while (inflater.needsInput() == false)
-			{
-				byte[] bytesDecompressedBuffer = new byte[bufferSizeInBytes];
+        int numberOfBytesDecompressedSoFar = 0;
+        List<Byte> bytesDecompressedSoFar = new ArrayList<>();
 
-				int numberOfBytesDecompressedThisTime = inflater.inflate
-				(
-					bytesDecompressedBuffer
-				);
+        try {
+            while (!inflater.needsInput()) {
+                byte[] bytesDecompressedBuffer = new byte[bufferSizeInBytes];
 
-				numberOfBytesDecompressedSoFar += numberOfBytesDecompressedThisTime;
+                int numberOfBytesDecompressedThisTime = inflater.inflate
+                        (
+                                bytesDecompressedBuffer
+                        );
 
-				for (int b = 0; b < numberOfBytesDecompressedThisTime; b++)
-				{
-					bytesDecompressedSoFar.add(bytesDecompressedBuffer[b]);
-				}
-			}
+                numberOfBytesDecompressedSoFar += numberOfBytesDecompressedThisTime;
 
-			returnValues = new byte[bytesDecompressedSoFar.size()];
-			for (int b = 0; b < returnValues.length; b++) 
-			{
-				returnValues[b] = (byte)(bytesDecompressedSoFar.get(b));
-			}
+                for (int b = 0; b < numberOfBytesDecompressedThisTime; b++) {
+                    bytesDecompressedSoFar.add(bytesDecompressedBuffer[b]);
+                }
+            }
 
-		}
-		catch (DataFormatException dfe)
-		{
-			dfe.printStackTrace();//DEBUG
-		}
+            returnValues = new byte[bytesDecompressedSoFar.size()];
+            for (int b = 0; b < returnValues.length; b++) {
+                returnValues[b] = (byte) (bytesDecompressedSoFar.get(b));
+            }
 
-		inflater.end();
+        } catch (DataFormatException dfe) {
+            dfe.printStackTrace();//DEBUG
+        }
 
-		return returnValues;
-	}
+        inflater.end();
 
-	public String decompressToString(byte[] bytesToDecompress)
-	{	
-		byte[] bytesDecompressed = this.decompress
-		(
-			bytesToDecompress
-		);
+        return returnValues;
+    }
 
-		String returnValue = null;
+    public String decompressToString(byte[] bytesToDecompress) {
+        byte[] bytesDecompressed = this.decompress
+                (
+                        bytesToDecompress
+                );
 
-		try
-		{
-			returnValue = new String
-			(
-				bytesDecompressed,
-				0,
-				bytesDecompressed.length,
-				"UTF-8"
-			);	
-		}
-		catch (UnsupportedEncodingException uee)
-		{
-			uee.printStackTrace();//DEBUG
-		}
+        String returnValue = null;
 
-		return returnValue;
-	}
+        try {
+            returnValue = new String
+                    (
+                            bytesDecompressed,
+                            0,
+                            bytesDecompressed.length,
+                            "UTF-8"
+                    );
+        } catch (UnsupportedEncodingException uee) {
+            uee.printStackTrace();//DEBUG
+        }
+
+        return returnValue;
+    }
 }

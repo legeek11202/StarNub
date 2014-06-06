@@ -1,6 +1,7 @@
-package org.starnub.network.packets;
+package network.packets;
 
 import network.StarboundStream;
+import network.Packet;
 
 /**
  * Packet Class.
@@ -9,52 +10,43 @@ import network.StarboundStream;
  * SirCmpwn - (https://github.com/SirCmpwn/StarNet) <br>
  * Mitch528 - (https://github.com/Mitch528/SharpStar) <br>
  * Starbound-Dev - (http://starbound-dev.org/)
- * 
- * @author Daniel (Underbalanced) (StarNub.org)
+ *
+ * @author Daniel (Underbalanced) (www.StarNub.org)
  * @version 1.0, 24 May 2014
- * 
  */
 public class UniverseTimeUpdatePacket extends Packet {
-	
-	public byte PacketId()
-	{
-		return 5;
-	}
 
-	private long	Time;
+    private long Time;
 
-	public UniverseTimeUpdatePacket()
-	{
-		Time = 0L;
-	}
+    public UniverseTimeUpdatePacket() {
+        Time = 0L;
+    }
 
-	/**
-	 * @return the time
-	 */
-	public long getTime()
-	{
-		return Time;
-	}
+    public byte PacketId() {
+        return 5;
+    }
 
-	/**
-	 * @param time
-	 *            the time to set
-	 */
-	public void setTime(long time)
-	{
-		Time = time;
-	}
-	
-	@Override
-	public void Read(StarboundStream stream)
-	{
-        int discarded;
-        Time = stream.readSignedVLQ();
-	}
+    /**
+     * @return the time
+     */
+    public long getTime() {
+        return Time;
+    }
 
-	@Override
-	public void Write(StarboundStream stream)
-	{
+    /**
+     * @param time the time to set
+     */
+    public void setTime(long time) {
+        Time = time;
+    }
+
+    @Override
+    public void Read(StarboundStream stream) {
+        Time = stream.readSignedVLQ().getValue();
+    }
+
+    @Override
+    public void Write(StarboundStream stream) {
         stream.writeSignedVLQ(Time);
-	}
+    }
 }

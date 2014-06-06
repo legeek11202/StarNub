@@ -1,6 +1,7 @@
-package org.starnub.network.packets;
+package network.packets;
 
-import org.starnub.network.StarboundStream;
+import network.Packet;
+import network.StarboundStream;
 
 /**
  * Packet Class.
@@ -9,82 +10,69 @@ import org.starnub.network.StarboundStream;
  * SirCmpwn - (https://github.com/SirCmpwn/StarNet) <br>
  * Mitch528 - (https://github.com/Mitch528/SharpStar) <br>
  * Starbound-Dev - (http://starbound-dev.org/)
- * 
- * @author Daniel (Underbalanced) (StarNub.org)
+ *
+ * @author Daniel (Underbalanced) (www.StarNub.org)
  * @version 1.0, 24 May 2014
- * 
  */
 public class EntityDestroyPacket extends Packet {
-	
-	public byte PacketId()
-	{
-		return 44;
-	}
 
-	private long	EntityId;
-	private Boolean	Death;
-	private byte[]	Unknown;
+    private long EntityId;
+    private Boolean Death;
+    private byte[] Unknown;
 
-	/**
-	 * @return the entityId
-	 */
-	public long getEntityId()
-	{
-		return EntityId;
-	}
+    public byte PacketId() {
+        return 44;
+    }
 
-	/**
-	 * @param entityId
-	 *            the entityId to set
-	 */
-	public void setEntityId(long entityId)
-	{
-		EntityId = entityId;
-	}
+    /**
+     * @return the entityId
+     */
+    public long getEntityId() {
+        return EntityId;
+    }
 
-	/**
-	 * @return the death
-	 */
-	public Boolean getDeath()
-	{
-		return Death;
-	}
+    /**
+     * @param entityId the entityId to set
+     */
+    public void setEntityId(long entityId) {
+        EntityId = entityId;
+    }
 
-	/**
-	 * @param death
-	 *            the death to set
-	 */
-	public void setDeath(Boolean death)
-	{
-		Death = death;
-	}
+    /**
+     * @return the death
+     */
+    public Boolean getDeath() {
+        return Death;
+    }
 
-	/**
-	 * @return the unknown
-	 */
-	public byte[] getUnknown()
-	{
-		return Unknown;
-	}
+    /**
+     * @param death the death to set
+     */
+    public void setDeath(Boolean death) {
+        Death = death;
+    }
 
-	/**
-	 * @param unknown
-	 *            the unknown to set
-	 */
-	public void setUnknown(byte[] unknown)
-	{
-		Unknown = unknown;
-	}
+    /**
+     * @return the unknown
+     */
+    public byte[] getUnknown() {
+        return Unknown;
+    }
 
-	@Override
-	public void Read(StarboundStream stream)
-	{
-		* //TODO
-	}
+    /**
+     * @param unknown the unknown to set
+     */
+    public void setUnknown(byte[] unknown) {
+        Unknown = unknown;
+    }
 
-	@Override
-	public void Write(StarboundStream stream)
-	{
-		//TODO
-	}
+    @Override
+    public void Read(StarboundStream stream) {
+//        * //TODO
+    }
+
+    @Override
+    public void Write(StarboundStream stream) {
+        //TODO
+    }
 }

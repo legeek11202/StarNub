@@ -1,7 +1,8 @@
-package org.starnub.network.packets;
+package network.packets;
 
-import network.StarboundStream;
 import datatypes.Variant;
+import network.StarboundStream;
+import network.Packet;
 
 /**
  * Packet Class.
@@ -10,198 +11,167 @@ import datatypes.Variant;
  * SirCmpwn - (https://github.com/SirCmpwn/StarNet) <br>
  * Mitch528 - (https://github.com/Mitch528/SharpStar) <br>
  * Starbound-Dev - (http://starbound-dev.org/)
- * 
- * @author Daniel (Underbalanced) (StarNub.org)
+ *
+ * @author Daniel (Underbalanced) (www.StarNub.org)
  * @version 1.0, 24 May 2014
- * 
  */
 public class WorldStartPacket extends Packet {
-	
-	public byte PacketId()
-	{
-		return 14;
-	}
 
-	private Variant	Planet;
-	private Variant	WorldStructure;
-	private byte[]	Sky;
-	private byte[]	Weather;
-	private float	SpawnX;
-	private float	SpawnY;
-	private Variant	WorldProperties;
-	private int	ClientId;
-	private boolean	Local;
+    private Variant Planet;
+    private Variant WorldStructure;
+    private byte[] Sky;
+    private byte[] Weather;
+    private float SpawnX;
+    private float SpawnY;
+    private Variant WorldProperties;
+    private int ClientId;
+    private boolean Local;
 
-	/**
-	 * @return the planet
-	 */
-	public Variant getPlanet()
-	{
-		return Planet;
-	}
+    public byte PacketId() {
+        return 14;
+    }
 
-	/**
-	 * @param planet
-	 *            the planet to set
-	 */
-	public void setPlanet(Variant planet)
-	{
-		Planet = planet;
-	}
+    /**
+     * @return the planet
+     */
+    public Variant getPlanet() {
+        return Planet;
+    }
 
-	/**
-	 * @return the worldStructure
-	 */
-	public Variant getWorldStructure()
-	{
-		return WorldStructure;
-	}
+    /**
+     * @param planet the planet to set
+     */
+    public void setPlanet(Variant planet) {
+        Planet = planet;
+    }
 
-	/**
-	 * @param worldStructure
-	 *            the worldStructure to set
-	 */
-	public void setWorldStructure(Variant worldStructure)
-	{
-		WorldStructure = worldStructure;
-	}
+    /**
+     * @return the worldStructure
+     */
+    public Variant getWorldStructure() {
+        return WorldStructure;
+    }
 
-	/**
-	 * @return the sky
-	 */
-	public byte[] getSky()
-	{
-		return Sky;
-	}
+    /**
+     * @param worldStructure the worldStructure to set
+     */
+    public void setWorldStructure(Variant worldStructure) {
+        WorldStructure = worldStructure;
+    }
 
-	/**
-	 * @param sky
-	 *            the sky to set
-	 */
-	public void setSky(byte[] sky)
-	{
-		Sky = sky;
-	}
+    /**
+     * @return the sky
+     */
+    public byte[] getSky() {
+        return Sky;
+    }
 
-	/**
-	 * @return the weather
-	 */
-	public byte[] getWeather()
-	{
-		return Weather;
-	}
+    /**
+     * @param sky the sky to set
+     */
+    public void setSky(byte[] sky) {
+        Sky = sky;
+    }
 
-	/**
-	 * @param weather
-	 *            the weather to set
-	 */
-	public void setWeather(byte[] weather)
-	{
-		Weather = weather;
-	}
+    /**
+     * @return the weather
+     */
+    public byte[] getWeather() {
+        return Weather;
+    }
 
-	/**
-	 * @return the spawnX
-	 */
-	public float getSpawnX()
-	{
-		return SpawnX;
-	}
+    /**
+     * @param weather the weather to set
+     */
+    public void setWeather(byte[] weather) {
+        Weather = weather;
+    }
 
-	/**
-	 * @param spawnX
-	 *            the spawnX to set
-	 */
-	public void setSpawnX(float spawnX)
-	{
-		SpawnX = spawnX;
-	}
+    /**
+     * @return the spawnX
+     */
+    public float getSpawnX() {
+        return SpawnX;
+    }
 
-	/**
-	 * @return the spawnY
-	 */
-	public float getSpawnY()
-	{
-		return SpawnY;
-	}
+    /**
+     * @param spawnX the spawnX to set
+     */
+    public void setSpawnX(float spawnX) {
+        SpawnX = spawnX;
+    }
 
-	/**
-	 * @param spawnY
-	 *            the spawnY to set
-	 */
-	public void setSpawnY(float spawnY)
-	{
-		SpawnY = spawnY;
-	}
+    /**
+     * @return the spawnY
+     */
+    public float getSpawnY() {
+        return SpawnY;
+    }
 
-	/**
-	 * @return the worldProperties
-	 */
-	public Variant getWorldProperties()
-	{
-		return WorldProperties;
-	}
+    /**
+     * @param spawnY the spawnY to set
+     */
+    public void setSpawnY(float spawnY) {
+        SpawnY = spawnY;
+    }
 
-	/**
-	 * @param worldProperties
-	 *            the worldProperties to set
-	 */
-	public void setWorldProperties(Variant worldProperties)
-	{
-		WorldProperties = worldProperties;
-	}
+    /**
+     * @return the worldProperties
+     */
+    public Variant getWorldProperties() {
+        return WorldProperties;
+    }
 
-	/**
-	 * @return the clientId
-	 */
-	public long getClientId()
-	{
-		return ClientId;
-	}
+    /**
+     * @param worldProperties the worldProperties to set
+     */
+    public void setWorldProperties(Variant worldProperties) {
+        WorldProperties = worldProperties;
+    }
 
-	/**
-	 * @param clientId
-	 *            the clientId to set
-	 */
-	public void setClientId(long clientId)
-	{
-		ClientId = clientId;
-	}
+    /**
+     * @return the clientId
+     */
+    public long getClientId() {
+        return ClientId;
+    }
 
-	/**
-	 * @return the local
-	 */
-	public boolean isLocal()
-	{
-		return Local;
-	}
+    /**
+     * @param clientId the clientId to set
+     */
+    public void setClientId(int clientId) {
+        ClientId = clientId;
+    }
 
-	/**
-	 * @param local
-	 *            the local to set
-	 */
-	public void setLocal(boolean local)
-	{
-		Local = local;
-	}
+    /**
+     * @return the local
+     */
+    public boolean isLocal() {
+        return Local;
+    }
 
-	@Override
-	public void Read(StarboundStream stream)
-	{
-        Planet = stream.readVariant();
-        WorldStructure = stream.readVariant();
+    /**
+     * @param local the local to set
+     */
+    public void setLocal(boolean local) {
+        Local = local;
+    }
+
+    @Override
+    public void Read(StarboundStream stream) {
+        try { Planet = stream.readVariant(); } catch (Exception e) { e.printStackTrace(); }
+        try { WorldStructure = stream.readVariant(); } catch (Exception e) { e.printStackTrace(); }
         Sky = stream.readInt8Array();
         Weather = stream.readInt8Array();
         SpawnX = stream.readFloatInt32();
         SpawnY = stream.readFloatInt32();
-        WorldProperties = stream.readVariant();
+        try {  WorldProperties = stream.readVariant(); } catch (Exception e) { e.printStackTrace(); }
         ClientId = stream.readUnsignedInt();
         Local = stream.readBoolean();
-	}
+    }
 
-	@Override
-	public void Write(StarboundStream stream)
-	{
+    @Override
+    public void Write(StarboundStream stream) {
         stream.writeVariant(Planet);
         stream.writeVariant(WorldStructure);
         stream.writeInt8Array(Sky);
@@ -211,6 +181,6 @@ public class WorldStartPacket extends Packet {
         stream.writeVariant(WorldProperties);
         stream.writeInt(ClientId);
         stream.writeBoolean(Local);
-		
-	}
+
+    }
 }

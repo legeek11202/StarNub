@@ -6,7 +6,7 @@ StarNub was created to solve a lot of Starbound server issues. This is a work in
 
 Wiki - https://github.com/StarNub/StarNub/wiki
 
-Authors: Underbalanced & Teihoo
+Authors: Underbalanced
 
 NOTE: This code is not final and will be modified for efficiency and clean up.
 

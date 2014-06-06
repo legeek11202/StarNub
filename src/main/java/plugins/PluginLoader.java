@@ -6,14 +6,12 @@ package plugins;
 //import net.xeoh.plugins.base.impl.PluginManagerFactory;
 
 public class PluginLoader {
-	
-	public PluginLoader() 
-	{
-	}
-	
-	public static void snPluginLoader ()
-	{
+
+    public PluginLoader() {
+    }
+
+    public static void snPluginLoader() {
 //	PluginManager pluginManager = PluginManagerFactory.createPluginManager();
 //	pluginManager.addPluginsFrom(new File("StarNub/plugins/").toURI());
-	}
+    }
 }

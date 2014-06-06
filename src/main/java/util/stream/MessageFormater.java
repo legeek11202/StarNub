@@ -11,27 +11,25 @@ import org.joda.time.format.DateTimeFormat;
 **/
 
 public class MessageFormater {
-	
-	private static String[] serverArray= new String[]
-			{
-				"[StarNub ",
-				"[Starbound ",
-			};
-	private static String[] typeArray = new String[]
-			{
-				"Info]: ",
-				"Error]: ",
-				"Chat]: ",
-			};
 
-	public MessageFormater() 
-	{
-	}
-	
-	public static void msgPrint(String message,int server,int type)
-	{
-		/* Adds a fresh date for each entry to stdout */
-		new DateTime();
-		System.out.println(DateTime.now().toString(DateTimeFormat.forPattern("[HH:mm:ss]"))+serverArray[server]+typeArray[type]+message);
-	}
+    private static String[] serverArray = new String[]
+            {
+                    "[StarNub ",
+                    "[Starbound ",
+            };
+    private static String[] typeArray = new String[]
+            {
+                    "Info]: ",
+                    "Error]: ",
+                    "Chat]: ",
+            };
+
+    public MessageFormater() {
+    }
+
+    public static void msgPrint(String message, int server, int type) {
+        /* Adds a fresh date for each entry to stdout */
+        new DateTime();
+        System.out.println(DateTime.now().toString(DateTimeFormat.forPattern("[HH:mm:ss]")) + serverArray[server] + typeArray[type] + message);
+    }
 }

@@ -1,44 +1,38 @@
 package managment;
 
+import util.stream.MessageFormater;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-import util.stream.MessageFormater;
 
 /**
  * This class will direct the Starbound Subprocess Stream which must be dealt
  * with or it will I/O Block. While it has formatted output this is for partial
  * wrapper functionality. While when the wrapper is fully functional we will
  * just discard the stream as we make our own from the network stack.
- * 
- * @author Daniel (Underbalanced) (StarNub.org)
+ *
+ * @author Daniel (Underbalanced) (www.StarNub.org)
  * @version 1.0, 17 May 2014 (Incomplete)
- * 
  */
 
 public class SbProcessStreamManagment implements Runnable {
 
-	public SbProcessStreamManagment()
-	{
-	}
+    public SbProcessStreamManagment() {
+    }
 
-	public synchronized void run()
-	{
-		String line;
-		BufferedReader input = new BufferedReader(new InputStreamReader(
-				SbProcessManagment.getSbProcess().getInputStream()));
-			try
-			{
-				while ((line = input.readLine()) != null)
-				{
+    public synchronized void run() {
+        String line;
+        BufferedReader input = new BufferedReader(new InputStreamReader(
+                SbProcessManagment.getSbProcess().getInputStream()));
+        try {
+            while ((line = input.readLine()) != null) {
 //					System.out.println(line); /* Prints all data */
-					/* Player Chat */
-					if (line.contains("Info:  <"))
-					{
-						MessageFormater.msgPrint(
-								line.substring(7, line.length()), 1, 2);
-					}
+                    /* Player Chat */
+                if (line.contains("Info:  <")) {
+                    MessageFormater.msgPrint(
+                            line.substring(7, line.length()), 1, 2);
+                }
 //					else if (line.contains("Client '") && line.contains("> ("))
 //					{
 //						/* Player Names */
@@ -54,15 +48,12 @@ public class SbProcessStreamManagment implements Runnable {
 //						MessageFormater.msgPrint(playerName + " has "
 //								+ activity + " (" + playerIP + ").", 1, 0);
 //					}
-					//TODO KEEP
+                //TODO KEEP
 					/* Prints Starbound SN_Server Version to console */
-					else if (line.contains("SN_Server version"))
-					{
-						MessageFormater.msgPrint(
-								line.substring(6, line.length()) + ".", 1, 0);
-					} 
-					else
-					{
+                else if (line.contains("SN_Server version")) {
+                    MessageFormater.msgPrint(
+                            line.substring(6, line.length()) + ".", 1, 0);
+                } else {
 						/*
 						 * Discard anything that did not pass the filter.
 						 * 
@@ -71,12 +62,10 @@ public class SbProcessStreamManagment implements Runnable {
 						 * /starbound/Starbound_Server.log if you want to see
 						 * anything not filtered about.
 						 */
-					}
-				}
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

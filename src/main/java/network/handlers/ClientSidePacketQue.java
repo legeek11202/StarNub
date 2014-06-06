@@ -1,51 +1,48 @@
 package network.handlers;
 
+import network.Packet;
+import network.StarboundStream;
+import util.Zlib;
+
 import java.util.concurrent.ArrayBlockingQueue;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import network.StarboundStream;
-import network.packets.Packet;
-import util.Zlib;
+import static io.netty.buffer.Unpooled.buffer;
 
 
 public class ClientSidePacketQue implements Runnable {
 
-	public static ArrayBlockingQueue<Packet> ClientPacketQue = new ArrayBlockingQueue<Packet>(1000);
-	
-	Packet packet;
-	
-	@Override
-	public void run() {
+    public static ArrayBlockingQueue<Packet> ClientPacketQue = new ArrayBlockingQueue<>(1000);
 
-			try {
-				packet = ClientPacketQue.take();
-			} catch (InterruptedException e) {
-			}
+    Packet packet;
 
-		StarboundStream mainStream = new StarboundStream(buffer());
-		StarboundStream payloadStream = new StarboundStream(buffer());
+    public void run() {
 
-		packet.Write(payloadStream); /* Uncompressed */
+        try {
+            packet = ClientPacketQue.take();
+        } catch (InterruptedException e) {
+        }
+        System.out.println("Point 1");
+        StarboundStream mainStream = new StarboundStream(buffer());
+        StarboundStream payloadStream = new StarboundStream(buffer());
 
-		int payloadLength = payloadStream.getBufferSize(); /* Get payload length */
-		byte[] data = payloadStream.getBuf().readBytes(payloadLength).array(); /* Put data into array */
+        packet.Write(payloadStream); /* Uncompressed */
 
-		if (payloadLength > 75) /* Compress data greater then 75 Byte */
-		{
-		data = new Zlib().compress(data); /* Compress payload */
-		payloadLength = -data.length; /* Get new payload length */
-		}
+        int payloadLength = payloadStream.getBufferSize(); /* Get payload length */
+        byte[] data = payloadStream.getBuf().readBytes(payloadLength).array(); /* Put data into array */
+        System.out.println("Point 1");
+        if (payloadLength > 75) /* Compress data greater then 75 Byte */ {
+            data = new Zlib().compress(data); /* Compress payload */
+            payloadLength = -data.length; /* Get new payload length */
+        }
+        System.out.println("Point 1");
+        mainStream.writeByte(packet.getPacketId()); /* Writing the Packet ID */
+        mainStream.writeSignedVLQ(payloadLength); /* Writing the Signed VLQ */
+        mainStream.writeAllBytes(data); /* Writing the Packet ID */
 
-		mainStream.writeByte(packet.getPacketId()); /* Writing the Packet ID */
-		mainStream.writeSignedVLQ(payloadLength); /* Writing the Signed VLQ */
-		mainStream.writeAllBytes(data); /* Writing the Packet ID */
-		
-		Object msg = mainStream.getBuf();
-		
-		packet.getServerCTX().writeAndFlush(msg);
-		}
-		
-	
+
+        System.out.println("Point 1");
+        packet.getServerCTX().channel().writeAndFlush(mainStream.getBuf());
+    }
+
 
 }

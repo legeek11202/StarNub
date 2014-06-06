@@ -1,6 +1,7 @@
 package network.packets;
 
 import network.StarboundStream;
+import network.Packet;
 
 /**
  * Packet Class.
@@ -9,46 +10,42 @@ import network.StarboundStream;
  * SirCmpwn - (https://github.com/SirCmpwn/StarNet) <br>
  * Mitch528 - (https://github.com/Mitch528/SharpStar) <br>
  * Starbound-Dev - (http://starbound-dev.org/)
- * 
- * @author Daniel (Underbalanced) (StarNub.org)
+ *
+ * @author Daniel (Underbalanced) (www.StarNub.org)
  * @version 1.0, 24 May 2014
- * 
  */
 public class HeartbeatPacket extends Packet {
-	
-	public byte PacketId()
-	{
-		return 48;
-	}
 
-	private long CurrentStep;
+    /**
+     * The Server sends steps incremented by one, the client responds every 3, increments of 3.
+     */
+    private long CurrentStep;
 
-	/**
-	 * @return the currentStep
-	 */
-	public long getCurrentStep()
-	{
-		return CurrentStep;
-	}
+    public byte PacketId() {
+        return 48;
+    }
 
-	/**
-	 * @param currentStep
-	 *            the currentStep to set
-	 */
-	public void setCurrentStep(long currentStep)
-	{
-		CurrentStep = currentStep;
-	}
+    /**
+     * @return the currentStep
+     */
+    public long getCurrentStep() {
+        return CurrentStep;
+    }
 
-	@Override
-	public void Read(StarboundStream stream)
-	{
+    /**
+     * @param currentStep the currentStep to set
+     */
+    public void setCurrentStep(long currentStep) {
+        CurrentStep = currentStep;
+    }
+
+    @Override
+    public void Read(StarboundStream stream) {
         CurrentStep = stream.readVLQ().getValue();
-	}
+    }
 
-	@Override
-	public void Write(StarboundStream stream)
-	{
-		stream.writeVLQ(CurrentStep);
-	}
+    @Override
+    public void Write(StarboundStream stream) {
+        stream.writeVLQ(CurrentStep);
+    }
 }
