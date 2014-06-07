@@ -22,7 +22,8 @@ public class ClientDisconnectPacket extends Packet {
         Unknown = 0;
     }
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 8;
     }
 

@@ -25,7 +25,8 @@ public class ProtocolVersionPacket extends Packet {
         ProtocolVersion = protocolVersion;
     }
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 0;
     }
 

@@ -12,24 +12,25 @@ import java.util.Map;
  * <br>
  * Starbound-Dev - Packet(http://starbound-dev.org/)
  *
- * @author Daniel Packet(Underbalanced) Packet(www.StarNub.org)
+ * @author Daniel Packet(Underbalanced) Packet(StarNub.org)
  * @version 1.0, 17 May 2014 Packet(Incomplete)
+ *
  */
 
 public enum KnownPackets {
 
-    ProtocolVersionPacket(ProtocolVersionPacket.class, 0),
-    ConnectionResponsePacket(ConnectionResponsePacket.class, 1),
-    DisconnectResponsePacket(DisconnectResponsePacket.class, 2), //TODO Reverse Engineer
-    HandshakeChallengePacket(HandshakeChallengePacket.class, 3),
+    ProtocolVersionPacket(PassThroughPacket.class, 0),
+    ConnectionResponsePacket(PassThroughPacket.class, 1),
+    DisconnectResponsePacket(PassThroughPacket.class, 2),
+    HandshakeChallengePacket(PassThroughPacket.class, 3),
     ChatReceivedPacket(ChatReceivedPacket.class, 4),
-    UniverseTimeUpdatePacket(UniverseTimeUpdatePacket.class, 5),
-    CelestialResponsePacket(PassThroughPacket.class, 6), //TODO Reverse Engineer
-    ClientConnectPacket(ClientConnectPacket.class, 7), //TODO Reverse Engineer
-    ClientDisconnectPacket(ClientDisconnectPacket.class, 8),
-    HandshakeResponsePacket(HandshakeResponsePacket.class, 9),
+    UniverseTimeUpdatePacket(PassThroughPacket.class, 5),
+    CelestialResponsePacket(PassThroughPacket.class, 6),
+    ClientConnectPacket(ClientConnectPacket.class, 7),
+    ClientDisconnectPacket(PassThroughPacket.class, 8),
+    HandshakeResponsePacket(PassThroughPacket.class, 9),
     WarpCommandPacket(PassThroughPacket.class, 10),
-    ChatSentPacket(network.packets.ChatSentPacket.class, 11),
+    ChatSentPacket(ChatSentPacket.class, 11),
     CelestialRequestPacket(PassThroughPacket.class, 12),
     ClientContextUpdatePacket(PassThroughPacket.class, 13),
     WorldStartPacket(PassThroughPacket.class, 14),
@@ -67,20 +68,35 @@ public enum KnownPackets {
     StatusEffectRequestPacket(PassThroughPacket.class, 46),
     UpdateWorldPropertiesPacket(PassThroughPacket.class, 47),
     HeartbeatPacket(HeartbeatPacket.class, 48);
-    /**
-     * A mapping between the integer code and its corresponding Status to facilitate lookup by code.
-     */
-    private static Map<Integer, KnownPackets> pId_pType_Map;
+
+
     private final Class<? extends Packet> packetType;
     private int packetId;
-    private int KnownPackets;
-
 
     private KnownPackets(Class<? extends Packet> packetType, int packetId) {
         this.packetType = packetType;
         this.packetId = packetId;
 
     }
+
+    public Packet makeNewPacket() throws Exception
+    {
+        return this.packetType.newInstance();
+    }
+
+
+    private int KnownPackets;
+
+    public int getKnownPackets() {
+        return this.KnownPackets;
+    }
+
+    /**
+     * A mapping between the integer code and its corresponding Status to facilitate lookup by code.
+     */
+    private static Map<Integer, KnownPackets> pId_pType_Map;
+
+
 
     public static KnownPackets getKnownPackets(int i) {
         if (pId_pType_Map == null) {
@@ -94,14 +110,6 @@ public enum KnownPackets {
         for (KnownPackets s : values()) {
             pId_pType_Map.put(s.packetId, s);
         }
-    }
-
-    public Packet makeNewPacket() throws Exception {
-        return this.packetType.newInstance();
-    }
-
-    public int getKnownPackets() {
-        return this.KnownPackets;
     }
 
     public int getPacketIdPacket() {

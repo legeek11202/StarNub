@@ -18,7 +18,8 @@ public class OpenContainerPacket extends Packet {
 
     private long EntityId;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 33;
     }
 

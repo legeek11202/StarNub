@@ -21,7 +21,8 @@ public class UpdateWorldPropertiesPacket extends Packet {
     private String PropertyName;
     private Variant PropertyValue;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 47;
     }
 

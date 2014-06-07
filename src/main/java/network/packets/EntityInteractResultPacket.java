@@ -21,7 +21,8 @@ public class EntityInteractResultPacket extends Packet {
     private int EntityId;
     private Variant Results;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 24;
     }
 

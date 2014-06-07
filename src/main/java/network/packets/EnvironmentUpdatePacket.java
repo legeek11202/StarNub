@@ -23,7 +23,8 @@ public class EnvironmentUpdatePacket extends Packet {
         Weather = new byte[0];
     }
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 23;
     }
 

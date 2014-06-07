@@ -22,7 +22,8 @@ public class ChatReceivedPacket extends Packet {
     private String Name;
     private String Message;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 4;
     }
 

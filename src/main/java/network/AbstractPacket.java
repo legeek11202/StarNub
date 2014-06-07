@@ -1,7 +1,6 @@
 package network;
 
 import io.netty.channel.ChannelHandlerContext;
-import network.StarboundStream;
 
 public abstract class AbstractPacket {
 

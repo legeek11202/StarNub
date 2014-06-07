@@ -20,7 +20,8 @@ public class EntityDestroyPacket extends Packet {
     private Boolean Death;
     private byte[] Unknown;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 44;
     }
 

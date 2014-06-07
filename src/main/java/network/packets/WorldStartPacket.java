@@ -27,7 +27,8 @@ public class WorldStartPacket extends Packet {
     private int ClientId;
     private boolean Local;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 14;
     }
 

@@ -24,7 +24,8 @@ public class ClientContextUpdatePacket extends Packet {
 
     // public World World; //TODO Need to add world read
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 13;
     }
 

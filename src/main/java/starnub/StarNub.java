@@ -10,9 +10,6 @@ import managment.SbServerMonitor;
 import network.ConnectedClient;
 import network.ProxyServer;
 import network.UDPProxyServer;
-import network.handlers.ClientSidePacketQue;
-import network.handlers.PacketStats;
-import network.handlers.ServerSidePacketQue;
 import network.packets.ProtocolVersionPacket;
 import org.joda.time.DateTime;
 import util.KeyListener;
@@ -23,6 +20,8 @@ import util.timers.ThreadSleep;
 
 import java.net.InetAddress;
 import java.util.*;
+
+//import network.handlers.PacketStats;
 
 /*
  * Represents the StarNub core.
@@ -38,8 +37,8 @@ public final class StarNub {
     public volatile static List<UUID> bannedUuids = new ArrayList<UUID>();
     public volatile static ProtocolVersionPacket ProtocolVersionPacket = new ProtocolVersionPacket();
     /* Debugging Only */
-    public volatile static PacketStats cps = new PacketStats();
-    public volatile static PacketStats sps = new PacketStats();
+//    public volatile static PacketStats cps = new PacketStats();
+//    public volatile static PacketStats sps = new PacketStats();
 
     public StarNub() {
     }
@@ -82,11 +81,11 @@ public final class StarNub {
     	/* Proxy Initialization */
         //TODO UDP Checker for thread crash
         Runnable sn_Proxy = new ProxyServer();
-        Runnable ClientSidePacketQue = new ClientSidePacketQue();
-        Runnable ServerSidePacketQue = new ServerSidePacketQue();
+//        Runnable ClientSidePacketQue = new ClientSidePacketQue();
+//        Runnable ServerSidePacketQue = new ServerSidePacketQue();
         Runnable sn_UDP_Proxy = new UDPProxyServer();
-        new Thread(ClientSidePacketQue).start();
-        new Thread(ServerSidePacketQue).start();
+//        new Thread(ClientSidePacketQue).start();
+//        new Thread(ServerSidePacketQue).start();
         new Thread(sn_Proxy).start();
         new Thread(sn_UDP_Proxy).start();
 

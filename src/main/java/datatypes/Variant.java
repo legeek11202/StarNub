@@ -60,8 +60,8 @@ public class Variant {
                 variant.value = dict;
                 break;
             default:
+                System.err.println("Unknown Variant Type: "+type);
                 throw new Exception("Unknown Variant type");
-                //TODO Remove throws and insert a default value and print statement.
         }
         return variant;
     }

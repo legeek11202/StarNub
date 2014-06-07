@@ -18,7 +18,8 @@ public class RequestDropPacket extends Packet {
 
     private long EntityId;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 28;
     }
 

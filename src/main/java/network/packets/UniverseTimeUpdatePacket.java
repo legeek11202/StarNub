@@ -22,7 +22,8 @@ public class UniverseTimeUpdatePacket extends Packet {
         Time = 0L;
     }
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 5;
     }
 

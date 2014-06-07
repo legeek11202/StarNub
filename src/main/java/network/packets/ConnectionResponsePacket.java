@@ -38,7 +38,8 @@ public class ConnectionResponsePacket extends Packet {
     public ConnectionResponsePacket() {
     }
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 1;
     }
 

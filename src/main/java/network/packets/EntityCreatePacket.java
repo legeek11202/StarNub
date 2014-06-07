@@ -16,7 +16,8 @@ import network.StarboundStream;
  */
 public class EntityCreatePacket extends Packet {
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 42;
     }//TODO
 

@@ -21,7 +21,8 @@ public class HeartbeatPacket extends Packet {
      */
     private long CurrentStep;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 48;
     }
 

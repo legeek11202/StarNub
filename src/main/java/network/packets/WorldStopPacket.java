@@ -21,7 +21,8 @@ public class WorldStopPacket extends Packet {
     public WorldStopPacket() {
     }
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 15;
     }
 

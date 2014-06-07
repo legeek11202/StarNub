@@ -23,7 +23,8 @@
 //        Coordinates = new WorldCoordinate();
 //    }
 //
-//    public byte PacketId() {
+//    @Override
+//    public byte getPacketId() {
 //        return 10;
 //    }
 //

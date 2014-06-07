@@ -63,7 +63,7 @@ public class ServerMessaging {
 
         int vlqvalue = payloadStream.getBufferSize();
 
-        mainStream.writeByte(packet.PacketId());
+//        mainStream.writeByte(packet.PacketId());
 
         mainStream.writeSignedVLQ(vlqvalue);
 

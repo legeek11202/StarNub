@@ -21,6 +21,12 @@ public class KeyListener implements Runnable {
     }
 
     public synchronized void run() {
+        while (true) {
+            menu();
+        }
+    }
+
+    private void menu (){
         System.out
                 .println("Press 1 and then enter to shutdown the Wrapper and SN_Server.");
         Scanner sc = new Scanner(System.in);
@@ -34,6 +40,10 @@ public class KeyListener implements Runnable {
             }
             System.exit(1);
         }
-        sc.close();
+        else{
+            sc.close();
+            menu();
+        }
+
     }
 }

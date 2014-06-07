@@ -23,7 +23,8 @@ public class HandshakeChallengePacket extends Packet {
         Rounds = 5000;
     }
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 3;
     }
 

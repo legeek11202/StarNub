@@ -2,7 +2,9 @@ package network;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
+import network.handlers.Frontend;
 import network.handlers.PacketDecoder;
+import network.handlers.PacketEncoder;
 
 /**
  * This class initializes the initial channel handlers.
@@ -26,9 +28,9 @@ public class ProxyServerInitializer extends ChannelInitializer<SocketChannel> {
 		 * Connection Inspector will check the IP and UUID for bans before it
 		 * removes itself
 		 */
-        ch.pipeline().addFirst("PacketDecoder", new PacketDecoder());
-//		 ch.pipeline().addAfter("PacketDecoder", "PacketEncoder", new PacketEncoder());
-//		 ch.pipeline().addAfter("PacketEncoder", "Frontend", new Frontend());
+         ch.pipeline().addFirst("PacketDecoder", new PacketDecoder());
+		 ch.pipeline().addAfter("PacketDecoder", "PacketEncoder", new PacketEncoder());
+		 ch.pipeline().addAfter("PacketEncoder", "Frontend", new Frontend());
 //		 ch.pipeline().addAfter("PacketDecoder", "PacketHandler", new PacketHandler());
     }
 }

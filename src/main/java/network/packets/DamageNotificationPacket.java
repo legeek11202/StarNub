@@ -26,7 +26,8 @@ public class DamageNotificationPacket extends Packet {
     private String TargetMaterialKind;
     private byte HitResultKind;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 45;
     }
 

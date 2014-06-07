@@ -38,7 +38,8 @@ public class ClientConnectPacket extends Packet {
         Account = account;
     }
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 7;
     }
 

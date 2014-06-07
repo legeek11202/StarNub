@@ -27,7 +27,8 @@
 //        ItemProperties = new VariantHashmap().VariantHashmap;
 //    }
 //
-//    public byte PacketId() {
+//    @Override
+//    public byte getPacketId() {
 //        return 21;
 //    }
 //

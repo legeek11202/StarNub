@@ -22,6 +22,7 @@ public class PassThroughPacket extends Packet {
     /**
      * @return the packetId
      */
+    @Override
     public byte getPacketId() {
         return packetId;
     }

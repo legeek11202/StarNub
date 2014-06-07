@@ -19,7 +19,8 @@ public class ChatSentPacket extends Packet {
     private String Message;
     private byte Channel;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 11;
     }
 

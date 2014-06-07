@@ -19,7 +19,8 @@ public class EntityUpdatePacket extends Packet {
     private long EntityId;
     private byte[] Unknown;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 43;
     }
 

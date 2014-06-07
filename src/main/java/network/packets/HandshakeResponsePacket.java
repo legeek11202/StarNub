@@ -25,7 +25,8 @@ public class HandshakeResponsePacket extends Packet {
         PasswordHash = passwordHash;
     }
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 9;
     }
 

@@ -35,7 +35,8 @@ public class TileDamageUpdatePacket extends Packet {
         DamageType = 0;
     }
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 19;
     }
 

@@ -15,7 +15,8 @@ import network.Packet;
  */
 public class CelestialResponsePacket extends Packet {
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 6;
     }
 

@@ -1,8 +1,7 @@
 package network.packets;
 
-import datatypes.VLQ;
-import network.StarboundStream;
 import network.Packet;
+import network.StarboundStream;
 
 /**
  * Packet Class.
@@ -19,7 +18,8 @@ public class CloseContainerPacket extends Packet {
 
     private long EntityId;
 
-    public byte PacketId() {
+    @Override
+    public byte getPacketId() {
         return 34;
     }
 

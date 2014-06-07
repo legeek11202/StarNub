@@ -92,7 +92,10 @@ public class VLQ {
 
     }
 
+    // FIXME Needed for compression
+    // NOTE doesnt appear that a VLQ was even being created
     public static byte[] createSignedVLQ(long value) {
+
 
         long result = Math.abs(value * 2);
 
