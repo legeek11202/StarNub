@@ -1,6 +1,7 @@
 package network;
 
-import datatypes.*;
+import datatypes.VLQ;
+import datatypes.Variant;
 import io.netty.buffer.ByteBuf;
 
 import java.nio.charset.Charset;

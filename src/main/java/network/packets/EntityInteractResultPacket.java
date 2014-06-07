@@ -1,8 +1,8 @@
 package network.packets;
 
 import datatypes.Variant;
-import network.StarboundStream;
 import network.Packet;
+import network.StarboundStream;
 
 /**
  * Packet Class.

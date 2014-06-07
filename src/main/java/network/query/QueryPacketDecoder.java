@@ -1,17 +1,16 @@
 package network.query;
 
+import datatypes.VLQ;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
-
-import java.util.List;
-
 import network.StarboundStream;
 import network.packets.ProtocolVersionPacket;
 import starnub.StarNub;
 import util.Zlib;
-import datatypes.VLQ;
+
+import java.util.List;
 
 
 public class QueryPacketDecoder extends ByteToMessageDecoder {

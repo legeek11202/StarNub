@@ -10,7 +10,8 @@ public final class ConnectedClient {
     private final String playername;
     private final InetAddress connectingIp;
     private final UUID uuid;
-    private final ChannelHandlerContext ctx;
+    private final ChannelHandlerContext ctx; //TODO Label client context
+    //TODO Server context
 
     public ConnectedClient(String playername, UUID connectingUuid, InetAddress connectingIp, ChannelHandlerContext ctx) {
         this.playername = playername;

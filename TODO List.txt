@@ -55,4 +55,6 @@ long end = System.currentTimeMillis ();
 System.out.println ("Time taken for execution is " + (end � start));
 
 
-IPs list of 61K IP's to test the performance of banned IP checks. It took only .27 seconds (270 milliseconds) to load the 61K addresses. When a I connected it took only .9 Seconds (900 milliseconds) to check the connecting IP against all 61K addresses. Ok back to work! 
+IPs list of 61K IP's to test the performance of banned IP checks. It took only .27 seconds (270 milliseconds) to load the 61K addresses. When a I connected it took only .9 Seconds (900 milliseconds) to check the connecting IP against all 61K addresses. Ok back to work!
+
+ //TODO BUG from starbound with player names and underscores or not matching names, crash on ship warp..

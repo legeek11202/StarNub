@@ -1,7 +1,7 @@
 package network.packets;
 
-import network.StarboundStream;
 import network.Packet;
+import network.StarboundStream;
 
 /**
  * Packet Class.

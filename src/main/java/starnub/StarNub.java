@@ -17,6 +17,8 @@ import util.os.Directories;
 import util.stream.MessageFormater;
 import util.stream.MultiOutputStreamLogger;
 import util.timers.ThreadSleep;
+import network.handlers.ClientPacketProcessor;
+import network.handlers.ServerPacketProcessor;
 
 import java.net.InetAddress;
 import java.util.*;
@@ -79,13 +81,13 @@ public final class StarNub {
         /* Plug-in Loader */
 
     	/* Proxy Initialization */
-        //TODO UDP Checker for thread crash
+        //TODO thread crash checker ???
         Runnable sn_Proxy = new ProxyServer();
-//        Runnable ClientSidePacketQue = new ClientSidePacketQue();
-//        Runnable ServerSidePacketQue = new ServerSidePacketQue();
+        Runnable ClientPacketProcessor = new ClientPacketProcessor();
+        Runnable ServerPacketProcessor = new ServerPacketProcessor();
         Runnable sn_UDP_Proxy = new UDPProxyServer();
-//        new Thread(ClientSidePacketQue).start();
-//        new Thread(ServerSidePacketQue).start();
+        new Thread(ClientPacketProcessor).start();
+        new Thread(ServerPacketProcessor).start();
         new Thread(sn_Proxy).start();
         new Thread(sn_UDP_Proxy).start();
 
