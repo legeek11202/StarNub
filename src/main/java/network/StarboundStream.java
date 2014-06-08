@@ -15,6 +15,9 @@ public class StarboundStream {
         this.buf = buf;
     }
 
+    public StarboundStream() {
+    }
+
     public ByteBuf getBuf() {
         return buf;
     }
@@ -22,6 +25,7 @@ public class StarboundStream {
     public void setBuf(ByteBuf buf) {
         this.buf = buf;
     }
+
 
     /* Boolean */
     public boolean readBoolean() {

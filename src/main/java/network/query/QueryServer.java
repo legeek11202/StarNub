@@ -39,12 +39,10 @@ public class QueryServer {
             Bootstrap snTxQuerySb = new Bootstrap();
             snTxQuerySb /* Configuring the Bootstrap */
                     .group(queryGroup)
-                    .channel(NioSocketChannel.class) /* Creates a channel Instance */
+                    .channel(NioSocketChannel.class)
                     .handler(new ChannelInitializer<Channel>() {
-                        /* Initializer to set up handlers for this channel */
                         @Override
                         public void initChannel(Channel ch) throws Exception {
-						/* Inbound Handler */
                             ch.pipeline().addFirst(new QueryPacketDecoder());
                         }
                     })

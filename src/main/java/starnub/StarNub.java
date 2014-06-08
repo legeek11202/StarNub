@@ -10,15 +10,14 @@ import managment.SbServerMonitor;
 import network.ConnectedClient;
 import network.ProxyServer;
 import network.UDPProxyServer;
-import network.packets.ProtocolVersionPacket;
+import network.packets.packettypes.ProtocolVersionPacket;
 import org.joda.time.DateTime;
+import reactor.core.Environment;
 import util.KeyListener;
 import util.os.Directories;
 import util.stream.MessageFormater;
 import util.stream.MultiOutputStreamLogger;
 import util.timers.ThreadSleep;
-import network.handlers.ClientPacketProcessor;
-import network.handlers.ServerPacketProcessor;
 
 import java.net.InetAddress;
 import java.util.*;
@@ -38,6 +37,7 @@ public final class StarNub {
     public volatile static List<InetAddress> bannedIps = new ArrayList<InetAddress>();
     public volatile static List<UUID> bannedUuids = new ArrayList<UUID>();
     public volatile static ProtocolVersionPacket ProtocolVersionPacket = new ProtocolVersionPacket();
+    public final static Environment env = new Environment();
     /* Debugging Only */
 //    public volatile static PacketStats cps = new PacketStats();
 //    public volatile static PacketStats sps = new PacketStats();
@@ -83,11 +83,7 @@ public final class StarNub {
     	/* Proxy Initialization */
         //TODO thread crash checker ???
         Runnable sn_Proxy = new ProxyServer();
-        Runnable ClientPacketProcessor = new ClientPacketProcessor();
-        Runnable ServerPacketProcessor = new ServerPacketProcessor();
         Runnable sn_UDP_Proxy = new UDPProxyServer();
-        new Thread(ClientPacketProcessor).start();
-        new Thread(ServerPacketProcessor).start();
         new Thread(sn_Proxy).start();
         new Thread(sn_UDP_Proxy).start();
 

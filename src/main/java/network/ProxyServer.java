@@ -1,6 +1,7 @@
 package network;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -36,8 +37,10 @@ public class ProxyServer implements Runnable {
                     .group(bossGroup, workerGroup)
 					/* Channel instance */
                     .channel(NioServerSocketChannel.class)
-					/* Attempt to help reduce bandwidth due to Starbound small packets */
+					/* Attempt to help reduce bandwidth due to Starbound small packettypes */
                     .childOption(ChannelOption.TCP_NODELAY, true)
+                    /* We are using a pooled buffer so we do not have to constantly alloc/dealloc*/
+                    .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
 					/* Server Initializer to set up this channels handlers */
                     .childHandler(
 							 /* Bind the Server Socket */

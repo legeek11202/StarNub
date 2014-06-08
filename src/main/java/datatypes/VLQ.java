@@ -15,6 +15,9 @@ public class VLQ {
         this.value = value;
     }
 
+    public VLQ() {
+    }
+
     public static VLQ signedFromBuffer(ByteBuf buf) {
 
         VLQ value = unsignedFromBuffer(buf);
@@ -32,7 +35,7 @@ public class VLQ {
 
     }
 
-    public static VLQ unsignedFromBuffer(ByteBuf buf) {
+    public static VLQ unsignedFromBuffer(ByteBuf buf) throws IndexOutOfBoundsException {
 
         long value = 0L;
 
@@ -92,8 +95,6 @@ public class VLQ {
 
     }
 
-    // FIXME Needed for compression
-    // NOTE doesnt appear that a VLQ was even being created
     public static byte[] createSignedVLQ(long value) {
 
 
@@ -102,7 +103,7 @@ public class VLQ {
         if (value < 0)
             result -= 1;
 
-        return createVLQ((long) result);
+        return createVLQ(result);
 
     }
 
