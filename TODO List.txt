@@ -1,15 +1,17 @@
-Updated: 14MAY14
-Features Addition:
+Updated: 13Jun
+Features Addition
+
 -Connection (Inspects IP & UUID checks for bans / Checks for invalid packets)
 -If IPban bypass, and UUID ban found, Ban new IP.
----STABLE RELEASE AFTER ABOVE---
+-Hook into the configuration process
+
 
 Features:
 Console access that will hold message printing while using menu
 SQLLite for player, uuid, ip and ban storage
 Plug-ins Frame Work (Java plug-ins (.jars) and potentially LUA Plug-in support)
 Localization flexibility and plug-in Localization option
-Modify language language configuration to use main configuration
+Modify language language org.starnub.configuration to use main org.starnub.configuration
 
 Packet Classes/Netty Handlers - Client ID and Client Class
 
@@ -18,7 +20,6 @@ Performance Monitoring Option
 Remote Console/Web Interface
 
 Fixes:
-Language resource is being created twice makes two instances (Verify)
 
 Debug Additions:
 Benchmark - Process Time and Proxy Bandwidth
@@ -58,3 +59,14 @@ System.out.println ("Time taken for execution is " + (end � start));
 IPs list of 61K IP's to test the performance of banned IP checks. It took only .27 seconds (270 milliseconds) to load the 61K addresses. When a I connected it took only .9 Seconds (900 milliseconds) to check the connecting IP against all 61K addresses. Ok back to work!
 
  //TODO BUG from starbound with player names and underscores or not matching names, crash on ship warp..
+Readable:
+http://netty.io/4.0/api/index.html
+http://reactor.github.io/docs/api/
+
+http://www.slideshare.net/jbrisbin?utm_campaign=profiletracking&utm_medium=sssite&utm_source=ssslideview
+
+List for later:
+Refractor the parts used from bukkit+paste in credits for bukkits open source code, once schedualer and events are placed in StarNub Style.
+
+
+git checkout HEAD~1, add all the files and commit them, git checkout MODIFIED_COMMIT, git reset --soft COMMIT_FOR_ORIGINALS, git commit -C MODIFIED_COMMIT
